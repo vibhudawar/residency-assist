@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-01T15:27:24.172197+00:00",
+  "generatedAt": "2026-10-01T16:18:02.293208+00:00",
   "title": "Design System: Residency Assist",
   "extensions": {
     "colorMeta": {
@@ -334,6 +334,21 @@
           "oklch(95% 0.03 15)"
         ]
       },
+      "ok": {
+        "role": "done-ink",
+        "displayName": "Stamp Green",
+        "canonical": "#1e6b43",
+        "tonalRamp": [
+          "oklch(15% 0.09 155)",
+          "oklch(26% 0.09 155)",
+          "oklch(38% 0.09 155)",
+          "oklch(49% 0.09 155)",
+          "oklch(61% 0.09 155)",
+          "oklch(72% 0.09 155)",
+          "oklch(84% 0.09 155)",
+          "oklch(95% 0.09 155)"
+        ]
+      },
       "ring": {
         "role": "secondary",
         "displayName": "Caret Amber",
@@ -361,7 +376,11 @@
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Form section legends."
+        "purpose": "Form section legends and console section titles."
+      },
+      "case-headline": {
+        "displayName": "Case Headline",
+        "purpose": "Console: one heading per view (applicant name on the case file, log page titles)."
       },
       "body": {
         "displayName": "Body",
@@ -374,6 +393,10 @@
       "label": {
         "displayName": "Label",
         "purpose": "Field labels; hints inline after a middle dot."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Board asides, board column heads, count labels, console bar subtitle, queue state lines."
       },
       "ticket": {
         "displayName": "Ticket",
@@ -396,7 +419,7 @@
       {
         "name": "ticket-drop",
         "value": "0 18px 30px -18px rgb(22 24 26 / 0.45), 0 2px 6px -2px rgb(22 24 26 / 0.18)",
-        "purpose": "The paper ticket resting on the hall floor."
+        "purpose": "The paper ticket and the console case-history roll."
       },
       {
         "name": "board-drop",
@@ -411,7 +434,7 @@
       {
         "name": "sheet-drop",
         "value": "0 24px 40px -28px rgb(22 24 26 / 0.5)",
-        "purpose": "A standalone paper sheet (mock UAE PASS)."
+        "purpose": "A standalone paper sheet (mock UAE PASS, officer sign-in)."
       },
       {
         "name": "led-glow",
@@ -456,6 +479,16 @@
         "purpose": "Cross-fade of the board state word."
       },
       {
+        "name": "change-lamp",
+        "value": "1100ms; lamp + word hold amber 0-65%, then the new state's colour; only when the state changes while watched",
+        "purpose": "Console queue/slip lamps relight after an approval or a call ending."
+      },
+      {
+        "name": "hover",
+        "value": "colour and stroke only (transition-colors)",
+        "purpose": "Keys and links never nudge, lift or press in."
+      },
+      {
         "name": "reduced-motion",
         "value": "animation/transition-duration 0.01ms",
         "purpose": "All motion collapses to its end state."
@@ -477,6 +510,10 @@
       {
         "name": "container",
         "value": "1240px"
+      },
+      {
+        "name": "console-container",
+        "value": "1440px"
       }
     ]
   },
@@ -485,7 +522,7 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "The one counter key per screen: ink fill, deepens to board black on hover.",
+      "description": "The primary counter key (ink fill, deepens to board black on hover); same key at 40px default in the shared Button.",
       "html": "<button class=\"ds-btn-primary\">Submit application</button>",
       "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;height:48px;min-width:220px;padding:0 24px;border:0;border-radius:8px;background:var(--ink,#16181a);color:var(--paper,#f6f8f9);font:500 16px/1 'Readex Pro',system-ui,sans-serif;cursor:pointer;transition:background-color .15s}.ds-btn-primary:hover{background:var(--board,#0c0e10)}.ds-btn-primary:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}.ds-btn-primary:disabled{opacity:.7}"
     },
@@ -544,18 +581,58 @@
       "description": "Black lamp board; each rule row holds amber while checking, then settles.",
       "html": "<section class=\"ds-board\"><div class=\"ds-b-in\"><header class=\"ds-b-h\">Checks against official records</header><ol class=\"ds-b-rows\"><li><span class=\"ds-lamp\" style=\"--c:var(--led-amber,#ffb020)\"></span><span><code>R1</code> Name matches passport</span><b style=\"color:var(--led-amber,#ffb020)\">FIX</b></li><li><span class=\"ds-lamp\" style=\"--c:var(--led-green,#3ddc84)\"></span><span><code>R2</code> Date of birth matches</span><b style=\"color:var(--led-green,#3ddc84)\">OK</b></li><li><span class=\"ds-lamp\" style=\"--c:var(--led-blue,#7ea6ff)\"></span><span><code>R8</code> Sponsor file</span><b style=\"color:var(--led-blue,#7ea6ff)\">ACTION</b></li></ol></div></section>",
       "css": ".ds-board{width:360px;padding:6px;border-radius:10px;background:var(--board,#0c0e10);color:var(--led-text,#d9dcd6);font:400 13px 'Readex Pro',system-ui,sans-serif;box-shadow:0 24px 40px -24px rgb(0 0 0/.6)}.ds-b-in{border:1px solid var(--board-rule,#262a2f);border-radius:7px;background:radial-gradient(circle at 1px 1px,#ffffff08 1px,transparent 1.2px) 0 0/6px 6px}.ds-b-h{padding:10px 16px;border-bottom:1px solid var(--board-rule,#262a2f);font-weight:500}.ds-b-rows{list-style:none;margin:0;padding:0}.ds-b-rows li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:8px 16px;border-top:1px solid var(--board-rule,#262a2f)}.ds-b-rows li:first-child{border-top:0}.ds-b-rows code{font:12px 'Geist Mono',monospace;opacity:.6;margin-inline-end:6px}.ds-b-rows b{font:900 15px/1 Doto,monospace;letter-spacing:.06em;text-shadow:0 0 6px currentColor}.ds-lamp{width:8px;height:8px;border-radius:50%;background:var(--c);color:var(--c);box-shadow:0 0 8px currentColor}"
+    },
+    {
+      "name": "Destructive Key",
+      "kind": "button",
+      "refersTo": "button-destructive",
+      "description": "Quiet paper with officer text; never filled red on paper. Reject sits apart from Approve.",
+      "html": "<button class=\"ds-btn-destr\">Reject…</button>",
+      "css": ".ds-btn-destr{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border:1px solid transparent;border-radius:8px;font:500 14px/1 'Readex Pro',system-ui,sans-serif;cursor:pointer;transition:color .15s,background-color .15s,border-color .15s;background:var(--paper,#f6f8f9);color:var(--officer,#b1222a);border-color:rgb(177 34 42/.35)}.ds-btn-destr:hover{border-color:var(--officer,#b1222a);background:var(--officer-bg,#fde6e7)}.ds-btn-destr:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}"
+    },
+    {
+      "name": "Board Key",
+      "kind": "button",
+      "refersTo": "button-board",
+      "description": "A key on the LED board: Board Panel fill, lights amber on hover.",
+      "html": "<div style=\"background:#0c0e10;padding:16px\"><button class=\"ds-btn-board\">Call phone</button></div>",
+      "css": ".ds-btn-board{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border:1px solid transparent;border-radius:8px;font:500 14px/1 'Readex Pro',system-ui,sans-serif;cursor:pointer;transition:color .15s,background-color .15s,border-color .15s;background:var(--board-2,#15181b);color:var(--paper,#f6f8f9);border-color:var(--board-rule,#262a2f)}.ds-btn-board:hover{border-color:var(--led-amber,#ffb020);color:var(--led-amber,#ffb020)}.ds-btn-board:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}"
+    },
+    {
+      "name": "Queue Board",
+      "kind": "custom",
+      "refersTo": "queue-row-selected",
+      "description": "Console queue: lit decision/handoff/blocked counts, then one lit row per case with small board reference cells and a change lamp.",
+      "html": "<section class=\"ds-q\"><div class=\"ds-q-in\"><header class=\"ds-q-h\"><span>Queue</span><span class=\"ds-q-a\">7 cases</span></header><div class=\"ds-q-c\"><div><b style=\"color:#ffb020\">2</b><span>Awaiting your decision</span></div><div><b style=\"color:#7ea6ff\">1</b><span>Open handoffs</span></div><div><b class=\"ds-q-z\">0</b><span>Blocked today</span></div></div><a class=\"ds-q-r ds-q-sel\"><span class=\"ds-q-cells\"><i>R</i><i>A</i><i class=\"d\">-</i><i>2</i><i>8</i><i>1</i><i>1</i><i>0</i><i>7</i></span><span class=\"ds-q-l\"><span class=\"ds-q-dot\" style=\"--c:#ffb020\"></span><b style=\"color:#ffb020\">FIX</b></span><span class=\"ds-q-n\">Ahmed Al Mansoori <code>R2</code></span><span class=\"ds-q-m\">Arabic · Call ended · <em>1 to decide</em></span></a><a class=\"ds-q-r\"><span class=\"ds-q-cells\"><i>R</i><i>A</i><i class=\"d\">-</i><i>3</i><i>0</i><i>4</i><i>9</i><i>1</i><i>2</i></span><span class=\"ds-q-l\"><span class=\"ds-q-dot\" style=\"--c:#3ddc84\"></span><b style=\"color:#3ddc84\">CLEAR</b></span><span class=\"ds-q-n\">Sara Khan</span><span class=\"ds-q-m\">English · Correction approved</span></a></div></section>",
+      "css": ".ds-q{width:400px;padding:6px;border-radius:10px;background:var(--board,#0c0e10);color:var(--led-text,#d9dcd6);font:400 13px 'Readex Pro',system-ui,sans-serif;box-shadow:0 24px 40px -24px rgb(0 0 0/.6)}.ds-q-in{border:1px solid var(--board-rule,#262a2f);border-radius:7px;background:radial-gradient(circle at 1px 1px,#ffffff08 1px,transparent 1.2px) 0 0/6px 6px}.ds-q-h{display:flex;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--board-rule,#262a2f);font-weight:500}.ds-q-a{font:12px 'Geist Mono',monospace;opacity:.6}.ds-q-c{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--board-rule,#262a2f);border-bottom:1px solid var(--board-rule,#262a2f)}.ds-q-c div{background:var(--board,#0c0e10);padding:10px 12px}.ds-q-c b{display:block;font:900 26px/1 Doto,monospace;text-shadow:0 0 6px currentColor}.ds-q-c b.ds-q-z{color:rgb(217 220 214/.3);text-shadow:none}.ds-q-c span{display:block;margin-top:6px;font-size:12px;line-height:1.25;opacity:.7}.ds-q-r{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:12px 16px;border-top:1px solid var(--board-rule,#262a2f);cursor:pointer;transition:background-color .15s}.ds-q-r:hover{background:rgb(21 24 27/.6)}.ds-q-sel,.ds-q-sel:hover{background:var(--board-2,#15181b)}.ds-q-sel .ds-q-n{color:var(--paper,#f6f8f9)}.ds-q-cells{display:inline-flex;gap:3px;direction:ltr}.ds-q-cells i{display:grid;place-items:center;width:16px;height:24px;border-radius:3px;background:var(--board-2,#15181b);box-shadow:inset 0 -1px 0 var(--board-rule,#262a2f);color:var(--led-amber,#ffb020);font:normal 900 15px/1 Doto,monospace;text-shadow:0 0 6px rgb(255 176 32/.55)}.ds-q-cells i.d{width:7px;background:none;box-shadow:none}.ds-q-l{display:flex;align-items:center;gap:10px}.ds-q-l b{font:900 14px/1 Doto,monospace;letter-spacing:.06em;text-shadow:0 0 6px currentColor}.ds-q-dot{width:8px;height:8px;border-radius:50%;background:var(--c);color:var(--c);box-shadow:0 0 8px currentColor}.ds-q-n{grid-column:span 2;font-weight:500}.ds-q-n code{font:11.5px 'Geist Mono',monospace;opacity:.6;margin-inline-start:8px}.ds-q-m{grid-column:span 2;font-size:12px;opacity:.6}.ds-q-m em{font-style:normal;color:var(--led-amber,#ffb020)}"
+    },
+    {
+      "name": "Correction Slip",
+      "kind": "card",
+      "refersTo": "correction-slip",
+      "description": "Old → new in mono; Approve is the primary, Reject sits apart and needs a typed reason.",
+      "html": "<article class=\"ds-slip\"><header class=\"ds-slip-h\"><h3><span class=\"ds-slip-c\">R2</span>Date of birth</h3><p>Captured on the call at <code>14:02</code> · <a href=\"#\">Open call record</a></p></header><div class=\"ds-slip-b\"><div><p class=\"ds-cap\">On the form</p><p class=\"ds-old\">12 Mar 1990</p></div><span class=\"ds-arr\">→</span><div><p class=\"ds-cap\">Caller confirmed · matches passport record</p><p class=\"ds-new\">21 Mar 1990</p></div></div><footer class=\"ds-slip-f\"><span class=\"ds-slip-a\"><button class=\"ds-approve\">Approve correction</button><small>Writes the new value and re-runs the 12 rules.</small></span><button class=\"ds-reject\">Reject…</button></footer></article>",
+      "css": ".ds-slip{max-width:720px;border:1px solid rgb(22 24 26/.4);border-radius:6px;background:var(--paper,#f6f8f9);color:var(--ink,#16181a);font-family:'Readex Pro',system-ui,sans-serif}.ds-slip-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 16px;padding:16px 20px 0}.ds-slip-h h3{display:flex;align-items:center;gap:10px;margin:0;font-size:15px;font-weight:600}.ds-slip-c{padding:4px 8px;border-radius:4px;background:var(--fix-bg,#fff0d3);color:var(--fix,#8a5200);font:500 12px 'Geist Mono',monospace}.ds-slip-h p,.ds-cap{margin:0;font-size:12.5px;color:var(--ink-2,#4b5057)}.ds-slip-h a{color:inherit;text-decoration:none}.ds-slip-h a:hover{color:var(--ink,#16181a);text-decoration:underline;text-underline-offset:.2em}.ds-slip-h code{font-family:'Geist Mono',monospace}.ds-slip-b{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:16px;padding:14px 20px 16px}.ds-old,.ds-new{margin:4px 0 0;font:400 17px 'Geist Mono',monospace}.ds-old{color:var(--ink-2,#4b5057);text-decoration:line-through;text-decoration-color:rgb(22 24 26/.4)}.ds-new{font-weight:500}.ds-arr{color:var(--ink-2,#4b5057);margin-bottom:4px}.ds-slip-f{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:16px 20px;border-top:1px solid var(--rule,#d0d6da)}.ds-slip-a{display:flex;align-items:center;gap:16px}.ds-slip-a small{max-width:34ch;font-size:12.5px;color:var(--ink-2,#4b5057)}.ds-approve{height:48px;padding:0 24px;border:0;border-radius:8px;background:var(--ink,#16181a);color:var(--paper,#f6f8f9);font:500 15px 'Readex Pro',sans-serif;cursor:pointer;transition:background-color .15s}.ds-approve:hover{background:var(--board,#0c0e10)}.ds-reject{height:40px;padding:0 16px;border:1px solid rgb(177 34 42/.35);border-radius:8px;background:var(--paper,#f6f8f9);color:var(--officer,#b1222a);font:500 14px 'Readex Pro',sans-serif;cursor:pointer;transition:background-color .15s,border-color .15s}.ds-reject:hover{border-color:var(--officer,#b1222a);background:var(--officer-bg,#fde6e7)}.ds-approve:focus-visible,.ds-reject:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}"
+    },
+    {
+      "name": "Case-History Roll",
+      "kind": "custom",
+      "refersTo": "case-history-roll",
+      "description": "One thermal printout for every case event: calls, SMS, handoffs, refusals, decisions.",
+      "html": "<section class=\"ds-roll\"><h2><span>CASE HISTORY</span><span dir=\"ltr\">RA-281107</span></h2><ol><li><span>09:14:02</span><span>SYSTEM</span><span>Rules checked<em>2 of 12 failed</em></span></li><li><span>14:01:40</span><span>AGENT</span><span>Call ended</span></li><li><span>14:06:11</span><span>OFFICER</span><span>Correction approved<em>date_of_birth</em></span></li></ol></section>",
+      "css": ".ds-roll{max-width:640px;padding:24px;background:var(--paper,#f6f8f9);color:var(--ink,#16181a);font:400 12.5px/1.375 'Geist Mono',ui-monospace,monospace;box-shadow:0 18px 30px -18px rgb(22 24 26/.45),0 2px 6px -2px rgb(22 24 26/.18);--tooth:8px;-webkit-mask:radial-gradient(circle at 50% 0,#0000 3.5px,#000 4px) 50% 0/var(--tooth) 51% repeat-x,radial-gradient(circle at 50% 100%,#0000 3.5px,#000 4px) 50% 100%/var(--tooth) 51% repeat-x;mask:radial-gradient(circle at 50% 0,#0000 3.5px,#000 4px) 50% 0/var(--tooth) 51% repeat-x,radial-gradient(circle at 50% 100%,#0000 3.5px,#000 4px) 50% 100%/var(--tooth) 51% repeat-x}.ds-roll h2{display:flex;justify-content:space-between;margin:0;padding-bottom:12px;border-bottom:1px dashed rgb(22 24 26/.3);font-size:12.5px;font-weight:600}.ds-roll ol{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:6px}.ds-roll li{display:grid;grid-template-columns:5.5rem 4.5rem 1fr;gap:0 12px}.ds-roll li>span:nth-child(-n+2){color:var(--ink-2,#4b5057)}.ds-roll em{display:block;font-style:normal;color:var(--ink-2,#4b5057)}"
     }
   ],
   "narrative": {
     "northStar": "The Service Hall",
-    "overview": "**Creative North Star: \"The Service Hall\"**\n\nThe application is a numbered ticket from a residency service hall, and the hall's black LED board always says where it is and what happens next. Two materials carry everything. The working surface is cool thermal paper printed in near-black ink: the form, the ticket, the issue list. The status surface is a near-black LED board whose dot-matrix lamps light amber while checking, green when done, red when attention is needed, blue when someone else must act. The hall itself is a pale cool grey floor that both materials sit on.\n\nThe world is calm and dense. The hall feels like a public counter where things are being dealt with, not like a dashboard. One bilingual sans (Readex Pro, Latin and Arabic) carries everything a person reads. The ticket prints in thermal mono. Dot-matrix appears only where a real board would light it: reference numerals, the \"now serving\" stage, short state words. Arabic is true RTL. Columns, lamps and ticket rows mirror; reference numbers and passport data stay LTR inside fixed character cells.\n\nThe world rejects the generic government blue-header stepper form and its startup-gradient opposite.\n\nThe operator console (`/console`, not yet built) inherits this world unchanged. There the board becomes the officer's queue display: same tokens, same issue ramp, same lamp states, same motion grammar (\"paper feeds down, LED cells light; nothing else moves\"). Case records are paper; queue and call state are board.",
+    "overview": "**Creative North Star: \"The Service Hall\"**\n\nThe application is a numbered ticket from a residency service hall, and the hall's black LED board always says where it is and what happens next. Two materials carry everything. The working surface is cool thermal paper printed in near-black ink: the form, the ticket, the issue list. The status surface is a near-black LED board whose dot-matrix lamps light amber while checking, green when done, red when attention is needed, blue when someone else must act. The hall itself is a pale cool grey floor that both materials sit on.\n\nThe world is calm and dense. The hall feels like a public counter where things are being dealt with, not like a dashboard. One bilingual sans (Readex Pro, Latin and Arabic) carries everything a person reads. The ticket prints in thermal mono. Dot-matrix appears only where a real board would light it: reference numerals, the \"now serving\" stage, short state words. Arabic is true RTL. Columns, lamps and ticket rows mirror; reference numbers and passport data stay LTR inside fixed character cells.\n\nThe world rejects the generic government blue-header stepper form and its startup-gradient opposite.\n\nThe operator console (`/console`) is built in the same world, unchanged: an officer's counter desk. The queue, the pre-dial calling board, the latency board and every lit count are LED board; the open case file, correction slips, call records, logs and the case-history roll are thermal paper. Same tokens, same issue ramp, same lamp states, same motion grammar (\"paper feeds down, LED cells light; nothing else moves\"). The console is English-only and always LTR.",
     "keyCharacteristics": [
       "Two materials only: thermal paper (working) and LED board (status), on a cool hall-grey floor.",
       "The reference number always sits in fixed character cells: reverse-printed ink on paper, glowing amber on the board.",
       "One fixed three-step issue ramp (fixable / route / officer) used identically everywhere.",
       "Each type role has one job: Readex reads, Geist Mono prints, Doto lights.",
       "Motion is mechanical and diegetic: paper feeds, cells drop, lamps light.",
-      "Full EN/AR parity with true RTL; data stays LTR."
+      "Full EN/AR parity with true RTL on the applicant portal; data stays LTR. The officer console is English and LTR."
     ],
     "rules": [
       {
@@ -570,12 +647,17 @@
       },
       {
         "name": "The One Ramp Rule",
-        "body": "Fixable, route and officer map to the same three colours on every surface: lamp, chip, label, row. Do not add a fourth weight. Do not reuse a ramp colour for decoration.",
+        "body": "Fixable, route and officer map to the same three colours on every surface: lamp, chip, label, row. Do not add a fourth weight. Do not reuse a ramp colour for decoration. A refusal or an event source is not an issue weight: it takes the neutral chip (ink on Quiet Paper), never officer red.",
+        "section": "colors"
+      },
+      {
+        "name": "The Done Ink Rule",
+        "body": "On paper, done reads in Stamp Green (ok) ink, as text or on Quiet Paper. On the board, done is Lamp Green. The two never swap materials.",
         "section": "colors"
       },
       {
         "name": "The Three Voices Rule",
-        "body": "Readex reads, Geist Mono prints, Doto lights. Dot-matrix is limited to reference numerals, the current stage, row state words and the hall monogram. Never use it for sentences, labels or headings.",
+        "body": "Readex reads, Geist Mono prints, Doto lights. Dot-matrix is limited to reference numerals, lit counts and figures on a board, the current stage, row state words and the hall monogram. Never use it for sentences, labels or headings.",
         "section": "typography"
       },
       {
@@ -585,7 +667,7 @@
       },
       {
         "name": "The Objects Lift Rule",
-        "body": "Only physical hall objects (ticket, board, machine, sheet) cast shadows. Cards, inputs and buttons are flat.",
+        "body": "Only physical hall objects (ticket and case-history roll, board, machine, sheet) cast shadows. Cards, slips, log tables, inputs and buttons are flat.",
         "section": "elevation"
       },
       {
@@ -601,14 +683,17 @@
       "Do use the amber \"checking\" hold before any board row settles on its result.",
       "Do keep the amber prototype banner at the top of every screen, including `/console`.",
       "Do set Arabic in Readex at the same size and weight as English, mirror the layout, and keep passport and reference data LTR.",
-      "Do render the operator console's queue display as an LED Board with the same tokens, ramp and motion grammar."
+      "Do render the operator console's queue, call checks and counts as LED Board, and its case file, slips, logs and history as paper, with the same tokens, ramp and motion grammar.",
+      "Do keep Approve the primary key on a correction slip, and keep Reject at the far end of the row behind a required, typed reason.",
+      "Do print every case event (calls, SMS, handoffs, refusals, decisions) on the one case-history roll."
     ],
     "donts": [
       "Don't use the generic government blue-header stepper form, or its startup-gradient opposite.",
-      "Don't put LED lamp colours (led-green, led-red, led-blue, led-amber) on paper as text or fills. Use the paper-side ramp.",
+      "Don't put LED lamp colours (led-green, led-red, led-blue, led-amber) on paper as text or fills. Use the paper-side ramp, and Stamp Green (ok) for done.",
+      "Don't mark refusals, sources or other non-issue states with the officer ramp. Use the neutral chip.",
       "Don't set sentences, headings or labels in Doto. Dot-matrix is for numerals, the current stage and short state words.",
-      "Don't add glow to anything on paper, or shadows to anything that isn't a hall object (ticket, board, machine, sheet).",
-      "Don't animate anything outside the paper-feed, cell-drop and lamp-lighting grammar. No hover lifts, no page transitions, no looping pulses. The live lamp is steady.",
+      "Don't add glow to anything on paper, or shadows to anything that isn't a hall object (ticket and case-history roll, board, machine, sheet).",
+      "Don't animate anything outside the paper-feed, cell-drop and lamp-lighting grammar. No hover lifts or arrow nudges, no press-in, no page transitions, no looping pulses. The live lamp is steady.",
       "Don't pre-tick consent, or place a destructive action beside the primary action."
     ]
   }

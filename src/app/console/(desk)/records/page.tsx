@@ -48,7 +48,7 @@ export default async function RecordsPage() {
                   {r.transcript.map((t, i) => (
                     <li key={i} className="grid grid-cols-[4rem_5.5rem_1fr] gap-x-3 text-[14px] leading-snug">
                       <span className="font-mono text-[12.5px] text-ink-2">{t.timeInCallSecs === null ? "" : secs(Math.round(t.timeInCallSecs))}</span>
-                      <span className={cn("text-[12.5px] font-medium", t.role === "agent" ? "text-ink" : "text-route")}>{t.role === "agent" ? "Assistant" : "Caller"}</span>
+                      <span className={cn("text-[12.5px] font-medium", t.role === "agent" ? "text-ink" : "text-ink-2")}>{t.role === "agent" ? "Assistant" : "Caller"}</span>
                       <span dir="auto">{t.message}</span>
                     </li>
                   ))}

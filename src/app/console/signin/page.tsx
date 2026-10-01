@@ -13,7 +13,7 @@ export default async function OfficerSignInPage() {
       <ConsoleBar />
       <main className="mx-auto grid w-full max-w-[1240px] flex-1 items-center gap-12 px-6 py-16 lg:grid-cols-12">
         <div className="lg:col-span-6">
-          <h1 className="max-w-[16ch] text-[44px] leading-[1.05] font-semibold tracking-[-0.02em] lg:text-[52px]">The officer&apos;s side of the counter</h1>
+          <h1 className="max-w-[16ch] text-[44px] leading-[1.05] font-semibold tracking-[-0.02em] lg:text-[56px]">The officer&apos;s side of the counter</h1>
           <p className="mt-5 max-w-[48ch] text-[18px] leading-relaxed text-ink-2">
             Work the queue, start the assistant&apos;s call, and decide every correction it captures. Nothing reaches an application without your approval.
           </p>
