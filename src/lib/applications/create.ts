@@ -1,9 +1,11 @@
 import "server-only";
 import { randomInt } from "node:crypto";
 import { normalisePassportNumber } from "@/lib/rules/engine";
+import { randomToken, sha256 } from "@/lib/security";
 import { putDocument } from "@/lib/storage";
 import { db } from "@/lib/supabase/server";
 import { evaluateApplication } from "./evaluate";
+import { notifyAfterCheck } from "./notify";
 
 export interface NewApplication {
   reference?: string;
@@ -26,6 +28,8 @@ function newReference(): string {
 /** Stores an application + its photo, then runs the rules on it. */
 export async function createApplication(input: NewApplication, photo: { body: Buffer; contentType: string } | null) {
   let row: { id: number; reference: string } | null = null;
+  // Private link to the applicant's status page; only the hash is stored.
+  const statusToken = randomToken();
 
   for (let attempt = 0; attempt < 5 && !row; attempt++) {
     const reference = input.reference ?? newReference();
@@ -43,6 +47,7 @@ export async function createApplication(input: NewApplication, photo: { body: Bu
         ai_call_consent: input.ai_call_consent,
         ai_call_consent_at: input.ai_call_consent ? new Date().toISOString() : null,
         is_demo_seed: input.is_demo_seed ?? false,
+        status_token_hash: sha256(statusToken),
       })
       .select("id, reference")
       .single();
@@ -66,5 +71,6 @@ export async function createApplication(input: NewApplication, photo: { body: Bu
   });
 
   const evaluation = await evaluateApplication(row.id);
-  return { id: row.id, reference: row.reference, ...evaluation };
+  await notifyAfterCheck(row.id);
+  return { id: row.id, reference: row.reference, statusToken, ...evaluation };
 }
