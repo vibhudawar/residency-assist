@@ -1,5 +1,6 @@
 import sharp from "sharp";
 import { describe, expect, it } from "vitest";
+import { PHOTO_BLUE, PHOTO_WHITE, silhouettePhoto } from "@/lib/demo/photos";
 import { checkPhoto } from "./image-check";
 
 /** A portrait "photo": plain background with a dark face-shaped block in the middle. */
@@ -24,6 +25,12 @@ describe("checkPhoto", () => {
 
   it("rejects a grey background", async () => {
     expect((await checkPhoto(await photo("#9a9a9a"))).ok).toBe(false);
+  });
+
+  it("judges the background only, even when the subject fills most of the frame", async () => {
+    // Regression: stats() once measured the whole image, so a large dark subject failed a white background.
+    expect((await checkPhoto(await silhouettePhoto(PHOTO_WHITE))).ok).toBe(true);
+    expect((await checkPhoto(await silhouettePhoto(PHOTO_BLUE))).ok).toBe(false);
   });
 
   it("rejects a photo that is too small", async () => {

@@ -33,7 +33,9 @@ export async function checkPhoto(buffer: Buffer): Promise<ImageCheck> {
   ];
 
   for (const region of regions) {
-    const { channels } = await sharp(buffer).rotate().removeAlpha().extract(region).stats();
+    // stats() measures the input image, not the pipeline output, so materialise the crop first.
+    const crop = await sharp(buffer).rotate().removeAlpha().extract(region).toBuffer();
+    const { channels } = await sharp(crop).stats();
     const means = channels.slice(0, 3).map((c) => c.mean);
     const brightness = means.reduce((a, b) => a + b, 0) / means.length;
     const chroma = Math.max(...means) - Math.min(...means);

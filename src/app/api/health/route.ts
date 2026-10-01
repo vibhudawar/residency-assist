@@ -3,8 +3,6 @@ import { NextResponse } from "next/server";
 import { env, envStatus } from "@/lib/env";
 import { db } from "@/lib/supabase/server";
 
-export const dynamic = "force-dynamic";
-
 type DbState = "ok" | "unreachable" | "schema_missing" | "not_configured";
 
 /**
