@@ -91,6 +91,8 @@ export const EVENT_LABEL: Record<string, string> = {
   sms_sent: "SMS sent",
   call_blocked: "Call refused by pre-dial checks",
   call_started: "Call started",
+  call_recorded: "Call ended — transcript received",
+  call_not_connected: "Call didn't connect",
   identity_verified: "Caller verified",
   identity_check_failed: "Identity check failed",
   correction_submitted: "Correction captured (pending review)",

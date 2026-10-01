@@ -28,8 +28,11 @@ export default async function RecordsPage() {
                 <CaseLink applicationId={r.applicationId} reference={r.reference} />
                 <span className="font-mono text-[13px] text-ink-2">{uaeTime(r.receivedAt)}</span>
                 <span>{r.language ? LANGUAGE[r.language] ?? r.language : "—"}</span>
+                {(r.status === "silent" || r.status === "voicemail") && (
+                  <span className="rounded-[4px] bg-secondary px-2 py-1 text-[12.5px] font-medium text-ink">{r.status === "silent" ? "Nobody spoke" : "Voicemail"}</span>
+                )}
                 <span className="text-ink-2">Length <span className="font-mono text-ink">{secs(r.durationSecs)}</span></span>
-                <span className="text-ink-2">Latency avg <span className="font-mono text-ink">{ms(r.avgLatencyMs)}</span> · max <span className="font-mono text-ink">{ms(r.maxLatencyMs)}</span></span>
+                <span className="text-ink-2" title="Time to the LLM's first token on each agent turn, as reported by ElevenLabs">Response avg <span className="font-mono text-ink">{ms(r.avgLatencyMs)}</span> · max <span className="font-mono text-ink">{ms(r.maxLatencyMs)}</span></span>
                 <span
                   className={cn(
                     "ms-auto rounded-[4px] px-2 py-1 text-[12.5px] font-medium",

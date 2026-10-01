@@ -25,7 +25,7 @@ export default async function EvidencePage() {
 
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <Panel title="Latency by language" aside={<span className="font-mono text-[12px] text-led-text/60">from call records</span>}>
+          <Panel title="Response latency by language" aside={<span className="font-mono text-[12px] text-led-text/60">LLM first token, per agent turn</span>}>
             {latency.length === 0 ? (
               <p className="px-4 py-5 text-[13.5px] leading-relaxed text-led-text/75">No recorded calls yet. Latency fills in from each call&apos;s turn metrics.</p>
             ) : (

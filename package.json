@@ -8,10 +8,12 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "smoke:tools": "tsx --conditions=react-server --env-file=.env scripts/smoke-tools.ts"
+    "smoke:tools": "tsx --conditions=react-server --env-file=.env scripts/smoke-tools.ts",
+    "smoke:webhook": "tsx --conditions=react-server --env-file=.env scripts/smoke-webhook.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
+    "@elevenlabs/elevenlabs-js": "^2.70.0",
     "@supabase/supabase-js": "2.117.2",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.4.0",
