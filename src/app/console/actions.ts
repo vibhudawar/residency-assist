@@ -3,7 +3,7 @@
 import { refresh } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { startCall } from "@/lib/calls/start";
+import { abandonBrowserCall, type BrowserSession, markBrowserCallLive, startCall } from "@/lib/calls/start";
 import type { PredialCheck } from "@/lib/calls/predial";
 import { approveCorrection, approveUpload, rejectCorrection, rejectUpload } from "@/lib/console/review";
 import { resetDemo } from "@/lib/demo/reset";
@@ -91,10 +91,12 @@ export async function rejectAction(_prev: ReviewState, formData: FormData): Prom
 // ---------------------------------------------------------------------------
 
 export interface CallState {
-  outcome?: "blocked" | "not_configured" | "failed";
+  outcome?: "blocked" | "not_configured" | "failed" | "dialling" | "browser";
   channel?: "phone" | "browser";
   missing?: string[];
   refused?: PredialCheck[];
+  /** Browser calls: what the page needs to start the session. */
+  session?: BrowserSession;
 }
 
 export async function callAction(_prev: CallState, formData: FormData): Promise<CallState> {
@@ -105,13 +107,32 @@ export async function callAction(_prev: CallState, formData: FormData): Promise<
   try {
     const result = await startCall(applicationId.data, channel.data);
     refresh();
-    return result.kind === "blocked"
-      ? { outcome: "blocked", channel: channel.data, refused: result.checks.filter((c) => !c.passed) }
-      : { outcome: "not_configured", channel: channel.data, missing: result.missing };
+    switch (result.kind) {
+      case "blocked":
+        return { outcome: "blocked", channel: channel.data, refused: result.checks.filter((c) => !c.passed) };
+      case "not_configured":
+        return { outcome: "not_configured", channel: channel.data, missing: result.missing };
+      case "dialling":
+        return { outcome: "dialling", channel: "phone" };
+      case "browser":
+        return { outcome: "browser", channel: "browser", session: result.session };
+      default:
+        return { outcome: "failed", channel: channel.data };
+    }
   } catch (err) {
     console.error("call failed", forLog(err instanceof Error ? err.message : err));
     return { outcome: "failed", channel: channel.data };
   }
+}
+
+/** The officer's page reports whether its browser session connected, so the attempt never dangles. */
+export async function browserCallEvent(attemptId: number, event: "live" | "abandoned") {
+  await requireOfficer();
+  const attempt = id.safeParse(attemptId);
+  if (!attempt.success || !["live", "abandoned"].includes(event)) return;
+  if (event === "live") await markBrowserCallLive(attempt.data);
+  else await abandonBrowserCall(attempt.data);
+  refresh();
 }
 
 // ---------------------------------------------------------------------------

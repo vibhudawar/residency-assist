@@ -7,6 +7,8 @@ export const CALL_WINDOW = { startHour: 9, endHour: 18 } as const; // UAE time, 
 export const MAX_ATTEMPTS_TOTAL = 3;
 export const MAX_ATTEMPTS_PER_DAY = 1;
 export const MAX_DECLINES = 2;
+/** A call left "dialing"/"connected" longer than this (tab closed, webhook lost) no longer blocks new calls. */
+export const STALE_CALL_MINUTES = 15;
 
 export type Channel = "phone" | "browser";
 
@@ -52,7 +54,8 @@ export async function predialChecks(applicationId: number, { channel, now = new 
   const today = uaeToday(now);
   const todayCount = real.filter((a) => uaeToday(new Date(a.started_at)) === today).length;
   const declines = real.filter((a) => a.status === "declined").length;
-  const active = (attempts ?? []).some((a) => ["dialing", "connected"].includes(a.status));
+  const staleBefore = now.getTime() - STALE_CALL_MINUTES * 60_000;
+  const active = (attempts ?? []).some((a) => ["dialing", "connected"].includes(a.status) && new Date(a.started_at).getTime() > staleBefore);
 
   const checks: PredialCheck[] = [
     {

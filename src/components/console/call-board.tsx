@@ -1,10 +1,11 @@
 "use client";
 
 import { Globe, Phone } from "lucide-react";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { callAction, type CallState } from "@/app/console/actions";
 import { Panel } from "@/components/hall/led-board";
 import { Button } from "@/components/ui/button";
+import { BrowserCall } from "./browser-call";
 import type { PredialCheck } from "@/lib/calls/predial";
 import { CALL_STATUS, CHECK_LABEL, uaeTime } from "@/lib/console/format";
 import { cn } from "@/lib/utils";
@@ -42,9 +43,13 @@ export function CallBoard({
   calls: { id: number; channel: string; status: string; blockReason: string | null; startedAt: string }[];
 }) {
   const [state, action, pending] = useActionState<CallState, FormData>(callAction, {});
+  // The browser call panel stays open until the officer closes it after the call.
+  const [closedSession, setClosedSession] = useState<number | null>(null);
+  const session = state.outcome === "browser" && state.session && state.session.attemptId !== closedSession ? state.session : null;
   const browserBy = new Map(browser.checks.map((c) => [c.name, c]));
 
   return (
+    <>
     <Panel title="Before calling" aside={<span className="font-mono text-[12px] text-led-text/60">checked on every press</span>}>
       <table className="w-full text-[13.5px]">
         <thead>
@@ -98,6 +103,10 @@ export function CallBoard({
             </p>
           )}
           {state.outcome === "failed" && <p className="text-led-red">Couldn&apos;t start the call. Try again; details are in the server log.</p>}
+          {state.outcome === "dialling" && (
+            <p className="text-led-amber">Ringing the applicant&apos;s phone now. The call shows below; the transcript and analysis arrive when it ends.</p>
+          )}
+          {state.outcome === "browser" && <p className="text-led-green">Checks passed. The live call panel is ready below — start it when you are.</p>}
         </div>
       )}
 
@@ -116,5 +125,7 @@ export function CallBoard({
         </ol>
       )}
     </Panel>
+    {session && <BrowserCall key={session.attemptId} session={session} onClose={() => setClosedSession(session.attemptId)} />}
+    </>
   );
 }

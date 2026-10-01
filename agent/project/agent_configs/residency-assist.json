@@ -110,6 +110,7 @@
         "interruption",
         "agent_response",
         "user_transcript",
+        "agent_tool_request",
         "agent_tool_response"
       ],
       "text_only": false
