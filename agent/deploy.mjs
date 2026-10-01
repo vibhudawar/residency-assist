@@ -53,7 +53,9 @@ function cli(...args) {
   execFileSync("pnpm", ["exec", "elevenlabs", ...args], { cwd: PROJECT, stdio: "inherit", env: process.env });
 }
 const build = () => execFileSync(process.execPath, [path.join(ROOT, "build.mjs")], { stdio: "inherit", env: process.env });
-const registered = (registry, key) => new Set((registry[key] ?? []).map((e) => e.name ?? e.tool_name ?? e.test_name).filter(Boolean));
+/** Names already uploaded. CLI registry entries are {config, id}, so the name is the config filename. */
+const entryName = (e) => e.name ?? e.tool_name ?? e.test_name ?? e.config?.split("/").pop()?.replace(/\.json$/, "");
+const registered = (registry, key) => new Set((registry[key] ?? []).map(entryName).filter(Boolean));
 
 async function main() {
   for (const [file, key] of [["agents.json", "agents"], ["tools.json", "tools"], ["tests.json", "tests"]]) {

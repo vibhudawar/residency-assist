@@ -1,0 +1,159 @@
+{
+  "name": "resolve-books-chosen-slot",
+  "type": "tool",
+  "chat_history": [
+    {
+      "role": "agent",
+      "message": "Hello, this is Residency Assist, an AI assistant. This call is recorded. I'm calling about a residency application — is now a good time to talk?",
+      "time_in_call_secs": 4
+    },
+    {
+      "role": "user",
+      "message": "Yes, I can talk now.",
+      "time_in_call_secs": 8
+    },
+    {
+      "role": "agent",
+      "message": "Thank you. First I need to confirm I'm speaking with the applicant. Could you tell me your application reference? It starts with R A followed by six numbers.",
+      "time_in_call_secs": 12
+    },
+    {
+      "role": "user",
+      "message": "R A two six zero one zero one.",
+      "time_in_call_secs": 16
+    },
+    {
+      "role": "agent",
+      "message": "Two, six, zero, one, zero, one. And your date of birth, as written in your passport?",
+      "time_in_call_secs": 20
+    },
+    {
+      "role": "user",
+      "message": "The twelfth of April, nineteen ninety-one.",
+      "time_in_call_secs": 24
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 28,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "verify_identity_0001",
+          "tool_name": "verify_identity",
+          "params_as_json": "{\"application_reference\":\"RA-260101\",\"date_of_birth\":\"1991-04-12\"}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 32,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "verify_identity_0001",
+          "tool_name": "verify_identity",
+          "result_value": "{\"ok\":true,\"verified\":true}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": "Thank you, you're verified. One moment while I check your application.",
+      "time_in_call_secs": 36
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 40,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "get_case_0002",
+          "tool_name": "get_case",
+          "params_as_json": "{}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 44,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "get_case_0002",
+          "tool_name": "get_case",
+          "result_value": "{\"ok\":true,\"reference\":\"RA-260101\",\"first_name\":\"Rahul\",\"issues\":[{\"rule\":\"R6\",\"how_to_resolve\":\"book_visit\",\"field\":null,\"explanation\":\"Emirates ID biometrics (fingerprints and photo) have not been done yet.\"}]}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 48,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "list_slots_0003",
+          "tool_name": "list_slots",
+          "params_as_json": "{\"purpose\":\"biometrics\"}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 52,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "list_slots_0003",
+          "tool_name": "list_slots",
+          "result_value": "{\"ok\":true,\"slots\":[{\"slot_id\":40,\"centre\":\"Amer Centre — Al Barsha\",\"when\":\"Monday, 5 October at 9:30 am\"},{\"slot_id\":41,\"centre\":\"Amer Centre — Deira\",\"when\":\"Monday, 5 October at 11:00 am\"}]}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": "I can offer Monday the 5th of October at 9:30 at the Al Barsha centre, or Monday at 11 at Deira. Which suits you?",
+      "time_in_call_secs": 56
+    },
+    {
+      "role": "user",
+      "message": "Deira at 11, please.",
+      "time_in_call_secs": 60
+    }
+  ],
+  "dynamic_variables": {
+    "call_attempt_id": "0",
+    "channel": "browser",
+    "secret__case_token": "test-case-token"
+  },
+  "tool_call_parameters": {
+    "referenced_tool": {
+      "id": "tool_2901m3wg149zf7ysrsktgyg75mh5",
+      "type": "webhook"
+    },
+    "parameters": [
+      {
+        "path": "slot_id",
+        "eval": {
+          "type": "regex",
+          "pattern": "^41$"
+        }
+      }
+    ],
+    "verify_absence": false
+  }
+}

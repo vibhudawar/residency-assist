@@ -139,12 +139,14 @@ function toolConfig(t) {
 }
 
 // ---------------------------------------------------------------------------
-// Registries the CLI maintains after upload (shape-tolerant lookups).
+// Registries the CLI maintains after upload. Entries are {config, id}: the name is the config filename.
 // ---------------------------------------------------------------------------
+const entryName = (e) => e.name ?? e.tool_name ?? e.test_name ?? e.config?.split("/").pop()?.replace(/\.json$/, "");
+
 function idsByName(registry, key) {
   const out = {};
   for (const e of registry?.[key] ?? []) {
-    const name = e.name ?? e.tool_name ?? e.test_name;
+    const name = entryName(e);
     const id = e.id ?? e.tool_id ?? e.test_id;
     if (name && id) out[name] = id;
   }
@@ -293,7 +295,7 @@ async function main() {
     workflow: {
       prevent_subagent_loops: true,
       nodes: {
-        start: { type: "start", position: { x: 0, y: 0 }, edge_order: ["start_open"] },
+        start_node: { type: "start", position: { x: 0, y: 0 }, edge_order: ["start_open"] },
         open: { ...node("Open", await step("1-open.md"), [], 0, 160), edge_order: ["open_verify", "open_handover"] },
         verify: { ...node("Verify", await step("2-verify.md"), ["verify_identity"], 0, 320), edge_order: ["verify_resolve", "verify_handover"] },
         resolve: {
@@ -303,7 +305,7 @@ async function main() {
         handover: { ...node("Hand over", await step("4-handover.md"), [], 320, 400), edge_order: [] },
       },
       edges: {
-        start_open: { source: "start", target: "open", forward_condition: { type: "unconditional" } },
+        start_open: { source: "start_node", target: "open", forward_condition: { type: "unconditional" } },
         open_verify: { source: "open", target: "verify", forward_condition: { type: "llm", label: "Can talk now", condition: "The person said now is a good time (or otherwise agreed to continue) and has not asked to stop or to be called later." } },
         open_handover: { source: "open", target: "handover", forward_condition: { type: "llm", label: "Wants a person", condition: "The person asked to speak to a human, or is upset or distressed." } },
         verify_resolve: { source: "verify", target: "resolve", forward_condition: { type: "llm", label: "Verified", condition: "The verify_identity tool returned verified: true on this call." } },

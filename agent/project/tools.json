@@ -1,0 +1,54 @@
+{
+    "tools": [
+        {
+            "type": "webhook",
+            "config": "tool_configs/book_appointment.json",
+            "id": "tool_2901m3wg149zf7ysrsktgyg75mh5"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs/check_upload.json",
+            "id": "tool_9901m3wg155becmvxgnne3trpheq"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs/create_callback.json",
+            "id": "tool_2001m3wg15zre8n8setnq3cbakzr"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs/create_followup.json",
+            "id": "tool_6501m3wg16wbf96se728yne4dkfy"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs/get_case.json",
+            "id": "tool_8201m3wg17t0f37aa26xc9w93ypy"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs/list_slots.json",
+            "id": "tool_6201m3wg18mceev9xpghhwz1kj92"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs/record_opt_out.json",
+            "id": "tool_5901m3wg19fpf3es6anzfbbhjx7a"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs/send_upload_link.json",
+            "id": "tool_9001m3wg1azvemxa1h1x7bbk4c4v"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs/submit_correction.json",
+            "id": "tool_8701m3wg1bsdet7v11ax7jaj1jwz"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs/verify_identity.json",
+            "id": "tool_8501m3wg1cmaeh786087mf9f397a"
+        }
+    ]
+}

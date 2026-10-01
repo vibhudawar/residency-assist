@@ -1,0 +1,44 @@
+{
+  "name": "open-not-now-books-callback",
+  "type": "tool",
+  "chat_history": [
+    {
+      "role": "agent",
+      "message": "Hello, this is Residency Assist, an AI assistant. This call is recorded. I'm calling about a residency application — is now a good time to talk?",
+      "time_in_call_secs": 4
+    },
+    {
+      "role": "user",
+      "message": "Not now, I'm driving. Call me after 6 this evening.",
+      "time_in_call_secs": 8
+    }
+  ],
+  "dynamic_variables": {
+    "call_attempt_id": "0",
+    "channel": "browser",
+    "secret__case_token": "test-case-token"
+  },
+  "tool_call_parameters": {
+    "referenced_tool": {
+      "id": "tool_2001m3wg15zre8n8setnq3cbakzr",
+      "type": "webhook"
+    },
+    "parameters": [
+      {
+        "path": "escalate",
+        "eval": {
+          "type": "llm",
+          "description": "Must be false: this is a 'call me later', not a hand-over."
+        }
+      },
+      {
+        "path": "preferred_time",
+        "eval": {
+          "type": "llm",
+          "description": "Mentions after 6 pm / this evening."
+        }
+      }
+    ],
+    "verify_absence": false
+  }
+}

@@ -31,7 +31,8 @@ async function main() {
   if (!agentId) stop("no agent id — run pnpm agent:deploy first.");
 
   const registry = (await readJson("tests.json")).tests ?? [];
-  const testId = new Map(registry.map((e) => [e.name ?? e.test_name, e.id ?? e.test_id]));
+  const name = (e) => e.name ?? e.test_name ?? e.config?.split("/").pop()?.replace(/\.json$/, ""); // CLI entries are {config, id}
+  const testId = new Map(registry.map((e) => [name(e), e.id ?? e.test_id]));
   const suite = [...TESTS, ...SIMULATIONS].filter((x) => testId.get(x.name));
   if (!suite.length) stop("no uploaded tests — run pnpm agent:deploy first.");
 

@@ -1,0 +1,46 @@
+{
+  "name": "sim-full-name-fix-end-to-end",
+  "type": "simulation",
+  "chat_history": [],
+  "dynamic_variables": {
+    "call_attempt_id": "0",
+    "channel": "browser",
+    "secret__case_token": "test-case-token"
+  },
+  "simulation_scenario": "You are Rahul, an Indian expat in Dubai. You answer the call and agree to talk. Your application reference is RA-260101 and your date of birth is 12 April 1991. When asked, you read your name from your passport: Rahul Sharma. Confirm the read-back only if it is correct. You are polite and want this fixed quickly.",
+  "success_conditions": [
+    "The agent disclosed it is an AI and the call is recorded at the start.",
+    "The agent verified the caller (reference and date of birth) before mentioning any problem with the application.",
+    "The agent read the corrected name back and got a clear yes before calling submit_correction.",
+    "The agent said the correction goes to an officer for approval and never said it was approved."
+  ],
+  "simulation_max_turns": 16,
+  "tool_mock_config": {
+    "mocking_strategy": "all",
+    "fallback_strategy": "raise_error",
+    "mocked_tool_ids": []
+  },
+  "tool_mock_overrides": {
+    "tool_8501m3wg1cmaeh786087mf9f397a": [
+      {
+        "parameter_conditions": [],
+        "mock_result": "{\"ok\":true,\"verified\":true}",
+        "is_error": false
+      }
+    ],
+    "tool_8201m3wg17t0f37aa26xc9w93ypy": [
+      {
+        "parameter_conditions": [],
+        "mock_result": "{\"ok\":true,\"reference\":\"RA-260101\",\"first_name\":\"Rahul\",\"issues\":[{\"rule\":\"R1\",\"how_to_resolve\":\"fix_by_voice\",\"field\":\"full_name\",\"explanation\":\"The name on the form is spelled differently from the name on the passport.\"}]}",
+        "is_error": false
+      }
+    ],
+    "tool_8701m3wg1bsdet7v11ax7jaj1jwz": [
+      {
+        "parameter_conditions": [],
+        "mock_result": "{\"ok\":true,\"correction_id\":1,\"status\":\"pending_officer_review\"}",
+        "is_error": false
+      }
+    ]
+  }
+}

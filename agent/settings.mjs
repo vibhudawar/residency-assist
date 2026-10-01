@@ -6,8 +6,12 @@ export const AGENT_NAME = "Residency Assist (prototype)";
 export const LLM = "gpt-4.1";
 export const TEMPERATURE = 0.2;
 
-/** Fastest multilingual TTS (English, Arabic, Hindi). Compare with eleven_v3_conversational before recording. */
-export const TTS_MODEL = "eleven_flash_v2_5";
+/**
+ * Fastest TTS. ElevenLabs requires the v2 (English) model on an English-default agent; calls in
+ * Arabic or Hindi (language presets) run on the multilingual v2.5 family. Compare with
+ * eleven_v3_conversational before recording.
+ */
+export const TTS_MODEL = "eleven_flash_v2";
 
 /**
  * One Voice Library voice per language — to be chosen by listening (3 candidates each).
