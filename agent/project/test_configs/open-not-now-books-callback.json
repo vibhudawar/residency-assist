@@ -25,14 +25,14 @@
     },
     "parameters": [
       {
-        "path": "escalate",
+        "path": "body.escalate",
         "eval": {
           "type": "llm",
           "description": "Must be false: this is a 'call me later', not a hand-over."
         }
       },
       {
-        "path": "preferred_time",
+        "path": "body.preferred_time",
         "eval": {
           "type": "llm",
           "description": "Mentions after 6 pm / this evening."

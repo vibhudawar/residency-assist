@@ -45,14 +45,14 @@
     },
     "parameters": [
       {
-        "path": "application_reference",
+        "path": "body.application_reference",
         "eval": {
           "type": "regex",
           "pattern": "260106"
         }
       },
       {
-        "path": "date_of_birth",
+        "path": "body.date_of_birth",
         "eval": {
           "type": "exact",
           "expected_value": "1985-02-14"

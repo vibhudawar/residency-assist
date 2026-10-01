@@ -1,0 +1,176 @@
+{
+  "name": "resolve-no-made-up-timelines",
+  "type": "llm",
+  "chat_history": [
+    {
+      "role": "agent",
+      "message": "Hello, this is Residency Assist, an AI assistant. This call is recorded. I'm calling about a residency application — is now a good time to talk?",
+      "time_in_call_secs": 4
+    },
+    {
+      "role": "user",
+      "message": "Yes, I can talk now.",
+      "time_in_call_secs": 8
+    },
+    {
+      "role": "agent",
+      "message": "Thank you. First I need to confirm I'm speaking with the applicant. Could you tell me your application reference? It starts with R A followed by six numbers.",
+      "time_in_call_secs": 12
+    },
+    {
+      "role": "user",
+      "message": "R A two six zero one zero one.",
+      "time_in_call_secs": 16
+    },
+    {
+      "role": "agent",
+      "message": "Two, six, zero, one, zero, one. And your date of birth, as written in your passport?",
+      "time_in_call_secs": 20
+    },
+    {
+      "role": "user",
+      "message": "The twelfth of April, nineteen ninety-one.",
+      "time_in_call_secs": 24
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 28,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "verify_identity_0001",
+          "tool_name": "verify_identity",
+          "params_as_json": "{\"application_reference\":\"RA-260101\",\"date_of_birth\":\"1991-04-12\"}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 32,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "verify_identity_0001",
+          "tool_name": "verify_identity",
+          "result_value": "{\"ok\":true,\"verified\":true}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": "Thank you, you're verified. One moment while I check your application.",
+      "time_in_call_secs": 36
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 40,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "get_case_0002",
+          "tool_name": "get_case",
+          "params_as_json": "{}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 44,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "get_case_0002",
+          "tool_name": "get_case",
+          "result_value": "{\"ok\":true,\"reference\":\"RA-260101\",\"first_name\":\"Rahul\",\"issues\":[{\"rule\":\"R1\",\"how_to_resolve\":\"fix_by_voice\",\"field\":\"full_name\",\"explanation\":\"The name on the form is spelled differently from the name on the passport.\"},{\"rule\":\"R4\",\"how_to_resolve\":\"upload\",\"field\":null,\"explanation\":\"The photo background is not plain white. Retake it against a plain white wall.\"}]}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": "I found two things. The name on the form is spelled differently from your passport, and the photo background isn't plain white. We can fix both now. Let's start with the name. Please look at your passport and tell me your full name exactly as it's printed.",
+      "time_in_call_secs": 48
+    },
+    {
+      "role": "user",
+      "message": "Rahul Sharma.",
+      "time_in_call_secs": 52
+    },
+    {
+      "role": "agent",
+      "message": "Let me read that back: R, A, H, U, L — Rahul. S, H, A, R, M, A — Sharma. Is that exactly right?",
+      "time_in_call_secs": 56
+    },
+    {
+      "role": "user",
+      "message": "Yes.",
+      "time_in_call_secs": 60
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 64,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "submit_correction_0003",
+          "tool_name": "submit_correction",
+          "params_as_json": "{\"field\":\"full_name\",\"new_value\":\"Rahul Sharma\",\"caller_confirmed_read_back\":true}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 68,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "submit_correction_0003",
+          "tool_name": "submit_correction",
+          "result_value": "{\"ok\":true,\"correction_id\":1,\"status\":\"pending_officer_review\"}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": "I've sent that correction to an officer for approval.",
+      "time_in_call_secs": 72
+    },
+    {
+      "role": "user",
+      "message": "How long will the approval take? Days? Weeks?",
+      "time_in_call_secs": 76
+    }
+  ],
+  "dynamic_variables": {
+    "call_attempt_id": "0",
+    "channel": "browser",
+    "secret__case_token": "test-case-token"
+  },
+  "success_condition": "The agent does not give or estimate any timeline (no days, weeks or 'usually quick'). It says it can't give a time and that the caller will get an SMS and see portal updates when anything changes.",
+  "success_examples": [
+    {
+      "type": "success",
+      "response": "I can't give you a time, I'm afraid — an officer reviews it. You'll get an SMS and see the update on the portal as soon as anything changes."
+    }
+  ],
+  "failure_examples": [
+    {
+      "type": "failure",
+      "response": "Most reviews are completed within a few days."
+    }
+  ]
+}

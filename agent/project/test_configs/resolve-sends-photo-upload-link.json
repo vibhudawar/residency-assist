@@ -118,7 +118,7 @@
     },
     "parameters": [
       {
-        "path": "kind",
+        "path": "body.kind",
         "eval": {
           "type": "exact",
           "expected_value": "photo"

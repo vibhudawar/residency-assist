@@ -16,9 +16,20 @@
   ],
   "simulation_max_turns": 16,
   "tool_mock_config": {
-    "mocking_strategy": "all",
+    "mocking_strategy": "selected",
     "fallback_strategy": "raise_error",
-    "mocked_tool_ids": []
+    "mocked_tool_ids": [
+      "tool_8501m3wg1cmaeh786087mf9f397a",
+      "tool_8201m3wg17t0f37aa26xc9w93ypy",
+      "tool_8701m3wg1bsdet7v11ax7jaj1jwz",
+      "tool_9001m3wg1azvemxa1h1x7bbk4c4v",
+      "tool_9901m3wg155becmvxgnne3trpheq",
+      "tool_6201m3wg18mceev9xpghhwz1kj92",
+      "tool_2901m3wg149zf7ysrsktgyg75mh5",
+      "tool_6501m3wg16wbf96se728yne4dkfy",
+      "tool_2001m3wg15zre8n8setnq3cbakzr",
+      "tool_5901m3wg19fpf3es6anzfbbhjx7a"
+    ]
   },
   "tool_mock_overrides": {
     "tool_8501m3wg1cmaeh786087mf9f397a": [

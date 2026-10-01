@@ -128,21 +128,21 @@
     },
     "parameters": [
       {
-        "path": "field",
+        "path": "body.field",
         "eval": {
           "type": "exact",
           "expected_value": "full_name"
         }
       },
       {
-        "path": "new_value",
+        "path": "body.new_value",
         "eval": {
           "type": "llm",
           "description": "The name Rahul Sharma (any letter case)."
         }
       },
       {
-        "path": "caller_confirmed_read_back",
+        "path": "body.caller_confirmed_read_back",
         "eval": {
           "type": "regex",
           "pattern": "^(true|True)$"

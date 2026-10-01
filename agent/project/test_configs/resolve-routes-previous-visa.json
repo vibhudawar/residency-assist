@@ -118,7 +118,7 @@
     },
     "parameters": [
       {
-        "path": "rule",
+        "path": "body.rule",
         "eval": {
           "type": "exact",
           "expected_value": "R9"

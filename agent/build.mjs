@@ -191,7 +191,8 @@ async function main() {
         dynamic_variables: placeholders,
         tool_call_parameters: {
           referenced_tool: { id: id(x.tool), type: "webhook" },
-          parameters: x.absent ? [] : x.params ?? [],
+          // Webhook tool arguments sit in the request body, so ElevenLabs resolves them as `body.<name>`.
+          parameters: x.absent ? [] : (x.params ?? []).map((p) => ({ ...p, path: `body.${p.path}` })),
           verify_absence: !!x.absent,
         },
       });
@@ -211,8 +212,9 @@ async function main() {
       simulation_scenario: x.scenario,
       success_conditions: x.conditions,
       simulation_max_turns: 16,
-      // Every tool is mocked: a simulated caller never touches real cases.
-      tool_mock_config: { mocking_strategy: "all", fallback_strategy: "raise_error", mocked_tool_ids: [] },
+      // Every one of our webhook tools is mocked, so a simulated caller never touches real cases. Only ours:
+      // mocking "all" also mocks ElevenLabs' own step hops, and the call could never leave the first step.
+      tool_mock_config: { mocking_strategy: "selected", fallback_strategy: "raise_error", mocked_tool_ids: TOOLS.map((t) => id(t.name)) },
       tool_mock_overrides: Object.fromEntries(Object.entries(x.mocks).map(([name, result]) => [id(name), [{ parameter_conditions: [], mock_result: JSON.stringify(result), is_error: false }]])),
     });
   }

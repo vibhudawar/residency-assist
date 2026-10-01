@@ -2,6 +2,7 @@
 // to agent/evidence/ (JSON + a readable Markdown table) for the evidence pack.
 //   pnpm agent:test            (10 runs per test)
 //   pnpm agent:test -- 3       (3 runs per test, for a quick check)
+//   pnpm agent:test -- 1 name-a,name-b   (only these tests; written to evidence/rerun-*.json, latest is untouched)
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -13,6 +14,7 @@ import { SIMULATIONS, TESTS } from "./tests.mjs";
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT = path.join(ROOT, "project");
 const REPEAT = Math.max(1, Math.min(20, Number(process.argv[2] ?? 10) || 10));
+const ONLY = process.argv[3] ? new Set(process.argv[3].split(",").map((n) => n.trim()).filter(Boolean)) : null;
 const POLL_MS = 10_000;
 const MAX_WAIT_MS = 45 * 60_000;
 
@@ -33,7 +35,8 @@ async function main() {
   const registry = (await readJson("tests.json")).tests ?? [];
   const name = (e) => e.name ?? e.test_name ?? e.config?.split("/").pop()?.replace(/\.json$/, ""); // CLI entries are {config, id}
   const testId = new Map(registry.map((e) => [name(e), e.id ?? e.test_id]));
-  const suite = [...TESTS, ...SIMULATIONS].filter((x) => testId.get(x.name));
+  const suite = [...TESTS, ...SIMULATIONS].filter((x) => testId.get(x.name) && (!ONLY || ONLY.has(x.name)));
+  if (ONLY) for (const n of ONLY) if (!suite.some((x) => x.name === n)) stop(`unknown or not uploaded test: ${n}`);
   if (!suite.length) stop("no uploaded tests — run pnpm agent:deploy first.");
 
   const client = new ElevenLabsClient({ apiKey });
@@ -79,18 +82,24 @@ async function main() {
     invocation_id: started.id,
     ran_at: new Date().toISOString(),
     repeat: REPEAT,
+    partial: !!ONLY,
     llm: S.LLM,
     tts_model: S.TTS_MODEL,
     overall_pass_rate: totalRuns ? totalPassed / totalRuns : 0,
     tests: rows,
   };
 
+  const pct = (v) => `${Math.round(v * 100)}%`;
   await mkdir(path.join(ROOT, "evidence"), { recursive: true });
   const stamp = result.ran_at.replace(/[:.]/g, "-");
-  await writeFile(path.join(ROOT, "evidence", `test-run-${stamp}.json`), `${JSON.stringify(result, null, 2)}\n`);
+  await writeFile(path.join(ROOT, "evidence", `${ONLY ? "rerun" : "test-run"}-${stamp}.json`), `${JSON.stringify(result, null, 2)}\n`);
+  if (ONLY) {
+    console.log(`Rerun: ${pct(result.overall_pass_rate)} (${totalPassed}/${totalRuns}). Written to agent/evidence/rerun-${stamp}.json`);
+    for (const r of rows) console.log(`  ${pct(r.pass_rate).padStart(4)}  ${r.name}${r.failures.length ? ` — ${String(r.failures[0]).slice(0, 160)}` : ""}`);
+    return;
+  }
   await writeFile(path.join(ROOT, "evidence", "latest.json"), `${JSON.stringify(result, null, 2)}\n`);
 
-  const pct = (v) => `${Math.round(v * 100)}%`;
   const md = [
     `# Agent test run — ${result.ran_at.slice(0, 16).replace("T", " ")} UTC`,
     "",

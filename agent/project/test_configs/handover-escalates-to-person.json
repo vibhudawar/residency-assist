@@ -118,7 +118,7 @@
     },
     "parameters": [
       {
-        "path": "escalate",
+        "path": "body.escalate",
         "eval": {
           "type": "llm",
           "description": "Must be true: a person must take over."

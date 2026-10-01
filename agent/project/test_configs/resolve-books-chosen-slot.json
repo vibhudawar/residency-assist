@@ -147,7 +147,7 @@
     },
     "parameters": [
       {
-        "path": "slot_id",
+        "path": "body.slot_id",
         "eval": {
           "type": "regex",
           "pattern": "^41$"

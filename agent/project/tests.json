@@ -179,6 +179,11 @@
             "config": "test_configs/verify-cannot-read-case-before-verified.json",
             "type": "tool",
             "id": "test_4101m3wg8hq9ey98d1q9ngzhc9bq"
+        },
+        {
+            "config": "test_configs/resolve-no-made-up-timelines.json",
+            "type": "llm",
+            "id": "test_2101m3wgydb3eq4vfghfm99m8m3r"
         }
     ]
 }
