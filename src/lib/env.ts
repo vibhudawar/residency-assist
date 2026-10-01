@@ -18,6 +18,8 @@ const schema = z.object({
   TWILIO_API_KEY_SECRET: optional,
   TWILIO_FROM_NUMBER: optional,
   DEMO_PHONE_NUMBER: optional,
+  /** Shared passcode for the operator console (prototype stand-in for officer SSO). */
+  OFFICER_PASSCODE: optional,
 });
 
 export type Env = z.infer<typeof schema>;
@@ -34,7 +36,7 @@ export function env(): Env {
 export function requireEnv<K extends EnvKey>(key: K): NonNullable<Env[K]> {
   const value = env()[key];
   if (value === undefined || value === "") {
-    throw new Error(`Missing environment variable ${key}. Add it to .env.local.`);
+    throw new Error(`Missing environment variable ${key}. Add it to .env.`);
   }
   return value as NonNullable<Env[K]>;
 }

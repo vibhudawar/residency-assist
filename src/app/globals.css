@@ -34,6 +34,7 @@
   --color-route-bg: var(--route-bg);
   --color-officer: var(--officer);
   --color-officer-bg: var(--officer-bg);
+  --color-ok: var(--ok);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -85,6 +86,8 @@
   --route-bg: #e5ebff;
   --officer: #b1222a;
   --officer-bg: #fde6e7;
+  /* Paper-side "done" ink (approved, verified, consent on). Lamp green stays on the board. */
+  --ok: #1e6b43;
 
   /* shadcn mapping */
   --background: var(--hall);

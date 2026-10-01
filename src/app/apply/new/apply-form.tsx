@@ -163,9 +163,9 @@ export function ApplyForm({ t, mobileMasked }: { t: Dictionary; mobileMasked: st
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="flex flex-col gap-2">
                 <span className="text-[14px] leading-snug font-medium text-ink">{t.mobile}</span>
-                <div className="flex min-h-11 flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-lg border border-rule bg-[#eef0eb] px-3.5 py-2">
+                <div className="flex min-h-11 flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-lg border border-rule bg-secondary px-3.5 py-2">
                   <span dir="ltr" className="font-mono text-[15px] whitespace-nowrap">{mobileMasked}</span>
-                  <span className="flex items-center gap-1.5 text-[12.5px] font-medium whitespace-nowrap text-[#1e6b43]">
+                  <span className="flex items-center gap-1.5 text-[12.5px] font-medium whitespace-nowrap text-ok">
                     <BadgeCheck className="size-4" aria-hidden />
                     {t.mobileFromUaePass}
                   </span>

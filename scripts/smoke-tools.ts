@@ -125,6 +125,11 @@ async function main() {
   const { count } = await db().from("blocked_actions").select("id", { count: "exact", head: true });
   check("Every refusal is in the blocked-actions log", (count ?? 0) >= 6, count);
 
+  // Leave the demo usable: the test calls end (as real calls would), and the demo phone comes off the
+  // do-not-call list. The pending correction, blocked actions and SMS stay for the console to show.
+  await db().from("call_attempts").update({ status: "completed", ended_at: new Date().toISOString() }).in("status", ["dialing", "connected"]);
+  await db().from("opt_outs").delete().eq("source", "call");
+
   console.log(failures === 0 ? "\nAll checks passed." : `\n${failures} check(s) failed.`);
   process.exit(failures === 0 ? 0 : 1);
 }

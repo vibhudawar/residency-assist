@@ -26,7 +26,7 @@ export default async function ApplyStart() {
                 className="group flex h-14 items-center justify-between gap-3 rounded-[8px] bg-ink px-5 text-[16px] font-medium text-paper transition-colors hover:bg-board"
               >
                 {t.formTitle}
-                <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5 rtl:rotate-180" aria-hidden />
+                <ArrowRight className="size-5 rtl:rotate-180" aria-hidden />
               </Link>
             ) : (
               <Link
@@ -40,7 +40,7 @@ export default async function ApplyStart() {
                     {t.mockTag}
                   </span>
                 </span>
-                <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5 rtl:rotate-180" aria-hidden />
+                <ArrowRight className="size-5 rtl:rotate-180" aria-hidden />
               </Link>
             )}
             <p className="mt-3 text-[13px] leading-snug text-ink-2">{t.signInNote}</p>

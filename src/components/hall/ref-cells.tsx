@@ -17,7 +17,7 @@ export function RefCells({
 }: {
   value: string | null;
   cascade?: boolean;
-  size?: "md" | "lg";
+  size?: "sm" | "md" | "lg";
   tone?: "paper" | "board";
   className?: string;
 }) {
@@ -39,8 +39,8 @@ export function RefCells({
             aria-hidden
             className={cn(
               "grid place-items-center rounded-[3px] leading-none",
-              size === "lg" ? "h-[52px] w-[34px] text-[34px]" : "h-[34px] w-[23px] text-[22px]",
-              dash && (size === "lg" ? "w-[14px]" : "w-[10px]"),
+              size === "lg" ? "h-[52px] w-[34px] text-[34px]" : size === "md" ? "h-[34px] w-[23px] text-[22px]" : "h-[24px] w-[16px] text-[15px]",
+              dash && (size === "lg" ? "w-[14px]" : size === "md" ? "w-[10px]" : "w-[7px]"),
               tone === "paper"
                 ? dash ? "bg-transparent text-ink" : blank ? "border border-dashed border-ink/30 bg-transparent" : "bg-ink text-paper"
                 : dash ? "bg-transparent text-led-amber" : blank ? "bg-board-2 shadow-[inset_0_-1px_0_var(--board-rule)]" : "bg-board-2 text-led-amber led-glow shadow-[inset_0_-1px_0_var(--board-rule)]",

@@ -116,7 +116,7 @@ export function StatusView({
                 <dt className="text-ink-2">{t.correction} · {fieldLabel(c.field)}</dt>
                 <dd className="flex items-baseline gap-3">
                   <span className="font-mono font-medium text-ink">{c.newValue}</span>
-                  <span className={cn("text-[12.5px] font-medium", c.status === "approved" ? "text-[#1e6b43]" : c.status === "rejected" ? "text-officer" : "text-fix")}>
+                  <span className={cn("text-[12.5px] font-medium", c.status === "approved" ? "text-ok" : c.status === "rejected" ? "text-officer" : "text-fix")}>
                     {correctionLabel(c.status)}
                   </span>
                 </dd>
@@ -133,7 +133,7 @@ export function StatusView({
 
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-rule pt-6">
           <p className="flex items-center gap-2 text-[14px] text-ink-2">
-            <span aria-hidden className={cn("size-2 rounded-full", view.consent ? "bg-[#1e6b43]" : "bg-ink-2/50")} />
+            <span aria-hidden className={cn("size-2 rounded-full", view.consent ? "bg-ok" : "bg-ink-2/50")} />
             {view.consent ? t.consentOn : t.consentOff}
           </p>
           {view.consent && (

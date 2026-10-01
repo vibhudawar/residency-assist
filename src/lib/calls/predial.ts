@@ -10,6 +10,14 @@ export const MAX_DECLINES = 2;
 
 export type Channel = "phone" | "browser";
 
+const STATUS_WORDS: Record<string, string> = {
+  submitted: "not checked yet",
+  pending_review: "a correction is waiting for an officer",
+  in_processing: "already back in processing",
+  needs_human: "handed to a person",
+  returned_officer: "officer-only issue",
+};
+
 export interface PredialCheck {
   name: "consent" | "do_not_call" | "calling_hours" | "officer_only" | "fixable_issue" | "attempt_limits" | "no_active_call";
   passed: boolean;
@@ -55,7 +63,7 @@ export async function predialChecks(applicationId: number, { channel, now = new 
     {
       name: "do_not_call",
       passed: !optOut,
-      detail: optOut ? "Number is on the do-not-call list." : "Number is not on the do-not-call list.",
+      detail: optOut ? "Number is on the do-not-call list." : "Checked against the do-not-call list.",
     },
     {
       name: "calling_hours",
@@ -69,12 +77,12 @@ export async function predialChecks(applicationId: number, { channel, now = new 
     {
       name: "officer_only",
       passed: app.status !== "returned_officer",
-      detail: app.status === "returned_officer" ? "Officer-only issue — AI calls are never allowed." : "No officer-only issue.",
+      detail: app.status === "returned_officer" ? "Officer-only issue — AI calls are never allowed." : "No type C rule failed.",
     },
     {
       name: "fixable_issue",
       passed: app.status === "returned_fixable",
-      detail: app.status === "returned_fixable" ? "Application has issues the assistant can help with." : `Nothing for the assistant to do (status: ${app.status}).`,
+      detail: app.status === "returned_fixable" ? "Application has issues the assistant can help with." : `Nothing for the assistant to do — ${STATUS_WORDS[app.status] ?? "not returned"}.`,
     },
     {
       name: "attempt_limits",
@@ -92,7 +100,7 @@ export async function predialChecks(applicationId: number, { channel, now = new 
     {
       name: "no_active_call",
       passed: !active,
-      detail: active ? "A call for this application is already in progress." : "No call in progress.",
+      detail: active ? "A call for this application is already in progress." : "Nothing dialling or connected for this case.",
     },
   ];
 

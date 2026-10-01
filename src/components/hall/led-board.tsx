@@ -28,7 +28,7 @@ const word: Record<LedState, string> = {
 };
 
 /** The board's panel: black frame, faint dot-matrix field, one header row. */
-function Panel({ title, aside, children, className }: { title: string; aside?: React.ReactNode; children: React.ReactNode; className?: string }) {
+export function Panel({ title, aside, children, className }: { title: string; aside?: React.ReactNode; children: React.ReactNode; className?: string }) {
   return (
     <section aria-label={title} className={cn("rounded-[10px] bg-board p-1.5 text-led-text shadow-[0_24px_40px_-24px_rgb(0_0_0/0.6)]", className)}>
       <div className="rounded-[7px] border border-board-rule bg-[radial-gradient(circle_at_1px_1px,#ffffff08_1px,transparent_1.2px)] bg-[length:6px_6px]">
