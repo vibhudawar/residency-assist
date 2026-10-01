@@ -1,0 +1,33 @@
+{
+  "type": "webhook",
+  "name": "record_opt_out",
+  "description": "The caller asked not to be called again: add their number to the do-not-call list. Do it immediately, then confirm and end the call.",
+  "response_timeout_secs": 20,
+  "interruption_mode": "allow",
+  "pre_tool_speech": "auto",
+  "tool_error_handling_mode": "auto",
+  "api_schema": {
+    "url": "https://{{system__env_app_host}}/api/tools/record_opt_out",
+    "method": "POST",
+    "content_type": "application/json",
+    "request_headers": {
+      "x-tool-secret": {
+        "env_var_label": "tool_shared_secret"
+      },
+      "x-case-token": {
+        "variable_name": "secret__case_token"
+      }
+    },
+    "request_body_schema": {
+      "type": "object",
+      "description": "Arguments for record_opt_out.",
+      "required": [],
+      "properties": {
+        "conversation_id": {
+          "type": "string",
+          "dynamic_variable": "system__conversation_id"
+        }
+      }
+    }
+  }
+}

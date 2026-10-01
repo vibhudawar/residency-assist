@@ -1,0 +1,44 @@
+{
+  "type": "webhook",
+  "name": "verify_identity",
+  "description": "Check the caller is the applicant: application reference and date of birth. Use only in the Verify step, once you have both. Never ask for anything else.",
+  "response_timeout_secs": 20,
+  "interruption_mode": "allow",
+  "pre_tool_speech": "auto",
+  "tool_error_handling_mode": "auto",
+  "api_schema": {
+    "url": "https://{{system__env_app_host}}/api/tools/verify_identity",
+    "method": "POST",
+    "content_type": "application/json",
+    "request_headers": {
+      "x-tool-secret": {
+        "env_var_label": "tool_shared_secret"
+      },
+      "x-case-token": {
+        "variable_name": "secret__case_token"
+      }
+    },
+    "request_body_schema": {
+      "type": "object",
+      "description": "Arguments for verify_identity.",
+      "required": [
+        "application_reference",
+        "date_of_birth"
+      ],
+      "properties": {
+        "application_reference": {
+          "type": "string",
+          "description": "The application reference as the caller said it, e.g. RA-260106."
+        },
+        "date_of_birth": {
+          "type": "string",
+          "description": "The caller's date of birth as YYYY-MM-DD."
+        },
+        "conversation_id": {
+          "type": "string",
+          "dynamic_variable": "system__conversation_id"
+        }
+      }
+    }
+  }
+}

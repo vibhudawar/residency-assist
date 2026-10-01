@@ -43,3 +43,6 @@ next-env.d.ts
 # impeccable review captures (local)
 .impeccable/review/
 .impeccable/questions/
+
+# ElevenLabs CLI project: local env only
+agent/project/.env

@@ -1,0 +1,39 @@
+{
+  "type": "webhook",
+  "name": "book_appointment",
+  "description": "Book the slot the caller chose from list_slots. Confirm centre, day and time back to them afterwards.",
+  "response_timeout_secs": 20,
+  "interruption_mode": "disable_during_tool",
+  "pre_tool_speech": "auto",
+  "tool_error_handling_mode": "auto",
+  "api_schema": {
+    "url": "https://{{system__env_app_host}}/api/tools/book_appointment",
+    "method": "POST",
+    "content_type": "application/json",
+    "request_headers": {
+      "x-tool-secret": {
+        "env_var_label": "tool_shared_secret"
+      },
+      "x-case-token": {
+        "variable_name": "secret__case_token"
+      }
+    },
+    "request_body_schema": {
+      "type": "object",
+      "description": "Arguments for book_appointment.",
+      "required": [
+        "slot_id"
+      ],
+      "properties": {
+        "slot_id": {
+          "type": "integer",
+          "description": "The slot_id from list_slots that the caller chose."
+        },
+        "conversation_id": {
+          "type": "string",
+          "dynamic_variable": "system__conversation_id"
+        }
+      }
+    }
+  }
+}

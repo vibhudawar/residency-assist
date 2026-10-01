@@ -1,0 +1,43 @@
+{
+  "type": "webhook",
+  "name": "list_slots",
+  "description": "Get the two earliest appointment slots for a pending in-person step (Emirates ID biometrics or the medical fitness test).",
+  "response_timeout_secs": 20,
+  "interruption_mode": "allow",
+  "pre_tool_speech": "auto",
+  "tool_error_handling_mode": "auto",
+  "api_schema": {
+    "url": "https://{{system__env_app_host}}/api/tools/list_slots",
+    "method": "POST",
+    "content_type": "application/json",
+    "request_headers": {
+      "x-tool-secret": {
+        "env_var_label": "tool_shared_secret"
+      },
+      "x-case-token": {
+        "variable_name": "secret__case_token"
+      }
+    },
+    "request_body_schema": {
+      "type": "object",
+      "description": "Arguments for list_slots.",
+      "required": [
+        "purpose"
+      ],
+      "properties": {
+        "purpose": {
+          "type": "string",
+          "description": "Which appointment.",
+          "enum": [
+            "biometrics",
+            "medical"
+          ]
+        },
+        "conversation_id": {
+          "type": "string",
+          "dynamic_variable": "system__conversation_id"
+        }
+      }
+    }
+  }
+}

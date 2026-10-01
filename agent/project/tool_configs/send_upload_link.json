@@ -1,0 +1,43 @@
+{
+  "type": "webhook",
+  "name": "send_upload_link",
+  "description": "Text the caller a secure one-time link (valid 24 hours) to upload a new photo or document scan. Only when get_case says upload.",
+  "response_timeout_secs": 20,
+  "interruption_mode": "allow",
+  "pre_tool_speech": "auto",
+  "tool_error_handling_mode": "auto",
+  "api_schema": {
+    "url": "https://{{system__env_app_host}}/api/tools/send_upload_link",
+    "method": "POST",
+    "content_type": "application/json",
+    "request_headers": {
+      "x-tool-secret": {
+        "env_var_label": "tool_shared_secret"
+      },
+      "x-case-token": {
+        "variable_name": "secret__case_token"
+      }
+    },
+    "request_body_schema": {
+      "type": "object",
+      "description": "Arguments for send_upload_link.",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "What to upload.",
+          "enum": [
+            "photo",
+            "scan"
+          ]
+        },
+        "conversation_id": {
+          "type": "string",
+          "dynamic_variable": "system__conversation_id"
+        }
+      }
+    }
+  }
+}

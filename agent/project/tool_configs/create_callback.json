@@ -1,0 +1,48 @@
+{
+  "type": "webhook",
+  "name": "create_callback",
+  "description": "Book a callback from a person. escalate=true when a person must take over (asked for a human, upset, disputes, could not verify, system problem); false for 'call me later'.",
+  "response_timeout_secs": 20,
+  "interruption_mode": "allow",
+  "pre_tool_speech": "auto",
+  "tool_error_handling_mode": "auto",
+  "api_schema": {
+    "url": "https://{{system__env_app_host}}/api/tools/create_callback",
+    "method": "POST",
+    "content_type": "application/json",
+    "request_headers": {
+      "x-tool-secret": {
+        "env_var_label": "tool_shared_secret"
+      },
+      "x-case-token": {
+        "variable_name": "secret__case_token"
+      }
+    },
+    "request_body_schema": {
+      "type": "object",
+      "description": "Arguments for create_callback.",
+      "required": [
+        "reason",
+        "escalate"
+      ],
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "Short factual reason, e.g. 'caller asked for a person'."
+        },
+        "escalate": {
+          "type": "boolean",
+          "description": "True if a person must take over the case."
+        },
+        "preferred_time": {
+          "type": "string",
+          "description": "When the caller prefers, in their words, if they said."
+        },
+        "conversation_id": {
+          "type": "string",
+          "dynamic_variable": "system__conversation_id"
+        }
+      }
+    }
+  }
+}

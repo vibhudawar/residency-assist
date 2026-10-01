@@ -1,0 +1,49 @@
+{
+  "type": "webhook",
+  "name": "create_followup",
+  "description": "Record an issue someone else must act on (passport renewal, previous visa, fines, profession code) so a person tracks it.",
+  "response_timeout_secs": 20,
+  "interruption_mode": "allow",
+  "pre_tool_speech": "auto",
+  "tool_error_handling_mode": "auto",
+  "api_schema": {
+    "url": "https://{{system__env_app_host}}/api/tools/create_followup",
+    "method": "POST",
+    "content_type": "application/json",
+    "request_headers": {
+      "x-tool-secret": {
+        "env_var_label": "tool_shared_secret"
+      },
+      "x-case-token": {
+        "variable_name": "secret__case_token"
+      }
+    },
+    "request_body_schema": {
+      "type": "object",
+      "description": "Arguments for create_followup.",
+      "required": [
+        "rule"
+      ],
+      "properties": {
+        "rule": {
+          "type": "string",
+          "description": "The rule from get_case.",
+          "enum": [
+            "R8",
+            "R9",
+            "R10",
+            "R11"
+          ]
+        },
+        "note": {
+          "type": "string",
+          "description": "Optional short note, e.g. the caller's plan."
+        },
+        "conversation_id": {
+          "type": "string",
+          "dynamic_variable": "system__conversation_id"
+        }
+      }
+    }
+  }
+}

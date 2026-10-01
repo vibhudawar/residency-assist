@@ -1,0 +1,54 @@
+{
+  "type": "webhook",
+  "name": "submit_correction",
+  "description": "Send ONE corrected value for officer approval. Only for a field get_case flagged, only after reading the value back and the caller clearly confirming it. Never approves anything.",
+  "response_timeout_secs": 20,
+  "interruption_mode": "disable_during_tool",
+  "pre_tool_speech": "auto",
+  "tool_error_handling_mode": "auto",
+  "api_schema": {
+    "url": "https://{{system__env_app_host}}/api/tools/submit_correction",
+    "method": "POST",
+    "content_type": "application/json",
+    "request_headers": {
+      "x-tool-secret": {
+        "env_var_label": "tool_shared_secret"
+      },
+      "x-case-token": {
+        "variable_name": "secret__case_token"
+      }
+    },
+    "request_body_schema": {
+      "type": "object",
+      "description": "Arguments for submit_correction.",
+      "required": [
+        "field",
+        "new_value",
+        "caller_confirmed_read_back"
+      ],
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The flagged field being corrected.",
+          "enum": [
+            "full_name",
+            "date_of_birth",
+            "passport_number"
+          ]
+        },
+        "new_value": {
+          "type": "string",
+          "description": "The value exactly as the caller read it from their passport. Dates as YYYY-MM-DD."
+        },
+        "caller_confirmed_read_back": {
+          "type": "boolean",
+          "description": "True only if you read the value back and the caller clearly said it is exactly right."
+        },
+        "conversation_id": {
+          "type": "string",
+          "dynamic_variable": "system__conversation_id"
+        }
+      }
+    }
+  }
+}
