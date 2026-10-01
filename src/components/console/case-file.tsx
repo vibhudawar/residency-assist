@@ -12,7 +12,7 @@ import {
 import type { CaseFile as CaseData, Ramp } from "@/lib/console/queries";
 import { cn } from "@/lib/utils";
 import { CallBoard } from "./call-board";
-import { CorrectionSlip } from "./correction-slip";
+import { CorrectionSlip, UploadSlip } from "./correction-slip";
 
 const chip: Record<"A" | "B" | "C", string> = {
   A: "bg-fix-bg text-fix",
@@ -65,7 +65,7 @@ function Fact({ label, value, mono = true }: { label: string; value: React.React
 export function CaseFile({ data }: { data: CaseData }) {
   const failed = data.rules.filter((r) => !r.passed);
   const passed = data.rules.length - failed.length;
-  const pending = data.corrections.filter((c) => c.status === "pending_review").length;
+  const pending = [...data.corrections, ...data.uploads].filter((c) => c.status === "pending_review").length;
 
   return (
     <article aria-label={`Case ${data.reference}`} className="space-y-6">
@@ -126,14 +126,17 @@ export function CaseFile({ data }: { data: CaseData }) {
         title="Your decision"
         aside={pending > 0 ? <span className="text-[12.5px] font-medium text-fix">{pending} waiting</span> : undefined}
       >
-        {data.corrections.length === 0 ? (
+        {data.corrections.length + data.uploads.length === 0 ? (
           <p className="max-w-[70ch] text-[14px] leading-relaxed text-ink-2">
-            No corrections captured yet. When the assistant confirms a corrected value on a call, it lands here as a slip; nothing changes on the application until you approve it.
+            Nothing to decide yet. When the assistant confirms a corrected value on a call, or the applicant sends a new photo that passes the check, it lands here as a slip; nothing changes on the application until you approve it.
           </p>
         ) : (
           <div className="space-y-3">
             {data.corrections.map((c) => (
-              <CorrectionSlip key={c.id} slip={c} hasRecord={data.recordedConversations.includes(c.conversationId)} />
+              <CorrectionSlip key={`c${c.id}`} slip={c} hasRecord={data.recordedConversations.includes(c.conversationId)} />
+            ))}
+            {data.uploads.map((u) => (
+              <UploadSlip key={`u${u.id}`} slip={u} />
             ))}
           </div>
         )}

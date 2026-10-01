@@ -42,10 +42,16 @@ export interface PersonStatus {
   contract_profession_code: string | null;
 }
 
+/** One requirement an image is checked against (lit as its own lamp on the upload page). */
+export type ImageRequirement = "photo_size" | "photo_portrait" | "photo_background" | "scan_resolution" | "scan_sharpness";
+
 /** Result of checking an uploaded image (computed separately, see image-check.ts). */
 export interface ImageCheck {
   ok: boolean;
+  /** The first failing requirement in plain words, or a pass message. */
   detail: string;
+  /** Every requirement, checked independently so the applicant sees all of them at once. */
+  requirements?: { key: ImageRequirement; ok: boolean }[];
 }
 
 export interface RuleInput {

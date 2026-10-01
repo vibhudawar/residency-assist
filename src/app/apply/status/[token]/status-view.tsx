@@ -58,7 +58,9 @@ export function StatusView({
   const stateLabel = (s: CheckState) =>
     s === "pass" ? t.checkPassed : s === "fix" ? t.checkFailed : s === "route" ? t.checkRoute : t.checkOfficer;
   const issueLabel = (s: CheckState) => (s === "fix" ? t.issueFixable : s === "route" ? t.issueRoute : t.issueOfficer);
-  const fieldLabel = (f: string) => (f === "full_name" ? t.fullName : f === "date_of_birth" ? t.dob : t.passportNumber);
+  const fieldLabel = (f: string) =>
+    f === "full_name" ? t.fullName : f === "date_of_birth" ? t.dob : f === "photo" ? t.upload.statusPhoto : f === "scan" ? t.upload.statusScan : t.passportNumber;
+  const isFile = (f: string) => f === "photo" || f === "scan";
   const issuedAt = new Intl.DateTimeFormat(locale === "ar" ? "ar-AE" : "en-GB", {
     timeZone: "Asia/Dubai", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit",
   }).format(new Date(view.submittedAt));
@@ -111,11 +113,11 @@ export function StatusView({
 
         {(view.corrections.length > 0 || view.appointment) && (
           <dl className="mt-8 divide-y divide-rule border-y border-rule text-[14.5px]">
-            {view.corrections.map((c) => (
-              <div key={c.field} className="flex flex-wrap items-baseline justify-between gap-3 py-3.5">
-                <dt className="text-ink-2">{t.correction} · {fieldLabel(c.field)}</dt>
+            {view.corrections.map((c, i) => (
+              <div key={`${c.field}-${i}`} className="flex flex-wrap items-baseline justify-between gap-3 py-3.5">
+                <dt className="text-ink-2">{isFile(c.field) ? fieldLabel(c.field) : `${t.correction} · ${fieldLabel(c.field)}`}</dt>
                 <dd className="flex items-baseline gap-3">
-                  <span className="font-mono font-medium text-ink">{c.newValue}</span>
+                  <span className={cn("font-medium text-ink", !isFile(c.field) && "font-mono")}>{isFile(c.field) ? t.upload.statusReceived : c.newValue}</span>
                   <span className={cn("text-[12.5px] font-medium", c.status === "approved" ? "text-ok" : c.status === "rejected" ? "text-officer" : "text-fix")}>
                     {correctionLabel(c.status)}
                   </span>

@@ -52,6 +52,7 @@ export function LedBoard({
   rows,
   checkingLabel,
   cascade = false,
+  startMs = 900,
   dense = false,
   className,
 }: {
@@ -60,6 +61,8 @@ export function LedBoard({
   rows: LedRow[];
   checkingLabel?: string;
   cascade?: boolean;
+  /** When the first row starts lighting (the portal waits for the ticket to print). */
+  startMs?: number;
   dense?: boolean;
   className?: string;
 }) {
@@ -67,7 +70,7 @@ export function LedBoard({
     <Panel title={title} aside={aside} className={className}>
       <ol className={cn("divide-y divide-board-rule", dense ? "text-[13px]" : "text-[14px]")}>
         {rows.map((row, i) => {
-          const at = 900 + i * 160;
+          const at = startMs + i * 160;
           const delay = { animationDelay: `${at}ms` };
           return (
             <li
@@ -87,7 +90,7 @@ export function LedBoard({
                 </span>
                 {row.detail && <span className="mt-1 block text-[12.5px] leading-snug text-led-text/75">{row.detail}</span>}
               </span>
-              <span className="relative grid text-end font-led text-[15px] font-black tracking-[0.06em] uppercase rtl:tracking-normal">
+              <span className="relative grid text-end font-led text-[15px] font-black tracking-[0.06em] uppercase rtl:font-sans rtl:text-[14px] rtl:font-semibold rtl:tracking-normal">
                 {cascade && checkingLabel && (
                   <span aria-hidden className="col-start-1 row-start-1 text-led-amber led-glow animate-led-out" style={delay}>
                     {checkingLabel}

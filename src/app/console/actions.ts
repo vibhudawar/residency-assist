@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { startCall } from "@/lib/calls/start";
 import type { PredialCheck } from "@/lib/calls/predial";
-import { approveCorrection, rejectCorrection } from "@/lib/console/review";
+import { approveCorrection, approveUpload, rejectCorrection, rejectUpload } from "@/lib/console/review";
 import { resetDemo } from "@/lib/demo/reset";
 import { env } from "@/lib/env";
 import { clearOfficerSession, OFFICER_NAME, passcodeMatches, requireOfficer, setOfficerSession } from "@/lib/officer";
@@ -46,12 +46,16 @@ export interface ReviewState {
   error?: "already_decided" | "reason_required" | "failed";
 }
 
+/** A slip is either a typed correction or a new photo/scan; both go through the same gate. */
+const slipKind = z.enum(["correction", "upload"]);
+
 export async function approveAction(_prev: ReviewState, formData: FormData): Promise<ReviewState> {
   const officer = await requireOfficer();
-  const correctionId = id.safeParse(formData.get("correctionId"));
-  if (!correctionId.success) return { error: "failed" };
+  const slipId = id.safeParse(formData.get("slipId"));
+  const kind = slipKind.safeParse(formData.get("kind"));
+  if (!slipId.success || !kind.success) return { error: "failed" };
   try {
-    const result = await approveCorrection(correctionId.data, officer.name);
+    const result = kind.data === "upload" ? await approveUpload(slipId.data, officer.name) : await approveCorrection(slipId.data, officer.name);
     if (!result.ok) return { error: "already_decided" };
   } catch (err) {
     console.error("approve failed", forLog(err instanceof Error ? err.message : err));
@@ -65,12 +69,14 @@ const reason = z.string().trim().min(5).max(300);
 
 export async function rejectAction(_prev: ReviewState, formData: FormData): Promise<ReviewState> {
   const officer = await requireOfficer();
-  const correctionId = id.safeParse(formData.get("correctionId"));
+  const slipId = id.safeParse(formData.get("slipId"));
+  const kind = slipKind.safeParse(formData.get("kind"));
   const note = reason.safeParse(formData.get("reason"));
-  if (!correctionId.success) return { error: "failed" };
+  if (!slipId.success || !kind.success) return { error: "failed" };
   if (!note.success) return { error: "reason_required" };
   try {
-    const result = await rejectCorrection(correctionId.data, officer.name, note.data);
+    const result =
+      kind.data === "upload" ? await rejectUpload(slipId.data, officer.name, note.data) : await rejectCorrection(slipId.data, officer.name, note.data);
     if (!result.ok) return { error: "already_decided" };
   } catch (err) {
     console.error("reject failed", forLog(err instanceof Error ? err.message : err));

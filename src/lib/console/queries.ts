@@ -47,10 +47,11 @@ export async function getQueue(): Promise<{ rows: QueueRow[]; awaitingDecision: 
   const startOfDay = new Date();
   startOfDay.setUTCHours(0, 0, 0, 0);
 
-  const [{ data: apps }, { data: rules }, { data: corrections }, { data: attempts }, blocked, blockedCalls, handoffs] = await Promise.all([
+  const [{ data: apps }, { data: rules }, { data: corrections }, { data: uploads }, { data: attempts }, blocked, blockedCalls, handoffs] = await Promise.all([
     db().from("applications").select("id, reference, full_name, status, preferred_language, ai_call_consent, created_at").order("created_at", { ascending: false }).limit(200),
     db().from("rule_results").select("application_id, rule_code, rule_type, passed, run_id, created_at").order("created_at", { ascending: false }).limit(4000),
     db().from("corrections").select("application_id, status, reviewed_at").in("status", ["pending_review", "approved", "rejected"]),
+    db().from("uploads").select("application_id, review_status, reviewed_at").not("review_status", "is", null),
     db().from("call_attempts").select("application_id, status, channel, started_at").order("started_at", { ascending: false }).limit(1000),
     db().from("blocked_actions").select("id", { count: "exact", head: true }).gte("created_at", startOfDay.toISOString()),
     db().from("call_attempts").select("id", { count: "exact", head: true }).eq("status", "blocked").gte("started_at", startOfDay.toISOString()),
@@ -66,7 +67,12 @@ export async function getQueue(): Promise<{ rows: QueueRow[]; awaitingDecision: 
   }
   const pending = new Map<number, number>();
   const decided = new Map<number, { status: string; at: string }>();
-  for (const c of corrections ?? []) {
+  // Typed corrections and new files are both slips waiting at the counter.
+  const slips = [
+    ...(corrections ?? []),
+    ...(uploads ?? []).map((u) => ({ application_id: u.application_id, status: u.review_status as string, reviewed_at: u.reviewed_at })),
+  ];
+  for (const c of slips) {
     if (c.status === "pending_review") pending.set(c.application_id, (pending.get(c.application_id) ?? 0) + 1);
     else if (c.reviewed_at && (decided.get(c.application_id)?.at ?? "") < c.reviewed_at) decided.set(c.application_id, { status: c.status, at: c.reviewed_at });
   }
@@ -129,6 +135,7 @@ export interface CaseFile {
   recordedConversations: string[];
   predial: { phone: { allowed: boolean; checks: PredialCheck[] }; browser: { allowed: boolean; checks: PredialCheck[] } };
   calls: { id: number; channel: string; status: string; blockReason: string | null; conversationId: string | null; startedAt: string; endedAt: string | null }[];
+  uploads: { id: number; kind: "photo" | "scan"; status: "pending_review" | "approved" | "rejected"; newUrl: string | null; currentUrl: string | null; reviewedBy: string | null; reviewNote: string | null; reviewedAt: string | null; uploadedAt: string }[];
   corrections: { id: number; ruleCode: string; field: string; oldValue: string | null; newValue: string; status: "pending_review" | "approved" | "rejected"; reviewedBy: string | null; reviewNote: string | null; reviewedAt: string | null; createdAt: string; conversationId: string }[];
   handoffs: { id: number; kind: string; reason: string; preferredTime: string | null; status: string; createdAt: string }[];
   sms: { id: number; body: string; createdAt: string }[];
@@ -156,12 +163,12 @@ function describe(detail: unknown): string | null {
 export async function getCase(id: number): Promise<CaseFile | null> {
   const { data: a } = await db()
     .from("applications")
-    .select("id, reference, status, full_name, date_of_birth, passport_number, passport_expiry, profession_code, phone, preferred_language, ai_call_consent, ai_call_consent_at, created_at, photo_path")
+    .select("id, reference, status, full_name, date_of_birth, passport_number, passport_expiry, profession_code, phone, preferred_language, ai_call_consent, ai_call_consent_at, created_at, photo_path, scan_path")
     .eq("id", id)
     .maybeSingle();
   if (!a) return null;
 
-  const [rules, phone, browser, calls, corrections, handoffs, sms, blocked, slot, audit, photoUrl, records] = await Promise.all([
+  const [rules, phone, browser, calls, corrections, handoffs, sms, blocked, slot, audit, photoUrl, records, uploads] = await Promise.all([
     latestRuleResults(id),
     predialChecks(id, { channel: "phone" }),
     predialChecks(id, { channel: "browser" }),
@@ -174,7 +181,22 @@ export async function getCase(id: number): Promise<CaseFile | null> {
     db().from("audit_log").select("actor, event, detail, created_at").eq("application_id", id).order("created_at").limit(300),
     a.photo_path ? signedDocumentUrl(a.photo_path) : Promise.resolve(null),
     db().from("call_records").select("conversation_id").eq("application_id", id),
+    db().from("uploads").select("id, kind, review_status, file_path, reviewed_by, review_note, reviewed_at, uploaded_at").eq("application_id", id).not("review_status", "is", null).order("uploaded_at"),
   ]);
+  const scanUrl = a.scan_path ? await signedDocumentUrl(a.scan_path) : null;
+  const uploadSlips = await Promise.all(
+    (uploads.data ?? []).map(async (u) => ({
+      id: u.id,
+      kind: u.kind as "photo" | "scan",
+      status: u.review_status as "pending_review" | "approved" | "rejected",
+      newUrl: u.file_path ? await signedDocumentUrl(u.file_path) : null,
+      currentUrl: u.kind === "photo" ? photoUrl : scanUrl,
+      reviewedBy: u.reviewed_by,
+      reviewNote: u.review_note,
+      reviewedAt: u.reviewed_at,
+      uploadedAt: u.uploaded_at ?? "",
+    })),
+  );
 
   const status = a.status as CaseStatus;
   const ruleRows = rules
@@ -201,6 +223,7 @@ export async function getCase(id: number): Promise<CaseFile | null> {
     recordedConversations: (records.data ?? []).map((r) => r.conversation_id),
     predial: { phone, browser },
     calls: (calls.data ?? []).map((c) => ({ id: c.id, channel: c.channel, status: c.status, blockReason: c.block_reason, conversationId: c.conversation_id, startedAt: c.started_at, endedAt: c.ended_at })),
+    uploads: uploadSlips,
     corrections: (corrections.data ?? []).map((c) => ({
       id: c.id, ruleCode: c.rule_code, field: c.field, oldValue: c.old_value, newValue: c.new_value, status: c.status,
       reviewedBy: c.reviewed_by, reviewNote: c.review_note, reviewedAt: c.reviewed_at, createdAt: c.created_at, conversationId: c.conversation_id,

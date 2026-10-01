@@ -37,16 +37,74 @@ export async function approveCorrection(correctionId: number, officer: string): 
     detail: { correction_id: c.id, field, reviewed_by: officer },
   });
 
-  const [{ count: pending }, { data: app }] = await Promise.all([
-    db().from("corrections").select("id", { count: "exact", head: true }).eq("application_id", c.application_id).eq("status", "pending_review"),
-    db().from("applications").select("status").eq("id", c.application_id).single(),
+  return { ok: true, status: await afterApproval(c.application_id) };
+}
+
+/** Once no slip is left waiting, re-run the 12 rules; a clean run goes back into processing. */
+async function afterApproval(applicationId: number): Promise<string> {
+  const [{ count: corrections }, { count: uploads }, { data: app }] = await Promise.all([
+    db().from("corrections").select("id", { count: "exact", head: true }).eq("application_id", applicationId).eq("status", "pending_review"),
+    db().from("uploads").select("id", { count: "exact", head: true }).eq("application_id", applicationId).eq("review_status", "pending_review"),
+    db().from("applications").select("status").eq("id", applicationId).single(),
   ]);
   // Wait for the officer to decide every slip; a rejected slip already handed the case to a person.
-  if ((pending ?? 0) > 0 || app?.status === "needs_human") return { ok: true, status: app?.status ?? "pending_review" };
+  if ((corrections ?? 0) + (uploads ?? 0) > 0 || app?.status === "needs_human") return app?.status ?? "pending_review";
 
-  const { status } = await evaluateApplication(c.application_id);
-  if (status === "in_processing") await sendSms(c.application_id, "correction_approved");
-  return { ok: true, status };
+  const { status } = await evaluateApplication(applicationId);
+  if (status === "in_processing") await sendSms(applicationId, "correction_approved");
+  return status;
+}
+
+/** Approve a new photo/scan that already passed the automatic check: it replaces the file on the application. */
+export async function approveUpload(uploadId: number, officer: string): Promise<ReviewResult> {
+  const now = new Date().toISOString();
+  const { data: u } = await db()
+    .from("uploads")
+    .update({ review_status: "approved", reviewed_by: officer, reviewed_at: now })
+    .eq("id", uploadId)
+    .eq("review_status", "pending_review")
+    .eq("check_passed", true)
+    .select("id, application_id, kind, file_path")
+    .maybeSingle();
+  if (!u) return { ok: false, reason: (await uploadExists(uploadId)) ? "already_decided" : "not_found" };
+  if (!u.file_path) throw new Error(`upload ${u.id} has no file`);
+
+  await db().from("applications").update({ [u.kind === "photo" ? "photo_path" : "scan_path"]: u.file_path, updated_at: now }).eq("id", u.application_id);
+  await db().from("audit_log").insert({
+    application_id: u.application_id,
+    actor: "officer",
+    event: "upload_approved",
+    detail: { kind: u.kind, reviewed_by: officer },
+  });
+  return { ok: true, status: await afterApproval(u.application_id) };
+}
+
+export async function rejectUpload(uploadId: number, officer: string, reason: string): Promise<ReviewResult> {
+  const now = new Date().toISOString();
+  const { data: u } = await db()
+    .from("uploads")
+    .update({ review_status: "rejected", reviewed_by: officer, reviewed_at: now, review_note: reason })
+    .eq("id", uploadId)
+    .eq("review_status", "pending_review")
+    .select("id, application_id, kind")
+    .maybeSingle();
+  if (!u) return { ok: false, reason: (await uploadExists(uploadId)) ? "already_decided" : "not_found" };
+
+  await db().from("applications").update({ status: "needs_human", updated_at: now }).eq("id", u.application_id);
+  await db().from("handoffs").insert({ application_id: u.application_id, kind: "followup", reason: `Officer rejected the new ${u.kind}: ${reason}` });
+  await db().from("audit_log").insert({
+    application_id: u.application_id,
+    actor: "officer",
+    event: "upload_rejected",
+    detail: { kind: u.kind, reviewed_by: officer, reason },
+  });
+  await sendSms(u.application_id, "officer_will_contact");
+  return { ok: true, status: "needs_human" };
+}
+
+async function uploadExists(uploadId: number) {
+  const { data } = await db().from("uploads").select("id").eq("id", uploadId).maybeSingle();
+  return !!data;
 }
 
 /** Reject never touches the application data: the case goes to a person and the applicant is told. */

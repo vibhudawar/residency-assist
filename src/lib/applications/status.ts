@@ -53,11 +53,12 @@ export async function getApplicantStatus(token: string): Promise<ApplicantStatus
     .maybeSingle();
   if (!app) return null;
 
-  const [rules, { data: attempts }, { data: corrections }, { data: slot }] = await Promise.all([
+  const [rules, { data: attempts }, { data: corrections }, { data: slot }, { data: uploads }] = await Promise.all([
     latestRuleResults(app.id),
     db().from("call_attempts").select("status").eq("application_id", app.id).order("started_at", { ascending: false }).limit(1),
     db().from("corrections").select("field, new_value, status, created_at").eq("application_id", app.id).order("created_at"),
     db().from("appointment_slots").select("centre, starts_at").eq("application_id", app.id).order("starts_at").limit(1).maybeSingle(),
+    db().from("uploads").select("kind, review_status, uploaded_at").eq("application_id", app.id).not("review_status", "is", null).order("uploaded_at"),
   ]);
 
   const calling = ["dialing", "connected"].includes(attempts?.[0]?.status ?? "");
@@ -106,7 +107,11 @@ export async function getApplicantStatus(token: string): Promise<ApplicantStatus
         detail: r.passed ? null : r.rule_type === "C" ? OFFICER_DETAIL : r.detail,
       };
     }),
-    corrections: (corrections ?? []).map((c) => ({ field: c.field, newValue: c.new_value, status: c.status })),
+    corrections: [
+      ...(corrections ?? []).map((c) => ({ field: c.field, newValue: c.new_value, status: c.status })),
+      // A new photo/scan that passed the check is shown like a correction; its value is the file, so none is printed.
+      ...(uploads ?? []).map((u) => ({ field: u.kind as string, newValue: "", status: u.review_status as "pending_review" | "approved" | "rejected" })),
+    ],
     appointment: slot
       ? {
           centre: slot.centre,

@@ -8,8 +8,9 @@ export const metadata: Metadata = { title: "Operator console — Residency Assis
 
 export default async function DeskLayout({ children }: LayoutProps<"/console">) {
   const officer = await requireOfficer();
-  const [pending, handoffs, sms, blockedTools, blockedCalls] = await Promise.all([
+  const [pending, pendingUploads, handoffs, sms, blockedTools, blockedCalls] = await Promise.all([
     db().from("corrections").select("id", { count: "exact", head: true }).eq("status", "pending_review"),
+    db().from("uploads").select("id", { count: "exact", head: true }).eq("review_status", "pending_review"),
     db().from("handoffs").select("id", { count: "exact", head: true }).eq("status", "open"),
     db().from("sms_outbox").select("id", { count: "exact", head: true }),
     db().from("blocked_actions").select("id", { count: "exact", head: true }),
@@ -22,7 +23,7 @@ export default async function DeskLayout({ children }: LayoutProps<"/console">) 
       <ConsoleBar officer={officer.name} />
       <ConsoleTabs
         counts={{
-          "/console": pending.count ?? 0,
+          "/console": (pending.count ?? 0) + (pendingUploads.count ?? 0),
           "/console/handoffs": handoffs.count ?? 0,
           "/console/sms": sms.count ?? 0,
           "/console/blocked": (blockedTools.count ?? 0) + (blockedCalls.count ?? 0),
