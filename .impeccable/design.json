@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-01T16:18:02.293208+00:00",
+  "generatedAt": "2026-10-01T18:00:00+00:00",
   "title": "Design System: Residency Assist",
   "extensions": {
     "colorMeta": {
@@ -413,6 +413,10 @@
       "led-stage": {
         "displayName": "Led Stage",
         "purpose": "Current stage on the Now Serving board."
+      },
+      "led-word-rtl": {
+        "displayName": "Led Word (RTL)",
+        "purpose": "Board state words in Arabic: Doto has no Arabic glyphs, so Readex semibold 14px in the lamp colour."
       }
     },
     "shadows": [
@@ -470,7 +474,7 @@
       },
       {
         "name": "led-check",
-        "value": "1100ms; amber held 0-65%, then the row's own colour; delay 900ms + 160ms per row",
+        "value": "1100ms; amber held 0-65%, then the row's own colour; delay 900ms + 160ms per row; the upload link's requirement board starts at 0ms",
         "purpose": "Two-phase rule check: amber 'Check' then result."
       },
       {
@@ -621,6 +625,30 @@
       "description": "One thermal printout for every case event: calls, SMS, handoffs, refusals, decisions.",
       "html": "<section class=\"ds-roll\"><h2><span>CASE HISTORY</span><span dir=\"ltr\">RA-281107</span></h2><ol><li><span>09:14:02</span><span>SYSTEM</span><span>Rules checked<em>2 of 12 failed</em></span></li><li><span>14:01:40</span><span>AGENT</span><span>Call ended</span></li><li><span>14:06:11</span><span>OFFICER</span><span>Correction approved<em>date_of_birth</em></span></li></ol></section>",
       "css": ".ds-roll{max-width:640px;padding:24px;background:var(--paper,#f6f8f9);color:var(--ink,#16181a);font:400 12.5px/1.375 'Geist Mono',ui-monospace,monospace;box-shadow:0 18px 30px -18px rgb(22 24 26/.45),0 2px 6px -2px rgb(22 24 26/.18);--tooth:8px;-webkit-mask:radial-gradient(circle at 50% 0,#0000 3.5px,#000 4px) 50% 0/var(--tooth) 51% repeat-x,radial-gradient(circle at 50% 100%,#0000 3.5px,#000 4px) 50% 100%/var(--tooth) 51% repeat-x;mask:radial-gradient(circle at 50% 0,#0000 3.5px,#000 4px) 50% 0/var(--tooth) 51% repeat-x,radial-gradient(circle at 50% 100%,#0000 3.5px,#000 4px) 50% 100%/var(--tooth) 51% repeat-x}.ds-roll h2{display:flex;justify-content:space-between;margin:0;padding-bottom:12px;border-bottom:1px dashed rgb(22 24 26/.3);font-size:12.5px;font-weight:600}.ds-roll ol{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:6px}.ds-roll li{display:grid;grid-template-columns:5.5rem 4.5rem 1fr;gap:0 12px}.ds-roll li>span:nth-child(-n+2){color:var(--ink-2,#4b5057)}.ds-roll em{display:block;font-style:normal;color:var(--ink-2,#4b5057)}"
+    },
+    {
+      "name": "Requirement Board",
+      "kind": "custom",
+      "refersTo": "led-board",
+      "description": "Upload link: one lamp per requirement, unlit en-dash before a check, amber Check while sending, PASS or FIX after. In RTL the word is Readex semibold 14px.",
+      "html": "<section class=\"ds-req\"><div class=\"ds-req-in\"><header>What the photo needs</header><ol><li><span class=\"ds-l\" style=\"--c:var(--led-red,#ff6a6f)\"></span><span>Plain white background<em>Stand in front of a plain white wall.</em></span><b style=\"color:var(--led-red,#ff6a6f)\">FIX</b></li><li><span class=\"ds-l\" style=\"--c:var(--led-green,#3ddc84)\"></span><span>Upright photo<em>Face and shoulders in the frame.</em></span><b style=\"color:var(--led-green,#3ddc84)\">PASS</b></li><li><span class=\"ds-l ds-off\"></span><span>Large enough<em>At least 400 × 500 pixels.</em></span><b class=\"ds-dash\">–</b></li></ol></div></section>",
+      "css": ".ds-req{width:360px;background:var(--board,#0c0e10);color:var(--led-text,#d9dcd6);border-radius:10px;padding:6px;box-shadow:0 24px 40px -24px rgb(0 0 0/.6);font:400 13px 'Readex Pro',system-ui,sans-serif}.ds-req-in{border:1px solid var(--board-rule,#262a2f);border-radius:7px;background:radial-gradient(circle at 1px 1px,#ffffff08 1px,transparent 1.2px) 0 0/6px 6px}.ds-req header{padding:10px 16px;border-bottom:1px solid var(--board-rule,#262a2f);font-weight:500}.ds-req ol{list-style:none;margin:0;padding:0}.ds-req li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;padding:8px 16px;border-top:1px solid var(--board-rule,#262a2f)}.ds-req li:first-child{border-top:0}.ds-req em{display:block;margin-top:4px;font-style:normal;font-size:12.5px;line-height:1.35;opacity:.75}.ds-req b{font:900 15px/1 Doto,monospace;letter-spacing:.06em;text-shadow:0 0 6px currentColor}.ds-req .ds-dash{color:rgb(217 220 214/.6);text-shadow:none}.ds-l{margin-top:.45em;width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c)}.ds-l.ds-off{background:rgb(217 220 214/.25);box-shadow:none}"
+    },
+    {
+      "name": "Photo Slot",
+      "kind": "custom",
+      "refersTo": "upload-slot",
+      "description": "Paper card with a 104 x 134 passport frame (dashed empty well) and stacked camera and gallery keys.",
+      "html": "<section class=\"ds-slot\"><div class=\"ds-frame\">Your new photo</div><div class=\"ds-keys\"><button class=\"ds-k\">Take photo</button><button class=\"ds-k ds-o\">Choose from gallery</button></div></section>",
+      "css": ".ds-slot{display:flex;gap:16px;max-width:520px;padding:16px;border:1px solid var(--rule,#d0d6da);border-radius:6px;background:var(--paper,#f6f8f9);font:400 14.5px 'Readex Pro',system-ui,sans-serif;color:var(--ink,#16181a)}.ds-frame{flex:none;display:grid;place-items:center;width:104px;height:134px;padding:0 8px;box-sizing:border-box;border:1px dashed rgb(22 24 26/.3);border-radius:4px;font-size:12px;text-align:center;color:var(--ink-2,#4b5057)}.ds-keys{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px}.ds-k{height:48px;border-radius:8px;border:1px solid var(--ink,#16181a);background:var(--ink,#16181a);color:var(--paper,#f6f8f9);font:500 14.5px 'Readex Pro',system-ui,sans-serif}.ds-k.ds-o{background:var(--paper,#f6f8f9);color:var(--ink,#16181a);border-color:rgb(22 24 26/.25)}"
+    },
+    {
+      "name": "Upload Slip",
+      "kind": "custom",
+      "refersTo": "upload-slip-picture",
+      "description": "Console: the new file beside the current one in 120 x 154 frames, on the correction slip's frame and decision footer.",
+      "html": "<article class=\"ds-us\"><header><span class=\"ds-chip\">R4</span><b>New photo</b><small>Sent from the upload link at <code>14:06</code> · passed the automatic check</small></header><div class=\"ds-pics\"><figure><figcaption>On the application</figcaption><div class=\"ds-pic ds-m\"></div></figure><span>→</span><figure><figcaption>New, from the applicant</figcaption><div class=\"ds-pic\"></div></figure></div><footer><button>Approve photo</button><button class=\"ds-rej\">Reject…</button></footer></article>",
+      "css": ".ds-us{max-width:560px;border:1px solid rgb(22 24 26/.4);border-radius:6px;background:var(--paper,#f6f8f9);color:var(--ink,#16181a);font:400 14px 'Readex Pro',system-ui,sans-serif}.ds-us header{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;padding:16px 20px 0}.ds-us b{font-size:15px;font-weight:600}.ds-us small{font-size:12.5px;color:var(--ink-2,#4b5057)}.ds-us code{font-family:'Geist Mono',monospace}.ds-chip{padding:4px 8px;border-radius:4px;background:var(--fix-bg,#fff0d3);color:var(--fix,#8a5200);font:500 12px 'Geist Mono',monospace}.ds-pics{display:flex;align-items:flex-end;gap:20px;padding:14px 20px 16px}.ds-pics span{margin-bottom:70px;color:var(--ink-2,#4b5057)}.ds-pics figure{margin:0}.ds-pics figcaption{font-size:12.5px;color:var(--ink-2,#4b5057)}.ds-pic{margin-top:6px;width:120px;height:154px;border:1px solid var(--rule,#d0d6da);border-radius:4px;background:var(--hall,#e4e8ea)}.ds-pic.ds-m{opacity:.6}.ds-us footer{display:flex;justify-content:space-between;padding:16px 20px;border-top:1px solid var(--rule,#d0d6da)}.ds-us footer button{height:48px;padding:0 24px;border-radius:8px;border:0;background:var(--ink,#16181a);color:var(--paper,#f6f8f9);font:500 15px 'Readex Pro',system-ui,sans-serif}.ds-us footer .ds-rej{height:40px;padding:0 16px;background:var(--paper,#f6f8f9);color:var(--officer,#b1222a);border:1px solid rgb(177 34 42/.35);font-size:14px}"
     }
   ],
   "narrative": {
@@ -662,7 +690,12 @@
       },
       {
         "name": "The Equal Scripts Rule",
-        "body": "Arabic is set in the same family, size and weight as English. Doto and Geist Mono fall back to Readex for Arabic, so board words stay legible in both scripts.",
+        "body": "Arabic is set in the same family, size and weight as English. Doto has no Arabic glyphs, so in RTL the board's state words switch deliberately to Readex semibold 14px in the lamp colour, never a browser fallback; Geist Mono falls back to Readex for Arabic. A lit word reads as a lamp in both scripts.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Digit System Rule",
+        "body": "A screen uses one set of digits. The reference prints in Latin digits in its cells, so Arabic screens format times, dates and counts with Latin digits too (ar-AE-u-nu-latn).",
         "section": "typography"
       },
       {
@@ -685,7 +718,9 @@
       "Do set Arabic in Readex at the same size and weight as English, mirror the layout, and keep passport and reference data LTR.",
       "Do render the operator console's queue, call checks and counts as LED Board, and its case file, slips, logs and history as paper, with the same tokens, ramp and motion grammar.",
       "Do keep Approve the primary key on a correction slip, and keep Reject at the far end of the row behind a required, typed reason.",
-      "Do print every case event (calls, SMS, handoffs, refusals, decisions) on the one case-history roll."
+      "Do print every case event (calls, SMS, handoffs, refusals, decisions) on the one case-history roll.",
+      "Do use one digit system per screen: Latin digits on Arabic screens, matching the reference cells.",
+      "Do let the h1 name where a link or case stands; a notice under it says only what that means and what to do next."
     ],
     "donts": [
       "Don't use the generic government blue-header stepper form, or its startup-gradient opposite.",

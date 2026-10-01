@@ -61,7 +61,7 @@ export function StatusView({
   const fieldLabel = (f: string) =>
     f === "full_name" ? t.fullName : f === "date_of_birth" ? t.dob : f === "photo" ? t.upload.statusPhoto : f === "scan" ? t.upload.statusScan : t.passportNumber;
   const isFile = (f: string) => f === "photo" || f === "scan";
-  const issuedAt = new Intl.DateTimeFormat(locale === "ar" ? "ar-AE" : "en-GB", {
+  const issuedAt = new Intl.DateTimeFormat(locale === "ar" ? "ar-AE-u-nu-latn" : "en-GB", {
     timeZone: "Asia/Dubai", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit",
   }).format(new Date(view.submittedAt));
   const correctionLabel = (s: string) => (s === "approved" ? t.correctionApproved : s === "rejected" ? t.correctionRejected : t.correctionPending);
