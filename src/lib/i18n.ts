@@ -1,5 +1,6 @@
 import "server-only";
 import { cookies } from "next/headers";
+import { HALL_WORDS } from "./hall-words";
 
 export const LOCALES = ["en", "ar"] as const;
 export type Locale = (typeof LOCALES)[number];
@@ -15,10 +16,10 @@ export function dirOf(locale: Locale): "ltr" | "rtl" {
 }
 
 const en = {
-  banner: "Prototype — not affiliated with GDRFA or ICP. All people and cases are fictional.",
-  switchLanguage: "العربية",
-  product: "Residency Assist",
-  hall: "Residency service hall",
+  banner: HALL_WORDS.en.banner,
+  switchLanguage: HALL_WORDS.en.switchLanguage,
+  product: HALL_WORDS.en.product,
+  hall: HALL_WORDS.en.hall,
 
   signInTitle: "Apply for a residence visa",
   signInBody: "Sign in to submit your application. If something small needs fixing later, we can call you and fix it on the call — only if you allow it.",
@@ -231,10 +232,10 @@ const en = {
 export type Dictionary = typeof en;
 
 const ar: Dictionary = {
-  banner: "نموذج تجريبي — غير تابع للإدارة العامة للإقامة وشؤون الأجانب أو للهيئة الاتحادية للهوية. جميع الأشخاص والحالات خيالية.",
-  switchLanguage: "English",
-  product: "مساعد الإقامة",
-  hall: "قاعة خدمات الإقامة",
+  banner: HALL_WORDS.ar.banner,
+  switchLanguage: HALL_WORDS.ar.switchLanguage,
+  product: HALL_WORDS.ar.product,
+  hall: HALL_WORDS.ar.hall,
 
   signInTitle: "تقديم طلب تأشيرة إقامة",
   signInBody: "سجّل الدخول لتقديم طلبك. إذا احتاج الطلب لاحقًا إلى تصحيح بسيط، يمكننا الاتصال بك وتصحيحه خلال المكالمة — فقط إذا سمحت بذلك.",

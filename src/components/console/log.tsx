@@ -28,7 +28,7 @@ export function CaseLink({ applicationId, reference }: { applicationId: number |
 }
 
 /** A plain paper table for the cross-case logs. */
-export function LogTable({ head, children, className }: { head: string[]; children: React.ReactNode; className?: string }) {
+export function LogTable({ head, children, className }: { head: readonly string[]; children: React.ReactNode; className?: string }) {
   return (
     <div className={cn("overflow-x-auto rounded-[6px] border border-rule bg-paper", className)}>
       <table className="w-full min-w-[860px] text-[14px]">
@@ -46,3 +46,12 @@ export function LogTable({ head, children, className }: { head: string[]; childr
     </div>
   );
 }
+
+/** Each log page's fixed words: its page and its loading screen print the same title, lead and columns. */
+export const LOGS = {
+  records: { title: "Call records", lead: "One record per call, sent by ElevenLabs after the call ends: the full transcript, its summary and post-call checks, and response latency." },
+  handoffs: { title: "Handoffs", lead: "Everything handed to a person: callbacks the caller asked for, escalations (dispute, distress, asked for a human, officer-only issue) and follow-ups the assistant can't do itself.", head: ["When", "Case", "Kind", "Reason", "Preferred time", "Status"] },
+  sms: { title: "SMS outbox", lead: "Texts are simulated in this prototype: each one is written here instead of being sent. They go out in the applicant's call language.", head: ["When", "Case", "To", "Message"] },
+  blocked: { title: "Blocked actions", lead: "Every action the system refused, and why: calls stopped by the pre-dial checks, and tool calls the backend turned down even when the agent asked (unverified caller, unflagged field, value that doesn't match the passport record).", head: ["When", "Case", "Stopped by", "What was tried", "Why it was refused"] },
+  evidence: { title: "Evidence", lead: "Response latency per language from recorded calls, the agent test suite, and the guardrails the backend enforces." },
+} as const;

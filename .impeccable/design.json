@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-01T18:00:00+00:00",
+  "generatedAt": "2026-10-02T12:00:00+00:00",
   "title": "Design System: Residency Assist",
   "extensions": {
     "colorMeta": {
@@ -488,14 +488,24 @@
         "purpose": "Console queue/slip lamps relight after an approval or a call ending."
       },
       {
+        "name": "wait-in",
+        "value": "240ms cubic-bezier(0.16, 1, 0.3, 1), 180ms delay; opacity 0 -> 1",
+        "purpose": "A loading screen appears only if the wait outlasts a blink; fast loads never flash a skeleton."
+      },
+      {
+        "name": "wait-breathe",
+        "value": "1400ms cubic-bezier(0.45, 0, 0.55, 1) infinite alternate; opacity 1 -> 0.45",
+        "purpose": "Unprinted lines and unlit cells breathe while waiting. The world's only loop, on waiting shapes only."
+      },
+      {
         "name": "hover",
         "value": "colour and stroke only (transition-colors)",
         "purpose": "Keys and links never nudge, lift or press in."
       },
       {
         "name": "reduced-motion",
-        "value": "animation/transition-duration 0.01ms",
-        "purpose": "All motion collapses to its end state."
+        "value": "animation/transition-duration 0.01ms, animation-iteration-count 1",
+        "purpose": "All motion collapses to its end state; the wait breathe stops and the skeleton simply appears, still."
       }
     ],
     "breakpoints": [
@@ -558,7 +568,7 @@
       "name": "Hall Bar",
       "kind": "nav",
       "refersTo": "hall-bar",
-      "description": "Amber prototype banner over the board-black bar with monogram and language switch.",
+      "description": "Amber prototype banner over the board-black bar with monogram and language switch; one shared bar frame for the hall bar, console bar and error screens. On loading screens the switch is an inert 60% placeholder.",
       "html": "<header class=\"ds-hall\"><div class=\"ds-banner\">Prototype — not affiliated with GDRFA or ICP. All people and cases are fictional.</div><div class=\"ds-hall-row\"><span class=\"ds-mono-mark\">R</span><span class=\"ds-hall-name\">Residency Assist</span><button class=\"ds-lang\" lang=\"ar\">العربية</button></div></header>",
       "css": ".ds-hall{background:var(--board,#0c0e10);color:var(--led-text,#d9dcd6);font-family:'Readex Pro',system-ui,sans-serif}.ds-banner{background:var(--led-amber,#ffb020);color:var(--board,#0c0e10);text-align:center;padding:6px 16px;font-size:12.5px;font-weight:500}.ds-hall-row{display:flex;align-items:center;gap:12px;padding:14px 24px}.ds-mono-mark{display:grid;place-items:center;width:32px;height:32px;border-radius:6px;background:var(--board-2,#15181b);color:var(--led-amber,#ffb020);font:900 18px Doto,monospace;text-shadow:0 0 6px rgb(255 176 32 / .55)}.ds-hall-name{font-size:15px;font-weight:600;color:var(--paper,#f6f8f9)}.ds-lang{margin-inline-start:auto;padding:6px 12px;border:1px solid var(--board-rule,#262a2f);border-radius:6px;background:transparent;color:var(--paper,#f6f8f9);font:400 13px 'Readex Pro',sans-serif;cursor:pointer;transition:color .15s,border-color .15s}.ds-lang:hover{border-color:var(--led-amber,#ffb020);color:var(--led-amber,#ffb020)}.ds-lang:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}"
     },
@@ -649,18 +659,35 @@
       "description": "Console: the new file beside the current one in 120 x 154 frames, on the correction slip's frame and decision footer.",
       "html": "<article class=\"ds-us\"><header><span class=\"ds-chip\">R4</span><b>New photo</b><small>Sent from the upload link at <code>14:06</code> · passed the automatic check</small></header><div class=\"ds-pics\"><figure><figcaption>On the application</figcaption><div class=\"ds-pic ds-m\"></div></figure><span>→</span><figure><figcaption>New, from the applicant</figcaption><div class=\"ds-pic\"></div></figure></div><footer><button>Approve photo</button><button class=\"ds-rej\">Reject…</button></footer></article>",
       "css": ".ds-us{max-width:560px;border:1px solid rgb(22 24 26/.4);border-radius:6px;background:var(--paper,#f6f8f9);color:var(--ink,#16181a);font:400 14px 'Readex Pro',system-ui,sans-serif}.ds-us header{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;padding:16px 20px 0}.ds-us b{font-size:15px;font-weight:600}.ds-us small{font-size:12.5px;color:var(--ink-2,#4b5057)}.ds-us code{font-family:'Geist Mono',monospace}.ds-chip{padding:4px 8px;border-radius:4px;background:var(--fix-bg,#fff0d3);color:var(--fix,#8a5200);font:500 12px 'Geist Mono',monospace}.ds-pics{display:flex;align-items:flex-end;gap:20px;padding:14px 20px 16px}.ds-pics span{margin-bottom:70px;color:var(--ink-2,#4b5057)}.ds-pics figure{margin:0}.ds-pics figcaption{font-size:12.5px;color:var(--ink-2,#4b5057)}.ds-pic{margin-top:6px;width:120px;height:154px;border:1px solid var(--rule,#d0d6da);border-radius:4px;background:var(--hall,#e4e8ea)}.ds-pic.ds-m{opacity:.6}.ds-us footer{display:flex;justify-content:space-between;padding:16px 20px;border-top:1px solid var(--rule,#d0d6da)}.ds-us footer button{height:48px;padding:0 24px;border-radius:8px;border:0;background:var(--ink,#16181a);color:var(--paper,#f6f8f9);font:500 15px 'Readex Pro',system-ui,sans-serif}.ds-us footer .ds-rej{height:40px;padding:0 16px;background:var(--paper,#f6f8f9);color:var(--officer,#b1222a);border:1px solid rgb(177 34 42/.35);font-size:14px}"
+    },
+    {
+      "name": "Waiting (Pre-Printed Form)",
+      "kind": "custom",
+      "refersTo": "waiting-ink",
+      "description": "Loading state in both materials: fixed labels print as real text; only case data is unprinted ink (7%) or unlit board (8% LED text, 25% unlit lamps), at real size.",
+      "html": "<div class=\"ds-wait\" role=\"status\"><span class=\"ds-sr\">Opening the case…</span><div aria-hidden=\"true\"><dl class=\"ds-facts\"><div><dt>Passport number</dt><dd><span class=\"ds-ink\" style=\"width:112px\"></span></dd></div><div><dt>Call language</dt><dd><span class=\"ds-ink\" style=\"width:80px\"></span></dd></div></dl><div class=\"ds-board\"><p class=\"ds-bt\">Before calling</p><div class=\"ds-row\"><span>Consent to an AI call</span><span class=\"ds-r\"><i class=\"ds-lamp\"></i><span class=\"ds-unlit\" style=\"width:36px\"></span></span></div><div class=\"ds-row\"><span>Calling hours</span><span class=\"ds-r\"><i class=\"ds-lamp\"></i><span class=\"ds-unlit\" style=\"width:36px\"></span></span></div></div></div></div>",
+      "css": ".ds-wait{max-width:520px;font:400 14px 'Readex Pro',system-ui,sans-serif;animation:ds-wait-in 240ms cubic-bezier(.16,1,.3,1) 180ms both}.ds-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.ds-facts{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;margin:0 0 16px;padding:14px 20px;border:1px solid var(--rule,#d0d6da);border-radius:6px;background:var(--paper,#f6f8f9)}.ds-facts dt{font-size:12.5px;color:var(--ink-2,#4b5057)}.ds-facts dd{margin:2px 0 0;height:21px;display:flex;align-items:center}.ds-ink,.ds-unlit{display:block;height:12px;border-radius:3px;animation:ds-breathe 1400ms cubic-bezier(.45,0,.55,1) infinite alternate}.ds-ink{background:rgb(22 24 26/.07)}.ds-unlit{background:rgb(217 220 214/.08)}.ds-board{padding:6px;border-radius:10px;background:var(--board,#0c0e10);color:var(--led-text,#d9dcd6)}.ds-bt{margin:0;padding:8px 10px;font-size:13px}.ds-row{display:flex;justify-content:space-between;align-items:center;padding:10px;border-top:1px solid var(--board-rule,#262a2f);font-size:13.5px}.ds-r{display:flex;align-items:center;gap:8px}.ds-lamp{width:8px;height:8px;border-radius:50%;background:rgb(217 220 214/.2)}@keyframes ds-wait-in{from{opacity:0}to{opacity:1}}@keyframes ds-breathe{from{opacity:1}to{opacity:.45}}@media (prefers-reduced-motion:reduce){.ds-wait,.ds-ink,.ds-unlit{animation:none}}"
+    },
+    {
+      "name": "Error Notice",
+      "kind": "custom",
+      "refersTo": "error-notice",
+      "description": "A failed screen on paper under the shared bar: headline, one plain line, large primary Try again (pending label), ghost exit, mono error reference. Never server error text.",
+      "html": "<section class=\"ds-err\" role=\"alert\"><h1>This page didn't load</h1><p>Something went wrong on our side, not with your application. Try again in a moment.</p><div class=\"ds-keys\"><button class=\"ds-retry\">Try again</button><a class=\"ds-exit\" href=\"#\">Back to the start</a></div><p class=\"ds-ref\">Error reference <code dir=\"ltr\">2840193377</code></p></section>",
+      "css": ".ds-err{max-width:60ch;color:var(--ink,#16181a);font-family:'Readex Pro',system-ui,sans-serif}.ds-err h1{margin:0;font-size:36px;line-height:1.12;font-weight:600;letter-spacing:-.015em}.ds-err p{margin:12px 0 0;font-size:15px;line-height:1.625;color:var(--ink-2,#4b5057)}.ds-keys{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.ds-retry,.ds-exit{height:48px;padding:0 24px;border-radius:8px;font:500 15px 'Readex Pro',system-ui,sans-serif;display:inline-flex;align-items:center;text-decoration:none;cursor:pointer;transition:background-color .15s,color .15s}.ds-retry{border:0;background:var(--ink,#16181a);color:var(--paper,#f6f8f9)}.ds-retry:hover{background:var(--board,#0c0e10)}.ds-exit{background:transparent;color:var(--ink-2,#4b5057)}.ds-exit:hover{background:var(--paper-quiet,#eaeef0);color:var(--ink,#16181a)}.ds-retry:focus-visible,.ds-exit:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}.ds-err .ds-ref{margin-top:32px;font-size:12.5px}.ds-ref code{font-family:'Geist Mono',monospace;color:var(--ink,#16181a)}"
     }
   ],
   "narrative": {
     "northStar": "The Service Hall",
-    "overview": "**Creative North Star: \"The Service Hall\"**\n\nThe application is a numbered ticket from a residency service hall, and the hall's black LED board always says where it is and what happens next. Two materials carry everything. The working surface is cool thermal paper printed in near-black ink: the form, the ticket, the issue list. The status surface is a near-black LED board whose dot-matrix lamps light amber while checking, green when done, red when attention is needed, blue when someone else must act. The hall itself is a pale cool grey floor that both materials sit on.\n\nThe world is calm and dense. The hall feels like a public counter where things are being dealt with, not like a dashboard. One bilingual sans (Readex Pro, Latin and Arabic) carries everything a person reads. The ticket prints in thermal mono. Dot-matrix appears only where a real board would light it: reference numerals, the \"now serving\" stage, short state words. Arabic is true RTL. Columns, lamps and ticket rows mirror; reference numbers and passport data stay LTR inside fixed character cells.\n\nThe world rejects the generic government blue-header stepper form and its startup-gradient opposite.\n\nThe operator console (`/console`) is built in the same world, unchanged: an officer's counter desk. The queue, the pre-dial calling board, the latency board and every lit count are LED board; the open case file, correction slips, call records, logs and the case-history roll are thermal paper. Same tokens, same issue ramp, same lamp states, same motion grammar (\"paper feeds down, LED cells light; nothing else moves\"). The console is English-only and always LTR.",
+    "overview": "**Creative North Star: \"The Service Hall\"**\n\nThe application is a numbered ticket from a residency service hall, and the hall's black LED board always says where it is and what happens next. Two materials carry everything. The working surface is cool thermal paper printed in near-black ink: the form, the ticket, the issue list. The status surface is a near-black LED board whose dot-matrix lamps light amber while checking, green when done, red when attention is needed, blue when someone else must act. The hall itself is a pale cool grey floor that both materials sit on.\n\nThe world is calm and dense. The hall feels like a public counter where things are being dealt with, not like a dashboard. One bilingual sans (Readex Pro, Latin and Arabic) carries everything a person reads. The ticket prints in thermal mono. Dot-matrix appears only where a real board would light it: reference numerals, the \"now serving\" stage, short state words. Arabic is true RTL. Columns, lamps and ticket rows mirror; reference numbers and passport data stay LTR inside fixed character cells.\n\nThe world rejects the generic government blue-header stepper form and its startup-gradient opposite.\n\nThe operator console (`/console`) is built in the same world, unchanged: an officer's counter desk. The queue, the pre-dial calling board, the latency board and every lit count are LED board; the open case file, correction slips, call records, logs and the case-history roll are thermal paper. Same tokens, same issue ramp, same lamp states, same motion grammar (\"paper feeds down, LED cells light; nothing else moves\"). The console is English-only and always LTR.\n\nWaiting, failure and absence are the same world too. While a page loads, the form is already pre-printed and the board is already hung: every fixed label prints, only the data is unprinted paper or an unlit board, at its real size. When a page fails, it says so in plain words on paper under the same bar, with one way forward.",
     "keyCharacteristics": [
       "Two materials only: thermal paper (working) and LED board (status), on a cool hall-grey floor.",
       "The reference number always sits in fixed character cells: reverse-printed ink on paper, glowing amber on the board.",
       "One fixed three-step issue ramp (fixable / route / officer) used identically everywhere.",
       "Each type role has one job: Readex reads, Geist Mono prints, Doto lights.",
       "Motion is mechanical and diegetic: paper feeds, cells drop, lamps light.",
-      "Full EN/AR parity with true RTL on the applicant portal; data stays LTR. The officer console is English and LTR."
+      "Full EN/AR parity with true RTL on the applicant portal; data stays LTR. The officer console is English and LTR.",
+      "Loading screens are the pre-printed form: labels print, data is unprinted ink or unlit lamps, nothing jumps when it arrives."
     ],
     "rules": [
       {
@@ -707,6 +734,11 @@
         "name": "The Paper Can't Glow Rule",
         "body": "Glow belongs to lamps. Reference cells on paper are reverse-printed ink with no glow. The same cells on the board glow amber.",
         "section": "elevation"
+      },
+      {
+        "name": "The Pre-Printed Form Rule",
+        "body": "The form is pre-printed; the data isn't printed yet. Anything that is the same for every case prints as real text while waiting; only case data is unprinted paper (ink at 7%) or unlit board (LED text at 8%, lamps at 25%, blank cells). Every block sits at its real size. No shimmer sweep, no grey boxes standing in for labels.",
+        "section": "components"
       }
     ],
     "dos": [
@@ -720,7 +752,10 @@
       "Do keep Approve the primary key on a correction slip, and keep Reject at the far end of the row behind a required, typed reason.",
       "Do print every case event (calls, SMS, handoffs, refusals, decisions) on the one case-history roll.",
       "Do use one digit system per screen: Latin digits on Arabic screens, matching the reference cells.",
-      "Do let the h1 name where a link or case stands; a notice under it says only what that means and what to do next."
+      "Do let the h1 name where a link or case stands; a notice under it says only what that means and what to do next.",
+      "Do build loading screens as the pre-printed form: fixed labels in real text, only case data unprinted (7% ink) or unlit (8% LED text, 25% lamps), every block at its real size, one status sentence for screen readers.",
+      "Do keep whatever still works on screen when part of a page fails or loads: the bar, the tabs, the queue board.",
+      "Do give every error screen one primary \"Try again\", an exit where there is one, and the mono error reference."
     ],
     "donts": [
       "Don't use the generic government blue-header stepper form, or its startup-gradient opposite.",
@@ -728,8 +763,11 @@
       "Don't mark refusals, sources or other non-issue states with the officer ramp. Use the neutral chip.",
       "Don't set sentences, headings or labels in Doto. Dot-matrix is for numerals, the current stage and short state words.",
       "Don't add glow to anything on paper, or shadows to anything that isn't a hall object (ticket and case-history roll, board, machine, sheet).",
-      "Don't animate anything outside the paper-feed, cell-drop and lamp-lighting grammar. No hover lifts or arrow nudges, no press-in, no page transitions, no looping pulses. The live lamp is steady.",
-      "Don't pre-tick consent, or place a destructive action beside the primary action."
+      "Don't animate anything outside the paper-feed, cell-drop and lamp-lighting grammar. No hover lifts or arrow nudges, no press-in, no page transitions, no looping pulses. The live lamp is steady. The one exception is the slow wait breathe on unprinted and unlit waiting shapes.",
+      "Don't pre-tick consent, or place a destructive action beside the primary action.",
+      "Don't sweep a shimmer across a skeleton, or stand grey boxes in for words that are the same on every case.",
+      "Don't show server error text on an error screen; show the plain-language notice and the digest.",
+      "Don't give a screen a skeleton when its language is only known from its data (the upload link)."
     ]
   }
 }

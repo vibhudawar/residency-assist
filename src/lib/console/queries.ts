@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { latestRuleResults } from "@/lib/applications/evaluate";
 import { type PredialCheck, predialChecks } from "@/lib/calls/predial";
 import { signedDocumentUrl } from "@/lib/storage";
@@ -43,7 +44,8 @@ const ORDER: Record<CaseStatus, number> = {
   pending_review: 0, needs_human: 1, returned_fixable: 2, returned_officer: 3, submitted: 4, in_processing: 5,
 };
 
-export async function getQueue(): Promise<{ rows: QueueRow[]; awaitingDecision: number; blockedToday: number; openHandoffs: number }> {
+/** One read per request: the desk layout (queue) and the /console page (first case) share it. */
+export const getQueue = cache(async function getQueue(): Promise<{ rows: QueueRow[]; awaitingDecision: number; blockedToday: number; openHandoffs: number }> {
   const startOfDay = new Date();
   startOfDay.setUTCHours(0, 0, 0, 0);
 
@@ -105,7 +107,7 @@ export async function getQueue(): Promise<{ rows: QueueRow[]; awaitingDecision: 
     blockedToday: (blocked.count ?? 0) + (blockedCalls.count ?? 0),
     openHandoffs: handoffs.count ?? 0,
   };
-}
+});
 
 export interface CaseEvent {
   at: string;

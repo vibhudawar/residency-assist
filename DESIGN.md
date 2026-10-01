@@ -317,6 +317,18 @@ components:
     backgroundColor: "{colors.led-amber}"
     textColor: "{colors.board}"
     padding: "6px 16px"
+  waiting-ink:
+    rounded: "{rounded.cell}"
+    height: "12px"
+  waiting-unlit:
+    rounded: "{rounded.cell}"
+    height: "12px"
+  unlit-lamp:
+    size: "8px"
+  error-notice:
+    textColor: "{colors.ink}"
+    typography: "{typography.case-headline}"
+    width: "60ch"
 ---
 
 # Design System: Residency Assist
@@ -335,6 +347,8 @@ The upload link (`/u/<token>`) is the same world on a phone: the applicant repla
 
 The operator console (`/console`) is built in the same world, unchanged: an officer's counter desk. The queue, the pre-dial calling board, the latency board and every lit count are LED board; the open case file, correction slips, call records, logs and the case-history roll are thermal paper. Same tokens, same issue ramp, same lamp states, same motion grammar ("paper feeds down, LED cells light; nothing else moves"). The console is English-only and always LTR.
 
+Waiting, failure and absence are the same world too. While a page loads, the form is already pre-printed and the board is already hung: every fixed label prints, only the data is unprinted paper or an unlit board, at its real size. When a page fails, it says so in plain words on paper under the same bar, with one way forward.
+
 **Key Characteristics:**
 - Two materials only: thermal paper (working) and LED board (status), on a cool hall-grey floor.
 - The reference number always sits in fixed character cells: reverse-printed ink on paper, glowing amber on the board.
@@ -342,6 +356,7 @@ The operator console (`/console`) is built in the same world, unchanged: an offi
 - Each type role has one job: Readex reads, Geist Mono prints, Doto lights.
 - Motion is mechanical and diegetic: paper feeds, cells drop, lamps light.
 - Full EN/AR parity with true RTL on the applicant portal; data stays LTR. The officer console is English and LTR.
+- Loading screens are the pre-printed form: labels print, data is unprinted ink or unlit lamps, nothing jumps when it arrives.
 
 ## Colors
 
@@ -422,7 +437,7 @@ Below `lg` everything is one column: the form or status first, then the ticket a
 
 The upload link is one 560px column with 20px side gutters, 24px from the bar to the headline. Phone and desktop use the same order: headline; the reference in small paper cells, the first name and the link expiry on one meta line under it; the reason row; the requirement board; the photo slot (or the received card, or the closed notice); a 12.5px privacy line. The blocks stack 16px apart. On a 375 x 812 phone the slot's top edge and its first key show without scrolling.
 
-The operator console runs wider: a 1440px container with 16px gutters (24px from `sm`). Under the console bar a hall-grey tab row (44px tabs, 2px ink underline on the active one) names the sections. The desk splits 4/12 and 8/12 at `lg` with a 40px gap: the queue board on the left, sticky 24px from the top and scrolling inside its own frame, the case file on the right. The case file keeps the same section order for every case: header, facts strip, why it was returned, your decision, call, case history. Sections open with a top rule and 20px of padding. The decision section sits above the calling board, so Approve is in the first viewport at 1440 x 900. Cross-case logs are full-width paper tables (min 860px) that scroll horizontally inside their frame on small screens. Below `lg` the desk is one column, queue first.
+The operator console runs wider: a 1440px container with 16px gutters (24px from `sm`). Under the console bar a hall-grey tab row (44px tabs, 2px ink underline on the active one) names the sections. The desk splits 4/12 and 8/12 at `lg` with a 40px gap: the queue board on the left, sticky 24px from the top and scrolling inside its own frame, the case file on the right. The queue board belongs to the desk, not to a case: it stays in place (and keeps its scroll) while another case file loads, fails or is not found, and only the right-hand column changes. The case file keeps the same section order for every case: header, facts strip, why it was returned, your decision, call, case history. Sections open with a top rule and 20px of padding. The decision section sits above the calling board, so Approve is in the first viewport at 1440 x 900. Cross-case logs are full-width paper tables (min 860px) that scroll horizontally inside their frame on small screens. Below `lg` the desk is one column, queue first.
 
 ## Elevation & Depth
 
@@ -485,7 +500,7 @@ Solid and quiet, like a counter terminal key. The shared Button component is the
 - **Tab count:** ink fill with paper mono 11px numerals, 4px radius, on a console tab where work is waiting.
 
 ### Navigation (Hall Bar)
-A board-black bar across every screen. Above it sits a full-width amber prototype banner (board text, 12.5px medium) that is never removed. The bar carries the amber Doto "R" monogram in a board-2 well, the product name in paper, the hall name in dimmed LED text (hidden on mobile), and the language switch.
+A board-black bar across every screen. Above it sits a full-width amber prototype banner (board text, 12.5px medium) that is never removed. The bar carries the amber Doto "R" monogram in a board-2 well, the product name in paper, the hall name in dimmed LED text (hidden on mobile), and the language switch. The banner, monogram, product name and subtitle are one shared bar frame (portal: 1240px, 14px by 24px; console: 1440px, 12px by 16px, 24px from `sm`) used by the hall bar, the console bar and every error screen, so a failed page keeps its bar. On a loading screen, which does not yet know its own address, the language switch holds its place as an inert 60%-opacity placeholder, hidden from screen readers.
 
 ### Navigation (Console Bar and Tabs)
 The console bar is the hall bar, staff side: the same banner and monogram, the product name over "Operator console" in 12px dimmed LED text, then, when signed in, the demo reset, a board-rule divider, the officer's name and a paper text-link Sign out that lights amber on hover. Below it, the tab row sits on the hall floor: 14px Faded Ink tabs, the active tab in ink at 500 with a 2px ink underline, and a tab count where work is waiting. The tab row scrolls horizontally on mobile.
@@ -505,7 +520,7 @@ A board-black frame with 6px padding around a 7px bezel with the dot-matrix fiel
 - **Waiting:** a single pending row before submit.
 
 ### Signature: Queue Board (console)
-The hall's queue board, officer side, built on the LED Board panel. Its header carries "Queue" and the case count in 12px mono. Under it, three lit counts in an even 3-column grid divided by board rules: awaiting your decision (amber), open handoffs (blue), blocked today (red), each a 26px glowing Doto numeral over a 12px label. A zero count drops to 30% LED text. Then one row per case: small board reference cells and a change lamp with its state word, the name in LED text (paper when selected) with the failed rule codes in 11.5px mono, then a 12px state line (call language · the decision once there is one, otherwise the last call · "N to decide" in amber). The selected row sits on Board Panel; hover is Board Panel at 60%.
+The hall's queue board, officer side, built on the LED Board panel. Its header carries "Queue" and the case count in 12px mono. Under it, three lit counts in an even 3-column grid divided by board rules: awaiting your decision (amber), open handoffs (blue), blocked today (red), each a 26px glowing Doto numeral over a 12px label. A zero count drops to 30% LED text. Then one row per case: small board reference cells and a change lamp with its state word, the name in LED text (paper when selected) with the failed rule codes in 11.5px mono, then a 12px state line (call language · the decision once there is one, otherwise the last call · "N to decide" in amber). The selected row sits on Board Panel; hover is Board Panel at 60%. Selection follows the address in the browser, so the row lights the moment it is pressed, before the case file has loaded.
 
 ### Signature: Change Lamp
 A board lamp (8px dot, 8px glow) with a 14px Doto state word. It is still on first paint. When its state changes while you watch (an approval, a call ending), the lamp and word hold amber for the check (the first 65% of 1100ms) and then settle on the new colour. This is how an approved slip relights its queue row green.
@@ -537,6 +552,26 @@ The case history is one thermal printout: a paper roll with the ticket's perfora
 ### Signature: Board Tables (console)
 Board-side figures (pre-dial checks, latency by language) are tables inside an LED Board panel: 12px column heads in 60% LED text, board-rule row dividers, data in mono LED text, and the headline figure in glowing amber Doto.
 
+### Signature: Waiting (the unprinted form)
+A loading screen is the real screen before its data is printed: the same grid, the same blocks, the same sizes, so nothing moves when the content arrives (the queue board measures the same 826px waiting and lit; the status board 214px; status check rows 40px in English and 38px in Arabic; the headline's top edge is identical). Two parts, one per material:
+- **Unprinted ink (paper):** a 3px-cornered line of Thermal Ink at 7%, the height of the text it stands for (12px for a line; headings at their own height: 26px case headline, 19px section title, 36px to 40px display). Chips, keys and pictures waiting on paper are the same 7% ink at their own size and corners; an empty photo frame is the dashed 25%-ink well.
+- **Unlit board:** LED Text at 8% for a line or figure, an unlit 8px lamp at 25% LED text (the same unlit lamp as the requirement and stage boards) with no glow, blank board reference cells, and the en-dash state word at 40%.
+
+Fixed words print as real text in their real style: section titles, fact labels, board titles and asides, column heads, the ticket's labels and masthead, rule names and codes, and the pre-dial check names (they run in the same order for every case). Each loading screen gives screen readers one polite status sentence ("Opening the case…", "Loading your application…"); every shape is hidden from them. Forms exist for the case file, the whole case desk, the queue board, the cross-case logs, call records, evidence and the applicant's status page (in the applicant's language, mirrored in RTL). The upload link has no loading screen: its language comes from the case itself, and a skeleton would flash English before Arabic.
+
+**The Pre-Printed Form Rule.** The form is pre-printed; the data isn't printed yet. Anything that is the same for every case prints as real text while waiting; only case data is unprinted paper (ink at 7%) or unlit board (LED text at 8%, lamps at 25%, blank cells). Every block sits at its real size. No shimmer sweep, no grey boxes standing in for labels.
+
+### Error Notice
+A failed screen on paper, under the shared bar frame: say what happened, offer one way forward, and an exit. It never shows server error text.
+- **Title:** the page headline (600, 28px, 36px from `sm`, 1.12, -0.015em) for a whole screen; the case headline (28px) when it stands in for one part of a screen.
+- **Body:** one 15px Faded Ink line at a relaxed leading, max 60ch, that says whose side the fault is on and what is unchanged ("Nothing on any case was changed by this").
+- **Keys:** a large primary "Try again", 24px under the body, which re-fetches and reads "Trying again…" while pending; a large ghost exit link beside it when there is somewhere to go.
+- **Error reference:** 32px below, a 12.5px Faded Ink label with the digest in Geist Mono ink, LTR, so the officer or support can match it to the log.
+- **Where it lands:** the portal draws the notice in both languages and the page direction shows one, so it is right on first paint. When the root itself fails, the notice is English with the Arabic title and body beneath it behind a top rule, and the retry key is labelled in both. A console section failure keeps the bar and tabs; a case file failure keeps the queue board beside it.
+
+### Not-Found Notice
+The Error Notice's paper shape without a reference or retry: the page headline, one 15px Faded Ink line, and a large primary key that is the way back in ("Go to the applicant portal"). The portal version is in the applicant's language. On the case desk it reads "No case with that number" at case-headline size, with the queue board still beside it and the key "Open the first case".
+
 ### Motion grammar
 Paper feeds down, LED cells light; nothing else moves.
 - **Paper feed** (900ms, ease-out-expo `cubic-bezier(0.16, 1, 0.3, 1)`): the ticket unclips top-down from a 12px lift.
@@ -545,6 +580,8 @@ Paper feeds down, LED cells light; nothing else moves.
 - The cascade plays once, on arrival from submit. On the upload link it plays after each check, with no base delay. Reduced motion collapses every animation to its end state.
 - **Change lamp** (1100ms, the same amber hold): a console lamp that changes state while you watch. First paint is still.
 - **Decision feed** (the paper feed, 900ms): a slip's decision line, only when decided while you watch.
+- **Wait in** (240ms ease-out-expo after a 180ms delay): a loading screen fades in only if the wait outlasts a blink, so fast loads never flash a skeleton.
+- **Wait breathe** (1400ms, ease-in-out `cubic-bezier(0.45, 0, 0.55, 1)`, alternating opacity 1 to 0.45): unprinted lines and unlit cells breathe slowly while waiting. It is the world's only loop, and it lives only on waiting shapes. Reduced motion stills it: the screen simply appears.
 - Hover changes colour and stroke only. Keys and links never nudge, lift or press in.
 
 ## Do's and Don'ts
@@ -561,6 +598,9 @@ Paper feeds down, LED cells light; nothing else moves.
 - **Do** print every case event (calls, SMS, handoffs, refusals, decisions) on the one case-history roll.
 - **Do** use one digit system per screen: Latin digits on Arabic screens, matching the reference cells.
 - **Do** let the h1 name where a link or case stands; a notice under it says only what that means and what to do next.
+- **Do** build loading screens as the pre-printed form: fixed labels in real text, only case data unprinted (7% ink) or unlit (8% LED text, 25% lamps), every block at its real size, one status sentence for screen readers.
+- **Do** keep whatever still works on screen when part of a page fails or loads: the bar, the tabs, the queue board.
+- **Do** give every error screen one primary "Try again", an exit where there is one, and the mono error reference.
 
 ### Don't:
 - **Don't** use the generic government blue-header stepper form, or its startup-gradient opposite.
@@ -568,5 +608,8 @@ Paper feeds down, LED cells light; nothing else moves.
 - **Don't** mark refusals, sources or other non-issue states with the officer ramp. Use the neutral chip.
 - **Don't** set sentences, headings or labels in Doto. Dot-matrix is for numerals, the current stage and short state words.
 - **Don't** add glow to anything on paper, or shadows to anything that isn't a hall object (ticket and case-history roll, board, machine, sheet).
-- **Don't** animate anything outside the paper-feed, cell-drop and lamp-lighting grammar. No hover lifts or arrow nudges, no press-in, no page transitions, no looping pulses. The live lamp is steady.
+- **Don't** animate anything outside the paper-feed, cell-drop and lamp-lighting grammar. No hover lifts or arrow nudges, no press-in, no page transitions, no looping pulses. The live lamp is steady. The one exception is the slow wait breathe on unprinted and unlit waiting shapes.
 - **Don't** pre-tick consent, or place a destructive action beside the primary action.
+- **Don't** sweep a shimmer across a skeleton, or stand grey boxes in for words that are the same on every case.
+- **Don't** show server error text on an error screen; show the plain-language notice and the digest.
+- **Don't** give a screen a skeleton when its language is only known from its data (the upload link).

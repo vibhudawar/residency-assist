@@ -1,4 +1,4 @@
-import { EmptyLog, PageHead } from "@/components/console/log";
+import { EmptyLog, LOGS, PageHead } from "@/components/console/log";
 import { Panel } from "@/components/hall/led-board";
 import { LANGUAGE } from "@/lib/console/format";
 import { getLatency } from "@/lib/console/queries";
@@ -21,7 +21,7 @@ export default async function EvidencePage() {
   const latency = await getLatency();
   return (
     <>
-      <PageHead title="Evidence" lead="Response latency per language from recorded calls, the agent test suite, and the guardrails the backend enforces." />
+      <PageHead title={LOGS.evidence.title} lead={LOGS.evidence.lead} />
 
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-5">

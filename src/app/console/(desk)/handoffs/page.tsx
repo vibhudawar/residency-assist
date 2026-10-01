@@ -1,4 +1,4 @@
-import { CaseLink, EmptyLog, LogTable, PageHead } from "@/components/console/log";
+import { CaseLink, EmptyLog, LOGS, LogTable, PageHead } from "@/components/console/log";
 import { HANDOFF_LABEL, uaeTime } from "@/lib/console/format";
 import { getHandoffs } from "@/lib/console/queries";
 import { requireOfficer } from "@/lib/officer";
@@ -9,14 +9,11 @@ export default async function HandoffsPage() {
   const rows = await getHandoffs();
   return (
     <>
-      <PageHead
-        title="Handoffs"
-        lead="Everything handed to a person: callbacks the caller asked for, escalations (dispute, distress, asked for a human, officer-only issue) and follow-ups the assistant can't do itself."
-      />
+      <PageHead title={LOGS.handoffs.title} lead={LOGS.handoffs.lead} />
       {rows.length === 0 ? (
         <EmptyLog>No handoffs yet. They appear when the assistant schedules a callback, escalates a call, or routes an issue, and when you reject a correction.</EmptyLog>
       ) : (
-        <LogTable head={["When", "Case", "Kind", "Reason", "Preferred time", "Status"]}>
+        <LogTable head={LOGS.handoffs.head}>
           {rows.map((h) => (
             <tr key={h.id}>
               <td className="px-4 py-3 font-mono text-[13px] whitespace-nowrap text-ink-2">{uaeTime(h.createdAt)}</td>

@@ -1,4 +1,4 @@
-import { CaseLink, EmptyLog, PageHead } from "@/components/console/log";
+import { CaseLink, EmptyLog, LOGS, PageHead } from "@/components/console/log";
 import { LANGUAGE, uaeClock, uaeTime } from "@/lib/console/format";
 import { getCallRecords } from "@/lib/console/queries";
 import { requireOfficer } from "@/lib/officer";
@@ -12,10 +12,7 @@ export default async function RecordsPage() {
   const records = await getCallRecords();
   return (
     <>
-      <PageHead
-        title="Call records"
-        lead="One record per call, sent by ElevenLabs after the call ends: the full transcript, its summary and post-call checks, and response latency."
-      />
+      <PageHead title={LOGS.records.title} lead={LOGS.records.lead} />
       {records.length === 0 ? (
         <EmptyLog>
           No calls recorded yet. Records arrive from the ElevenLabs post-call webhook once the agent is connected and a call ends.

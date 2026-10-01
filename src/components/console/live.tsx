@@ -97,3 +97,22 @@ export function ConsoleTabs({ counts }: { counts: Partial<Record<(typeof TABS)[n
     </nav>
   );
 }
+
+/**
+ * A queue row's link. The selected row follows the address on the client, so it lights the moment you
+ * click, while the case file is still loading. On /console the first row is the open case.
+ */
+export function QueueLink({ id, isDefault, className, children }: { id: number; isDefault: boolean; className?: string; children: React.ReactNode }) {
+  const pathname = usePathname();
+  const selected = pathname === `/console/cases/${id}` || (isDefault && pathname === "/console");
+  return (
+    <Link
+      href={`/console/cases/${id}`}
+      aria-current={selected ? "true" : undefined}
+      data-selected={selected ? "" : undefined}
+      className={cn("group", className, selected ? "bg-board-2" : "hover:bg-board-2/60")}
+    >
+      {children}
+    </Link>
+  );
+}
