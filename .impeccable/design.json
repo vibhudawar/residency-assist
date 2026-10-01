@@ -1,0 +1,615 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T15:27:24.172197+00:00",
+  "title": "Design System: Residency Assist",
+  "extensions": {
+    "colorMeta": {
+      "hall": {
+        "role": "neutral",
+        "displayName": "Hall Floor",
+        "canonical": "#e4e8ea",
+        "tonalRamp": [
+          "oklch(15% 0.006 230)",
+          "oklch(26% 0.006 230)",
+          "oklch(38% 0.006 230)",
+          "oklch(49% 0.006 230)",
+          "oklch(61% 0.006 230)",
+          "oklch(72% 0.006 230)",
+          "oklch(84% 0.006 230)",
+          "oklch(95% 0.006 230)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Thermal Paper",
+        "canonical": "#f6f8f9",
+        "tonalRamp": [
+          "oklch(15% 0.003 230)",
+          "oklch(26% 0.003 230)",
+          "oklch(38% 0.003 230)",
+          "oklch(49% 0.003 230)",
+          "oklch(61% 0.003 230)",
+          "oklch(72% 0.003 230)",
+          "oklch(84% 0.003 230)",
+          "oklch(95% 0.003 230)"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Thermal Ink",
+        "canonical": "#16181a",
+        "tonalRamp": [
+          "oklch(15% 0.005 250)",
+          "oklch(26% 0.005 250)",
+          "oklch(38% 0.005 250)",
+          "oklch(49% 0.005 250)",
+          "oklch(61% 0.005 250)",
+          "oklch(72% 0.005 250)",
+          "oklch(84% 0.005 250)",
+          "oklch(95% 0.005 250)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Faded Ink",
+        "canonical": "#4b5057",
+        "tonalRamp": [
+          "oklch(15% 0.012 255)",
+          "oklch(26% 0.012 255)",
+          "oklch(38% 0.012 255)",
+          "oklch(49% 0.012 255)",
+          "oklch(61% 0.012 255)",
+          "oklch(72% 0.012 255)",
+          "oklch(84% 0.012 255)",
+          "oklch(95% 0.012 255)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Paper Rule",
+        "canonical": "#d0d6da",
+        "tonalRamp": [
+          "oklch(15% 0.008 230)",
+          "oklch(26% 0.008 230)",
+          "oklch(38% 0.008 230)",
+          "oklch(49% 0.008 230)",
+          "oklch(61% 0.008 230)",
+          "oklch(72% 0.008 230)",
+          "oklch(84% 0.008 230)",
+          "oklch(95% 0.008 230)"
+        ]
+      },
+      "input-stroke": {
+        "role": "neutral",
+        "displayName": "Input Stroke",
+        "canonical": "#bac2c8",
+        "tonalRamp": [
+          "oklch(15% 0.012 230)",
+          "oklch(26% 0.012 230)",
+          "oklch(38% 0.012 230)",
+          "oklch(49% 0.012 230)",
+          "oklch(61% 0.012 230)",
+          "oklch(72% 0.012 230)",
+          "oklch(84% 0.012 230)",
+          "oklch(95% 0.012 230)"
+        ]
+      },
+      "paper-quiet": {
+        "role": "neutral",
+        "displayName": "Quiet Paper",
+        "canonical": "#eaeef0",
+        "tonalRamp": [
+          "oklch(15% 0.005 230)",
+          "oklch(26% 0.005 230)",
+          "oklch(38% 0.005 230)",
+          "oklch(49% 0.005 230)",
+          "oklch(61% 0.005 230)",
+          "oklch(72% 0.005 230)",
+          "oklch(84% 0.005 230)",
+          "oklch(95% 0.005 230)"
+        ]
+      },
+      "board": {
+        "role": "primary",
+        "displayName": "Board Black",
+        "canonical": "#0c0e10",
+        "tonalRamp": [
+          "oklch(15% 0.005 250)",
+          "oklch(26% 0.005 250)",
+          "oklch(38% 0.005 250)",
+          "oklch(49% 0.005 250)",
+          "oklch(61% 0.005 250)",
+          "oklch(72% 0.005 250)",
+          "oklch(84% 0.005 250)",
+          "oklch(95% 0.005 250)"
+        ]
+      },
+      "board-2": {
+        "role": "neutral",
+        "displayName": "Board Panel",
+        "canonical": "#15181b",
+        "tonalRamp": [
+          "oklch(15% 0.007 250)",
+          "oklch(26% 0.007 250)",
+          "oklch(38% 0.007 250)",
+          "oklch(49% 0.007 250)",
+          "oklch(61% 0.007 250)",
+          "oklch(72% 0.007 250)",
+          "oklch(84% 0.007 250)",
+          "oklch(95% 0.007 250)"
+        ]
+      },
+      "board-rule": {
+        "role": "neutral",
+        "displayName": "Board Rule",
+        "canonical": "#262a2f",
+        "tonalRamp": [
+          "oklch(15% 0.01 255)",
+          "oklch(26% 0.01 255)",
+          "oklch(38% 0.01 255)",
+          "oklch(49% 0.01 255)",
+          "oklch(61% 0.01 255)",
+          "oklch(72% 0.01 255)",
+          "oklch(84% 0.01 255)",
+          "oklch(95% 0.01 255)"
+        ]
+      },
+      "led-amber": {
+        "role": "secondary",
+        "displayName": "Now-Serving Amber",
+        "canonical": "#ffb020",
+        "tonalRamp": [
+          "oklch(15% 0.17 75)",
+          "oklch(26% 0.17 75)",
+          "oklch(38% 0.17 75)",
+          "oklch(49% 0.17 75)",
+          "oklch(61% 0.17 75)",
+          "oklch(72% 0.17 75)",
+          "oklch(84% 0.17 75)",
+          "oklch(95% 0.17 75)"
+        ]
+      },
+      "led-green": {
+        "role": "tertiary",
+        "displayName": "Lamp Green",
+        "canonical": "#3ddc84",
+        "tonalRamp": [
+          "oklch(15% 0.17 155)",
+          "oklch(26% 0.17 155)",
+          "oklch(38% 0.17 155)",
+          "oklch(49% 0.17 155)",
+          "oklch(61% 0.17 155)",
+          "oklch(72% 0.17 155)",
+          "oklch(84% 0.17 155)",
+          "oklch(95% 0.17 155)"
+        ]
+      },
+      "led-red": {
+        "role": "tertiary",
+        "displayName": "Lamp Red",
+        "canonical": "#ff6a6f",
+        "tonalRamp": [
+          "oklch(15% 0.18 20)",
+          "oklch(26% 0.18 20)",
+          "oklch(38% 0.18 20)",
+          "oklch(49% 0.18 20)",
+          "oklch(61% 0.18 20)",
+          "oklch(72% 0.18 20)",
+          "oklch(84% 0.18 20)",
+          "oklch(95% 0.18 20)"
+        ]
+      },
+      "led-blue": {
+        "role": "tertiary",
+        "displayName": "Lamp Blue",
+        "canonical": "#7ea6ff",
+        "tonalRamp": [
+          "oklch(15% 0.13 265)",
+          "oklch(26% 0.13 265)",
+          "oklch(38% 0.13 265)",
+          "oklch(49% 0.13 265)",
+          "oklch(61% 0.13 265)",
+          "oklch(72% 0.13 265)",
+          "oklch(84% 0.13 265)",
+          "oklch(95% 0.13 265)"
+        ]
+      },
+      "led-dim": {
+        "role": "neutral",
+        "displayName": "Unlit Lamp",
+        "canonical": "#2c2a22",
+        "tonalRamp": [
+          "oklch(15% 0.01 90)",
+          "oklch(26% 0.01 90)",
+          "oklch(38% 0.01 90)",
+          "oklch(49% 0.01 90)",
+          "oklch(61% 0.01 90)",
+          "oklch(72% 0.01 90)",
+          "oklch(84% 0.01 90)",
+          "oklch(95% 0.01 90)"
+        ]
+      },
+      "led-text": {
+        "role": "neutral",
+        "displayName": "LED Text",
+        "canonical": "#d9dcd6",
+        "tonalRamp": [
+          "oklch(15% 0.008 120)",
+          "oklch(26% 0.008 120)",
+          "oklch(38% 0.008 120)",
+          "oklch(49% 0.008 120)",
+          "oklch(61% 0.008 120)",
+          "oklch(72% 0.008 120)",
+          "oklch(84% 0.008 120)",
+          "oklch(95% 0.008 120)"
+        ]
+      },
+      "fix": {
+        "role": "issue-ramp",
+        "displayName": "Fixable",
+        "canonical": "#8a5200",
+        "tonalRamp": [
+          "oklch(15% 0.12 65)",
+          "oklch(26% 0.12 65)",
+          "oklch(38% 0.12 65)",
+          "oklch(49% 0.12 65)",
+          "oklch(61% 0.12 65)",
+          "oklch(72% 0.12 65)",
+          "oklch(84% 0.12 65)",
+          "oklch(95% 0.12 65)"
+        ]
+      },
+      "fix-bg": {
+        "role": "issue-ramp",
+        "displayName": "Fixable Wash",
+        "canonical": "#fff0d3",
+        "tonalRamp": [
+          "oklch(15% 0.06 80)",
+          "oklch(26% 0.06 80)",
+          "oklch(38% 0.06 80)",
+          "oklch(49% 0.06 80)",
+          "oklch(61% 0.06 80)",
+          "oklch(72% 0.06 80)",
+          "oklch(84% 0.06 80)",
+          "oklch(95% 0.06 80)"
+        ]
+      },
+      "route": {
+        "role": "issue-ramp",
+        "displayName": "Route",
+        "canonical": "#2c4bb0",
+        "tonalRamp": [
+          "oklch(15% 0.16 265)",
+          "oklch(26% 0.16 265)",
+          "oklch(38% 0.16 265)",
+          "oklch(49% 0.16 265)",
+          "oklch(61% 0.16 265)",
+          "oklch(72% 0.16 265)",
+          "oklch(84% 0.16 265)",
+          "oklch(95% 0.16 265)"
+        ]
+      },
+      "route-bg": {
+        "role": "issue-ramp",
+        "displayName": "Route Wash",
+        "canonical": "#e5ebff",
+        "tonalRamp": [
+          "oklch(15% 0.04 265)",
+          "oklch(26% 0.04 265)",
+          "oklch(38% 0.04 265)",
+          "oklch(49% 0.04 265)",
+          "oklch(61% 0.04 265)",
+          "oklch(72% 0.04 265)",
+          "oklch(84% 0.04 265)",
+          "oklch(95% 0.04 265)"
+        ]
+      },
+      "officer": {
+        "role": "issue-ramp",
+        "displayName": "Officer",
+        "canonical": "#b1222a",
+        "tonalRamp": [
+          "oklch(15% 0.18 25)",
+          "oklch(26% 0.18 25)",
+          "oklch(38% 0.18 25)",
+          "oklch(49% 0.18 25)",
+          "oklch(61% 0.18 25)",
+          "oklch(72% 0.18 25)",
+          "oklch(84% 0.18 25)",
+          "oklch(95% 0.18 25)"
+        ]
+      },
+      "officer-bg": {
+        "role": "issue-ramp",
+        "displayName": "Officer Wash",
+        "canonical": "#fde6e7",
+        "tonalRamp": [
+          "oklch(15% 0.03 15)",
+          "oklch(26% 0.03 15)",
+          "oklch(38% 0.03 15)",
+          "oklch(49% 0.03 15)",
+          "oklch(61% 0.03 15)",
+          "oklch(72% 0.03 15)",
+          "oklch(84% 0.03 15)",
+          "oklch(95% 0.03 15)"
+        ]
+      },
+      "ring": {
+        "role": "secondary",
+        "displayName": "Caret Amber",
+        "canonical": "#c98400",
+        "tonalRamp": [
+          "oklch(15% 0.15 75)",
+          "oklch(26% 0.15 75)",
+          "oklch(38% 0.15 75)",
+          "oklch(49% 0.15 75)",
+          "oklch(61% 0.15 75)",
+          "oklch(72% 0.15 75)",
+          "oklch(84% 0.15 75)",
+          "oklch(95% 0.15 75)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Sign-in headline only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "One per screen; on status, the single next step as a hall announcement."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Form section legends."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All readable copy, tabular numerals on."
+      },
+      "body-lead": {
+        "displayName": "Body Lead",
+        "purpose": "Lead paragraphs, max 52ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels; hints inline after a middle dot."
+      },
+      "ticket": {
+        "displayName": "Ticket",
+        "purpose": "Thermal ticket data and codes; passport and reference fields."
+      },
+      "led-numeral": {
+        "displayName": "Led Numeral",
+        "purpose": "Reference digits in fixed character cells."
+      },
+      "led-word": {
+        "displayName": "Led Word",
+        "purpose": "Board rule-row state words."
+      },
+      "led-stage": {
+        "displayName": "Led Stage",
+        "purpose": "Current stage on the Now Serving board."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ticket-drop",
+        "value": "0 18px 30px -18px rgb(22 24 26 / 0.45), 0 2px 6px -2px rgb(22 24 26 / 0.18)",
+        "purpose": "The paper ticket resting on the hall floor."
+      },
+      {
+        "name": "board-drop",
+        "value": "0 24px 40px -24px rgb(0 0 0 / 0.6)",
+        "purpose": "Every LED board panel."
+      },
+      {
+        "name": "machine-drop",
+        "value": "0 30px 50px -30px rgb(0 0 0 / 0.7)",
+        "purpose": "The ticket dispenser body."
+      },
+      {
+        "name": "sheet-drop",
+        "value": "0 24px 40px -28px rgb(22 24 26 / 0.5)",
+        "purpose": "A standalone paper sheet (mock UAE PASS)."
+      },
+      {
+        "name": "led-glow",
+        "value": "text-shadow: 0 0 6px color-mix(in oklab, currentColor 55%, transparent)",
+        "purpose": "Lit glyphs on the board only; lamps use 0 0 6-8px currentColor."
+      },
+      {
+        "name": "cell-well",
+        "value": "inset 0 -1px 0 var(--board-rule)",
+        "purpose": "Board character cells."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-feed",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Every feed, drop and lamp-on in the world."
+      },
+      {
+        "name": "paper-feed",
+        "value": "900ms; clip-path inset(0 0 100% 0)->inset(0) + translateY(-12px)->0",
+        "purpose": "Ticket feeds down from the dispenser/printer."
+      },
+      {
+        "name": "cell-drop",
+        "value": "520ms; delay 300ms + 70ms per cell; opacity 0, translateY(-55%), blur(3px) -> rest",
+        "purpose": "Reference prints cell by cell on submit."
+      },
+      {
+        "name": "led-on",
+        "value": "420ms (rows: 1100ms cadence); opacity 0.12 + blur(2px) -> 1",
+        "purpose": "Board row lights."
+      },
+      {
+        "name": "led-check",
+        "value": "1100ms; amber held 0-65%, then the row's own colour; delay 900ms + 160ms per row",
+        "purpose": "Two-phase rule check: amber 'Check' then result."
+      },
+      {
+        "name": "led-out / led-in",
+        "value": "1100ms; checking word out at 85-100%, result word in at 70-100%",
+        "purpose": "Cross-fade of the board state word."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation/transition-duration 0.01ms",
+        "purpose": "All motion collapses to its end state."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "container",
+        "value": "1240px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one counter key per screen: ink fill, deepens to board black on hover.",
+      "html": "<button class=\"ds-btn-primary\">Submit application</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;height:48px;min-width:220px;padding:0 24px;border:0;border-radius:8px;background:var(--ink,#16181a);color:var(--paper,#f6f8f9);font:500 16px/1 'Readex Pro',system-ui,sans-serif;cursor:pointer;transition:background-color .15s}.ds-btn-primary:hover{background:var(--board,#0c0e10)}.ds-btn-primary:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}.ds-btn-primary:disabled{opacity:.7}"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Secondary paper action; destructive variant turns officer-red on hover.",
+      "html": "<button class=\"ds-btn-quiet\">Stop assistant calls</button>",
+      "css": ".ds-btn-quiet{padding:8px 14px;border:1px solid var(--rule,#d0d6da);border-radius:6px;background:var(--paper,#f6f8f9);color:var(--ink,#16181a);font:400 13.5px/1.2 'Readex Pro',system-ui,sans-serif;cursor:pointer;transition:color .15s,border-color .15s}.ds-btn-quiet:hover{border-color:var(--officer,#b1222a);color:var(--officer,#b1222a)}.ds-btn-quiet:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Paper field; passport data in thermal mono, LTR.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Passport number</span><input class=\"ds-input ds-input-mono\" value=\"Z4471820\" dir=\"ltr\"></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:8px;max-width:320px}.ds-field-label{font:500 14px/1.375 'Readex Pro',system-ui,sans-serif;color:var(--ink,#16181a)}.ds-input{height:44px;padding:0 14px;border:1px solid var(--input,#bac2c8);border-radius:6px;background:var(--paper,#f6f8f9);color:var(--ink,#16181a);font:400 15px 'Readex Pro',system-ui,sans-serif;outline:none;transition:border-color .15s,box-shadow .15s}.ds-input-mono{font-family:'Geist Mono',ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em}.ds-input:focus-visible{border-color:var(--ink,#16181a);box-shadow:0 0 0 3px rgb(201 132 0 / .4)}"
+    },
+    {
+      "name": "Segmented Language Choice",
+      "kind": "chip",
+      "refersTo": "segment-selected",
+      "description": "Call-language radiogroup; each label in its own language.",
+      "html": "<div class=\"ds-seg\" role=\"radiogroup\"><span class=\"ds-seg-opt ds-seg-on\">English</span><span class=\"ds-seg-opt\" lang=\"ar\">العربية</span><span class=\"ds-seg-opt\" lang=\"hi\">हिन्दी</span></div>",
+      "css": ".ds-seg{display:grid;grid-template-columns:repeat(3,1fr);height:44px;max-width:320px;padding:4px;border:1px solid var(--input,#bac2c8);border-radius:6px;background:var(--paper,#f6f8f9)}.ds-seg-opt{display:grid;place-items:center;border-radius:5px;font:400 14px 'Readex Pro',system-ui,sans-serif;color:var(--ink-2,#4b5057);cursor:pointer;transition:color .15s}.ds-seg-opt:hover{color:var(--ink,#16181a)}.ds-seg-on{background:var(--ink,#16181a);color:var(--paper,#f6f8f9)}.ds-seg-on:hover{color:var(--paper,#f6f8f9)}"
+    },
+    {
+      "name": "Hall Bar",
+      "kind": "nav",
+      "refersTo": "hall-bar",
+      "description": "Amber prototype banner over the board-black bar with monogram and language switch.",
+      "html": "<header class=\"ds-hall\"><div class=\"ds-banner\">Prototype — not affiliated with GDRFA or ICP. All people and cases are fictional.</div><div class=\"ds-hall-row\"><span class=\"ds-mono-mark\">R</span><span class=\"ds-hall-name\">Residency Assist</span><button class=\"ds-lang\" lang=\"ar\">العربية</button></div></header>",
+      "css": ".ds-hall{background:var(--board,#0c0e10);color:var(--led-text,#d9dcd6);font-family:'Readex Pro',system-ui,sans-serif}.ds-banner{background:var(--led-amber,#ffb020);color:var(--board,#0c0e10);text-align:center;padding:6px 16px;font-size:12.5px;font-weight:500}.ds-hall-row{display:flex;align-items:center;gap:12px;padding:14px 24px}.ds-mono-mark{display:grid;place-items:center;width:32px;height:32px;border-radius:6px;background:var(--board-2,#15181b);color:var(--led-amber,#ffb020);font:900 18px Doto,monospace;text-shadow:0 0 6px rgb(255 176 32 / .55)}.ds-hall-name{font-size:15px;font-weight:600;color:var(--paper,#f6f8f9)}.ds-lang{margin-inline-start:auto;padding:6px 12px;border:1px solid var(--board-rule,#262a2f);border-radius:6px;background:transparent;color:var(--paper,#f6f8f9);font:400 13px 'Readex Pro',sans-serif;cursor:pointer;transition:color .15s,border-color .15s}.ds-lang:hover{border-color:var(--led-amber,#ffb020);color:var(--led-amber,#ffb020)}.ds-lang:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}"
+    },
+    {
+      "name": "Issue Row",
+      "kind": "card",
+      "refersTo": "issue-chip-fix",
+      "description": "Paper row: ramp-coloured rule code, plain finding, ramp label.",
+      "html": "<div class=\"ds-issue\"><span class=\"ds-chip ds-chip-fix\">R1</span><div><p class=\"ds-issue-t\">The name on the application is spelled differently from the passport.</p><p class=\"ds-issue-m\"><b class=\"ds-fix\">Can be fixed on the call</b> Checked: name matches passport</p></div></div>",
+      "css": ".ds-issue{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:16px;border:1px solid var(--rule,#d0d6da);border-radius:6px;background:var(--paper,#f6f8f9);font-family:'Readex Pro',system-ui,sans-serif;max-width:560px}.ds-chip{padding:4px 8px;border-radius:4px;font:600 13px 'Geist Mono',monospace}.ds-chip-fix{background:var(--fix-bg,#fff0d3);color:var(--fix,#8a5200)}.ds-issue-t{margin:0;font-size:15.5px;font-weight:600;line-height:1.375;color:var(--ink,#16181a)}.ds-issue-m{margin:8px 0 0;font-size:13px;color:var(--ink-2,#4b5057)}.ds-fix{font-weight:500;color:var(--fix,#8a5200);margin-inline-end:12px}"
+    },
+    {
+      "name": "Thermal Ticket",
+      "kind": "custom",
+      "refersTo": "ticket",
+      "description": "Perforated thermal ticket with reverse-printed reference cells and live-printed data.",
+      "html": "<div class=\"ds-ticket\"><div class=\"ds-t-head\"><b>RESIDENCY SERVICE HALL</b><span>•••</span></div><div class=\"ds-t-sec\"><div class=\"ds-t-lbl\">YOUR NUMBER</div><div class=\"ds-cells\"><i>R</i><i>A</i><i class=\"ds-dash\">-</i><i>2</i><i>8</i><i>1</i><i>1</i><i>0</i><i>7</i></div></div><dl class=\"ds-t-sec ds-t-dl\"><dt>SERVICE</dt><dd>Residence visa</dd><dt>NAME</dt><dd>RAHUL SARMA</dd><dt>PASSPORT</dt><dd>Z4••••20</dd></dl></div>",
+      "css": ".ds-ticket{width:360px;padding:28px 24px 24px;background:var(--paper,#f6f8f9);color:var(--ink,#16181a);font:400 12.5px/1.375 'Geist Mono',ui-monospace,monospace;box-shadow:0 18px 30px -18px rgb(22 24 26/.45),0 2px 6px -2px rgb(22 24 26/.18);--tooth:8px;-webkit-mask:radial-gradient(circle at 50% 0,#0000 3.5px,#000 4px) 50% 0/var(--tooth) 51% repeat-x,radial-gradient(circle at 50% 100%,#0000 3.5px,#000 4px) 50% 100%/var(--tooth) 51% repeat-x;mask:radial-gradient(circle at 50% 0,#0000 3.5px,#000 4px) 50% 0/var(--tooth) 51% repeat-x,radial-gradient(circle at 50% 100%,#0000 3.5px,#000 4px) 50% 100%/var(--tooth) 51% repeat-x}.ds-t-head{display:flex;justify-content:space-between}.ds-t-sec{margin-top:16px;padding-top:16px;border-top:1px dashed rgb(22 24 26/.3)}.ds-t-lbl,.ds-t-dl dt{color:var(--ink-2,#4b5057)}.ds-cells{display:inline-flex;gap:3px;margin-top:8px;direction:ltr}.ds-cells i{display:grid;place-items:center;width:34px;height:52px;border-radius:3px;background:var(--ink,#16181a);color:var(--paper,#f6f8f9);font:normal 900 34px/1 Doto,monospace}.ds-cells i.ds-dash{width:14px;background:transparent;color:var(--ink,#16181a)}.ds-t-dl{display:grid;grid-template-columns:7.5rem 1fr;gap:6px 8px;margin-bottom:0}.ds-t-dl dd{margin:0}"
+    },
+    {
+      "name": "LED Rules Board",
+      "kind": "custom",
+      "refersTo": "led-board",
+      "description": "Black lamp board; each rule row holds amber while checking, then settles.",
+      "html": "<section class=\"ds-board\"><div class=\"ds-b-in\"><header class=\"ds-b-h\">Checks against official records</header><ol class=\"ds-b-rows\"><li><span class=\"ds-lamp\" style=\"--c:var(--led-amber,#ffb020)\"></span><span><code>R1</code> Name matches passport</span><b style=\"color:var(--led-amber,#ffb020)\">FIX</b></li><li><span class=\"ds-lamp\" style=\"--c:var(--led-green,#3ddc84)\"></span><span><code>R2</code> Date of birth matches</span><b style=\"color:var(--led-green,#3ddc84)\">OK</b></li><li><span class=\"ds-lamp\" style=\"--c:var(--led-blue,#7ea6ff)\"></span><span><code>R8</code> Sponsor file</span><b style=\"color:var(--led-blue,#7ea6ff)\">ACTION</b></li></ol></div></section>",
+      "css": ".ds-board{width:360px;padding:6px;border-radius:10px;background:var(--board,#0c0e10);color:var(--led-text,#d9dcd6);font:400 13px 'Readex Pro',system-ui,sans-serif;box-shadow:0 24px 40px -24px rgb(0 0 0/.6)}.ds-b-in{border:1px solid var(--board-rule,#262a2f);border-radius:7px;background:radial-gradient(circle at 1px 1px,#ffffff08 1px,transparent 1.2px) 0 0/6px 6px}.ds-b-h{padding:10px 16px;border-bottom:1px solid var(--board-rule,#262a2f);font-weight:500}.ds-b-rows{list-style:none;margin:0;padding:0}.ds-b-rows li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:8px 16px;border-top:1px solid var(--board-rule,#262a2f)}.ds-b-rows li:first-child{border-top:0}.ds-b-rows code{font:12px 'Geist Mono',monospace;opacity:.6;margin-inline-end:6px}.ds-b-rows b{font:900 15px/1 Doto,monospace;letter-spacing:.06em;text-shadow:0 0 6px currentColor}.ds-lamp{width:8px;height:8px;border-radius:50%;background:var(--c);color:var(--c);box-shadow:0 0 8px currentColor}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Service Hall",
+    "overview": "**Creative North Star: \"The Service Hall\"**\n\nThe application is a numbered ticket from a residency service hall, and the hall's black LED board always says where it is and what happens next. Two materials carry everything. The working surface is cool thermal paper printed in near-black ink: the form, the ticket, the issue list. The status surface is a near-black LED board whose dot-matrix lamps light amber while checking, green when done, red when attention is needed, blue when someone else must act. The hall itself is a pale cool grey floor that both materials sit on.\n\nThe world is calm and dense. The hall feels like a public counter where things are being dealt with, not like a dashboard. One bilingual sans (Readex Pro, Latin and Arabic) carries everything a person reads. The ticket prints in thermal mono. Dot-matrix appears only where a real board would light it: reference numerals, the \"now serving\" stage, short state words. Arabic is true RTL. Columns, lamps and ticket rows mirror; reference numbers and passport data stay LTR inside fixed character cells.\n\nThe world rejects the generic government blue-header stepper form and its startup-gradient opposite.\n\nThe operator console (`/console`, not yet built) inherits this world unchanged. There the board becomes the officer's queue display: same tokens, same issue ramp, same lamp states, same motion grammar (\"paper feeds down, LED cells light; nothing else moves\"). Case records are paper; queue and call state are board.",
+    "keyCharacteristics": [
+      "Two materials only: thermal paper (working) and LED board (status), on a cool hall-grey floor.",
+      "The reference number always sits in fixed character cells: reverse-printed ink on paper, glowing amber on the board.",
+      "One fixed three-step issue ramp (fixable / route / officer) used identically everywhere.",
+      "Each type role has one job: Readex reads, Geist Mono prints, Doto lights.",
+      "Motion is mechanical and diegetic: paper feeds, cells drop, lamps light.",
+      "Full EN/AR parity with true RTL; data stays LTR."
+    ],
+    "rules": [
+      {
+        "name": "The Two Materials Rule",
+        "body": "Every surface is either paper (ink on cool white) or board (lamps on black). There is no third material: no tinted cards, no gradients, no glass.",
+        "section": "colors"
+      },
+      {
+        "name": "The Lamps Stay On The Board Rule",
+        "body": "LED green, red, blue and amber glow only on board black. On paper, issue weight is expressed with the paper-side ramp (fix / route / officer), never with a lamp colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Ramp Rule",
+        "body": "Fixable, route and officer map to the same three colours on every surface: lamp, chip, label, row. Do not add a fourth weight. Do not reuse a ramp colour for decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three Voices Rule",
+        "body": "Readex reads, Geist Mono prints, Doto lights. Dot-matrix is limited to reference numerals, the current stage, row state words and the hall monogram. Never use it for sentences, labels or headings.",
+        "section": "typography"
+      },
+      {
+        "name": "The Equal Scripts Rule",
+        "body": "Arabic is set in the same family, size and weight as English. Doto and Geist Mono fall back to Readex for Arabic, so board words stay legible in both scripts.",
+        "section": "typography"
+      },
+      {
+        "name": "The Objects Lift Rule",
+        "body": "Only physical hall objects (ticket, board, machine, sheet) cast shadows. Cards, inputs and buttons are flat.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Paper Can't Glow Rule",
+        "body": "Glow belongs to lamps. Reference cells on paper are reverse-printed ink with no glow. The same cells on the board glow amber.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do build every new surface from the two materials: thermal paper (ink on paper) for working content, LED board (lamps on board black) for status, queues and live state.",
+      "Do show any reference number in fixed character cells: reverse-printed ink on paper, glowing amber on the board, always LTR.",
+      "Do express issue weight only through the fix / route / officer ramp, identically on lamp, chip, label and row.",
+      "Do use the amber \"checking\" hold before any board row settles on its result.",
+      "Do keep the amber prototype banner at the top of every screen, including `/console`.",
+      "Do set Arabic in Readex at the same size and weight as English, mirror the layout, and keep passport and reference data LTR.",
+      "Do render the operator console's queue display as an LED Board with the same tokens, ramp and motion grammar."
+    ],
+    "donts": [
+      "Don't use the generic government blue-header stepper form, or its startup-gradient opposite.",
+      "Don't put LED lamp colours (led-green, led-red, led-blue, led-amber) on paper as text or fills. Use the paper-side ramp.",
+      "Don't set sentences, headings or labels in Doto. Dot-matrix is for numerals, the current stage and short state words.",
+      "Don't add glow to anything on paper, or shadows to anything that isn't a hall object (ticket, board, machine, sheet).",
+      "Don't animate anything outside the paper-feed, cell-drop and lamp-lighting grammar. No hover lifts, no page transitions, no looping pulses. The live lamp is steady.",
+      "Don't pre-tick consent, or place a destructive action beside the primary action."
+    ]
+  }
+}
