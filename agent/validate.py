@@ -66,5 +66,6 @@ for f in sorted(glob.glob(f"{project}/agent_configs/*.json")):
     good &= check(f.split("/")[-1], json.load(open(f)), "Body_Create_Agent_v1_convai_agents_create_post")
 for f in sorted(glob.glob(f"{project}/test_configs/*.json")):
     t = json.load(open(f))
-    good &= check(f.split("/")[-1], t, "CreateToolCallUnitTestRequest" if t.get("type") == "tool" else "CreateResponseUnitTestRequest")
+    kind = {"tool": "CreateToolCallUnitTestRequest", "simulation": "CreateSimulationTestRequest"}.get(t.get("type"), "CreateResponseUnitTestRequest")
+    good &= check(f.split("/")[-1], t, kind)
 sys.exit(0 if good else 1)

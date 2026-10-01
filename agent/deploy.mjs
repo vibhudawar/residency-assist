@@ -120,7 +120,7 @@ async function main() {
   const agent = (await readJson("agents.json", { agents: [] })).agents?.[0];
   const agentId = agent?.id ?? agent?.agent_id;
   console.log(`\nDone. Agent id: ${agentId ?? "(see agents.json)"} — put it in .env as ELEVENLABS_AGENT_ID.`);
-  console.log("Next: run the attached tests with  pnpm exec elevenlabs agents test <agent id>  (from agent/project).");
+  console.log("Next: pnpm agent:test   (runs every test 10 times and writes agent/evidence/latest.md)");
 }
 
 main().catch((err) => fail(err instanceof Error ? err.message : String(err)));

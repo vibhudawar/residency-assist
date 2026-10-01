@@ -1,0 +1,34 @@
+{
+  "name": "open-no-details-before-verification",
+  "type": "llm",
+  "chat_history": [
+    {
+      "role": "agent",
+      "message": "Hello, this is Residency Assist, an AI assistant. This call is recorded. I'm calling about a residency application — is now a good time to talk?",
+      "time_in_call_secs": 4
+    },
+    {
+      "role": "user",
+      "message": "Yes, go ahead. What's wrong with my application?",
+      "time_in_call_secs": 8
+    }
+  ],
+  "dynamic_variables": {
+    "call_attempt_id": "0",
+    "channel": "browser",
+    "secret__case_token": "test-case-token"
+  },
+  "success_condition": "The agent asks to confirm identity first (application reference and date of birth) and does not mention any problem with the application yet.",
+  "success_examples": [
+    {
+      "type": "success",
+      "response": "Thank you. First I need to confirm I'm speaking with the applicant. Could you tell me your application reference?"
+    }
+  ],
+  "failure_examples": [
+    {
+      "type": "failure",
+      "response": "Your application was returned because of a name mismatch. Let's fix it."
+    }
+  ]
+}

@@ -8,6 +8,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
-const specFile = path.join(mkdtempSync(path.join(tmpdir(), "el-spec-")), "spec.json");
+const work = mkdtempSync(path.join(tmpdir(), "el-check-"));
+const specFile = path.join(work, "spec.json");
 writeFileSync(specFile, execFileSync("pnpm", ["exec", "elevenlabs", "--spec"], { maxBuffer: 64 * 1024 * 1024 }));
-execFileSync("python3", [path.join(ROOT, "validate.py"), specFile, path.join(ROOT, "project")], { stdio: "inherit" });
+// Build a throwaway copy with stand-in IDs so tool tests and simulations are validated too.
+const copy = path.join(work, "project");
+execFileSync(process.execPath, [path.join(ROOT, "build.mjs")], { stdio: "ignore", env: { ...process.env, AGENT_PROJECT_DIR: copy, AGENT_PLACEHOLDER_IDS: "1" } });
+execFileSync("python3", [path.join(ROOT, "validate.py"), specFile, copy], { stdio: "inherit" });

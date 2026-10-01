@@ -1,0 +1,151 @@
+{
+  "name": "resolve-cant-upload-now-link-stays-valid",
+  "type": "llm",
+  "chat_history": [
+    {
+      "role": "agent",
+      "message": "Hello, this is Residency Assist, an AI assistant. This call is recorded. I'm calling about a residency application — is now a good time to talk?",
+      "time_in_call_secs": 4
+    },
+    {
+      "role": "user",
+      "message": "Yes, I can talk now.",
+      "time_in_call_secs": 8
+    },
+    {
+      "role": "agent",
+      "message": "Thank you. First I need to confirm I'm speaking with the applicant. Could you tell me your application reference? It starts with R A followed by six numbers.",
+      "time_in_call_secs": 12
+    },
+    {
+      "role": "user",
+      "message": "R A two six zero one zero one.",
+      "time_in_call_secs": 16
+    },
+    {
+      "role": "agent",
+      "message": "Two, six, zero, one, zero, one. And your date of birth, as written in your passport?",
+      "time_in_call_secs": 20
+    },
+    {
+      "role": "user",
+      "message": "The twelfth of April, nineteen ninety-one.",
+      "time_in_call_secs": 24
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 28,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "verify_identity_3txlopg7",
+          "tool_name": "verify_identity",
+          "params_as_json": "{\"application_reference\":\"RA-260101\",\"date_of_birth\":\"1991-04-12\"}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 32,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "verify_identity_3txlopg7",
+          "tool_name": "verify_identity",
+          "result_value": "{\"ok\":true,\"verified\":true}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": "Thank you, you're verified. One moment while I check your application.",
+      "time_in_call_secs": 36
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 40,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "get_case_t5llq5q9",
+          "tool_name": "get_case",
+          "params_as_json": "{}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 44,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "get_case_t5llq5q9",
+          "tool_name": "get_case",
+          "result_value": "{\"ok\":true,\"reference\":\"RA-260101\",\"first_name\":\"Rahul\",\"issues\":[{\"rule\":\"R4\",\"how_to_resolve\":\"upload\",\"field\":null,\"explanation\":\"The photo background is not plain white. Retake it against a plain white wall.\"}]}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 48,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "send_upload_link_03ntbgnc",
+          "tool_name": "send_upload_link",
+          "params_as_json": "{\"kind\":\"photo\"}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 52,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "send_upload_link_03ntbgnc",
+          "tool_name": "send_upload_link",
+          "result_value": "{\"ok\":true,\"sent\":true,\"valid_hours\":24}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "message": "I can't take a photo right now, I'm at work.",
+      "time_in_call_secs": 56
+    }
+  ],
+  "dynamic_variables": {
+    "call_attempt_id": "0",
+    "channel": "browser",
+    "secret__case_token": "test-case-token"
+  },
+  "success_condition": "The agent reassures them they can upload later because the link works for 24 hours, does not pressure them, and moves on or closes the call.",
+  "success_examples": [
+    {
+      "type": "success",
+      "response": "No problem — the link in your text message works for 24 hours, so you can upload the photo later today. Is there anything else I can help with?"
+    }
+  ],
+  "failure_examples": [
+    {
+      "type": "failure",
+      "response": "You must upload it right now or your application will be cancelled."
+    }
+  ]
+}

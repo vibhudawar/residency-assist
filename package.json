@@ -12,7 +12,8 @@
     "smoke:webhook": "tsx --conditions=react-server --env-file=.env scripts/smoke-webhook.ts",
     "agent:build": "node agent/build.mjs",
     "agent:deploy": "node --env-file=.env agent/deploy.mjs",
-    "agent:check": "node agent/build.mjs && node agent/check.mjs"
+    "agent:check": "node agent/build.mjs && node agent/check.mjs",
+    "agent:test": "node --env-file=.env agent/test.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",

@@ -1,0 +1,180 @@
+{
+  "name": "resolve-failed-upload-says-what-to-fix",
+  "type": "llm",
+  "chat_history": [
+    {
+      "role": "agent",
+      "message": "Hello, this is Residency Assist, an AI assistant. This call is recorded. I'm calling about a residency application — is now a good time to talk?",
+      "time_in_call_secs": 4
+    },
+    {
+      "role": "user",
+      "message": "Yes, I can talk now.",
+      "time_in_call_secs": 8
+    },
+    {
+      "role": "agent",
+      "message": "Thank you. First I need to confirm I'm speaking with the applicant. Could you tell me your application reference? It starts with R A followed by six numbers.",
+      "time_in_call_secs": 12
+    },
+    {
+      "role": "user",
+      "message": "R A two six zero one zero one.",
+      "time_in_call_secs": 16
+    },
+    {
+      "role": "agent",
+      "message": "Two, six, zero, one, zero, one. And your date of birth, as written in your passport?",
+      "time_in_call_secs": 20
+    },
+    {
+      "role": "user",
+      "message": "The twelfth of April, nineteen ninety-one.",
+      "time_in_call_secs": 24
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 28,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "verify_identity_b619xhsu",
+          "tool_name": "verify_identity",
+          "params_as_json": "{\"application_reference\":\"RA-260101\",\"date_of_birth\":\"1991-04-12\"}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 32,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "verify_identity_b619xhsu",
+          "tool_name": "verify_identity",
+          "result_value": "{\"ok\":true,\"verified\":true}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": "Thank you, you're verified. One moment while I check your application.",
+      "time_in_call_secs": 36
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 40,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "get_case_rcyyosje",
+          "tool_name": "get_case",
+          "params_as_json": "{}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 44,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "get_case_rcyyosje",
+          "tool_name": "get_case",
+          "result_value": "{\"ok\":true,\"reference\":\"RA-260101\",\"first_name\":\"Rahul\",\"issues\":[{\"rule\":\"R4\",\"how_to_resolve\":\"upload\",\"field\":null,\"explanation\":\"The photo background is not plain white. Retake it against a plain white wall.\"}]}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 48,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "send_upload_link_wji8wowj",
+          "tool_name": "send_upload_link",
+          "params_as_json": "{\"kind\":\"photo\"}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 52,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "send_upload_link_wji8wowj",
+          "tool_name": "send_upload_link",
+          "result_value": "{\"ok\":true,\"sent\":true,\"valid_hours\":24}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "message": "Okay, I uploaded it.",
+      "time_in_call_secs": 56
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 60,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "check_upload_on1cil2g",
+          "tool_name": "check_upload",
+          "params_as_json": "{\"kind\":\"photo\"}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 64,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "check_upload_on1cil2g",
+          "tool_name": "check_upload",
+          "result_value": "{\"ok\":true,\"status\":\"uploaded_but_failed\",\"detail\":\"The photo background is not plain white. Retake it against a plain white wall.\"}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    }
+  ],
+  "dynamic_variables": {
+    "call_attempt_id": "0",
+    "channel": "browser",
+    "secret__case_token": "test-case-token"
+  },
+  "success_condition": "The agent says the new photo didn't pass because the background still isn't plain white, gives a practical tip (plain white wall, even light), and invites them to try again. It does not say the photo was accepted.",
+  "success_examples": [
+    {
+      "type": "success",
+      "response": "That one didn't pass — the background still isn't plain white. Try standing in front of a plain white wall in good light, then upload again using the same link."
+    }
+  ],
+  "failure_examples": [
+    {
+      "type": "failure",
+      "response": "Great, your photo has been approved."
+    }
+  ]
+}

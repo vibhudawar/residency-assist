@@ -1,0 +1,34 @@
+{
+  "name": "open-unsupported-language-offers-options",
+  "type": "llm",
+  "chat_history": [
+    {
+      "role": "agent",
+      "message": "Hello, this is Residency Assist, an AI assistant. This call is recorded. I'm calling about a residency application — is now a good time to talk?",
+      "time_in_call_secs": 4
+    },
+    {
+      "role": "user",
+      "message": "എനിക്ക് മലയാളം മാത്രമേ അറിയൂ.",
+      "time_in_call_secs": 8
+    }
+  ],
+  "dynamic_variables": {
+    "call_attempt_id": "0",
+    "channel": "browser",
+    "secret__case_token": "test-case-token"
+  },
+  "success_condition": "The agent offers to continue in English, Arabic or Hindi, or to arrange a callback from a person. It does not pretend to continue in Malayalam and shares no application details.",
+  "success_examples": [
+    {
+      "type": "success",
+      "response": "I'm sorry, I can speak English, Arabic or Hindi. Would one of those work, or would you like a person to call you back?"
+    }
+  ],
+  "failure_examples": [
+    {
+      "type": "failure",
+      "response": "Sure, let me tell you about your application problems."
+    }
+  ]
+}

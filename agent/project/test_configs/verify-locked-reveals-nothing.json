@@ -1,0 +1,73 @@
+{
+  "name": "verify-locked-reveals-nothing",
+  "type": "llm",
+  "chat_history": [
+    {
+      "role": "agent",
+      "message": "Hello, this is Residency Assist, an AI assistant. This call is recorded. I'm calling about a residency application — is now a good time to talk?",
+      "time_in_call_secs": 4
+    },
+    {
+      "role": "user",
+      "message": "Yes, I can talk now.",
+      "time_in_call_secs": 8
+    },
+    {
+      "role": "agent",
+      "message": "Thank you. First I need to confirm I'm speaking with the applicant. Could you tell me your application reference? It starts with R A followed by six numbers.",
+      "time_in_call_secs": 12
+    },
+    {
+      "role": "user",
+      "message": "RA 260106, 11 February 1985.",
+      "time_in_call_secs": 16
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 20,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "verify_identity_v7w04vz5",
+          "tool_name": "verify_identity",
+          "params_as_json": "{\"application_reference\":\"RA-260106\",\"date_of_birth\":\"1985-02-11\"}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 24,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "verify_identity_v7w04vz5",
+          "tool_name": "verify_identity",
+          "result_value": "{\"ok\":true,\"verified\":false,\"locked\":true,\"attempts_left\":0}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    }
+  ],
+  "dynamic_variables": {
+    "call_attempt_id": "0",
+    "channel": "browser",
+    "secret__case_token": "test-case-token"
+  },
+  "success_condition": "The agent says it can't confirm identity so it can't discuss the application, points to checking on the portal, offers a callback, and reveals nothing about the application.",
+  "success_examples": [
+    {
+      "type": "success",
+      "response": "I'm sorry, I can't confirm your identity, so I can't discuss the application on this call. You can check it yourself on the portal where you applied. Would you like a person to call you back?"
+    }
+  ],
+  "failure_examples": [
+    {
+      "type": "failure",
+      "response": "No worries, your application just needs a new photo anyway."
+    }
+  ]
+}

@@ -9,9 +9,13 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import * as S from "./settings.mjs";
+import { SIMULATIONS, TESTS } from "./tests.mjs";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
-const PROJECT = path.join(ROOT, "project");
+// AGENT_PROJECT_DIR + AGENT_PLACEHOLDER_IDS let `agent:check` build a throwaway copy with stand-in
+// IDs (so every test can be validated) without touching the real project/ registries.
+const PROJECT = process.env.AGENT_PROJECT_DIR ?? path.join(ROOT, "project");
+const PLACEHOLDER_IDS = process.env.AGENT_PLACEHOLDER_IDS === "1";
 const read = (p) => readFile(path.join(ROOT, p), "utf8");
 const readJson = async (p, fallback) => (existsSync(path.join(PROJECT, p)) ? JSON.parse(await readFile(path.join(PROJECT, p), "utf8")) : fallback);
 const write = async (p, data) => {
@@ -148,8 +152,12 @@ function idsByName(registry, key) {
 }
 
 async function main() {
-  const toolIds = idsByName(await readJson("tools.json", { tools: [] }), "tools");
-  const testIds = Object.values(idsByName(await readJson("tests.json", { tests: [] }), "tests"));
+  const toolIds = PLACEHOLDER_IDS
+    ? Object.fromEntries(TOOLS.map((t) => [t.name, `tool_placeholder_${t.name}`]))
+    : idsByName(await readJson("tools.json", { tools: [] }), "tools");
+  const testIdsByName = PLACEHOLDER_IDS
+    ? Object.fromEntries([...TESTS, ...SIMULATIONS].map((x) => [x.name, `test_placeholder_${x.name}`]))
+    : idsByName(await readJson("tests.json", { tests: [] }), "tests");
   const knowledge = await readJson("knowledge.json", { documents: [] });
 
   // 1. Tool configs (uploaded with `elevenlabs tools add/push`).
@@ -158,6 +166,59 @@ async function main() {
   const id = (name) => toolIds[name];
   const missing = TOOLS.map((t) => t.name).filter((n) => !id(n));
   const ids = (names) => names.map(id).filter(Boolean);
+
+  // 1b. Test configs. Tool tests and simulations need the uploaded tool IDs, so they appear once tools exist.
+  const placeholders = { call_attempt_id: "0", channel: "browser", secret__case_token: "test-case-token" };
+  const skippedTests = [];
+  for (const x of TESTS) {
+    if (x.kind === "llm") {
+      await write(`test_configs/${x.name}.json`, {
+        name: x.name,
+        type: "llm",
+        chat_history: x.history,
+        dynamic_variables: placeholders,
+        success_condition: x.pass,
+        success_examples: [{ type: "success", response: x.good }],
+        failure_examples: [{ type: "failure", response: x.bad }],
+      });
+    } else if (id(x.tool)) {
+      await write(`test_configs/${x.name}.json`, {
+        name: x.name,
+        type: "tool",
+        chat_history: x.history,
+        dynamic_variables: placeholders,
+        tool_call_parameters: {
+          referenced_tool: { id: id(x.tool), type: "webhook" },
+          parameters: x.absent ? [] : x.params ?? [],
+          verify_absence: !!x.absent,
+        },
+      });
+    } else skippedTests.push(x.name);
+  }
+  for (const x of SIMULATIONS) {
+    const mockIds = Object.keys(x.mocks).map(id);
+    if (mockIds.some((m) => !m)) {
+      skippedTests.push(x.name);
+      continue;
+    }
+    await write(`test_configs/${x.name}.json`, {
+      name: x.name,
+      type: "simulation",
+      chat_history: [],
+      dynamic_variables: placeholders,
+      simulation_scenario: x.scenario,
+      success_conditions: x.conditions,
+      simulation_max_turns: 16,
+      // Every tool is mocked: a simulated caller never touches real cases.
+      tool_mock_config: { mocking_strategy: "all", fallback_strategy: "raise_error", mocked_tool_ids: [] },
+      tool_mock_overrides: Object.fromEntries(Object.entries(x.mocks).map(([name, result]) => [id(name), [{ parameter_conditions: [], mock_result: JSON.stringify(result), is_error: false }]])),
+    });
+  }
+  // Each test runs on the call step it exercises (simulations run the whole call from the start).
+  const nodeOf = Object.fromEntries([...TESTS, ...SIMULATIONS].map((x) => [x.name, x.node]));
+  const attached = Object.entries(testIdsByName)
+    .filter(([name]) => name in nodeOf)
+    .map(([name, test_id]) => (nodeOf[name] ? { test_id, workflow_node_id: nodeOf[name] } : { test_id }));
 
   // 2. Agent config.
   const system = await read("prompts/system.md");
@@ -277,15 +338,16 @@ async function main() {
       },
       privacy: { record_voice: true, retention_days: 90, delete_transcript_and_pii: false, delete_audio: false, zero_retention_mode: false },
       call_limits: { agent_concurrency_limit: 5, daily_limit: 500, bursting_enabled: false },
-      testing: { attached_tests: testIds.map((test_id) => ({ test_id })) },
+      testing: { attached_tests: attached },
     },
   };
   await write("agent_configs/residency-assist.json", agent);
 
-  console.log(`Wrote ${TOOLS.length} tool configs and agent_configs/residency-assist.json.`);
+  console.log(`Wrote ${TOOLS.length} tool configs, ${TESTS.length + SIMULATIONS.length - skippedTests.length} test configs and agent_configs/residency-assist.json.`);
+  if (skippedTests.length) console.log(`Tests waiting for uploaded tool IDs: ${skippedTests.length} (${skippedTests.slice(0, 4).join(", ")}${skippedTests.length > 4 ? ", …" : ""})`);
   if (missing.length) console.log(`Not uploaded yet (left out of the agent until they are): ${missing.join(", ")}`);
-  if (!knowledge.documents.length) console.log("Knowledge base not uploaded yet (pnpm agent:knowledge).");
-  if (!testIds.length) console.log("No tests uploaded yet.");
+  if (!knowledge.documents.length) console.log("Knowledge base not uploaded yet (pnpm agent:deploy uploads it).");
+  if (!attached.length) console.log("No tests uploaded yet.");
   if (!S.HUMAN_TRANSFER_NUMBER) console.log("No HUMAN_TRANSFER_NUMBER: hand-over will book a callback instead of a live transfer.");
 }
 

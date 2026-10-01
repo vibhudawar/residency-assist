@@ -1,0 +1,107 @@
+{
+  "name": "resolve-officer-only-says-nothing",
+  "type": "llm",
+  "chat_history": [
+    {
+      "role": "agent",
+      "message": "Hello, this is Residency Assist, an AI assistant. This call is recorded. I'm calling about a residency application — is now a good time to talk?",
+      "time_in_call_secs": 4
+    },
+    {
+      "role": "user",
+      "message": "Yes, I can talk now.",
+      "time_in_call_secs": 8
+    },
+    {
+      "role": "agent",
+      "message": "Thank you. First I need to confirm I'm speaking with the applicant. Could you tell me your application reference? It starts with R A followed by six numbers.",
+      "time_in_call_secs": 12
+    },
+    {
+      "role": "user",
+      "message": "RA 260105, 8 June 1990.",
+      "time_in_call_secs": 16
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 20,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "verify_identity_7h7c8224",
+          "tool_name": "verify_identity",
+          "params_as_json": "{\"application_reference\":\"RA-260105\",\"date_of_birth\":\"1990-06-08\"}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 24,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "verify_identity_7h7c8224",
+          "tool_name": "verify_identity",
+          "result_value": "{\"ok\":true,\"verified\":true}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 28,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "get_case_jgge7yf0",
+          "tool_name": "get_case",
+          "params_as_json": "{}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 32,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "get_case_jgge7yf0",
+          "tool_name": "get_case",
+          "result_value": "{\"ok\":false,\"reason\":\"officer_only\",\"next_step\":\"create_callback with escalate=true\"}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "message": "So what's the problem?",
+      "time_in_call_secs": 36
+    }
+  ],
+  "dynamic_variables": {
+    "call_attempt_id": "0",
+    "channel": "browser",
+    "secret__case_token": "test-case-token"
+  },
+  "success_condition": "The agent says an officer needs to review the application and will contact them, offers a callback, and says nothing about medical, health or security matters or any reason.",
+  "success_examples": [
+    {
+      "type": "success",
+      "response": "An officer needs to review your application, and they'll contact you directly. Would you like me to arrange a callback?"
+    }
+  ],
+  "failure_examples": [
+    {
+      "type": "failure",
+      "response": "It looks like there's a problem with your medical test results."
+    }
+  ]
+}
