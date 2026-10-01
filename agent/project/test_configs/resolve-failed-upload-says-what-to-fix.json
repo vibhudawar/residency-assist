@@ -39,7 +39,7 @@
       "tool_calls": [
         {
           "type": "webhook",
-          "request_id": "verify_identity_jtzoqjdz",
+          "request_id": "verify_identity_0001",
           "tool_name": "verify_identity",
           "params_as_json": "{\"application_reference\":\"RA-260101\",\"date_of_birth\":\"1991-04-12\"}",
           "tool_has_been_called": true
@@ -53,7 +53,7 @@
       "tool_results": [
         {
           "type": "webhook",
-          "request_id": "verify_identity_jtzoqjdz",
+          "request_id": "verify_identity_0001",
           "tool_name": "verify_identity",
           "result_value": "{\"ok\":true,\"verified\":true}",
           "is_error": false,
@@ -73,7 +73,7 @@
       "tool_calls": [
         {
           "type": "webhook",
-          "request_id": "get_case_af86yync",
+          "request_id": "get_case_0002",
           "tool_name": "get_case",
           "params_as_json": "{}",
           "tool_has_been_called": true
@@ -87,7 +87,7 @@
       "tool_results": [
         {
           "type": "webhook",
-          "request_id": "get_case_af86yync",
+          "request_id": "get_case_0002",
           "tool_name": "get_case",
           "result_value": "{\"ok\":true,\"reference\":\"RA-260101\",\"first_name\":\"Rahul\",\"issues\":[{\"rule\":\"R4\",\"how_to_resolve\":\"upload\",\"field\":null,\"explanation\":\"The photo background is not plain white. Retake it against a plain white wall.\"}]}",
           "is_error": false,
@@ -102,7 +102,7 @@
       "tool_calls": [
         {
           "type": "webhook",
-          "request_id": "send_upload_link_c1vqxjxe",
+          "request_id": "send_upload_link_0003",
           "tool_name": "send_upload_link",
           "params_as_json": "{\"kind\":\"photo\"}",
           "tool_has_been_called": true
@@ -116,7 +116,7 @@
       "tool_results": [
         {
           "type": "webhook",
-          "request_id": "send_upload_link_c1vqxjxe",
+          "request_id": "send_upload_link_0003",
           "tool_name": "send_upload_link",
           "result_value": "{\"ok\":true,\"sent\":true,\"valid_hours\":24}",
           "is_error": false,
@@ -136,7 +136,7 @@
       "tool_calls": [
         {
           "type": "webhook",
-          "request_id": "check_upload_uz4ikaep",
+          "request_id": "check_upload_0004",
           "tool_name": "check_upload",
           "params_as_json": "{\"kind\":\"photo\"}",
           "tool_has_been_called": true
@@ -150,7 +150,7 @@
       "tool_results": [
         {
           "type": "webhook",
-          "request_id": "check_upload_uz4ikaep",
+          "request_id": "check_upload_0004",
           "tool_name": "check_upload",
           "result_value": "{\"ok\":true,\"status\":\"uploaded_but_failed\",\"detail\":\"The photo background is not plain white. Retake it against a plain white wall.\"}",
           "is_error": false,

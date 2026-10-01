@@ -9,15 +9,16 @@ let t = 0;
 const at = () => (t += 4);
 const agent = (message) => ({ role: "agent", message, time_in_call_secs: at() });
 const user = (message) => ({ role: "user", message, time_in_call_secs: at() });
-/** An agent tool call and its result, as two transcript turns. */
+/** An agent tool call and its result, as two transcript turns (ids are stable, so rebuilds don't churn). */
+let callNo = 0;
 function tool(name, params, result) {
-  const request_id = `${name}_${Math.random().toString(36).slice(2, 10)}`;
+  const request_id = `${name}_${String(++callNo).padStart(4, "0")}`;
   return [
     { role: "agent", message: null, time_in_call_secs: at(), tool_calls: [{ type: "webhook", request_id, tool_name: name, params_as_json: JSON.stringify(params), tool_has_been_called: true }] },
     { role: "agent", message: null, time_in_call_secs: at(), tool_results: [{ type: "webhook", request_id, tool_name: name, result_value: JSON.stringify(result), is_error: false, tool_has_been_called: true }] },
   ];
 }
-const start = () => ((t = 0), [agent(FIRST_MESSAGE.en)]);
+const start = () => ((t = 0), (callNo = 0), [agent(FIRST_MESSAGE.en)]);
 
 // --- shared conversation openings --------------------------------------------
 const opened = () => [...start(), user("Yes, I can talk now."), agent("Thank you. First I need to confirm I'm speaking with the applicant. Could you tell me your application reference? It starts with R A followed by six numbers.")];

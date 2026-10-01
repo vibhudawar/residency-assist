@@ -29,7 +29,7 @@
       "tool_calls": [
         {
           "type": "webhook",
-          "request_id": "verify_identity_r2wj2uhx",
+          "request_id": "verify_identity_0001",
           "tool_name": "verify_identity",
           "params_as_json": "{\"application_reference\":\"RA-260106\",\"date_of_birth\":\"1985-02-11\"}",
           "tool_has_been_called": true
@@ -43,7 +43,7 @@
       "tool_results": [
         {
           "type": "webhook",
-          "request_id": "verify_identity_r2wj2uhx",
+          "request_id": "verify_identity_0001",
           "tool_name": "verify_identity",
           "result_value": "{\"ok\":true,\"verified\":false,\"locked\":false,\"attempts_left\":1}",
           "is_error": false,

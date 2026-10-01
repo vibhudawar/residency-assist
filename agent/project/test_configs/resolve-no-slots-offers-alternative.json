@@ -39,7 +39,7 @@
       "tool_calls": [
         {
           "type": "webhook",
-          "request_id": "verify_identity_setidpc6",
+          "request_id": "verify_identity_0001",
           "tool_name": "verify_identity",
           "params_as_json": "{\"application_reference\":\"RA-260101\",\"date_of_birth\":\"1991-04-12\"}",
           "tool_has_been_called": true
@@ -53,7 +53,7 @@
       "tool_results": [
         {
           "type": "webhook",
-          "request_id": "verify_identity_setidpc6",
+          "request_id": "verify_identity_0001",
           "tool_name": "verify_identity",
           "result_value": "{\"ok\":true,\"verified\":true}",
           "is_error": false,
@@ -73,7 +73,7 @@
       "tool_calls": [
         {
           "type": "webhook",
-          "request_id": "get_case_x5duimtq",
+          "request_id": "get_case_0002",
           "tool_name": "get_case",
           "params_as_json": "{}",
           "tool_has_been_called": true
@@ -87,7 +87,7 @@
       "tool_results": [
         {
           "type": "webhook",
-          "request_id": "get_case_x5duimtq",
+          "request_id": "get_case_0002",
           "tool_name": "get_case",
           "result_value": "{\"ok\":true,\"reference\":\"RA-260101\",\"first_name\":\"Rahul\",\"issues\":[{\"rule\":\"R6\",\"how_to_resolve\":\"book_visit\",\"field\":null,\"explanation\":\"Emirates ID biometrics (fingerprints and photo) have not been done yet.\"}]}",
           "is_error": false,
@@ -102,7 +102,7 @@
       "tool_calls": [
         {
           "type": "webhook",
-          "request_id": "list_slots_wy8hbabg",
+          "request_id": "list_slots_0003",
           "tool_name": "list_slots",
           "params_as_json": "{\"purpose\":\"biometrics\"}",
           "tool_has_been_called": true
@@ -116,7 +116,7 @@
       "tool_results": [
         {
           "type": "webhook",
-          "request_id": "list_slots_wy8hbabg",
+          "request_id": "list_slots_0003",
           "tool_name": "list_slots",
           "result_value": "{\"ok\":true,\"slots\":[],\"next_step\":\"create_callback\"}",
           "is_error": false,

@@ -29,7 +29,7 @@
       "tool_calls": [
         {
           "type": "webhook",
-          "request_id": "verify_identity_a5whavz1",
+          "request_id": "verify_identity_0001",
           "tool_name": "verify_identity",
           "params_as_json": "{\"application_reference\":\"RA-260105\",\"date_of_birth\":\"1990-06-08\"}",
           "tool_has_been_called": true
@@ -43,7 +43,7 @@
       "tool_results": [
         {
           "type": "webhook",
-          "request_id": "verify_identity_a5whavz1",
+          "request_id": "verify_identity_0001",
           "tool_name": "verify_identity",
           "result_value": "{\"ok\":true,\"verified\":true}",
           "is_error": false,
@@ -58,7 +58,7 @@
       "tool_calls": [
         {
           "type": "webhook",
-          "request_id": "get_case_lbj19sr2",
+          "request_id": "get_case_0002",
           "tool_name": "get_case",
           "params_as_json": "{}",
           "tool_has_been_called": true
@@ -72,7 +72,7 @@
       "tool_results": [
         {
           "type": "webhook",
-          "request_id": "get_case_lbj19sr2",
+          "request_id": "get_case_0002",
           "tool_name": "get_case",
           "result_value": "{\"ok\":false,\"reason\":\"officer_only\",\"next_step\":\"create_callback with escalate=true\"}",
           "is_error": false,
