@@ -1,10 +1,10 @@
 "use client";
 
-import { Check, PhoneCall } from "lucide-react";
+import { PhoneCall } from "lucide-react";
 import { useEffect, useState } from "react";
-import { LedBoard, LiveLamp, type LedState } from "@/components/hall/led-board";
+import { LedBoard, LiveLamp, StageBoard, type LedState } from "@/components/hall/led-board";
 import { Ticket } from "@/components/hall/ticket";
-import type { ApplicantStatusView, CheckState, Stage } from "@/lib/applications/status";
+import type { ApplicantStatusView, CheckState } from "@/lib/applications/status";
 import type { Dictionary } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { withdrawConsent } from "../../actions";
@@ -59,84 +59,41 @@ export function StatusView({
     s === "pass" ? t.checkPassed : s === "fix" ? t.checkFailed : s === "route" ? t.checkRoute : t.checkOfficer;
   const issueLabel = (s: CheckState) => (s === "fix" ? t.issueFixable : s === "route" ? t.issueRoute : t.issueOfficer);
   const fieldLabel = (f: string) => (f === "full_name" ? t.fullName : f === "date_of_birth" ? t.dob : t.passportNumber);
+  const issuedAt = new Intl.DateTimeFormat(locale === "ar" ? "ar-AE" : "en-GB", {
+    timeZone: "Asia/Dubai", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit",
+  }).format(new Date(view.submittedAt));
   const correctionLabel = (s: string) => (s === "approved" ? t.correctionApproved : s === "rejected" ? t.correctionRejected : t.correctionPending);
 
   return (
     <main className="mx-auto grid w-full max-w-[1240px] flex-1 grid-cols-1 gap-12 px-6 py-12 lg:grid-cols-12">
       <section className="lg:col-span-7">
+        {/* "Now serving": the hall board says where the application is. */}
+        <StageBoard
+          title={t.boardNowServing}
+          aside={<LiveLamp label={t.live} />}
+          numberLabel={t.ticketNumber}
+          reference={view.reference}
+          currentLabel={t.stages[view.stage]}
+          stages={view.path.map((s, i) => ({
+            key: s,
+            label: t.stages[s],
+            state: i < stageIndex || view.stage === "processing" ? "done" : i === stageIndex ? "current" : "upcoming",
+          }))}
+        />
+
         {/* The single next step, at the scale of a hall announcement. */}
-        <div className="border-b border-rule pb-8">
-          <h1 aria-live="polite" className="max-w-[24ch] text-[34px] leading-[1.12] font-semibold tracking-[-0.015em] text-ink lg:text-[40px]">
-            {view.next === "calling" && <PhoneCall className="me-3 inline size-8 -translate-y-1 text-fix" aria-hidden />}
-            {t.next[view.next]}
-          </h1>
-        </div>
-
-        {/* The path, on one baseline: only the lit stage changes. */}
-        {/* Phones: the same path as a vertical list, so labels never collide. */}
-        <ol className="mt-8 space-y-3 sm:hidden">
-          {view.path.map((s: Stage, i) => {
-            const done = i < stageIndex || (s === "processing" && view.stage === "processing");
-            const current = i === stageIndex && s !== "processing";
-            return (
-              <li key={s} className="flex items-center gap-3 text-[15px]" aria-current={current ? "step" : undefined}>
-                <span
-                  aria-hidden
-                  className={cn(
-                    "grid size-5 shrink-0 place-items-center rounded-full border-2",
-                    done ? "border-ink bg-ink text-paper" : current ? "border-fix bg-led-amber shadow-[0_0_0_4px_var(--fix-bg)]" : "border-rule bg-hall",
-                  )}
-                >
-                  {done && <Check className="size-3" strokeWidth={4} />}
-                </span>
-                <span className={cn(current ? "font-semibold text-ink" : done ? "text-ink" : "text-ink-2")}>{t.stages[s]}</span>
-              </li>
-            );
-          })}
-        </ol>
-
-        <ol className="mt-8 hidden gap-0 sm:grid" style={{ gridTemplateColumns: `repeat(${view.path.length}, minmax(0, 1fr))` }}>
-          {view.path.map((s: Stage, i) => {
-            const done = i < stageIndex || (s === "processing" && view.stage === "processing");
-            const current = i === stageIndex && s !== "processing";
-            return (
-              <li key={s} className="relative pt-5">
-                <span
-                  aria-hidden
-                  className={cn(
-                    "absolute inset-x-0 top-[7px] h-[2px]",
-                    i === 0 && "start-1/2",
-                    i === view.path.length - 1 && "end-1/2",
-                    i <= stageIndex ? "bg-ink" : "bg-rule",
-                  )}
-                />
-                <span
-                  aria-hidden
-                  className={cn(
-                    "absolute start-1/2 top-0 grid size-4 -translate-x-1/2 place-items-center rounded-full border-2 rtl:translate-x-1/2",
-                    done ? "border-ink bg-ink text-paper" : current ? "border-fix bg-led-amber shadow-[0_0_0_4px_var(--fix-bg)]" : "border-rule bg-hall",
-                  )}
-                >
-                  {done && <Check className="size-2.5" strokeWidth={4} />}
-                </span>
-                <span
-                  className={cn("mt-2 block px-1 text-center text-[13px] leading-snug", current ? "font-semibold text-ink" : done ? "text-ink" : "text-ink-2")}
-                  aria-current={current ? "step" : undefined}
-                >
-                  {t.stages[s]}
-                </span>
-              </li>
-            );
-          })}
-        </ol>
+        <h1 className="mt-10 max-w-[24ch] text-[34px] leading-[1.12] font-semibold tracking-[-0.015em] text-ink lg:text-[40px]">
+          {view.next === "calling" && <PhoneCall className="me-3 inline size-8 -translate-y-1 text-fix" aria-hidden />}
+          {t.next[view.next]}
+        </h1>
 
         {issues.length > 0 && (
-          <ul className="mt-10 space-y-3">
+          <ul className="mt-8 space-y-3">
             {issues.map((c) => {
               const tone = ramp[c.state as Exclude<CheckState, "pass">];
               return (
                 <li key={c.code} className="grid grid-cols-[auto_1fr] items-start gap-4 rounded-lg border border-rule bg-paper p-4">
-                  <span dir="ltr" className={cn("rounded-[4px] px-2 py-1 font-led text-[13px] font-black", tone.bg, tone.text)}>{c.code}</span>
+                  <span dir="ltr" className={cn("rounded-[4px] px-2 py-1 font-mono text-[13px] font-semibold", tone.bg, tone.text)}>{c.code}</span>
                   <div>
                     <p className="text-[15.5px] leading-snug font-semibold text-ink">
                       {locale === "ar" || !c.detail ? t.ruleDetails[c.code as keyof Dictionary["ruleDetails"]] : c.detail}
@@ -194,13 +151,14 @@ export function StatusView({
         <div className="flex flex-col items-center gap-6 lg:sticky lg:top-8">
           <Ticket
             hall={t.hall}
-            header={t.ticketHeader}
             numberLabel={t.ticketNumber}
             pendingLabel={t.ticketPending}
             reference={view.reference}
             cascade={cascade}
             feed={cascade}
             lines={[
+              { label: t.ticketService, value: t.ticketServiceValue, keepCase: true },
+              { label: t.ticketIssued, value: issuedAt, keepCase: true },
               { label: t.ticketName, value: view.fullName },
               { label: t.ticketDob, value: view.dateOfBirth },
               { label: t.ticketPassport, value: view.passportMasked },
@@ -215,6 +173,7 @@ export function StatusView({
             aside={<LiveLamp label={t.live} />}
             dense
             cascade={cascade}
+            checkingLabel={t.checking}
             rows={view.checks.map((c) => ({
               key: c.code,
               code: c.code,

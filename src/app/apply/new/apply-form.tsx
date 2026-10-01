@@ -271,11 +271,11 @@ export function ApplyForm({ t, mobileMasked }: { t: Dictionary; mobileMasked: st
         <div className="flex flex-col items-center gap-6 lg:sticky lg:top-8">
           <Ticket
             hall={t.hall}
-            header={t.ticketHeader}
             numberLabel={t.ticketNumber}
             pendingLabel={t.ticketPending}
             reference={null}
             lines={[
+              { label: t.ticketService, value: t.ticketServiceValue, keepCase: true },
               { label: t.ticketName, value: values.full_name },
               { label: t.ticketDob, value: values.date_of_birth },
               { label: t.ticketPassport, value: values.passport_number },
@@ -288,7 +288,7 @@ export function ApplyForm({ t, mobileMasked }: { t: Dictionary; mobileMasked: st
             className="w-full max-w-[360px]"
             title={t.checksTitle}
             dense
-            rows={[{ key: "waiting", label: t.boardWaiting, state: "pending", stateLabel: "· · ·" }]}
+            rows={[{ key: "waiting", label: t.boardWaiting, state: "pending", stateLabel: "" }]}
           />
         </div>
       </aside>

@@ -53,20 +53,21 @@ export default async function ApplyStart() {
         <section aria-hidden className="relative flex justify-center lg:col-span-6">
           <div className="w-full max-w-[420px]">
             <div className="rounded-t-[14px] bg-board px-6 pt-6 pb-5 shadow-[0_30px_50px_-30px_rgb(0_0_0/0.7)]">
-              <div className="flex items-center justify-between font-led text-[13px] font-bold tracking-[0.12em] text-led-amber led-glow">
-                <span>RA</span>
-                <span className="text-led-dim">·· ·· ··</span>
+              <div className="flex items-center justify-between">
+                <span className="font-led text-[15px] font-black tracking-[0.12em] text-led-amber led-glow">RA</span>
+                <span className="text-[13px] text-led-text/70">{t.dispenserPrompt}</span>
               </div>
               <div className="mt-4 h-3 rounded-full bg-[#050607] shadow-[inset_0_2px_3px_rgb(0_0_0/0.9)]" />
             </div>
             <div className="-mt-1 flex justify-center px-6">
               <Ticket
                 hall={t.hall}
-                header={t.ticketHeader}
                 numberLabel={t.ticketNumber}
                 pendingLabel={t.ticketPending}
                 reference={null}
+                feed
                 lines={[
+                  { label: t.ticketService, value: t.ticketServiceValue, keepCase: true },
                   { label: t.ticketName, value: "" },
                   { label: t.ticketPassport, value: "" },
                   { label: t.ticketLanguage, value: "" },
