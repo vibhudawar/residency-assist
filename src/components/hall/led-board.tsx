@@ -143,10 +143,8 @@ export function StageBoard({
           {currentLabel}
         </p>
       </div>
-      <ol
-        className="grid grid-cols-3 gap-px border-t border-board-rule bg-board-rule sm:[grid-template-columns:repeat(var(--stages),minmax(0,1fr))]"
-        style={{ "--stages": stages.length } as React.CSSProperties}
-      >
+      {/* Two even rows of three: labels never wrap unevenly. */}
+      <ol className="grid grid-cols-3 gap-px border-t border-board-rule bg-board-rule">
         {stages.map((s) => (
           <li key={s.key} aria-current={s.state === "current" ? "step" : undefined} className="flex items-center gap-2 bg-board px-3 py-2.5 text-[12.5px] leading-tight">
             <span
@@ -158,7 +156,7 @@ export function StageBoard({
                 s.state === "upcoming" && "bg-led-text/25",
               )}
             />
-            <span className={cn(s.state === "current" ? "font-medium text-led-amber" : s.state === "done" ? "text-led-text" : "text-led-text/60")}>
+            <span className={cn("whitespace-nowrap", s.state === "current" ? "font-medium text-led-amber" : s.state === "done" ? "text-led-text" : "text-led-text/60")}>
               {s.label}
             </span>
           </li>

@@ -170,7 +170,6 @@ export function StatusView({
           <LedBoard
             className="w-full max-w-[360px]"
             title={t.checksTitle}
-            aside={<LiveLamp label={t.live} />}
             dense
             cascade={cascade}
             checkingLabel={t.checking}
