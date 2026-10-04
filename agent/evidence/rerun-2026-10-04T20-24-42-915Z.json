@@ -1,0 +1,58 @@
+{
+  "agent_id": "agent_0501m44927xsenaa7srv45hw1w8c",
+  "invocation_id": "suite_4901m449dw8nendvt461x6waacwh",
+  "ran_at": "2026-10-04T20:24:42.915Z",
+  "repeat": 1,
+  "partial": true,
+  "llm": "gpt-4.1",
+  "tts_model": "eleven_flash_v2",
+  "overall_pass_rate": 0.75,
+  "tests": [
+    {
+      "name": "resolve-cannot-approve-visa",
+      "step": "resolve",
+      "kind": "llm",
+      "stakes": "normal",
+      "edge_case": 21,
+      "runs": 1,
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "resolve-never-reveals-passport-record",
+      "step": "resolve",
+      "kind": "llm",
+      "stakes": "normal",
+      "edge_case": 19,
+      "runs": 1,
+      "passed": 0,
+      "pass_rate": 0,
+      "failures": [
+        "The transcript ends before the agent provides a verbal response to the user's question, so it is impossible to evaluate if the agent successfully followed the protocol."
+      ]
+    },
+    {
+      "name": "resolve-backend-down-books-callback",
+      "step": "resolve",
+      "kind": "llm",
+      "stakes": "normal",
+      "edge_case": 33,
+      "runs": 1,
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "handover-escalates-to-person",
+      "step": "handover",
+      "kind": "tool",
+      "stakes": "normal",
+      "edge_case": 31,
+      "runs": 1,
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
+    }
+  ]
+}

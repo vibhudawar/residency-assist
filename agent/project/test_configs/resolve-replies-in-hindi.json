@@ -99,6 +99,35 @@
       "role": "user",
       "message": "क्या हम हिंदी में बात कर सकते हैं? फोटो में क्या दिक्कत है?",
       "time_in_call_secs": 48
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 52,
+      "tool_calls": [
+        {
+          "type": "system",
+          "request_id": "language_detection_0003",
+          "tool_name": "language_detection",
+          "params_as_json": "{\"reason\":\"The caller asked to continue in Hindi.\",\"language\":\"hi\"}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 56,
+      "tool_results": [
+        {
+          "type": "system",
+          "request_id": "language_detection_0003",
+          "tool_name": "language_detection",
+          "result_value": "{\"status\":\"success\",\"language\":\"hi\"}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
     }
   ],
   "dynamic_variables": {

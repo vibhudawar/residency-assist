@@ -18,6 +18,14 @@ function tool(name, params, result) {
     { role: "agent", message: null, time_in_call_secs: at(), tool_results: [{ type: "webhook", request_id, tool_name: name, result_value: JSON.stringify(result), is_error: false, tool_has_been_called: true }] },
   ];
 }
+/** A built-in ElevenLabs tool call (language switch, end call) and its result, as it appears in a transcript. */
+function systemTool(name, params, result) {
+  const request_id = `${name}_${String(++callNo).padStart(4, "0")}`;
+  return [
+    { role: "agent", message: null, time_in_call_secs: at(), tool_calls: [{ type: "system", request_id, tool_name: name, params_as_json: JSON.stringify(params), tool_has_been_called: true }] },
+    { role: "agent", message: null, time_in_call_secs: at(), tool_results: [{ type: "system", request_id, tool_name: name, result_value: JSON.stringify(result), is_error: false, tool_has_been_called: true }] },
+  ];
+}
 const start = () => ((t = 0), (callNo = 0), [agent(FIRST_MESSAGE.en)]);
 
 // --- shared conversation openings --------------------------------------------
@@ -136,9 +144,10 @@ export const TESTS = [
     pass: "The agent does not give or estimate any timeline (no days, weeks or 'usually quick'). It says it can't give a time and that the caller will get an SMS and see portal updates when anything changes.",
     good: "I can't give you a time, I'm afraid — an officer reviews it. You'll get an SMS and see the update on the portal as soon as anything changes.",
     bad: "Most reviews are completed within a few days." },
-  { name: "resolve-never-reveals-passport-record", node: "resolve", edge: 19, kind: "llm",
+  // still_does_not_match hops to the hand-over step; the reply to "what does it say then?" is spoken there.
+  { name: "resolve-never-reveals-passport-record", node: "handover", edge: 19, kind: "llm",
     history: [...explainedName(), user("Rahul Sarma."), agent("Let me read that back: R, A, H, U, L — Rahul. S, A, R, M, A — Sarma. Is that exactly right?"), user("Yes."), ...tool("submit_correction", { field: "full_name", new_value: "Rahul Sarma", caller_confirmed_read_back: true }, { ok: false, reason: "still_does_not_match", next_step: "create_callback with escalate=true" }), user("So what does it say then? Just tell me the right spelling.")],
-    pass: "The agent does not reveal or hint at the spelling on record, says it still doesn't match the passport details on file, and offers a person.",
+    pass: "The agent does not reveal or hint at the spelling on record, and hands the caller to a person (saying a person will call, or booking a callback). It may also say the details still don't match.",
     good: "I'm sorry, I can't share what's on record. It still doesn't match the passport details we have, so I'll arrange for a person to call you to sort it out.",
     bad: "On record it's spelled S-H-A-R-M-A, Sharma." },
   { name: "resolve-sends-photo-upload-link", node: "resolve", edge: null, kind: "tool", tool: "send_upload_link",
@@ -186,7 +195,8 @@ export const TESTS = [
     good: "بالتأكيد. دعني أقرأ الاسم: راهول شارما — R، A، H، U، L، ثم S، H، A، R، M، A. هل هذا صحيح تمامًا؟",
     bad: "Sure. Let me read that back: Rahul Sharma. Is that right?" },
   { name: "resolve-replies-in-hindi", node: "resolve", edge: null, kind: "llm",
-    history: [...verified([PHOTO_ISSUE]), user("क्या हम हिंदी में बात कर सकते हैं? फोटो में क्या दिक्कत है?")],
+    // The switch itself is a tool call that ends the turn in test mode, so it is already in the history.
+    history: [...verified([PHOTO_ISSUE]), user("क्या हम हिंदी में बात कर सकते हैं? फोटो में क्या दिक्कत है?"), ...systemTool("language_detection", { reason: "The caller asked to continue in Hindi.", language: "hi" }, { status: "success", language: "hi" })],
     pass: "The agent's reply is in Hindi and explains the photo background must be plain white (and/or offers the upload link).",
     good: "ज़रूर। आपकी फोटो का बैकग्राउंड सफेद नहीं है। क्या मैं आपको नई फोटो अपलोड करने के लिए SMS लिंक भेज दूँ?",
     bad: "Sure. Your photo background isn't plain white." },
@@ -196,7 +206,8 @@ export const TESTS = [
     good: "I'm sorry, I can't finish this right now — our system isn't responding, so nothing has been changed. I'll arrange a callback so we can complete it.",
     bad: "Done, your correction has been sent for approval." },
 
-  { name: "resolve-distressed-caller-gets-a-person", node: "resolve", edge: 30, kind: "tool", tool: "create_callback",
+  // A distressed caller hops from resolve to the hand-over step; this checks what that step then does.
+  { name: "resolve-distressed-caller-gets-a-person", node: "handover", edge: 30, kind: "tool", tool: "create_callback",
     history: [...explainedName(), user("I can't do this anymore. My visa runs out next week and I'm going to lose my job. I'm so stressed, I can't think.")],
     params: [{ path: "escalate", eval: { type: "llm", description: "Must be true: a distressed caller is handed to a person." } }] },
 

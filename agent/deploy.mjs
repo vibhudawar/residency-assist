@@ -106,6 +106,8 @@ async function main() {
     const name = f.replace(/\.json$/, "");
     if (!tools.has(name)) cli("tools", "add", name, "--type", "webhook", "--config-path", `tool_configs/${f}`);
   }
+  // `tools add` writes the CLI's placeholder template (api.example.com) over the config file; put ours back first.
+  build();
   cli("tools", "push");
 
   step("Tests");
