@@ -181,7 +181,8 @@
         "agent_response",
         "user_transcript",
         "agent_tool_request",
-        "agent_tool_response"
+        "agent_tool_response",
+        "agent_tool_response_full_payload"
       ],
       "text_only": false
     },

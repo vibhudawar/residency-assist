@@ -1,0 +1,157 @@
+{
+  "source": "Recorded test call conv_0401m44c19hdebrt1bz6yjawtj48",
+  "language": "en",
+  "durationSecs": 134,
+  "events": [
+    {
+      "at": 0,
+      "kind": "say",
+      "who": "agent",
+      "text": "Hello, this is Residency Assist, an AI assistant. This call is recorded. I'm calling about a residency application — is now a good time to talk?"
+    },
+    {
+      "at": 10,
+      "kind": "say",
+      "who": "user",
+      "text": "Yes, now is fine."
+    },
+    {
+      "at": 12,
+      "kind": "tool",
+      "id": "call_EN2CcatO3s2KnjHhaapqsdTM",
+      "name": "notify_condition_1_met"
+    },
+    {
+      "at": 13,
+      "kind": "say",
+      "who": "agent",
+      "text": "Thank you. To confirm your identity, could you please tell me your application reference? It starts with the letters R A followed by six numbers. Please read it out slowly."
+    },
+    {
+      "at": 24,
+      "kind": "say",
+      "who": "user",
+      "text": "723484."
+    },
+    {
+      "at": 29,
+      "kind": "say",
+      "who": "agent",
+      "text": "Thank you. The application reference should start with the letters R A, then six numbers. For example, R A seven two three four eight four. Could you please read the full reference including the letters?"
+    },
+    {
+      "at": 42,
+      "kind": "say",
+      "who": "user",
+      "text": "Yes, it's R A seven two three four eight four."
+    },
+    {
+      "at": 48,
+      "kind": "say",
+      "who": "agent",
+      "text": "Thank you. I have R A seven two three four eight four. Now, could you please tell me your date of birth as written in your passport? Please say the day, month in words, and year."
+    },
+    {
+      "at": 60,
+      "kind": "say",
+      "who": "user",
+      "text": "12th of April, 1991."
+    },
+    {
+      "at": 65,
+      "kind": "tool",
+      "id": "call_wGf6vfnzWcI2noMThsv2tb8x",
+      "name": "verify_identity"
+    },
+    {
+      "at": 65,
+      "kind": "result",
+      "id": "call_wGf6vfnzWcI2noMThsv2tb8x",
+      "ok": true
+    },
+    {
+      "at": 66,
+      "kind": "tool",
+      "id": "call_CTBnP1teznaBKSMl9I44ku4G",
+      "name": "notify_condition_1_met"
+    },
+    {
+      "at": 67,
+      "kind": "tool",
+      "id": "call_R7nLRIvRcvwTBXCA3jNSL6KQ",
+      "name": "get_case"
+    },
+    {
+      "at": 68,
+      "kind": "result",
+      "id": "call_R7nLRIvRcvwTBXCA3jNSL6KQ",
+      "ok": true
+    },
+    {
+      "at": 69,
+      "kind": "say",
+      "who": "agent",
+      "text": "I found one thing. The name on your application form is spelled differently from your passport. We can fix this now. Please look at your passport and tell me your full name exactly as it is printed, spelling each letter clearly."
+    },
+    {
+      "at": 82,
+      "kind": "say",
+      "who": "user",
+      "text": "It's Rahul Sharma. R-A-H-U-L S-H-A-R-M-A."
+    },
+    {
+      "at": 90,
+      "kind": "say",
+      "who": "agent",
+      "text": "Thank you. Just to confirm, your full name as printed on your passport is R for Romeo, A for Alpha, H for Hotel, U for Uniform, L for Lima, then a space, S for Sierra, H for Hotel, A for Alpha, R for Romeo, M for Mike, A for Alpha. That is: Rahul Sharma. Is that exactly right?"
+    },
+    {
+      "at": 108,
+      "kind": "say",
+      "who": "user",
+      "text": "Yes, that's right."
+    },
+    {
+      "at": 110,
+      "kind": "tool",
+      "id": "call_qpy79j51VebMpdqqpQvOCzJs",
+      "name": "submit_correction"
+    },
+    {
+      "at": 111,
+      "kind": "result",
+      "id": "call_qpy79j51VebMpdqqpQvOCzJs",
+      "ok": true
+    },
+    {
+      "at": 112,
+      "kind": "say",
+      "who": "agent",
+      "text": "I've sent that correction to an officer for approval. Is there anything else I can help you with today?"
+    },
+    {
+      "at": 119,
+      "kind": "say",
+      "who": "user",
+      "text": "Thanks, that's all."
+    },
+    {
+      "at": 121,
+      "kind": "say",
+      "who": "agent",
+      "text": "I've sent your name correction for officer approval. An officer reviews every change. You'll get an SMS and see updates on the portal. If you ever don't want these calls, just tell us and we'll stop. Goodbye."
+    },
+    {
+      "at": 122,
+      "kind": "tool",
+      "id": "call_Ox6IpVgnTlL6pwyaUpuHHgsj",
+      "name": "end_call"
+    },
+    {
+      "at": 134,
+      "kind": "result",
+      "id": "call_Ox6IpVgnTlL6pwyaUpuHHgsj",
+      "ok": true
+    }
+  ]
+}
