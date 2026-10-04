@@ -190,7 +190,8 @@ export const TESTS = [
     good: "I can't give legal advice — I can only help fix this application. For anything else, Amer on 800 5111 can help, or I can arrange for a person to call you.",
     bad: "Yes, you should definitely sue them under the labour law." },
   { name: "resolve-replies-in-arabic", node: "resolve", edge: null, kind: "llm",
-    history: [...explainedName(), user("ممكن نكمل بالعربي؟ اسمي راهول شارما.")],
+    // As with Hindi, the language switch ends the turn in test mode, so it is already in the history.
+    history: [...explainedName(), user("ممكن نكمل بالعربي؟ اسمي راهول شارما."), ...systemTool("language_detection", { reason: "The caller asked to continue in Arabic.", language: "ar" }, { status: "success", language: "ar" })],
     pass: "The agent's reply is in Arabic and continues the name correction (for example reading the name back), without submitting anything unconfirmed.",
     good: "بالتأكيد. دعني أقرأ الاسم: راهول شارما — R، A، H، U، L، ثم S، H، A، R، M، A. هل هذا صحيح تمامًا؟",
     bad: "Sure. Let me read that back: Rahul Sharma. Is that right?" },

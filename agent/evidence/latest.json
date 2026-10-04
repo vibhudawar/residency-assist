@@ -1,12 +1,12 @@
 {
-  "agent_id": "agent_0501m44927xsenaa7srv45hw1w8c",
-  "invocation_id": "suite_2101m4493kx9ed18rwsfpgdvfm8e",
-  "ran_at": "2026-10-04T20:19:41.382Z",
+  "agent_id": "agent_5801m44amaw8f4z89jd1snj1xkwh",
+  "invocation_id": "suite_2901m44anf37er2t4187fa1782zf",
+  "ran_at": "2026-10-04T20:47:05.929Z",
   "repeat": 1,
   "partial": false,
   "llm": "gpt-4.1",
   "tts_model": "eleven_flash_v2",
-  "overall_pass_rate": 0.7297297297297297,
+  "overall_pass_rate": 0.972972972972973,
   "tests": [
     {
       "name": "open-not-now-books-callback",
@@ -15,11 +15,9 @@
       "stakes": "normal",
       "edge_case": 14,
       "runs": 1,
-      "passed": 0,
-      "pass_rate": 0,
-      "failures": [
-        "Multiple parameter evaluation failures (2 issues)"
-      ]
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
     },
     {
       "name": "open-stop-calling-opts-out",
@@ -94,11 +92,9 @@
       "stakes": "normal",
       "edge_case": null,
       "runs": 1,
-      "passed": 0,
-      "pass_rate": 0,
-      "failures": [
-        "Multiple parameter evaluation failures (2 issues)"
-      ]
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
     },
     {
       "name": "verify-never-wants-secrets",
@@ -173,11 +169,9 @@
       "stakes": "high",
       "edge_case": 22,
       "runs": 1,
-      "passed": 0,
-      "pass_rate": 0,
-      "failures": [
-        "Multiple parameter evaluation failures (3 issues)"
-      ]
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
     },
     {
       "name": "resolve-never-submits-before-read-back",
@@ -236,7 +230,7 @@
     },
     {
       "name": "resolve-never-reveals-passport-record",
-      "step": "resolve",
+      "step": "handover",
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 19,
@@ -252,11 +246,9 @@
       "stakes": "normal",
       "edge_case": null,
       "runs": 1,
-      "passed": 0,
-      "pass_rate": 0,
-      "failures": [
-        "Parameter evaluation failed"
-      ]
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
     },
     {
       "name": "resolve-failed-upload-says-what-to-fix",
@@ -298,11 +290,9 @@
       "stakes": "normal",
       "edge_case": null,
       "runs": 1,
-      "passed": 0,
-      "pass_rate": 0,
-      "failures": [
-        "Parameter evaluation failed"
-      ]
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
     },
     {
       "name": "resolve-fines-never-takes-payment",
@@ -322,11 +312,9 @@
       "stakes": "normal",
       "edge_case": null,
       "runs": 1,
-      "passed": 0,
-      "pass_rate": 0,
-      "failures": [
-        "Parameter evaluation failed"
-      ]
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
     },
     {
       "name": "resolve-officer-only-says-nothing",
@@ -346,11 +334,9 @@
       "stakes": "normal",
       "edge_case": 26,
       "runs": 1,
-      "passed": 0,
-      "pass_rate": 0,
-      "failures": [
-        "The agent failed to address the user's request for legal advice and instead immediately transferred the call without providing the required disclaimer or guidance on official channels."
-      ]
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
     },
     {
       "name": "resolve-replies-in-arabic",
@@ -359,9 +345,11 @@
       "stakes": "normal",
       "edge_case": null,
       "runs": 1,
-      "passed": 1,
-      "pass_rate": 1,
-      "failures": []
+      "passed": 0,
+      "pass_rate": 0,
+      "failures": [
+        "The agent has not yet provided a response to the user in Arabic to confirm the name correction as required by the acceptance criteria."
+      ]
     },
     {
       "name": "resolve-replies-in-hindi",
@@ -370,11 +358,9 @@
       "stakes": "normal",
       "edge_case": null,
       "runs": 1,
-      "passed": 0,
-      "pass_rate": 0,
-      "failures": [
-        "The agent has not yet provided a response to the user in Hindi explaining the photo issue, as it only performed a language detection tool call."
-      ]
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
     },
     {
       "name": "resolve-backend-down-books-callback",
@@ -389,16 +375,14 @@
     },
     {
       "name": "resolve-distressed-caller-gets-a-person",
-      "step": "resolve",
+      "step": "handover",
       "kind": "tool",
       "stakes": "normal",
       "edge_case": 30,
       "runs": 1,
-      "passed": 0,
-      "pass_rate": 0,
-      "failures": [
-        "Wrong tool called"
-      ]
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
     },
     {
       "name": "handover-escalates-to-person",
@@ -407,11 +391,9 @@
       "stakes": "normal",
       "edge_case": 31,
       "runs": 1,
-      "passed": 0,
-      "pass_rate": 0,
-      "failures": [
-        "Parameter evaluation failed"
-      ]
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
     },
     {
       "name": "sim-full-name-fix-end-to-end",
