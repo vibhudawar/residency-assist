@@ -325,6 +325,18 @@ components:
     height: "12px"
   unlit-lamp:
     size: "8px"
+  call-state-lamp:
+    size: "10px"
+  call-state-word:
+    textColor: "{colors.led-amber}"
+    typography: "{typography.led-stage}"
+  call-transcript-row:
+    textColor: "{colors.led-text}"
+    padding: "10px 16px"
+  call-action-row:
+    backgroundColor: "{colors.board-2}"
+    textColor: "{colors.led-text}"
+    padding: "8px 16px"
   error-notice:
     textColor: "{colors.ink}"
     typography: "{typography.case-headline}"
@@ -345,7 +357,7 @@ The world rejects the generic government blue-header stepper form and its startu
 
 The upload link (`/u/<token>`) is the same world on a phone: the applicant replaces one photo or scan, mid-call, in English or Arabic. The requirements are the board: each rule is its own lamp, unlit before a file is sent and lit in place after the check. The paper slot below it holds the photo at passport proportions.
 
-The operator console (`/console`) is built in the same world, unchanged: an officer's counter desk. The queue, the pre-dial calling board, the latency board and every lit count are LED board; the open case file, correction slips, call records, logs and the case-history roll are thermal paper. Same tokens, same issue ramp, same lamp states, same motion grammar ("paper feeds down, LED cells light; nothing else moves"). The console is English-only and always LTR.
+The operator console (`/console`) is built in the same world, unchanged: an officer's counter desk. The queue, the pre-dial calling board, the live call board, the latency board and every lit count are LED board; the open case file, correction slips, call records, logs and the case-history roll are thermal paper. Same tokens, same issue ramp, same lamp states, same motion grammar ("paper feeds down, LED cells light; nothing else moves"). The console is English-only and always LTR.
 
 Waiting, failure and absence are the same world too. While a page loads, the form is already pre-printed and the board is already hung: every fixed label prints, only the data is unprinted paper or an unlit board, at its real size. When a page fails, it says so in plain words on paper under the same bar, with one way forward.
 
@@ -416,7 +428,7 @@ A cool, near-neutral paper-and-ink palette, lit by a small set of saturated LED 
 - **Meta** (400, 12px, 1.25): board header asides, board table column heads, count labels, the console bar subtitle and queue-row state lines. Paper-side meta (fact labels, slip captions, hints) sits at 12.5px in Faded Ink.
 - **Ticket** (Geist Mono 400, 12.5px; labels uppercase in Faded Ink, values uppercase in ink unless typed case matters; uppercase is dropped in RTL).
 - **LED numeral** (Doto 900, 34px in 52px-tall cells on paper, 22px in 34px cells on the board, 15px in 24px cells on queue rows). Lit counts on the queue board are 26px Doto; the latency board's averages are 17px.
-- **LED word / stage** (Doto 900, uppercase; 15px at 0.06em for rule-row state words, 14px for queue-row state words, 13px for pre-dial PASS/STOP, 26px at 0.04em for the current stage; tracking resets to normal in RTL). In RTL the rule-row state word leaves Doto altogether: Readex semibold 14px, normal tracking, in the lamp colour with the same glow (led-word-rtl).
+- **LED word / stage** (Doto 900, uppercase; 15px at 0.06em for rule-row state words, 14px for queue-row state words, 13px for pre-dial PASS/STOP, 14px for live-call action words, 26px at 0.04em for the current stage and the live call's state word; tracking resets to normal in RTL). In RTL the rule-row state word leaves Doto altogether: Readex semibold 14px, normal tracking, in the lamp colour with the same glow (led-word-rtl).
 
 ### Named Rules
 **The Three Voices Rule.** Readex reads, Geist Mono prints, Doto lights. Dot-matrix is limited to reference numerals, lit counts and figures on a board, the current stage, row state words and the hall monogram. Never use it for sentences, labels or headings.
@@ -458,7 +470,7 @@ Depth is physical, not interface. Exactly three objects lift off the hall floor:
 
 ## Shapes
 
-Corners are small and mechanical, and they scale with the size of the object: 3px character cells, 4px chips, 6px controls and cards, 8px buttons, 10px board frames (with a 7px inner bezel), 12px sheets, 14px machine tops. Nothing is pill-shaped except lamps, which are round 8px dots.
+Corners are small and mechanical, and they scale with the size of the object: 3px character cells, 4px chips, 6px controls and cards, 8px buttons, 10px board frames (with a 7px inner bezel), 12px sheets, 14px machine tops. Nothing is pill-shaped except lamps, which are round 8px dots (10px for the live call's state lamp beside its 26px word).
 
 The ticket and the case-history roll have no corners at all. Its top and bottom edges are perforated, cut by a repeating 8px semicircular tooth mask, so it reads as torn from a roll. Inside the ticket, dashed ink rules (30% ink) divide masthead, number and data. Blank reference cells are dashed outlines. Inside the board, a faint 6px dot-matrix grid (white at 3%) textures the panel field.
 
@@ -528,6 +540,18 @@ A board lamp (8px dot, 8px glow) with a 14px Doto state word. It is still on fir
 ### Signature: Calling Board (console)
 The pre-dial checks on an LED Board panel titled "Before calling", aside "checked on every press". A three-column table: the check (LED text, with a 12.5px detail at 65%), then a Phone and a Browser lamp, each a glowing green or red dot with a 13px Doto PASS or STOP. Check labels keep their sentence capitalisation. Under the table, the call keys (board variant, with phone and globe icons) and a 12.5px line saying what pressing will do. A refusal or not-connected outcome prints below in red or amber LED text, and the last six attempts list in mono time, channel and a coloured status.
 
+### Signature: Live Call Board (console)
+The browser call, lit on the hall's board. It hangs 16px under the "Before calling" board once an officer presses "Call in browser" and the checks pass, and stays until the officer closes it after the call. One LED Board panel titled "Live call — browser", aside the call language and a running clock (m:ss) in 12px mono at 60% LED text. The same board draws a real call and the local replay.
+- **State strip:** a steady 10px lamp (8px glow) and the call's state word in amber Doto at the current-stage size (26px, 0.04em, uppercase, glowing): Ready and Connect amber, Speaking and Listening green while live, Ended with an unlit 25% lamp and the word at 60% LED text, Failed red. The key sits at the far end on the board variant and changes with the phase: Start the call (mic icon; "Try again" after a failure), End call (phone-off icon; hover lights stroke and text Lamp Red instead of amber), then Close. Keyboard focus follows the key as it changes. On first appearance the board scrolls into view (nearest edge) and Start takes focus.
+- **Progress strip:** under the state word, the Now Serving lamp-row pattern for the call: each distinct action so far, once, in order of first use, as an 8px lamp (6px glow) and a 12.5px short word at 85% LED text (Identity · Case · Correction · Upload link · Upload · Slots · Booking · Follow-up · Callback · Opt-out · Language · Voicemail · Ended). Each lamp shows that action's latest outcome: amber running, green done, red refused, and a refused word turns Lamp Red too.
+- **Before and after:** in Ready a 13.5px line at 75% LED text says what will happen (who the officer speaks as, the microphone prompt, the opening language). A failure prints one 13.5px Lamp Red line. After the call a 13px line at 70% says where the full record will appear.
+- **Transcript feed:** one row per line, divided by board rules, 10px by 16px. The speaker label is 12.5px Readex: "Assistant" in amber, "Applicant" at 60% LED text; the words are 14px Readex in LED text, max 68ch, direction taken from the text. From `sm` the label sits in a 6.5rem column beside the words; below `sm` it stacks above them. The feed scrolls inside 420px, follows new lines only while the reader is within about 40px of the bottom (reading back up is never interrupted), and takes keyboard focus so it can be scrolled from the keyboard.
+- **Action rows:** on Board Panel at 50%, 8px by 16px, 13px: an "Action" label at 12.5px Readex, 60% LED text, in the label column; the action in plain words at 85% ("Checking identity", "Texting upload link"), followed by its function name in 11.5px mono at 45% only when the action has plain words; then an 8px lamp and a 14px Doto word (0.06em, glowing): Check in amber while running, then Done in green or Refused in red. The running Check is the board's amber hold, held for as long as the real action takes. ElevenLabs' internal workflow tools (notify_condition_*, transfer_to_agent) are plumbing, not actions, and never show on the board.
+- **Screen readers:** one hidden status line announces only the turning points: Connecting, Call connected, "<action>: done" or "<action>: refused", Call ended, Call failed. The state word and lamps are hidden from them, and neither the word nor the feed is a live region; the officer is hearing the call itself. Progress words carry their state as hidden text.
+- **Replay (local tooling):** a recorded test call can be replayed on this same board at `/console/replay` for design review, at real pace or faster, or opened at a given moment. The title gains "(replay)", nothing is sent, and the route does not exist in production. It is a review tool, not a product surface.
+
+**The Refusals Light Red Rule.** A call action lights by what our backend answered, not by whether the request got through. A refusal sent as a normal reply (ok: false, verified: false, locked: true in the tool's full answer), a blocked tool or a transport error lights Lamp Red with Refused, never green Done; only an answer that refuses nothing lights Done. This is Product Principle 5, every refusal is visible, on the board. On paper a refusal still takes the neutral chip (The One Ramp Rule).
+
 ### Signature: Correction Slip (console)
 One correction the agent captured, as a paper slip (6px, 1px border at 40% ink while waiting, Paper Rule once decided). The header has the fix-ramp rule chip, the field name at 15px semibold, and a 12.5px caption with the capture time; it links "Open call record" only when a record exists. The body is old → new in 17px Geist Mono: the form value struck through in Faded Ink, an arrow, the confirmed value in ink. The footer, behind a top rule, holds the large primary "Approve correction" with a one-line note of what it writes. Reject sits at the far end of the row as a destructive key. Opening Reject replaces the row with a right-aligned form: a label, a required reason textarea (at least 5 characters), a hint saying where the reason goes, then Cancel (ghost) and Reject correction (destructive). Once decided, the footer prints the decision line: Stamp Green with a check for approved, officer ink for rejected, with who and when in mono. It feeds down only when decided while you watch.
 
@@ -579,6 +603,7 @@ Paper feeds down, LED cells light; nothing else moves.
 - **Rules cascade** (1100ms per row, 900ms base delay plus 160ms per row): each row lights from 12% opacity. Its lamp and word hold amber with the localized word "Check" for the first 65%, then the word cross-fades to the row's own result colour.
 - The cascade plays once, on arrival from submit. On the upload link it plays after each check, with no base delay. Reduced motion collapses every animation to its end state.
 - **Change lamp** (1100ms, the same amber hold): a console lamp that changes state while you watch. First paint is still.
+- **Live call lamps** (no animation): the live call board's lamps and words switch directly with the call's real events. An action's amber Check lasts exactly as long as the real action, so it is the hold.
 - **Decision feed** (the paper feed, 900ms): a slip's decision line, only when decided while you watch.
 - **Wait in** (240ms ease-out-expo after a 180ms delay): a loading screen fades in only if the wait outlasts a blink, so fast loads never flash a skeleton.
 - **Wait breathe** (1400ms, ease-in-out `cubic-bezier(0.45, 0, 0.55, 1)`, alternating opacity 1 to 0.45): unprinted lines and unlit cells breathe slowly while waiting. It is the world's only loop, and it lives only on waiting shapes. Reduced motion stills it: the screen simply appears.
@@ -591,6 +616,7 @@ Paper feeds down, LED cells light; nothing else moves.
 - **Do** show any reference number in fixed character cells: reverse-printed ink on paper, glowing amber on the board, always LTR.
 - **Do** express issue weight only through the fix / route / officer ramp, identically on lamp, chip, label and row.
 - **Do** use the amber "checking" hold before any board row settles on its result.
+- **Do** light a call action by our backend's answer: Refused in Lamp Red for any refusal, Done in green only when nothing was refused.
 - **Do** keep the amber prototype banner at the top of every screen, including `/console`.
 - **Do** set Arabic in Readex at the same size and weight as English, mirror the layout, and keep passport and reference data LTR.
 - **Do** render the operator console's queue, call checks and counts as LED Board, and its case file, slips, logs and history as paper, with the same tokens, ramp and motion grammar.
@@ -613,3 +639,4 @@ Paper feeds down, LED cells light; nothing else moves.
 - **Don't** sweep a shimmer across a skeleton, or stand grey boxes in for words that are the same on every case.
 - **Don't** show server error text on an error screen; show the plain-language notice and the digest.
 - **Don't** give a screen a skeleton when its language is only known from its data (the upload link).
+- **Don't** show ElevenLabs' internal workflow tools (notify_condition_*, transfer_to_agent) as actions, or make a live transcript a live region; screen readers hear the turning points only.
