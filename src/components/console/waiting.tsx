@@ -336,21 +336,28 @@ export function EvidenceWaiting() {
     <Waiting label="Loading the evidence…">
       <PageHead title={title} lead={lead} />
       <div className="grid gap-10 lg:grid-cols-12">
-        <div className="lg:col-span-5">
-          <Panel
-            title="Response latency by language"
-            aside={
-              <span className="font-mono text-[12px] text-led-text/60">
-                LLM first token, per agent turn
-              </span>
-            }
-          >
+        <div className="space-y-6 lg:col-span-5">
+          <Panel title="Agent tests — latest full run" aside={<Unlit className="h-2.5 w-24" />}>
+            <div className="flex items-end justify-between gap-4 px-4 pt-4 pb-3.5">
+              <div>
+                <Unlit className="h-[34px] w-28" />
+                <Unlit className="mt-2.5 h-2.5 w-40" />
+              </div>
+              <Unlit className="h-6 w-20" />
+            </div>
+            <div className="grid grid-cols-2 gap-px border-t border-board-rule bg-board-rule sm:grid-cols-5 lg:grid-cols-3 xl:grid-cols-5">
+              {["Open", "Verify", "Resolve", "Hand over", "Simulated call"].map((step) => (
+                <div key={step} className="bg-board px-3 py-2.5">
+                  <Unlit className="h-[22px] w-10" />
+                  <p className="mt-1.5 text-[12px] leading-tight text-led-text/70">{step}</p>
+                </div>
+              ))}
+            </div>
+          </Panel>
+          <Panel title="Response latency by language" aside={<span className="font-mono text-[12px] text-led-text/60">LLM first token, per agent turn</span>}>
             <div className="divide-y divide-board-rule">
               {["English", "Arabic", "Hindi"].map((l) => (
-                <div
-                  key={l}
-                  className="flex items-center justify-between gap-4 px-4 py-3.5"
-                >
+                <div key={l} className="flex items-center justify-between gap-4 px-4 py-3.5">
                   <span className="text-[13.5px] text-led-text">{l}</span>
                   <Unlit className="h-[17px] w-16" />
                 </div>
@@ -361,10 +368,12 @@ export function EvidenceWaiting() {
         <div className="space-y-10 lg:col-span-7">
           <section>
             <h2 className="text-[19px] font-semibold">Agent tests</h2>
-            <Ink className="mt-4 h-16 w-full rounded-[6px]" />
+            <Ink className="mt-3 w-[min(36rem,90%)]" />
+            <p className="mt-5 text-[14.5px] font-medium">Must never fail</p>
+            <Ink className="mt-2 h-60 w-full rounded-[6px]" />
           </section>
           <section>
-            <h2 className="text-[19px] font-semibold">Guardrails enforced by the backend</h2>
+            <h2 className="text-[19px] font-semibold">End-to-end flows</h2>
             <Ink className="mt-4 h-72 w-full rounded-[6px]" />
           </section>
         </div>

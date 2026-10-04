@@ -1,0 +1,29 @@
+[
+  {
+    "conversation_id": "conv_0401m44c19hdebrt1bz6yjawtj48",
+    "started_at": "2026-10-04T21:10:14.000Z",
+    "channel": "browser",
+    "language": "en",
+    "duration_secs": 134,
+    "avg_latency_ms": 694,
+    "max_latency_ms": 1050,
+    "call_successful": "success",
+    "summary_title": "Residency Name Correction",
+    "evaluation": {
+      "ai_disclosure": "success",
+      "verified_before_details": "success",
+      "no_secrets_requested": "success",
+      "read_back_before_submit": "success",
+      "correct_path": "success",
+      "opt_out_honoured": "success",
+      "stayed_in_language": "success"
+    },
+    "data_collected": {
+      "escalation_reason": null,
+      "fields_corrected": "full_name",
+      "language_used": "en",
+      "outcome": "resolved_on_call",
+      "rules_hit": "R1"
+    }
+  }
+]

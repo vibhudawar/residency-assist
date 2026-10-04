@@ -329,10 +329,16 @@ export async function getBlockedActions() {
   ].sort((x, y) => y.at.localeCompare(x.at));
 }
 
-export async function getLatency() {
-  const { data } = await db().from("call_records").select("language, avg_latency_ms, max_latency_ms").not("avg_latency_ms", "is", null);
+/**
+ * Response latency per language, from call records plus calls kept as evidence (agent/evidence/
+ * live-calls.json survives demo resets). A call in both is counted once.
+ */
+export async function getLatency(kept: { conversation_id: string; language: string; avg_latency_ms: number | null; max_latency_ms: number | null }[] = []) {
+  const { data } = await db().from("call_records").select("conversation_id, language, avg_latency_ms, max_latency_ms").not("avg_latency_ms", "is", null);
+  const seen = new Set((data ?? []).map((r) => r.conversation_id));
+  const rows = [...(data ?? []), ...kept.filter((k) => k.avg_latency_ms !== null && !seen.has(k.conversation_id))];
   const by = new Map<string, { calls: number; sum: number; max: number }>();
-  for (const r of data ?? []) {
+  for (const r of rows) {
     const k = r.language ?? "unknown";
     const cur = by.get(k) ?? { calls: 0, sum: 0, max: 0 };
     by.set(k, { calls: cur.calls + 1, sum: cur.sum + (r.avg_latency_ms ?? 0), max: Math.max(cur.max, r.max_latency_ms ?? 0) });

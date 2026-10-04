@@ -10,6 +10,7 @@ import { fileURLToPath } from "node:url";
 import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
 import * as S from "./settings.mjs";
 import { SIMULATIONS, TESTS } from "./tests.mjs";
+import { summarize } from "./summarize.mjs";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT = path.join(ROOT, "project");
@@ -96,6 +97,7 @@ async function main() {
   if (ONLY) {
     console.log(`Rerun: ${pct(result.overall_pass_rate)} (${totalPassed}/${totalRuns}). Written to agent/evidence/rerun-${stamp}.json`);
     for (const r of rows) console.log(`  ${pct(r.pass_rate).padStart(4)}  ${r.name}${r.failures.length ? ` — ${String(r.failures[0]).slice(0, 160)}` : ""}`);
+    await summarize();
     return;
   }
   await writeFile(path.join(ROOT, "evidence", "latest.json"), `${JSON.stringify(result, null, 2)}\n`);
@@ -116,6 +118,7 @@ async function main() {
   ].join("\n");
   await writeFile(path.join(ROOT, "evidence", "latest.md"), md);
 
+  await summarize();
   console.log(`Overall: ${pct(result.overall_pass_rate)} (${totalPassed}/${totalRuns}). Written to agent/evidence/latest.md`);
   for (const r of rows.filter((x) => x.pass_rate < 1)) console.log(`  ${pct(r.pass_rate).padStart(4)}  ${r.name}`);
 }

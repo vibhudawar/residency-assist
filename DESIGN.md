@@ -187,6 +187,18 @@ components:
     textColor: "{colors.board}"
     rounded: "{rounded.control}"
     height: "32px"
+  button-board-confirm-on:
+    backgroundColor: "{colors.board-2}"
+    textColor: "{colors.led-green}"
+    rounded: "{rounded.control}"
+    padding: "0 12px"
+    height: "32px"
+  auto-call-switch:
+    backgroundColor: "{colors.board-2}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.control}"
+    padding: "0 12px"
+    height: "32px"
   input:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
@@ -337,6 +349,9 @@ components:
     backgroundColor: "{colors.board-2}"
     textColor: "{colors.led-text}"
     padding: "8px 16px"
+  auto-call-line:
+    textColor: "{colors.led-text}"
+    padding: "12px 16px"
   error-notice:
     textColor: "{colors.ink}"
     typography: "{typography.case-headline}"
@@ -428,7 +443,7 @@ A cool, near-neutral paper-and-ink palette, lit by a small set of saturated LED 
 - **Meta** (400, 12px, 1.25): board header asides, board table column heads, count labels, the console bar subtitle and queue-row state lines. Paper-side meta (fact labels, slip captions, hints) sits at 12.5px in Faded Ink.
 - **Ticket** (Geist Mono 400, 12.5px; labels uppercase in Faded Ink, values uppercase in ink unless typed case matters; uppercase is dropped in RTL).
 - **LED numeral** (Doto 900, 34px in 52px-tall cells on paper, 22px in 34px cells on the board, 15px in 24px cells on queue rows). Lit counts on the queue board are 26px Doto; the latency board's averages are 17px.
-- **LED word / stage** (Doto 900, uppercase; 15px at 0.06em for rule-row state words, 14px for queue-row state words, 13px for pre-dial PASS/STOP, 14px for live-call action words, 26px at 0.04em for the current stage and the live call's state word; tracking resets to normal in RTL). In RTL the rule-row state word leaves Doto altogether: Readex semibold 14px, normal tracking, in the lamp colour with the same glow (led-word-rtl).
+- **LED word / stage** (Doto 900, uppercase; 15px at 0.06em for rule-row state words, 14px for queue-row state words, 13px for pre-dial PASS/STOP and for the auto-call words (the bar switch's ON/OFF, the case line's QUEUED / CALLING / PLACED / STOPPED / CANCELLED / OFF), 14px for live-call action words, 26px at 0.04em for the current stage and the live call's state word; tracking resets to normal in RTL). In RTL the rule-row state word leaves Doto altogether: Readex semibold 14px, normal tracking, in the lamp colour with the same glow (led-word-rtl).
 
 ### Named Rules
 **The Three Voices Rule.** Readex reads, Geist Mono prints, Doto lights. Dot-matrix is limited to reference numerals, lit counts and figures on a board, the current stage, row state words and the hall monogram. Never use it for sentences, labels or headings.
@@ -485,7 +500,7 @@ Solid and quiet, like a counter terminal key. The shared Button component is the
 - **Secondary:** Quiet Paper fill, ink text; hover goes to Paper Rule.
 - **Ghost:** no fill, Faded Ink text; hover fills Quiet Paper and inks the text. Used for Cancel.
 - **Destructive:** quiet paper with officer text and a 35%-officer stroke; hover takes the full officer stroke on the officer wash. It is never filled red on paper.
-- **Board:** for keys on the LED board: Board Panel fill, board-rule stroke, paper text. Hover lights stroke and text amber. The board's two-step confirm key (demo reset) is the one filled lamp key: Lamp Red with board text, on the board only.
+- **Board:** for keys on the LED board: Board Panel fill, board-rule stroke, paper text. Hover lights stroke and text amber. The board's two-step confirm key (demo reset) is the one filled lamp key: Lamp Red with board text, on the board only. Any other board confirm is outlined, not filled: "Turn on auto-call" is the small board key with a 60% Lamp Green stroke and Lamp Green text, the stroke going full green on hover.
 - **Quiet (portal):** paper fill, 6px radius, 1px rule or 25%-ink stroke, 13.5px. The destructive quiet button turns its stroke and text officer-red on hover.
 - **Text link:** Faded Ink, underlined on hover with a 0.2em offset.
 - **On board (portal):** the language switch is a 6px outline in board-rule with paper text. Hover lights it amber.
@@ -515,9 +530,11 @@ Solid and quiet, like a counter terminal key. The shared Button component is the
 A board-black bar across every screen. Above it sits a full-width amber prototype banner (board text, 12.5px medium) that is never removed. The bar carries the amber Doto "R" monogram in a board-2 well, the product name in paper, the hall name in dimmed LED text (hidden on mobile), and the language switch. The banner, monogram, product name and subtitle are one shared bar frame (portal: 1240px, 14px by 24px; console: 1440px, 12px by 16px, 24px from `sm`) used by the hall bar, the console bar and every error screen, so a failed page keeps its bar. On a loading screen, which does not yet know its own address, the language switch holds its place as an inert 60%-opacity placeholder, hidden from screen readers.
 
 ### Navigation (Console Bar and Tabs)
-The console bar is the hall bar, staff side: the same banner and monogram, the product name over "Operator console" in 12px dimmed LED text, then, when signed in, the demo reset, a board-rule divider, the officer's name and a paper text-link Sign out that lights amber on hover. Below it, the tab row sits on the hall floor: 14px Faded Ink tabs, the active tab in ink at 500 with a 2px ink underline, and a tab count where work is waiting. The tab row scrolls horizontally on mobile.
+The console bar is the hall bar, staff side: the same banner and monogram, the product name over "Operator console" in 12px dimmed LED text, then, when signed in, the auto-call switch, the demo reset, a board-rule divider, the officer's name and a paper text-link Sign out that lights amber on hover. Below it, the tab row sits on the hall floor: 14px Faded Ink tabs, the active tab in ink at 500 with a 2px ink underline, and a tab count where work is waiting. The tab row scrolls horizontally on mobile. The bar's right group wraps onto a second line on small screens (12px column gap, 20px from `sm`; the divider and the officer's name drop below `sm`).
 
 **Two-step reset.** "Reset demo" is a small board key. Pressing it asks first: a dimmed LED line says what it wipes, then Cancel (board key) and, after a deliberate gap, the Lamp Red Confirm reset key. The result is a short green or red LED word beside the key.
+
+**Auto-call switch.** A small board key that reads like a lamp on the board: an 8px lamp (steady Lamp Green with its glow when on, unlit 25% LED text when off), "Auto-call", then the state word in 13px Doto (ON in glowing green, OFF at 50% LED text). It is a toggle (aria-pressed) and its title says who starts calls in each state. Turning it on rings real phones, so it asks first, on the Reset demo pattern, inline in the bar: a 12.5px hint at 80% LED text that says what it does ("Rings opted-in applicants' phones by itself, 09:00–18:00 UAE, for applications checked from now on. Checks still run before every call."), end-aligned, at most 46ch beside the keys at `lg` and on its own full-width row above them below `lg`; then Cancel (board key, which takes focus), a deliberate 16px gap, and the green-outlined "Turn on auto-call" key, which the hint describes (aria-describedby). Escape cancels, and focus returns to the switch. Turning it off is immediate and cancels any call still waiting. A 12.5px status line beside the switch (role=status; visible from `md`, screen-reader only below) reports "Auto-call on" or "Auto-call off · N waiting calls cancelled" at 70% LED text; a failure reads "Auto-call didn't change. Try again." in Lamp Red. While pending the key shows "…" for its word, or "Turning on…".
 
 ### Signature: The Ticket
 The thermal ticket, max 360px wide, with a perforated edge and Geist Mono 12.5px. It has a masthead (hall name in uppercase plus three fading ink dots), the number block (reference cells, or "issued on submit"), a label/value data list on a 7.5rem label column, and a decorative LTR barcode with the spaced reference beneath. It prints the applicant's typed details live as they type. On submit it feeds down and prints its reference cell by cell.
@@ -538,7 +555,10 @@ The hall's queue board, officer side, built on the LED Board panel. Its header c
 A board lamp (8px dot, 8px glow) with a 14px Doto state word. It is still on first paint. When its state changes while you watch (an approval, a call ending), the lamp and word hold amber for the check (the first 65% of 1100ms) and then settle on the new colour. This is how an approved slip relights its queue row green.
 
 ### Signature: Calling Board (console)
-The pre-dial checks on an LED Board panel titled "Before calling", aside "checked on every press". A three-column table: the check (LED text, with a 12.5px detail at 65%), then a Phone and a Browser lamp, each a glowing green or red dot with a 13px Doto PASS or STOP. Check labels keep their sentence capitalisation. Under the table, the call keys (board variant, with phone and globe icons) and a 12.5px line saying what pressing will do. A refusal or not-connected outcome prints below in red or amber LED text, and the last six attempts list in mono time, channel and a coloured status.
+The pre-dial checks on an LED Board panel titled "Before calling", aside "checked on every press". A three-column table: the check (LED text, with a 12.5px detail at 65%), then a Phone and a Browser lamp, each a glowing green or red dot with a 13px Doto PASS or STOP. Check labels keep their sentence capitalisation. Between the table and the call keys, behind a board-rule top border, the case's auto-call line (below). Under it, the call keys (board variant, with phone and globe icons) and a 12.5px line saying what pressing will do. A refusal or not-connected outcome prints below in red or amber LED text, and the last six attempts list in mono time, channel and a coloured status.
+
+- **Auto-call line:** what the assistant will do by itself for this case, and the officer's say in it. 12px by 16px, wrapping. On the leading side, an 8px lamp, then the state word in 13px Doto (0.06em, uppercase), then one 13px sentence at 75% LED text; screen readers hear "Automatic call:" first. QUEUED and CALLING light amber with a glow, PLACED lights green, STOPPED, CANCELLED and OFF sit unlit (25% lamp, word at 50%). The sentence says when or why in plain words: "For 09:00 today.", "For tomorrow 09:00, the next try after an unanswered call.", "Called automatically at 5 Oct, 14:30.", "Stopped for this case by an officer.", "Returned before auto-call was on, so no automatic call.", "Auto-call is off. Calls start from the keys below." A cancelled call gives its reason in the pre-dial checks' own words, joined with " · " ("Number is on the do-not-call list."), and wherever a manual call is still allowed the sentence ends "Call from the keys below if it's still needed." On the far end, a small board key "Stop automatic calls" (while queued or placed) or "Resume automatic calls" (when stopped), "Saving…" while pending; a failed change adds "That didn't go through. Try again." in Lamp Red (role=alert).
+- **Calling hours detail:** the calling-hours check's detail says only whether now is inside 09:00–18:00 UAE; it no longer mentions queueing. The auto-call line is the only place on the board that reports the queue.
 
 ### Signature: Live Call Board (console)
 The browser call, lit on the hall's board. It hangs 16px under the "Before calling" board once an officer presses "Call in browser" and the checks pass, and stays until the officer closes it after the call. One LED Board panel titled "Live call — browser", aside the call language and a running clock (m:ss) in 12px mono at 60% LED text. The same board draws a real call and the local replay.
@@ -567,11 +587,16 @@ A file that passed replaces the slot with a paper card (6px, 40%-ink border, 16p
 ### Closed-State Notice (upload link)
 An approved, rejected, expired, replaced or locked link shows one paper notice (6px, rule border, 16px by 20px padding). The h1 already names the state, so the notice is body only: a 15px Faded Ink line, max 52ch, on what it means and what to do. Approved adds the 28px Stamp Green check badge on the leading side.
 
+### Status Headline (applicant portal)
+The status page's Headline is the hall announcement of the next step, and while something needs fixing it tells the truth about the call, in English and Arabic. It promises the assistant's call only when an automatic call is actually waiting: "will call you shortly" when it is due within 15 minutes or just placed, "today after 9:00" when it waits for the morning, "later today" for a same-day retry, "tomorrow, between 9:00 and 18:00" for the next day. With no call waiting it says "An officer will arrange a call with our AI assistant." When the checks have refused an AI call for good (do-not-call, limits spent) it says "An officer will contact you about it." While the phone is ringing it reads "Our AI assistant is calling you now."
+
+**The Page Never Promises A Call Rule.** The status page promises a call only when one is queued, and says when in words the queue can keep. Otherwise an officer arranges the call or will contact the applicant. The applicant is never told to wait for a call nothing will place.
+
 ### Signature: Upload Slip (console)
 A sent file on the officer's desk, on the correction slip's frame and decision footer. The header has the fix-ramp R4 or R5 chip, "New photo" at 15px semibold, and a 12.5px caption with the send time in mono and "passed the automatic check". The body puts the two pictures side by side as 120 x 154px frames (4px, rule border) under 12.5px Faded Ink captions: the current file at 60% opacity, an arrow, then the new file. A missing picture is a dashed 30%-ink well that says "None". Once decided only the new file stays. The footer is the shared decision line: primary "Approve photo" with a note of what it replaces, Reject at the far end behind a typed reason, and the Stamp Green or officer decision line once decided.
 
 ### Signature: Case-History Roll (console)
-The case history is one thermal printout: a paper roll with the ticket's perforated edges and ticket drop, Geist Mono 12.5px, a dashed-rule header with "Case history" and the reference. Every event prints top to bottom on a time / actor / event grid (5.5rem, 4.5rem, the rest), with detail in Faded Ink under the event. Calls, SMS, handoffs, refusals and decisions all print on this one roll; there is no second history.
+The case history is one thermal printout: a paper roll with the ticket's perforated edges and ticket drop, Geist Mono 12.5px, a dashed-rule header with "Case history" and the reference. Every event prints top to bottom on a time / actor / event grid (5.5rem, 4.5rem, the rest), with detail in Faded Ink under the event. Calls, SMS, handoffs, refusals and decisions all print on this one roll; there is no second history. Automatic calls print here too, in the same plain past tense: "Automatic call queued", "Automatic call moved", "Automatic call placed", "Automatic call cancelled", "Automatic calls stopped", "Automatic calls resumed". A due time is said the way an officer says it: "14:30 today", "tomorrow 09:00", otherwise the dated UAE time ("5 Oct, 14:30").
 
 ### Signature: Board Tables (console)
 Board-side figures (pre-dial checks, latency by language) are tables inside an LED Board panel: 12px column heads in 60% LED text, board-rule row dividers, data in mono LED text, and the headline figure in glowing amber Doto.
@@ -627,6 +652,8 @@ Paper feeds down, LED cells light; nothing else moves.
 - **Do** build loading screens as the pre-printed form: fixed labels in real text, only case data unprinted (7% ink) or unlit (8% LED text, 25% lamps), every block at its real size, one status sentence for screen readers.
 - **Do** keep whatever still works on screen when part of a page fails or loads: the bar, the tabs, the queue board.
 - **Do** give every error screen one primary "Try again", an exit where there is one, and the mono error reference.
+- **Do** ask first, inline on the board, before switching on anything that acts by itself on real phones; switching it off is immediate.
+- **Do** promise the applicant a call only when one is queued; otherwise say an officer will arrange it or contact them.
 
 ### Don't:
 - **Don't** use the generic government blue-header stepper form, or its startup-gradient opposite.
@@ -639,4 +666,5 @@ Paper feeds down, LED cells light; nothing else moves.
 - **Don't** sweep a shimmer across a skeleton, or stand grey boxes in for words that are the same on every case.
 - **Don't** show server error text on an error screen; show the plain-language notice and the digest.
 - **Don't** give a screen a skeleton when its language is only known from its data (the upload link).
+- **Don't** fill a board key with a lamp colour except Reset demo's Lamp Red confirm; other board confirms are outlined in their lamp colour.
 - **Don't** show ElevenLabs' internal workflow tools (notify_condition_*, transfer_to_agent) as actions, or make a live transcript a live region; screen readers hear the turning points only.

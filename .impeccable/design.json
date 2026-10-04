@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-05T12:00:00+00:00",
+  "generatedAt": "2026-10-05T18:00:00+00:00",
   "title": "Design System: Residency Assist",
   "extensions": {
     "colorMeta": {
@@ -629,6 +629,22 @@
       "css": ".ds-lc{max-width:720px;padding:6px;border-radius:10px;background:var(--board,#0c0e10);color:var(--led-text,#d9dcd6);font:400 13px 'Readex Pro',system-ui,sans-serif;box-shadow:0 24px 40px -24px rgb(0 0 0/.6)}.ds-lc-in{border:1px solid var(--board-rule,#262a2f);border-radius:7px;background:radial-gradient(circle at 1px 1px,#ffffff08 1px,transparent 1.2px) 0 0/6px 6px}.ds-lc-h{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--board-rule,#262a2f)}.ds-lc-h h2{margin:0;font-size:13px;font-weight:500}.ds-lc-a{font:12px 'Geist Mono',monospace;color:rgb(217 220 214/.6)}.ds-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.ds-lc-s{padding:14px 16px;border-bottom:1px solid var(--board-rule,#262a2f)}.ds-lc-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px}.ds-lc-st{display:flex;align-items:center;gap:12px}.ds-lc-lamp{width:10px;height:10px;border-radius:50%;background:var(--c);color:var(--c);box-shadow:0 0 8px currentColor}.ds-lc-st b{font:900 26px/1 Doto,monospace;letter-spacing:.04em;text-shadow:0 0 6px color-mix(in oklab,currentColor 55%,transparent)}.ds-lc-key{display:inline-flex;align-items:center;height:40px;padding:0 16px;border:1px solid var(--board-rule,#262a2f);border-radius:8px;background:var(--board-2,#15181b);color:var(--paper,#f6f8f9);font:500 14px 'Readex Pro',system-ui,sans-serif;cursor:pointer;transition:color .15s,border-color .15s}.ds-lc-key:hover{border-color:var(--led-red,#ff6a6f);color:var(--led-red,#ff6a6f)}.ds-lc-key:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}.ds-lc-p{list-style:none;display:flex;flex-wrap:wrap;gap:8px 20px;margin:12px 0 0;padding:0;font-size:12.5px}.ds-lc-p li{display:flex;align-items:center;gap:8px}.ds-lc-p span{color:rgb(217 220 214/.85)}.ds-lc-p span.r{color:var(--led-red,#ff6a6f)}.ds-lc i{display:block;flex:none;width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 6px var(--c)}.ds-lc-st i.ds-lc-lamp{width:10px;height:10px;box-shadow:0 0 8px var(--c)}.ds-lc-f{list-style:none;margin:0;padding:0;max-height:420px;overflow-y:auto}.ds-lc-f:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:-2px}.ds-lc-f li{display:grid;grid-template-columns:6.5rem 1fr;gap:4px 12px;padding:10px 16px;border-top:1px solid var(--board-rule,#262a2f);font-size:14px;line-height:1.375}.ds-lc-f li:first-child{border-top:0}.ds-lc-f li>span:nth-child(2){max-width:68ch}.ds-who{font-size:12.5px;color:rgb(217 220 214/.6)}.ds-who.ag{color:var(--led-amber,#ffb020)}.ds-lc-f li.ds-act{grid-template-columns:6.5rem 1fr auto;align-items:center;padding:8px 16px;background:rgb(21 24 27/.5);font-size:13px}.ds-act>span:nth-child(2){color:rgb(217 220 214/.85)}.ds-act code{margin-inline-start:6px;font:11.5px 'Geist Mono',monospace;color:rgb(217 220 214/.45)}.ds-res{display:flex;align-items:center;gap:8px}.ds-res b{width:5.25rem;font:900 14px/1 Doto,monospace;letter-spacing:.06em;text-shadow:0 0 6px color-mix(in oklab,currentColor 55%,transparent)}@media (max-width:639px){.ds-lc-f li,.ds-lc-f li.ds-act{grid-template-columns:1fr}.ds-lc-f li.ds-act{grid-template-columns:1fr auto}.ds-act .ds-who{grid-column:span 2}}"
     },
     {
+      "name": "Auto-Call Switch",
+      "kind": "button",
+      "refersTo": "auto-call-switch",
+      "description": "Console bar toggle (aria-pressed): 8px lamp (steady green on, 25% unlit off) + 'Auto-call' + 13px Doto ON/OFF. Turning on asks inline like Reset demo: 12.5px hint at 80% LED text (≤46ch at lg, own row below lg, aria-describedby), Cancel takes focus, a 16px gap, then the green-OUTLINED 'Turn on auto-call' key (Reset demo's red confirm stays the only filled lamp key). Escape cancels and focus returns to the switch. Off is immediate and cancels waiting calls; a role=status line reports the result, errors in Lamp Red.",
+      "html": "<div class=\"ds-ac-bar\"><div class=\"ds-ac-row\"><span class=\"ds-ac-msg\" role=\"status\">Auto-call on</span><button class=\"ds-ac-key\" aria-pressed=\"true\"><i class=\"ds-ac-lamp on\" aria-hidden=\"true\"></i>Auto-call<b class=\"ds-ac-w on\" aria-hidden=\"true\">ON</b></button></div><div class=\"ds-ac-row ds-ac-ask\"><span id=\"ds-ac-hint\" class=\"ds-ac-hint\">Rings opted-in applicants' phones by itself, 09:00–18:00 UAE, for applications checked from now on. Checks still run before every call.</span><button class=\"ds-ac-key\">Cancel</button><span class=\"ds-ac-gap\" aria-hidden=\"true\"></span><button class=\"ds-ac-key ds-ac-go\" aria-describedby=\"ds-ac-hint\">Turn on auto-call</button></div></div>",
+      "css": ".ds-ac-bar{display:grid;gap:16px;padding:12px 16px;background:var(--board,#0c0e10);color:var(--led-text,#d9dcd6);font:400 13px 'Readex Pro',system-ui,sans-serif}.ds-ac-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px 12px}.ds-ac-key{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border:1px solid var(--board-rule,#262a2f);border-radius:6px;background:var(--board-2,#15181b);color:var(--paper,#f6f8f9);font:500 13px/1 'Readex Pro',system-ui,sans-serif;cursor:pointer;transition:color .15s,border-color .15s}.ds-ac-key:hover{border-color:var(--led-amber,#ffb020);color:var(--led-amber,#ffb020)}.ds-ac-key:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}.ds-ac-lamp{width:8px;height:8px;border-radius:50%;background:rgb(217 220 214/.25)}.ds-ac-lamp.on{background:var(--led-green,#3ddc84);box-shadow:0 0 6px var(--led-green,#3ddc84)}.ds-ac-w{font:900 13px/1 Doto,monospace;letter-spacing:.06em;color:rgb(217 220 214/.5)}.ds-ac-w.on{color:var(--led-green,#3ddc84);text-shadow:0 0 6px color-mix(in oklab,currentColor 55%,transparent)}.ds-ac-msg{font-size:12.5px;color:rgb(217 220 214/.7)}.ds-ac-hint{flex-basis:100%;text-align:end;font-size:12.5px;line-height:1.375;color:rgb(217 220 214/.8)}@media (min-width:1024px){.ds-ac-hint{flex-basis:auto;max-width:46ch}}.ds-ac-gap{width:16px}.ds-ac-go{border-color:rgb(61 220 132/.6);color:var(--led-green,#3ddc84)}.ds-ac-go:hover{border-color:var(--led-green,#3ddc84);color:var(--led-green,#3ddc84)}"
+    },
+    {
+      "name": "Case Auto-Call Line",
+      "kind": "custom",
+      "refersTo": "auto-call-line",
+      "description": "Calling Board row between the pre-dial table and the call keys, behind a board-rule top border: lamp + 13px Doto state word (QUEUED/CALLING amber, PLACED green, STOPPED/CANCELLED/OFF unlit at 50%) + a 13px sentence at 75% LED text, sr-only 'Automatic call:' prefix, and a small board key for Stop / Resume automatic calls. Cancelled reasons reuse the pre-dial checks' own words joined with ' · '. The only place the board reports the queue.",
+      "html": "<div class=\"ds-acl-board\"><div class=\"ds-acl\"><p><i class=\"ds-acl-lamp\" aria-hidden=\"true\"></i><span><span class=\"ds-sr\">Automatic call: </span><b class=\"ds-acl-w\">QUEUED</b><span class=\"ds-acl-t\">For 09:00 today.</span></span></p><button class=\"ds-ac-key\">Stop automatic calls</button></div><div class=\"ds-acl\"><p><i class=\"ds-acl-lamp off\" aria-hidden=\"true\"></i><span><span class=\"ds-sr\">Automatic call: </span><b class=\"ds-acl-w off\">CANCELLED</b><span class=\"ds-acl-t\">Number is on the do-not-call list. Call from the keys below if it's still needed.</span></span></p></div></div>",
+      "css": ".ds-acl-board{max-width:720px;background:var(--board,#0c0e10);color:var(--led-text,#d9dcd6);font:400 13px 'Readex Pro',system-ui,sans-serif;border-radius:10px;padding:6px}.ds-acl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:12px 16px;border-top:1px solid var(--board-rule,#262a2f)}.ds-acl p{display:flex;align-items:flex-start;gap:10px;margin:0;min-width:0;line-height:1.375}.ds-acl-lamp{flex:none;margin-top:.4em;width:8px;height:8px;border-radius:50%;background:var(--led-amber,#ffb020);box-shadow:0 0 6px var(--led-amber,#ffb020)}.ds-acl-lamp.off{background:rgb(217 220 214/.25);box-shadow:none}.ds-acl-w{margin-inline-end:8px;font:900 13px Doto,monospace;letter-spacing:.06em;color:var(--led-amber,#ffb020);text-shadow:0 0 6px color-mix(in oklab,currentColor 55%,transparent)}.ds-acl-w.off{color:rgb(217 220 214/.5);text-shadow:none}.ds-acl-t{color:rgb(217 220 214/.75)}.ds-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.ds-ac-key{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border:1px solid var(--board-rule,#262a2f);border-radius:6px;background:var(--board-2,#15181b);color:var(--paper,#f6f8f9);font:500 13px/1 'Readex Pro',system-ui,sans-serif;cursor:pointer;transition:color .15s,border-color .15s}.ds-ac-key:hover{border-color:var(--led-amber,#ffb020);color:var(--led-amber,#ffb020)}.ds-ac-key:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}"
+    },
+    {
       "name": "Correction Slip",
       "kind": "card",
       "refersTo": "correction-slip",
@@ -752,6 +768,11 @@
         "name": "The Refusals Light Red Rule",
         "body": "A call action lights by what our backend answered, not by whether the request got through. A refusal sent as a normal reply (ok: false, verified: false, locked: true in the tool's full answer), a blocked tool or a transport error lights Lamp Red with Refused, never green Done; only an answer that refuses nothing lights Done. This is Product Principle 5, every refusal is visible, on the board. On paper a refusal still takes the neutral chip (The One Ramp Rule).",
         "section": "components"
+      },
+      {
+        "name": "The Page Never Promises A Call Rule",
+        "body": "The status page promises a call only when one is queued, and says when in words the queue can keep. Otherwise an officer arranges the call or will contact the applicant. The applicant is never told to wait for a call nothing will place.",
+        "section": "components"
       }
     ],
     "dos": [
@@ -769,7 +790,9 @@
       "Do let the h1 name where a link or case stands; a notice under it says only what that means and what to do next.",
       "Do build loading screens as the pre-printed form: fixed labels in real text, only case data unprinted (7% ink) or unlit (8% LED text, 25% lamps), every block at its real size, one status sentence for screen readers.",
       "Do keep whatever still works on screen when part of a page fails or loads: the bar, the tabs, the queue board.",
-      "Do give every error screen one primary \"Try again\", an exit where there is one, and the mono error reference."
+      "Do give every error screen one primary \"Try again\", an exit where there is one, and the mono error reference.",
+      "Do ask first, inline on the board, before switching on anything that acts by itself on real phones; switching it off is immediate.",
+      "Do promise the applicant a call only when one is queued; otherwise say an officer will arrange it or contact them."
     ],
     "donts": [
       "Don't use the generic government blue-header stepper form, or its startup-gradient opposite.",
@@ -782,6 +805,7 @@
       "Don't sweep a shimmer across a skeleton, or stand grey boxes in for words that are the same on every case.",
       "Don't show server error text on an error screen; show the plain-language notice and the digest.",
       "Don't give a screen a skeleton when its language is only known from its data (the upload link).",
+      "Don't fill a board key with a lamp colour except Reset demo's Lamp Red confirm; other board confirms are outlined in their lamp colour.",
       "Don't show ElevenLabs' internal workflow tools (notify_condition_*, transfer_to_agent) as actions, or make a live transcript a live region; screen readers hear the turning points only."
     ]
   }
