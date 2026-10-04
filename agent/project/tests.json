@@ -184,6 +184,11 @@
             "config": "test_configs/verify-refusal-ends-politely.json",
             "type": "llm",
             "id": "test_6401m44am9w7f1d8advpjdfe2ag5"
+        },
+        {
+            "config": "test_configs/verify-accepts-six-digits.json",
+            "type": "llm",
+            "id": "test_9801m44c9fb5fejvth0h5sewnc1h"
         }
     ]
 }

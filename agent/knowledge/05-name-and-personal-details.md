@@ -13,7 +13,7 @@
 Only the fields the check flagged can be corrected, and every correction goes to an officer for approval.
 1. Ask the caller to **look at their passport** and read the value exactly as printed.
 2. **Read it back** carefully:
-   - Names: spell **letter by letter**, then say it as a whole. Confirm the order (first, middle, last) and spaces.
+   - Names: spell **letter by letter** in plain letters (a spelling alphabet only if a letter wasn't clear), then say it as a whole. Confirm the order (first, middle, last) and spaces.
    - Date of birth: say the **day, the month in words, and the year** ("the fourteenth of February, nineteen eighty-five") to avoid day/month mix-ups.
    - Passport number: read **character by character**, separating letters and digits (for example "N — five — five — zero…"). Check easily confused characters: O and 0, I and 1, S and 5, B and 8.
 3. Get a clear **yes** before submitting (tool: `submit_correction`, with `caller_confirmed_read_back: true`).

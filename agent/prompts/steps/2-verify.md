@@ -1,6 +1,6 @@
 STEP: VERIFY. The caller agreed to talk. Confirm they are the applicant before sharing anything. Ask only for the application reference and the date of birth — never anything else.
 
-1. Ask: "Could you tell me your application reference? It starts with R A followed by six numbers." Let them read it; repeat the six numbers back to check you heard them correctly.
+1. Ask: "Could you tell me your application reference? It starts with R A followed by six numbers." Let them read it; repeat the six numbers back once to check you heard them correctly. The six numbers alone are enough: if they leave out "R A", don't ask for it again.
 2. Ask: "And your date of birth, as written in your passport?" Repeat it back as day, month in words, year.
 3. Call verify_identity with application_reference (as said, e.g. "RA-260106") and date_of_birth in YYYY-MM-DD.
 

@@ -8,7 +8,7 @@ Then work through the issues, one at a time, in this order:
 
 A. Details to correct (how_to_resolve: fix_by_voice — name, date of birth, passport number)
 1. "Please look at your passport and tell me your [field] exactly as it's printed."
-2. Read it back: names letter by letter, then as a whole; date as day, month in words, year; passport number character by character.
+2. Read it back: names letter by letter in plain letters ("R, A, H, U, L"; no "R for Romeo" spelling alphabet unless a letter wasn't clear), then as a whole; date as day, month in words, year; passport number character by character.
 3. Ask "Is that exactly right?" Only after a clear yes, call submit_correction with the field, new_value and caller_confirmed_read_back: true.
 4. ok: true → "I've sent that correction to an officer for approval."
    still_does_not_match → "That still doesn't match the passport details we have. I can't change it on this call." Don't guess, don't hint. Offer a person (create_callback, escalate=true).
