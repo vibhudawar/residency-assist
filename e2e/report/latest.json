@@ -1,0 +1,185 @@
+{
+  "ran_at": "2026-10-04T19:59:46.691Z",
+  "base_url": "http://localhost:3006",
+  "status": "passed",
+  "passed": 6,
+  "total": 6,
+  "flows": [
+    {
+      "flow": "A typo is fixed on the call, approved by an officer, and the applicant sees it",
+      "file": "01-golden-path.spec.ts",
+      "status": "passed",
+      "seconds": 25.9,
+      "steps": [
+        {
+          "title": "Applicant signs in, fills the form with a name typo, opts in to AI calls and submits",
+          "ok": true
+        },
+        {
+          "title": "The 12-rule check returns the name and says the assistant will call",
+          "ok": true
+        },
+        {
+          "title": "Assistant can't read the case before the caller is verified",
+          "ok": true
+        },
+        {
+          "title": "Caller verifies with reference and date of birth; the case lists the name issue",
+          "ok": true
+        },
+        {
+          "title": "Caller confirms the read-back; mid-call the applicant sees the call and the pending correction",
+          "ok": true
+        },
+        {
+          "title": "The call ends: ElevenLabs' signed post-call record shows in Call records with its latency",
+          "ok": true
+        },
+        {
+          "title": "After the call, the applicant sees the correction waiting for an officer",
+          "ok": true
+        },
+        {
+          "title": "Officer opens the case and approves the correction",
+          "ok": true
+        },
+        {
+          "title": "Applicant's status page shows the approval and the application moves to processing",
+          "ok": true
+        },
+        {
+          "title": "The applicant is told by SMS, logged in the outbox",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "flow": "An officer rejects a correction: nothing changes, a person takes over and the applicant is told",
+      "file": "02-officer-rejects.spec.ts",
+      "status": "passed",
+      "seconds": 19.2,
+      "steps": [
+        {
+          "title": "On a call, Ahmed verifies and confirms his date of birth from his passport",
+          "ok": true
+        },
+        {
+          "title": "A reason is required to reject",
+          "ok": true
+        },
+        {
+          "title": "Officer rejects with a reason; the slip records who, when and why",
+          "ok": true
+        },
+        {
+          "title": "The case is handed to a person, listed under Handoffs",
+          "ok": true
+        },
+        {
+          "title": "The applicant is told by SMS that an officer will contact them",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "flow": "A new photo by SMS link: a bad one is refused with the reason, a good one is approved by an officer",
+      "file": "03-upload-link.spec.ts",
+      "status": "passed",
+      "seconds": 28.5,
+      "steps": [
+        {
+          "title": "On a call, the assistant texts Fatima an upload link",
+          "ok": true
+        },
+        {
+          "title": "The text with the link is in the SMS outbox",
+          "ok": true
+        },
+        {
+          "title": "A photo on a blue background is refused, naming exactly what's wrong",
+          "ok": true
+        },
+        {
+          "title": "A photo on white passes the automatic check and waits for an officer",
+          "ok": true
+        },
+        {
+          "title": "Officer compares old and new and approves the photo",
+          "ok": true
+        },
+        {
+          "title": "The link now says the new photo is on the application, and is closed",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "flow": "Calls that break the rules are refused before dialling and logged",
+      "file": "04-predial-refusals.spec.ts",
+      "status": "passed",
+      "seconds": 26,
+      "steps": [
+        {
+          "title": "Sarah never opted in to AI calls: the call is refused for consent",
+          "ok": true
+        },
+        {
+          "title": "Maria's case is officer-only (a medical result): the AI never calls",
+          "ok": true
+        },
+        {
+          "title": "Both refusals are in the Blocked actions log",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "flow": "Only the right people get in: officers, verified callers, and signed webhooks",
+      "file": "05-access.spec.ts",
+      "status": "passed",
+      "seconds": 11.6,
+      "steps": [
+        {
+          "title": "Console pages send a signed-out visitor to sign-in",
+          "ok": true
+        },
+        {
+          "title": "A wrong passcode is refused",
+          "ok": true
+        },
+        {
+          "title": "Demo reset refuses anyone who isn't a signed-in officer",
+          "ok": true
+        },
+        {
+          "title": "Agent tools refuse a wrong tool secret and an unknown case token",
+          "ok": true
+        },
+        {
+          "title": "The post-call webhook refuses an unsigned record",
+          "ok": true
+        },
+        {
+          "title": "A status link that isn't valid says so, with the way back",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "flow": "The applicant portal works in Arabic, right to left, and switches back",
+      "file": "06-arabic.spec.ts",
+      "status": "passed",
+      "seconds": 0.8,
+      "steps": [
+        {
+          "title": "In Arabic the page is right to left with Arabic text and the prototype banner",
+          "ok": true
+        },
+        {
+          "title": "The language switch returns to English, left to right",
+          "ok": true
+        }
+      ]
+    }
+  ]
+}

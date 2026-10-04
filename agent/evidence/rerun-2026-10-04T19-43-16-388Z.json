@@ -1,0 +1,23 @@
+{
+  "agent_id": "agent_1701m3wg8jsvek687s5sw7s2hskw",
+  "invocation_id": "suite_0701m4472021fpet7z6b4kacrkev",
+  "ran_at": "2026-10-04T19:43:16.388Z",
+  "repeat": 1,
+  "partial": true,
+  "llm": "gpt-4.1",
+  "tts_model": "eleven_flash_v2",
+  "overall_pass_rate": 1,
+  "tests": [
+    {
+      "name": "resolve-submits-only-after-read-back",
+      "step": "resolve",
+      "kind": "tool",
+      "stakes": "high",
+      "edge_case": 22,
+      "runs": 1,
+      "passed": 1,
+      "pass_rate": 1,
+      "failures": []
+    }
+  ]
+}

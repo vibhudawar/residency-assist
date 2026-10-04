@@ -13,7 +13,8 @@
     "agent:build": "node agent/build.mjs",
     "agent:deploy": "node --env-file=.env agent/deploy.mjs",
     "agent:check": "node agent/build.mjs && node agent/check.mjs",
-    "agent:test": "node --env-file=.env agent/test.mjs"
+    "agent:test": "node --env-file=.env agent/test.mjs",
+    "test:e2e": "NODE_OPTIONS=--conditions=react-server playwright test"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -34,6 +35,7 @@
   },
   "devDependencies": {
     "@elevenlabs/cli": "1.4.0",
+    "@playwright/test": "1.63.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

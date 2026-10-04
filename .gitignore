@@ -46,3 +46,7 @@ next-env.d.ts
 
 # ElevenLabs CLI project: local env only
 agent/project/.env
+
+# Playwright scratch output (the evidence report in e2e/report/ is kept)
+/test-results/
+/playwright-report/
