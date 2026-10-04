@@ -24,8 +24,8 @@
         },
         "timezone": "Asia/Dubai",
         "tool_ids": [
-          "tool_5901m3wg19fpf3es6anzfbbhjx7a",
-          "tool_2001m3wg15zre8n8setnq3cbakzr"
+          "tool_0401m4491dfmfevbxjj480769ebg",
+          "tool_3901m4491a8eeettrz8aw6ydtsne"
         ],
         "built_in_tools": {
           "end_call": {
@@ -59,67 +59,67 @@
           {
             "type": "text",
             "name": "Residency Assist — About this call, and what the assistant can and cannot do",
-            "id": "JDTstuMUIIBqyWyhJ0g5",
+            "id": "3q9NvRHOf2xhg5zJWqpe",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — The 12 checks, and what happens when one fails",
-            "id": "zQvOqDeN3vmOClDXoQCZ",
+            "id": "q5Ze36igkQCvOsrNjuTm",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Personal photo and document scans (checks R4 and R5)",
-            "id": "72lpw1UIN7KJfbBufvL4",
+            "id": "awLCWI1Lyuahv4Ebr1j6",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Passport validity (check R8)",
-            "id": "37PZhfBFkxBiiRgbbjL1",
+            "id": "OoDa3Z9iTVk3vgxXtijr",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Name, date of birth and passport number (checks R1, R2, R3)",
-            "id": "bD1V9JfZf8H0jCPtNfda",
+            "id": "Qqg3nwxrx1c9UhmjvAd4",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Attestation of certificates",
-            "id": "p2lsPS5V2Ih5bRCJtuT6",
+            "id": "SjcTFE2dbidIAM3Km4RD",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — A previous residence visa is still active (check R9)",
-            "id": "ftssiRJkReywsWF5II8c",
+            "id": "qhLqfEZfScEXy8BVFGTL",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Unpaid immigration fines (check R10)",
-            "id": "30oLyqOLqmAknEhPBmMO",
+            "id": "9U291bRrsQSoSrunclT8",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Medical fitness test and Emirates ID biometrics (checks R6 and R7)",
-            "id": "Log5o1kT2TB7ciHWKjD8",
+            "id": "gsNSpDkwvL3XAbW9KdMK",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Amer centres and official ways to check an application",
-            "id": "zm1iNL4enQmHOxsl39LC",
+            "id": "gXo4rTXAHMpev2Zt93r0",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Profession code doesn't match the labour contract (check R11)",
-            "id": "dFS37CTwDC94plWqXz1e",
+            "id": "otrijGDdcs2y1h2gbUgJ",
             "usage_mode": "auto"
           }
         ],
@@ -247,7 +247,7 @@
         },
         "additional_prompt": "STEP: VERIFY. The caller agreed to talk. Confirm they are the applicant before sharing anything. Ask only for the application reference and the date of birth — never anything else.\n\n1. Ask: \"Could you tell me your application reference? It starts with R A followed by six numbers.\" Let them read it; repeat the six numbers back to check you heard them correctly.\n2. Ask: \"And your date of birth, as written in your passport?\" Repeat it back as day, month in words, year.\n3. Call verify_identity with application_reference (as said, e.g. \"RA-260106\") and date_of_birth in YYYY-MM-DD.\n\nResults:\n- verified: true → \"Thank you, you're verified.\" Move on (the next step explains the application).\n- verified: false with attempts_left 1 → \"Those details don't match our records. Let's try once more.\" Ask for both again. Never say which one was wrong.\n- locked: true (or a second failure) → \"I'm sorry, I can't confirm your identity, so I can't discuss the application on this call. You can check it yourself on the portal where you applied.\" Offer a callback from a person (create_callback, escalate=true, reason \"identity could not be verified\"). Goodbye, end_call. Reveal nothing about the application.\n- The caller refuses to give these details → that's fine. Explain you can't discuss the application without them, offer a callback, end politely.\n- The caller offers a password, PIN, code or card number → stop them: \"Please don't share that — I will never need it.\"\n",
         "additional_tool_ids": [
-          "tool_8501m3wg1cmaeh786087mf9f397a"
+          "tool_3401m4491fyjf4yvxn7hwn5psj5g"
         ],
         "entry_behavior": "auto",
         "edge_order": [
@@ -264,13 +264,13 @@
         },
         "additional_prompt": "STEP: RESOLVE. The caller is verified on this call. Call get_case right away, then explain and fix.\n\nExplain first:\n- Say how many things were found, then one plain sentence each, using the \"12 checks\" knowledge document. Example: \"I found two things. The name on the form is spelled differently from your passport, and the photo background isn't plain white. We can fix both now.\"\n- If get_case returns officer_only: \"An officer needs to review your application, and they'll contact you directly.\" Offer a callback (create_callback, escalate=true). Say nothing else about it. Close and end_call.\n\nThen work through the issues, one at a time, in this order:\n\nA. Details to correct (how_to_resolve: fix_by_voice — name, date of birth, passport number)\n1. \"Please look at your passport and tell me your [field] exactly as it's printed.\"\n2. Read it back: names letter by letter, then as a whole; date as day, month in words, year; passport number character by character.\n3. Ask \"Is that exactly right?\" Only after a clear yes, call submit_correction with the field, new_value and caller_confirmed_read_back: true.\n4. ok: true → \"I've sent that correction to an officer for approval.\"\n   still_does_not_match → \"That still doesn't match the passport details we have. I can't change it on this call.\" Don't guess, don't hint. Offer a person (create_callback, escalate=true).\n   field_not_flagged → \"I can only correct the items our check flagged.\"\n   If they change their mind before submitting, take the new value and read it back again.\n\nB. New photo or scan (how_to_resolve: upload)\n1. Explain what was wrong in one sentence and what a good photo needs (knowledge document \"Photo and scan\").\n2. send_upload_link with kind photo or scan. \"I've sent you a text message with a link. It works for 24 hours.\"\n3. Offer to wait while they do it. When they say done, check_upload:\n   uploaded_and_passed → \"It passed the automatic check. An officer will confirm it.\"\n   uploaded_but_failed → say exactly what failed, and help them try again.\n   waiting_for_upload → offer to wait a little longer, or they can do it later today.\n\nC. Appointments (how_to_resolve: book_visit — biometrics R6, medical test R7)\n1. One sentence on what's pending. list_slots with purpose biometrics or medical.\n2. Offer the two slots (\"Tuesday at 9:30 at the Al Barsha centre, or Wednesday at 11 at Deira\"). book_appointment with the chosen slot_id.\n3. Confirm centre, day and time, and what to bring (original passport or Emirates ID). This prototype's slots are demonstration slots — if asked, say so.\n4. No slots → give the next available date or book a callback.\n\nD. Someone else must act (how_to_resolve: route — R8 passport, R9 previous visa, R10 fines, R11 profession code)\n- Explain who must act, from the knowledge base, in two sentences or fewer. Never take payment. create_followup with the rule.\n- Fines (R10): name the channels exactly: \"Fines can only be paid through the official channels: the GDRFA Dubai website or app, or an Amer centre.\" If they offer to pay you, say you can't take any payment on this call and nobody from us will ever ask them to pay over the phone.\n\nClose:\n- Summarise: what was sent for officer approval, what was booked, what the caller or someone else still needs to do.\n- \"An officer reviews every change. You'll get an SMS and see updates on the portal.\"\n- \"If you ever don't want these calls, just tell us and we'll stop.\" Then goodbye and end_call.\n\nThroughout: if the caller disputes the decision, gets upset, asks for a person, or asks for something outside this application (another application, a different service), hand over to a person. A caller who just wants it approved or done faster stays here: explain an officer decides, and keep fixing.\n",
         "additional_tool_ids": [
-          "tool_8201m3wg17t0f37aa26xc9w93ypy",
-          "tool_8701m3wg1bsdet7v11ax7jaj1jwz",
-          "tool_9001m3wg1azvemxa1h1x7bbk4c4v",
-          "tool_9901m3wg155becmvxgnne3trpheq",
-          "tool_6201m3wg18mceev9xpghhwz1kj92",
-          "tool_2901m3wg149zf7ysrsktgyg75mh5",
-          "tool_6501m3wg16wbf96se728yne4dkfy"
+          "tool_0001m4491bvse56a7t94zwcxcqse",
+          "tool_1301m4491f3rfccsys7yctx78wmb",
+          "tool_3601m4491eaafk8sb1tn9vhv824m",
+          "tool_5101m44919djfh0rqa7p9zsvvxwn",
+          "tool_3401m4491cnwe7e8tth63546bsnd",
+          "tool_1801m44918m9f8dvqqp2xxbrexrt",
+          "tool_2201m4491b1yemda9gc52bxx4wc3"
         ],
         "entry_behavior": "auto",
         "edge_order": [
@@ -461,150 +461,150 @@
     "testing": {
       "attached_tests": [
         {
-          "test_id": "test_7601m3wg1m5mfq4vwf5eq5wrgns4",
-          "workflow_node_id": "verify"
-        },
-        {
-          "test_id": "test_7501m3wg1mksewa8ec3ds1z8w3b1",
-          "workflow_node_id": "open"
-        },
-        {
-          "test_id": "test_3701m3wg1n2qed1rn3zb7tvqfa04",
-          "workflow_node_id": "open"
-        },
-        {
-          "test_id": "test_8401m3wg1nh9eg9b7847c9gw7xb8",
-          "workflow_node_id": "open"
-        },
-        {
-          "test_id": "test_9001m3wg1nype07rkx38znaz4mar",
-          "workflow_node_id": "open"
-        },
-        {
-          "test_id": "test_7901m3wg1pdffz8s7bnm9akm8vwg",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_5401m3wg1pydffdbdtk459pczqzn",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_9101m3wg1qcwfbka3aax1kxbktq8",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_7701m3wg1qwwfg2azyepgk30b4z6",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_8501m3wg1rbgehvbds4yk3aq2vay",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_8301m3wg1rszeehbk0tk10g13pgh",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_0601m3wg1s8wexrrggfwypp3w1ew",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_4101m3wg1sqtfrp96w3gancf93zp",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_5801m3wg1t8yf9steqepsfw3z741",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_9301m3wg1tssf1s822tpav0h8k1s",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_5201m3wg1vbmf4yr9a7g5eaab5hm",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_2801m3wg1vt5em3vh9cv4wj5p07d",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_7201m3wg1w9qedca51p1dxgpjjy9",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_2201m3wg1wqje7h93vcrhjagqap6",
-          "workflow_node_id": "verify"
-        },
-        {
-          "test_id": "test_3001m3wg1x65f0cs4m5zytfzae96",
-          "workflow_node_id": "verify"
-        },
-        {
-          "test_id": "test_1501m3wg1xmdfgav66x1hqh01k3x",
-          "workflow_node_id": "verify"
-        },
-        {
-          "test_id": "test_7001m3wg1y2kfynv5e964dds8htz",
-          "workflow_node_id": "verify"
-        },
-        {
-          "test_id": "test_0601m3wg875kfkx8xjtttv4f7zh2",
+          "test_id": "test_8801m4491nkqfj8taagt6c62ap6h",
           "workflow_node_id": "handover"
         },
         {
-          "test_id": "test_8501m3wg87kvf5wb3z25j2zpgp3a",
-          "workflow_node_id": "open"
-        },
-        {
-          "test_id": "test_3701m3wg882texgt17sx7jsnb4ge",
-          "workflow_node_id": "open"
-        },
-        {
-          "test_id": "test_1901m3wg88ktf819ff2tvjnt32jv",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_3001m3wg894bf6xvc809seeq216v",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_6701m3wg89ntex1bzn9d41yshbp4",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_3901m3wg8a5vegtv3cj8793mkkyx",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_6401m3wg8enxexkrztz2yd9r7m29",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_6101m3wg8f97en7vj19vafyxsvkz",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_6901m3wg8fs6eyb8fxc8mwxzj6z6",
-          "workflow_node_id": "resolve"
-        },
-        {
-          "test_id": "test_6001m3wg8g7gftc9vvwtavv2wk96"
-        },
-        {
-          "test_id": "test_7301m3wg8gsffwr8f1qgr5bmww8d"
-        },
-        {
-          "test_id": "test_3401m3wg8h9qfkhttykqyc2jhv0s",
+          "test_id": "test_7901m4491p3pfg6askkerns9wans",
           "workflow_node_id": "verify"
         },
         {
-          "test_id": "test_4101m3wg8hq9ey98d1q9ngzhc9bq",
+          "test_id": "test_1601m4491phafafv8tw0znk05vwv",
+          "workflow_node_id": "open"
+        },
+        {
+          "test_id": "test_6501m4491q0df4vt9mbcvtzht0am",
+          "workflow_node_id": "open"
+        },
+        {
+          "test_id": "test_1101m4491qq0fq89cxmnf23hxd92",
+          "workflow_node_id": "open"
+        },
+        {
+          "test_id": "test_4401m4491r5jft9rydx3g7kpv72a",
+          "workflow_node_id": "open"
+        },
+        {
+          "test_id": "test_5801m4491rkgew1bt7vbrx3d2tca",
+          "workflow_node_id": "open"
+        },
+        {
+          "test_id": "test_7801m4491s2cfq4av402fk485mdq",
+          "workflow_node_id": "open"
+        },
+        {
+          "test_id": "test_5801m4491shbf9qvx6nn54g5pydg",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_7601m4491sz9e9csf60k9dmd894j",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_3701m4491tdzfyqthqa3b4vqvq0z",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_3701m4491twjesybmtpp9xddp7ck",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_7401m4491vatfvfr6pprsaj3kcjs",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_6301m4491vs1f0mvqbfbdgz7m7ey",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_8301m4491wgfewhbbeyecmsxrtze",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_8501m4491wzrf5t9qsdh1tn7mq1s",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_2301m4491xf2fg2bkkth79e1bmhz",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_9001m4491xx3fnd9ac7cb2xyfxba",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_6701m4491yb8e02vga1gmt1ctvrd",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_3801m4491yttf3eadb9eqhpmjxmk",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_6001m4491zagevra51p0z4e92xr8",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_4101m4491zref3wta5ejyqwv5nax",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_1901m4492088e4xbnrwamcg4rjx1",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_3401m44920pke1kb57f39pbthmpz",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_8301m4492147edg8g9q5g9jfk17q",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_4901m44921r7eb4vsrvwkd90tdt2",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_6801m449226jerxvp8af1c39qtaj",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_7101m44922p1e548f88r9ttdh0nz",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_6301m449234tennajrnvpv7qq9ke",
+          "workflow_node_id": "resolve"
+        },
+        {
+          "test_id": "test_6601m44923krft8vchzdv9gjcasd"
+        },
+        {
+          "test_id": "test_0201m449242ve2j87afyaa469ntz"
+        },
+        {
+          "test_id": "test_1801m44924kaew6srk6zwa3kff6z",
           "workflow_node_id": "verify"
         },
         {
-          "test_id": "test_2101m3wgydb3eq4vfghfm99m8m3r",
-          "workflow_node_id": "resolve"
+          "test_id": "test_8001m449253ae12ag215cebg8br4",
+          "workflow_node_id": "verify"
+        },
+        {
+          "test_id": "test_0101m44925hyemgvq37dpesrtgwt",
+          "workflow_node_id": "verify"
+        },
+        {
+          "test_id": "test_3001m4492602e338x4wendw4fs1j",
+          "workflow_node_id": "verify"
+        },
+        {
+          "test_id": "test_4401m44926f9emctrdv507q6v67q",
+          "workflow_node_id": "verify"
+        },
+        {
+          "test_id": "test_4701m44926xme6b9swrfwf0gs0qk",
+          "workflow_node_id": "verify"
         }
       ]
     }

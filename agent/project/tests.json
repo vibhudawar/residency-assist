@@ -1,189 +1,189 @@
 {
     "tests": [
         {
-            "config": "test_configs/open-no-details-before-verification.json",
-            "type": "llm",
-            "id": "test_7601m3wg1m5mfq4vwf5eq5wrgns4"
-        },
-        {
-            "config": "test_configs/open-scam-question-reassures.json",
-            "type": "llm",
-            "id": "test_7501m3wg1mksewa8ec3ds1z8w3b1"
-        },
-        {
-            "config": "test_configs/open-silence-checks-line.json",
-            "type": "llm",
-            "id": "test_3701m3wg1n2qed1rn3zb7tvqfa04"
-        },
-        {
-            "config": "test_configs/open-unsupported-language-offers-options.json",
-            "type": "llm",
-            "id": "test_8401m3wg1nh9eg9b7847c9gw7xb8"
-        },
-        {
-            "config": "test_configs/open-wrong-person-reveals-nothing.json",
-            "type": "llm",
-            "id": "test_9001m3wg1nype07rkx38znaz4mar"
-        },
-        {
-            "config": "test_configs/resolve-backend-down-books-callback.json",
-            "type": "llm",
-            "id": "test_7901m3wg1pdffz8s7bnm9akm8vwg"
-        },
-        {
-            "config": "test_configs/resolve-cannot-approve-visa.json",
-            "type": "llm",
-            "id": "test_5401m3wg1pydffdbdtk459pczqzn"
-        },
-        {
-            "config": "test_configs/resolve-cant-upload-now-link-stays-valid.json",
-            "type": "llm",
-            "id": "test_9101m3wg1qcwfbka3aax1kxbktq8"
-        },
-        {
-            "config": "test_configs/resolve-explains-every-issue.json",
-            "type": "llm",
-            "id": "test_7701m3wg1qwwfg2azyepgk30b4z6"
-        },
-        {
-            "config": "test_configs/resolve-failed-upload-says-what-to-fix.json",
-            "type": "llm",
-            "id": "test_8501m3wg1rbgehvbds4yk3aq2vay"
-        },
-        {
-            "config": "test_configs/resolve-fines-never-takes-payment.json",
-            "type": "llm",
-            "id": "test_8301m3wg1rszeehbk0tk10g13pgh"
-        },
-        {
-            "config": "test_configs/resolve-never-reveals-passport-record.json",
-            "type": "llm",
-            "id": "test_0601m3wg1s8wexrrggfwypp3w1ew"
-        },
-        {
-            "config": "test_configs/resolve-no-legal-advice.json",
-            "type": "llm",
-            "id": "test_4101m3wg1sqtfrp96w3gancf93zp"
-        },
-        {
-            "config": "test_configs/resolve-no-slots-offers-alternative.json",
-            "type": "llm",
-            "id": "test_5801m3wg1t8yf9steqepsfw3z741"
-        },
-        {
-            "config": "test_configs/resolve-officer-only-says-nothing.json",
-            "type": "llm",
-            "id": "test_9301m3wg1tssf1s822tpav0h8k1s"
-        },
-        {
-            "config": "test_configs/resolve-refuses-unflagged-field.json",
-            "type": "llm",
-            "id": "test_5201m3wg1vbmf4yr9a7g5eaab5hm"
-        },
-        {
-            "config": "test_configs/resolve-replies-in-arabic.json",
-            "type": "llm",
-            "id": "test_2801m3wg1vt5em3vh9cv4wj5p07d"
-        },
-        {
-            "config": "test_configs/resolve-replies-in-hindi.json",
-            "type": "llm",
-            "id": "test_7201m3wg1w9qedca51p1dxgpjjy9"
-        },
-        {
-            "config": "test_configs/verify-failure-does-not-say-which.json",
-            "type": "llm",
-            "id": "test_2201m3wg1wqje7h93vcrhjagqap6"
-        },
-        {
-            "config": "test_configs/verify-locked-reveals-nothing.json",
-            "type": "llm",
-            "id": "test_3001m3wg1x65f0cs4m5zytfzae96"
-        },
-        {
-            "config": "test_configs/verify-never-wants-secrets.json",
-            "type": "llm",
-            "id": "test_1501m3wg1xmdfgav66x1hqh01k3x"
-        },
-        {
-            "config": "test_configs/verify-refusal-ends-politely.json",
-            "type": "llm",
-            "id": "test_7001m3wg1y2kfynv5e964dds8htz"
-        },
-        {
             "config": "test_configs/handover-escalates-to-person.json",
             "type": "tool",
-            "id": "test_0601m3wg875kfkx8xjtttv4f7zh2"
+            "id": "test_8801m4491nkqfj8taagt6c62ap6h"
+        },
+        {
+            "config": "test_configs/open-no-details-before-verification.json",
+            "type": "llm",
+            "id": "test_7901m4491p3pfg6askkerns9wans"
         },
         {
             "config": "test_configs/open-not-now-books-callback.json",
             "type": "tool",
-            "id": "test_8501m3wg87kvf5wb3z25j2zpgp3a"
+            "id": "test_1601m4491phafafv8tw0znk05vwv"
+        },
+        {
+            "config": "test_configs/open-scam-question-reassures.json",
+            "type": "llm",
+            "id": "test_6501m4491q0df4vt9mbcvtzht0am"
+        },
+        {
+            "config": "test_configs/open-silence-checks-line.json",
+            "type": "llm",
+            "id": "test_1101m4491qq0fq89cxmnf23hxd92"
         },
         {
             "config": "test_configs/open-stop-calling-opts-out.json",
             "type": "tool",
-            "id": "test_3701m3wg882texgt17sx7jsnb4ge"
+            "id": "test_4401m4491r5jft9rydx3g7kpv72a"
+        },
+        {
+            "config": "test_configs/open-unsupported-language-offers-options.json",
+            "type": "llm",
+            "id": "test_5801m4491rkgew1bt7vbrx3d2tca"
+        },
+        {
+            "config": "test_configs/open-wrong-person-reveals-nothing.json",
+            "type": "llm",
+            "id": "test_7801m4491s2cfq4av402fk485mdq"
+        },
+        {
+            "config": "test_configs/resolve-backend-down-books-callback.json",
+            "type": "llm",
+            "id": "test_5801m4491shbf9qvx6nn54g5pydg"
         },
         {
             "config": "test_configs/resolve-books-chosen-slot.json",
             "type": "tool",
-            "id": "test_1901m3wg88ktf819ff2tvjnt32jv"
+            "id": "test_7601m4491sz9e9csf60k9dmd894j"
+        },
+        {
+            "config": "test_configs/resolve-cannot-approve-visa.json",
+            "type": "llm",
+            "id": "test_3701m4491tdzfyqthqa3b4vqvq0z"
+        },
+        {
+            "config": "test_configs/resolve-cant-upload-now-link-stays-valid.json",
+            "type": "llm",
+            "id": "test_3701m4491twjesybmtpp9xddp7ck"
         },
         {
             "config": "test_configs/resolve-distressed-caller-gets-a-person.json",
             "type": "tool",
-            "id": "test_3001m3wg894bf6xvc809seeq216v"
+            "id": "test_7401m4491vatfvfr6pprsaj3kcjs"
+        },
+        {
+            "config": "test_configs/resolve-explains-every-issue.json",
+            "type": "llm",
+            "id": "test_6301m4491vs1f0mvqbfbdgz7m7ey"
+        },
+        {
+            "config": "test_configs/resolve-failed-upload-says-what-to-fix.json",
+            "type": "llm",
+            "id": "test_8301m4491wgfewhbbeyecmsxrtze"
+        },
+        {
+            "config": "test_configs/resolve-fines-never-takes-payment.json",
+            "type": "llm",
+            "id": "test_8501m4491wzrf5t9qsdh1tn7mq1s"
+        },
+        {
+            "config": "test_configs/resolve-never-reveals-passport-record.json",
+            "type": "llm",
+            "id": "test_2301m4491xf2fg2bkkth79e1bmhz"
         },
         {
             "config": "test_configs/resolve-never-submits-before-read-back.json",
             "type": "tool",
-            "id": "test_6701m3wg89ntex1bzn9d41yshbp4"
+            "id": "test_9001m4491xx3fnd9ac7cb2xyfxba"
         },
         {
             "config": "test_configs/resolve-never-submits-when-caller-unsure.json",
             "type": "tool",
-            "id": "test_3901m3wg8a5vegtv3cj8793mkkyx"
+            "id": "test_6701m4491yb8e02vga1gmt1ctvrd"
         },
         {
-            "config": "test_configs/resolve-routes-previous-visa.json",
-            "type": "tool",
-            "id": "test_6401m3wg8enxexkrztz2yd9r7m29"
-        },
-        {
-            "config": "test_configs/resolve-sends-photo-upload-link.json",
-            "type": "tool",
-            "id": "test_6101m3wg8f97en7vj19vafyxsvkz"
-        },
-        {
-            "config": "test_configs/resolve-submits-only-after-read-back.json",
-            "type": "tool",
-            "id": "test_6901m3wg8fs6eyb8fxc8mwxzj6z6"
-        },
-        {
-            "config": "test_configs/sim-full-name-fix-end-to-end.json",
-            "type": "simulation",
-            "id": "test_6001m3wg8g7gftc9vvwtavv2wk96"
-        },
-        {
-            "config": "test_configs/sim-red-team-tries-to-skip-rules.json",
-            "type": "simulation",
-            "id": "test_7301m3wg8gsffwr8f1qgr5bmww8d"
-        },
-        {
-            "config": "test_configs/verify-calls-tool-with-ref-and-dob.json",
-            "type": "tool",
-            "id": "test_3401m3wg8h9qfkhttykqyc2jhv0s"
-        },
-        {
-            "config": "test_configs/verify-cannot-read-case-before-verified.json",
-            "type": "tool",
-            "id": "test_4101m3wg8hq9ey98d1q9ngzhc9bq"
+            "config": "test_configs/resolve-no-legal-advice.json",
+            "type": "llm",
+            "id": "test_3801m4491yttf3eadb9eqhpmjxmk"
         },
         {
             "config": "test_configs/resolve-no-made-up-timelines.json",
             "type": "llm",
-            "id": "test_2101m3wgydb3eq4vfghfm99m8m3r"
+            "id": "test_6001m4491zagevra51p0z4e92xr8"
+        },
+        {
+            "config": "test_configs/resolve-no-slots-offers-alternative.json",
+            "type": "llm",
+            "id": "test_4101m4491zref3wta5ejyqwv5nax"
+        },
+        {
+            "config": "test_configs/resolve-officer-only-says-nothing.json",
+            "type": "llm",
+            "id": "test_1901m4492088e4xbnrwamcg4rjx1"
+        },
+        {
+            "config": "test_configs/resolve-refuses-unflagged-field.json",
+            "type": "llm",
+            "id": "test_3401m44920pke1kb57f39pbthmpz"
+        },
+        {
+            "config": "test_configs/resolve-replies-in-arabic.json",
+            "type": "llm",
+            "id": "test_8301m4492147edg8g9q5g9jfk17q"
+        },
+        {
+            "config": "test_configs/resolve-replies-in-hindi.json",
+            "type": "llm",
+            "id": "test_4901m44921r7eb4vsrvwkd90tdt2"
+        },
+        {
+            "config": "test_configs/resolve-routes-previous-visa.json",
+            "type": "tool",
+            "id": "test_6801m449226jerxvp8af1c39qtaj"
+        },
+        {
+            "config": "test_configs/resolve-sends-photo-upload-link.json",
+            "type": "tool",
+            "id": "test_7101m44922p1e548f88r9ttdh0nz"
+        },
+        {
+            "config": "test_configs/resolve-submits-only-after-read-back.json",
+            "type": "tool",
+            "id": "test_6301m449234tennajrnvpv7qq9ke"
+        },
+        {
+            "config": "test_configs/sim-full-name-fix-end-to-end.json",
+            "type": "simulation",
+            "id": "test_6601m44923krft8vchzdv9gjcasd"
+        },
+        {
+            "config": "test_configs/sim-red-team-tries-to-skip-rules.json",
+            "type": "simulation",
+            "id": "test_0201m449242ve2j87afyaa469ntz"
+        },
+        {
+            "config": "test_configs/verify-calls-tool-with-ref-and-dob.json",
+            "type": "tool",
+            "id": "test_1801m44924kaew6srk6zwa3kff6z"
+        },
+        {
+            "config": "test_configs/verify-cannot-read-case-before-verified.json",
+            "type": "tool",
+            "id": "test_8001m449253ae12ag215cebg8br4"
+        },
+        {
+            "config": "test_configs/verify-failure-does-not-say-which.json",
+            "type": "llm",
+            "id": "test_0101m44925hyemgvq37dpesrtgwt"
+        },
+        {
+            "config": "test_configs/verify-locked-reveals-nothing.json",
+            "type": "llm",
+            "id": "test_3001m4492602e338x4wendw4fs1j"
+        },
+        {
+            "config": "test_configs/verify-never-wants-secrets.json",
+            "type": "llm",
+            "id": "test_4401m44926f9emctrdv507q6v67q"
+        },
+        {
+            "config": "test_configs/verify-refusal-ends-politely.json",
+            "type": "llm",
+            "id": "test_4701m44926xme6b9swrfwf0gs0qk"
         }
     ]
 }

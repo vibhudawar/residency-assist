@@ -20,7 +20,7 @@
   },
   "tool_call_parameters": {
     "referenced_tool": {
-      "id": "tool_5901m3wg19fpf3es6anzfbbhjx7a",
+      "id": "tool_0401m4491dfmfevbxjj480769ebg",
       "type": "webhook"
     },
     "parameters": [],
