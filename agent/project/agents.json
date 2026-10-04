@@ -2,9 +2,7 @@
     "agents": [
         {
             "config": "agent_configs/residency-assist.json",
-            "id": "agent_0501m44927xsenaa7srv45hw1w8c",
-            "branch_id": "agtbrch_5101m44929wme96aebw54xarwwzt",
-            "version_id": "agtvrsn_8401m449hv5xe29ay0njk3v20h89"
+            "id": "agent_5801m44amaw8f4z89jd1snj1xkwh"
         }
     ]
 }
