@@ -1,22 +1,22 @@
 {
-  "ran_at": "2026-10-04T19:59:46.691Z",
+  "ran_at": "2026-10-04T22:16:53.816Z",
   "base_url": "http://localhost:3006",
   "status": "passed",
-  "passed": 6,
-  "total": 6,
+  "passed": 7,
+  "total": 7,
   "flows": [
     {
       "flow": "A typo is fixed on the call, approved by an officer, and the applicant sees it",
       "file": "01-golden-path.spec.ts",
       "status": "passed",
-      "seconds": 25.9,
+      "seconds": 23.3,
       "steps": [
         {
           "title": "Applicant signs in, fills the form with a name typo, opts in to AI calls and submits",
           "ok": true
         },
         {
-          "title": "The 12-rule check returns the name and says the assistant will call",
+          "title": "The 12-rule check returns the name; with auto-call off, an officer arranges the call",
           "ok": true
         },
         {
@@ -57,7 +57,7 @@
       "flow": "An officer rejects a correction: nothing changes, a person takes over and the applicant is told",
       "file": "02-officer-rejects.spec.ts",
       "status": "passed",
-      "seconds": 19.2,
+      "seconds": 20,
       "steps": [
         {
           "title": "On a call, Ahmed verifies and confirms his date of birth from his passport",
@@ -85,7 +85,7 @@
       "flow": "A new photo by SMS link: a bad one is refused with the reason, a good one is approved by an officer",
       "file": "03-upload-link.spec.ts",
       "status": "passed",
-      "seconds": 28.5,
+      "seconds": 24.5,
       "steps": [
         {
           "title": "On a call, the assistant texts Fatima an upload link",
@@ -117,7 +117,7 @@
       "flow": "Calls that break the rules are refused before dialling and logged",
       "file": "04-predial-refusals.spec.ts",
       "status": "passed",
-      "seconds": 26,
+      "seconds": 26.1,
       "steps": [
         {
           "title": "Sarah never opted in to AI calls: the call is refused for consent",
@@ -137,7 +137,7 @@
       "flow": "Only the right people get in: officers, verified callers, and signed webhooks",
       "file": "05-access.spec.ts",
       "status": "passed",
-      "seconds": 11.6,
+      "seconds": 11.3,
       "steps": [
         {
           "title": "Console pages send a signed-out visitor to sign-in",
@@ -160,6 +160,10 @@
           "ok": true
         },
         {
+          "title": "The auto-call dialler refuses anyone without the job's secret",
+          "ok": true
+        },
+        {
           "title": "A status link that isn't valid says so, with the way back",
           "ok": true
         }
@@ -169,7 +173,7 @@
       "flow": "The applicant portal works in Arabic, right to left, and switches back",
       "file": "06-arabic.spec.ts",
       "status": "passed",
-      "seconds": 0.8,
+      "seconds": 0.6,
       "steps": [
         {
           "title": "In Arabic the page is right to left with Arabic text and the prototype banner",
@@ -177,6 +181,34 @@
         },
         {
           "title": "The language switch returns to English, left to right",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "flow": "With auto-call on, the assistant calls by itself after a fixable check, and the officer can stop it",
+      "file": "07-auto-call.spec.ts",
+      "status": "passed",
+      "seconds": 25.1,
+      "steps": [
+        {
+          "title": "Auto-call starts off; turning it on asks first",
+          "ok": true
+        },
+        {
+          "title": "The applicant submits; the status page says when the assistant will call",
+          "ok": true
+        },
+        {
+          "title": "The case shows the automatic call: placed now, or queued for calling hours",
+          "ok": true
+        },
+        {
+          "title": "The officer stops automatic calls for this case; the applicant is told an officer will arrange it",
+          "ok": true
+        },
+        {
+          "title": "Turning auto-call off is immediate",
           "ok": true
         }
       ]

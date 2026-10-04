@@ -15,6 +15,27 @@ const PASSCODE = process.env.OFFICER_PASSCODE ?? "";
 const TOOL_SECRET = process.env.TOOL_SHARED_SECRET ?? "";
 export const WEBHOOK_SECRET = process.env.ELEVENLABS_WEBHOOK_SECRET ?? "";
 
+/**
+ * Test mode for auto-call: due calls are marked placed and nobody is rung (no Twilio, no credits). Only
+ * the tests set this; the console never shows it.
+ */
+export async function autoCallTestMode() {
+  const { data } = await db().from("settings").select("value").eq("key", "auto_call").single();
+  await db().from("settings").update({ value: { ...(data!.value as object), dry_run: true } }).eq("key", "auto_call");
+}
+
+/** The applicant signs in and submits the demo application (name typo, AI calls allowed). */
+export async function applyAsRahul(page: Page) {
+  await page.goto("/apply");
+  await page.getByRole("link", { name: "Sign in with UAE PASS" }).click();
+  await page.getByRole("button", { name: "Allow and continue" }).click();
+  await page.getByRole("button", { name: "Fill demo applicant details" }).click();
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Submit application" }).click();
+  await page.waitForURL(/\/apply\/status\/[^/?]+/);
+  return new URL(page.url()).pathname;
+}
+
 /** Back to the seven demo cases, with nothing left over from an earlier test. */
 export const freshDemo = () => resetDemo();
 

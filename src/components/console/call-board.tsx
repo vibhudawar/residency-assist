@@ -5,8 +5,10 @@ import { useActionState, useState } from "react";
 import { callAction, type CallState } from "@/app/console/actions";
 import { Panel } from "@/components/hall/led-board";
 import { Button } from "@/components/ui/button";
+import { CaseAutoCall } from "./auto-call";
 import { BrowserCall } from "./browser-call";
 import type { PredialCheck } from "@/lib/calls/predial";
+import type { AutoCallView } from "@/lib/console/queries";
 import { CALL_STATUS, CHECK_LABEL, uaeTime } from "@/lib/console/format";
 import { cn } from "@/lib/utils";
 
@@ -36,8 +38,10 @@ export function CallBoard({
   phone,
   browser,
   calls,
+  auto,
 }: {
   applicationId: number;
+  auto: AutoCallView;
   phone: Predial;
   browser: Predial;
   calls: { id: number; channel: string; status: string; blockReason: string | null; startedAt: string }[];
@@ -75,6 +79,8 @@ export function CallBoard({
           })}
         </tbody>
       </table>
+
+      <CaseAutoCall applicationId={applicationId} auto={auto} manualAllowed={phone.allowed || browser.allowed} />
 
       <form action={action} className="flex flex-wrap items-center gap-3 border-t border-board-rule px-4 py-3.5">
         <input type="hidden" name="applicationId" value={applicationId} />

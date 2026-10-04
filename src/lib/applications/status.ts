@@ -1,6 +1,7 @@
 import "server-only";
 import { sha256 } from "@/lib/security";
 import { db } from "@/lib/supabase/server";
+import { uaeHour, uaeToday } from "@/lib/time";
 import { UAE_TZ } from "@/lib/time";
 import { latestRuleResults } from "./evaluate";
 
@@ -9,6 +10,11 @@ export type NextKey =
   | "in_processing"
   | "returned_fixable_consent"
   | "returned_fixable_no_consent"
+  | "call_today"
+  | "call_later_today"
+  | "no_ai_call"
+  | "call_later"
+  | "officer_arranges_call"
   | "returned_officer"
   | "pending_review"
   | "needs_human"
@@ -43,6 +49,17 @@ function mask(passport: string): string {
  * The applicant's view of their application, found by the private status link token.
  * Returns an explicit whitelist of fields — never raw rows.
  */
+/** What an opted-in applicant is told about the call: soon, later today, another day, or an officer will arrange it. */
+function autoCallNext(dueAt: string | null): NextKey {
+  if (!dueAt) return "officer_arranges_call";
+  const due = new Date(dueAt);
+  // Already due (or just placed): "shortly".
+  if (due.getTime() - Date.now() <= 15 * 60 * 1000) return "returned_fixable_consent";
+  if (uaeToday(due) !== uaeToday()) return "call_later";
+  // "After 9:00" only when it really waits for the morning; a same-day retry is "later today".
+  return uaeHour(due) === 9 && due.getUTCMinutes() === 0 ? "call_today" : "call_later_today";
+}
+
 export async function getApplicantStatus(token: string): Promise<ApplicantStatusView | null> {
   if (!/^[A-Za-z0-9_-]{16,64}$/.test(token)) return null;
 
@@ -60,6 +77,12 @@ export async function getApplicantStatus(token: string): Promise<ApplicantStatus
     db().from("appointment_slots").select("centre, starts_at").eq("application_id", app.id).order("starts_at").limit(1).maybeSingle(),
     db().from("uploads").select("kind, review_status, uploaded_at").eq("application_id", app.id).not("review_status", "is", null).order("uploaded_at"),
   ]);
+  // When (and whether) the assistant will call by itself: only an automatic call actually waiting counts.
+  const { data: auto } = await db().from("scheduled_calls").select("status, due_at, stop_reason, updated_at").eq("application_id", app.id).order("id", { ascending: false }).limit(1).maybeSingle();
+  // A call waiting, or one placed in the last few minutes (the phone attempt shows as "calling" once it rings).
+  const queued = auto && (["queued", "dialling"].includes(auto.status) || (auto.status === "placed" && Date.now() - new Date(auto.updated_at).getTime() < 10 * 60 * 1000)) ? auto : null;
+  // The checks refused an AI call for good (do-not-call, limits spent): don't promise one.
+  const refused = auto?.status === "cancelled" && auto.stop_reason === "refused";
 
   const calling = ["dialing", "connected"].includes(attempts?.[0]?.status ?? "");
   const status = app.status as string;
@@ -81,7 +104,7 @@ export async function getApplicantStatus(token: string): Promise<ApplicantStatus
 
   const next: NextKey =
     calling ? "calling"
-      : status === "returned_fixable" ? (app.ai_call_consent ? "returned_fixable_consent" : "returned_fixable_no_consent")
+      : status === "returned_fixable" ? (app.ai_call_consent ? (refused && !queued ? "no_ai_call" : autoCallNext(queued?.due_at ?? null)) : "returned_fixable_no_consent")
         : status === "returned_officer" ? "returned_officer"
           : status === "pending_review" ? "pending_review"
             : status === "needs_human" ? "needs_human"

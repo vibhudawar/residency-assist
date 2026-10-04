@@ -30,6 +30,10 @@ test("Only the right people get in: officers, verified callers, and signed webho
     expect([401, 503]).toContain(res.status());
   });
 
+  await test.step("The auto-call dialler refuses anyone without the job's secret", async () => {
+    expect((await request.post("/api/calls/run", { headers: { "x-cron-secret": "not-the-secret" } })).status()).toBe(401);
+  });
+
   await test.step("A status link that isn't valid says so, with the way back", async () => {
     await page.goto("/apply/status/not-a-real-token");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("We couldn't find that page");

@@ -1,6 +1,8 @@
 import "server-only";
 import { z } from "zod";
 import { forLog } from "@/lib/security";
+import { queueAutoCall } from "@/lib/calls/auto";
+import { nextDayCallTime } from "@/lib/calls/schedule";
 import { db } from "@/lib/supabase/server";
 
 /**
@@ -133,6 +135,13 @@ async function findAttempt(conversationId: string, dynamicVariables: Record<stri
 
 const OPEN = ["dialing", "connected", "queued"];
 
+/** An automatic phone call that didn't reach the applicant is tried again the next day (pre-dial limits still apply). */
+async function retryIfUnreached(attemptId: number, applicationId: number, outcome: string) {
+  if (!["no_answer", "declined", "failed", "voicemail", "silent"].includes(outcome)) return;
+  const { data } = await db().from("call_attempts").select("channel").eq("id", attemptId).single();
+  if (data?.channel === "phone") await queueAutoCall(applicationId, "retry", nextDayCallTime(new Date()));
+}
+
 export type WebhookResult = { handled: "transcription" | "failure" | "ignored"; conversationId?: string; matched?: boolean };
 
 export async function handlePostCallEvent(event: unknown): Promise<WebhookResult> {
@@ -174,6 +183,7 @@ export async function handlePostCallEvent(event: unknown): Promise<WebhookResult
         .select("id");
       if (closed?.length) {
         await db().from("audit_log").insert({ application_id: attempt.application_id, actor: "agent", event: "call_recorded", detail: { outcome: summary.outcome } });
+        await retryIfUnreached(attempt.id, attempt.application_id, summary.outcome);
       }
     } else {
       console.warn("post-call record with no matching call attempt", forLog(data.conversation_id));
@@ -199,6 +209,7 @@ export async function handlePostCallEvent(event: unknown): Promise<WebhookResult
           event: "call_not_connected",
           detail: { outcome: status, reason: forLog(data.failure_reason ?? "unknown") },
         });
+        await retryIfUnreached(attempt.id, attempt.application_id, status);
       }
     }
     return { handled: "failure", conversationId: data.conversation_id, matched: !!attempt };

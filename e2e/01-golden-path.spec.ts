@@ -19,8 +19,8 @@ test("A typo is fixed on the call, approved by an officer, and the applicant see
     reference = await latestReference("Rahul Sarma");
   });
 
-  await test.step("The 12-rule check returns the name and says the assistant will call", async () => {
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Something needs fixing. Our AI assistant will call you shortly.");
+  await test.step("The 12-rule check returns the name; with auto-call off, an officer arranges the call", async () => {
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Something needs fixing. An officer will arrange a call with our AI assistant.");
     await expect(page.locator("main li").filter({ hasText: "R1" }).first()).toBeVisible();
   });
 

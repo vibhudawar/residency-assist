@@ -110,6 +110,22 @@ export const EVENT_LABEL: Record<string, string> = {
   correction_approved: "Officer approved correction",
   correction_rejected: "Officer rejected correction",
   demo_reset: "Demo reset",
+  auto_call_queued: "Automatic call queued",
+  auto_call_rescheduled: "Automatic call moved",
+  auto_call_placed: "Automatic call placed",
+  auto_call_cancelled: "Automatic call cancelled",
+  auto_call_stopped: "Automatic calls stopped",
+  auto_call_resumed: "Automatic calls resumed",
 };
+
+/** When an automatic call is due, in the officer's words: "14:30 today", "tomorrow 09:00", or a date. */
+export function dueLabel(iso: string, now = new Date()): string {
+  const day = (d: Date) => new Intl.DateTimeFormat("en-CA", { timeZone: TZ }).format(d);
+  const due = new Date(iso);
+  const time = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false }).format(due);
+  if (day(due) === day(now)) return `${time} today`;
+  if (day(due) === day(new Date(now.getTime() + 86_400_000))) return `tomorrow ${time}`;
+  return uaeTime(iso);
+}
 
 export const HANDOFF_LABEL: Record<string, string> = { callback: "Callback", escalation: "Escalation", followup: "Follow-up" };

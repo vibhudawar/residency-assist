@@ -75,7 +75,7 @@ export async function predialChecks(applicationId: number, { channel, now = new 
         ? "Browser demo call — calling-hours window not applied."
         : inWindow
           ? `Within calling hours (09:00–18:00 UAE, now ${String(hour).padStart(2, "0")}:00).`
-          : "Outside calling hours (09:00–18:00 UAE) — queued for the next window.",
+          : "Outside calling hours (09:00–18:00 UAE).",
     },
     {
       name: "officer_only",

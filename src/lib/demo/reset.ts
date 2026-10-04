@@ -35,7 +35,11 @@ export async function resetDemo() {
   const people = demoPeople(today);
   const phone = env().DEMO_PHONE_NUMBER ?? FALLBACK_DEMO_PHONE;
 
-  // 1. Clear everything (children cascade from applications).
+  // 0. Auto-call off first: the demo cases are re-created below, and must never queue a real call.
+  must(await db().from("settings").upsert({ key: "auto_call", value: { enabled: false }, updated_by: "demo reset", updated_at: new Date().toISOString() }), "settings");
+  must(await db().from("audit_log").delete().is("application_id", null), "audit_log");
+
+  // 1. Clear everything (children, including queued automatic calls, cascade from applications).
   await wipe("applications", "id");
   await wipe("call_records", "conversation_id");
   await wipe("appointment_slots", "id");

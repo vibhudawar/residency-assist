@@ -1,6 +1,7 @@
 "use server";
 
 import { refresh } from "next/cache";
+import { setAutoCall, setCaseAutoCall } from "@/lib/calls/auto";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { abandonBrowserCall, type BrowserSession, markBrowserCallLive, startCall } from "@/lib/calls/start";
@@ -150,6 +151,37 @@ export async function resetDemoAction(): Promise<ResetState> {
     await resetDemo();
   } catch (err) {
     console.error("demo reset failed", forLog(err instanceof Error ? err.message : err));
+    return { error: true };
+  }
+  refresh();
+  return { done: true };
+}
+
+export type AutoCallState = { done?: boolean; error?: boolean; cancelled?: number };
+
+/** The officer's auto-call switch. Turning it off also cancels calls still waiting. */
+export async function setAutoCallAction(enabled: boolean): Promise<AutoCallState> {
+  const officer = await requireOfficer();
+  if (typeof enabled !== "boolean") return { error: true };
+  let cancelled = 0;
+  try {
+    ({ cancelled } = await setAutoCall(enabled, officer.name));
+  } catch (err) {
+    console.error("auto-call switch failed", forLog(err instanceof Error ? err.message : err));
+    return { error: true };
+  }
+  refresh();
+  return { done: true, cancelled };
+}
+
+/** Stop or resume automatic calls for one case. */
+export async function caseAutoCallAction(applicationId: number, stopped: boolean): Promise<AutoCallState> {
+  const officer = await requireOfficer();
+  if (!Number.isSafeInteger(applicationId) || applicationId <= 0 || typeof stopped !== "boolean") return { error: true };
+  try {
+    await setCaseAutoCall(applicationId, stopped, officer.name);
+  } catch (err) {
+    console.error("case auto-call change failed", forLog(err instanceof Error ? err.message : err));
     return { error: true };
   }
   refresh();

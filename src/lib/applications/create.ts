@@ -4,6 +4,7 @@ import { normalisePassportNumber } from "@/lib/rules/engine";
 import { randomToken, sha256 } from "@/lib/security";
 import { putDocument } from "@/lib/storage";
 import { db } from "@/lib/supabase/server";
+import { queueAutoCall } from "@/lib/calls/auto";
 import { evaluateApplication } from "./evaluate";
 import { notifyAfterCheck } from "./notify";
 
@@ -72,5 +73,7 @@ export async function createApplication(input: NewApplication, photo: { body: Bu
 
   const evaluation = await evaluateApplication(row.id);
   await notifyAfterCheck(row.id);
+  // Something fixable and an opt-in: the assistant calls by itself (if the officer's switch is on).
+  await queueAutoCall(row.id, "submitted");
   return { id: row.id, reference: row.reference, statusToken, ...evaluation };
 }

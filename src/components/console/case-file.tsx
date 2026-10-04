@@ -143,7 +143,7 @@ export function CaseFile({ data }: { data: CaseData }) {
       </Section>
 
       <Section title="Call">
-        <CallBoard applicationId={data.id} phone={data.predial.phone} browser={data.predial.browser} calls={data.calls} />
+        <CallBoard applicationId={data.id} phone={data.predial.phone} browser={data.predial.browser} calls={data.calls} auto={data.autoCall} />
       </Section>
 
       <section aria-labelledby="case-history" className="border-t border-rule pt-6">

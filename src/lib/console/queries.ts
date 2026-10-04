@@ -1,9 +1,10 @@
 import "server-only";
 import { cache } from "react";
 import { latestRuleResults } from "@/lib/applications/evaluate";
+import { getAutoCall, latestAutoCall } from "@/lib/calls/auto";
 import { type PredialCheck, predialChecks } from "@/lib/calls/predial";
 import { signedDocumentUrl } from "@/lib/storage";
-import { maskPhone } from "./format";
+import { maskPhone, uaeTime } from "./format";
 import { db } from "@/lib/supabase/server";
 
 /**
@@ -116,6 +117,14 @@ export interface CaseEvent {
   detail: string | null;
 }
 
+export interface AutoCallView {
+  enabled: boolean;
+  stopped: boolean;
+  latest: { status: "queued" | "dialling" | "placed" | "cancelled"; dueAt: string; reason: "submitted" | "retry" | "resumed"; outcome: string | null; stopReason: string | null; updatedAt: string } | null;
+  /** Something to fix and an opt-in: the case would be called automatically if checked while the switch is on. */
+  qualifies: boolean;
+}
+
 export interface CaseFile {
   id: number;
   reference: string;
@@ -136,6 +145,8 @@ export interface CaseFile {
   /** Conversations whose post-call record has arrived. */
   recordedConversations: string[];
   predial: { phone: { allowed: boolean; checks: PredialCheck[] }; browser: { allowed: boolean; checks: PredialCheck[] } };
+  /** The officer's auto-call switch, whether calls are stopped for this case, and its latest automatic call. */
+  autoCall: AutoCallView;
   calls: { id: number; channel: string; status: string; blockReason: string | null; conversationId: string | null; startedAt: string; endedAt: string | null }[];
   uploads: { id: number; kind: "photo" | "scan"; status: "pending_review" | "approved" | "rejected"; newUrl: string | null; currentUrl: string | null; reviewedBy: string | null; reviewNote: string | null; reviewedAt: string | null; uploadedAt: string }[];
   corrections: { id: number; ruleCode: string; field: string; oldValue: string | null; newValue: string; status: "pending_review" | "approved" | "rejected"; reviewedBy: string | null; reviewNote: string | null; reviewedAt: string | null; createdAt: string; conversationId: string }[];
@@ -149,7 +160,7 @@ export interface CaseFile {
 /** Audit events whose full record is printed from its own table instead (SMS body, handoff reason). */
 const FOLDED = new Set(["sms_sent", "followup_created", "escalated_to_human", "callback_scheduled"]);
 
-const DETAIL_KEYS = ["field", "reason", "reasons", "outcome", "failed", "channel", "kind", "rule", "purpose", "reviewed_by", "attempts"] as const;
+const DETAIL_KEYS = ["field", "reason", "reasons", "outcome", "failed", "channel", "kind", "rule", "purpose", "reviewed_by", "attempts", "due_at", "because", "by"] as const;
 
 /** The audit detail as one readable line (only known keys, so nothing unexpected reaches the screen). */
 function describe(detail: unknown): string | null {
@@ -157,6 +168,7 @@ function describe(detail: unknown): string | null {
   const d = detail as Record<string, unknown>;
   const parts = DETAIL_KEYS.filter((k) => d[k] !== undefined && d[k] !== null).map((k) => {
     const v = d[k];
+    if (k === "due_at" && typeof v === "string") return `for ${uaeTime(v)}`;
     return `${k.replace(/_/g, " ")}: ${Array.isArray(v) ? v.join(", ") || "none" : String(v)}`;
   });
   return parts.length ? parts.join(" · ") : null;
@@ -165,12 +177,12 @@ function describe(detail: unknown): string | null {
 export async function getCase(id: number): Promise<CaseFile | null> {
   const { data: a } = await db()
     .from("applications")
-    .select("id, reference, status, full_name, date_of_birth, passport_number, passport_expiry, profession_code, phone, preferred_language, ai_call_consent, ai_call_consent_at, created_at, photo_path, scan_path")
+    .select("id, reference, status, full_name, date_of_birth, passport_number, passport_expiry, profession_code, phone, preferred_language, ai_call_consent, ai_call_consent_at, created_at, photo_path, scan_path, auto_call_stopped")
     .eq("id", id)
     .maybeSingle();
   if (!a) return null;
 
-  const [rules, phone, browser, calls, corrections, handoffs, sms, blocked, slot, audit, photoUrl, records, uploads] = await Promise.all([
+  const [rules, phone, browser, calls, corrections, handoffs, sms, blocked, slot, audit, photoUrl, records, uploads, autoSetting, autoLatest] = await Promise.all([
     latestRuleResults(id),
     predialChecks(id, { channel: "phone" }),
     predialChecks(id, { channel: "browser" }),
@@ -184,6 +196,8 @@ export async function getCase(id: number): Promise<CaseFile | null> {
     a.photo_path ? signedDocumentUrl(a.photo_path) : Promise.resolve(null),
     db().from("call_records").select("conversation_id").eq("application_id", id),
     db().from("uploads").select("id, kind, review_status, file_path, reviewed_by, review_note, reviewed_at, uploaded_at").eq("application_id", id).not("review_status", "is", null).order("uploaded_at"),
+    getAutoCall(),
+    latestAutoCall(id),
   ]);
   const scanUrl = a.scan_path ? await signedDocumentUrl(a.scan_path) : null;
   const uploadSlips = await Promise.all(
@@ -224,6 +238,14 @@ export async function getCase(id: number): Promise<CaseFile | null> {
     rules: ruleRows,
     recordedConversations: (records.data ?? []).map((r) => r.conversation_id),
     predial: { phone, browser },
+    autoCall: {
+      enabled: autoSetting.enabled,
+      stopped: a.auto_call_stopped,
+      latest: autoLatest
+        ? { status: autoLatest.status, dueAt: autoLatest.due_at, reason: autoLatest.reason, outcome: autoLatest.outcome, stopReason: autoLatest.stop_reason, updatedAt: autoLatest.updated_at }
+        : null,
+      qualifies: status === "returned_fixable" && a.ai_call_consent,
+    },
     calls: (calls.data ?? []).map((c) => ({ id: c.id, channel: c.channel, status: c.status, blockReason: c.block_reason, conversationId: c.conversation_id, startedAt: c.started_at, endedAt: c.ended_at })),
     uploads: uploadSlips,
     corrections: (corrections.data ?? []).map((c) => ({

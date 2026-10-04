@@ -2,6 +2,8 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { after } from "next/server";
+import { runDueCalls } from "@/lib/calls/auto";
 import { z } from "zod";
 import { createApplication } from "@/lib/applications/create";
 import { PHOTO_BLUE, PHOTO_WHITE, silhouettePhoto } from "@/lib/demo/photos";
@@ -110,6 +112,8 @@ export async function submitApplication(_prev: SubmitState, formData: FormData):
     console.error("submit application failed", message);
     return { formError: "generic" };
   }
+  // Dial straight away rather than waiting for the next minute's run; the applicant's page doesn't wait for it.
+  after(() => runDueCalls().catch((err) => console.error("auto-call after submit failed", forLog(err instanceof Error ? err.message : err))));
   redirect(`/apply/status/${statusToken}?checked=1`);
 }
 
