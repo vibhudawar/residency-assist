@@ -122,6 +122,17 @@ export function demoPeople(today: string): DemoPerson[] {
         preferred_language: "en", ai_call_consent: true, photo_background: PHOTO_BLUE,
       },
     },
+    {
+      key: "kofi",
+      story: "Status issues: overstay fine (R10) + profession code ≠ contract (R11) → explains, routes, follow-ups",
+      passport: { passport_number: "G4021876", full_name: "KOFI MENSAH", date_of_birth: "1987-03-15", expiry_date: later, nationality: "GHA" },
+      status: { ...clean, unpaid_fines_aed: 1250, contract_profession_code: "3121" },
+      application: {
+        reference: "RA-260109", full_name: "Kofi Mensah", date_of_birth: "1987-03-15",
+        passport_number: "G4021876", passport_expiry: later, profession_code: "2149",
+        preferred_language: "en", ai_call_consent: true, photo_background: PHOTO_WHITE,
+      },
+    },
   ];
 }
 
