@@ -20,7 +20,7 @@ export default async function RecordsPage() {
       ) : (
         <div className="space-y-4">
           {records.map((r) => (
-            <article key={r.conversationId} id={r.conversationId} className="scroll-mt-6 rounded-[6px] border border-rule bg-paper">
+            <article key={r.conversationId} id={r.conversationId} className="scroll-mt-[calc(var(--call-bar,0px)+1.5rem)] rounded-[6px] border border-rule bg-paper">
               <header className="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-rule px-5 py-3.5 text-[13.5px]">
                 <CaseLink applicationId={r.applicationId} reference={r.reference} />
                 <span className="font-mono text-[13px] text-ink-2">{uaeTime(r.receivedAt)}</span>

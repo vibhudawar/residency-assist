@@ -38,7 +38,7 @@ export function QueueBoard({
       </div>
       {rows.length === 0 ? (
         <p className="px-4 py-6 text-[13.5px] leading-relaxed text-led-text/75">
-          No cases yet. Submit one from the applicant portal at <span className="font-mono">/apply</span>, or reset the demo to load the seven demo cases.
+          No cases yet. Submit one from the applicant portal at <span className="font-mono">/apply</span>, or reset the demo to load the eight demo cases.
         </p>
       ) : (
         <ol className="divide-y divide-board-rule">

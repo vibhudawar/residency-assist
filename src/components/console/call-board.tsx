@@ -1,12 +1,12 @@
 "use client";
 
 import { Globe, Phone } from "lucide-react";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect } from "react";
 import { callAction, type CallState } from "@/app/console/actions";
 import { Panel } from "@/components/hall/led-board";
 import { Button } from "@/components/ui/button";
 import { CaseAutoCall } from "./auto-call";
-import { BrowserCall } from "./browser-call";
+import { DockedCallBoard, useCallKeeper } from "./call-keeper";
 import type { PredialCheck } from "@/lib/calls/predial";
 import type { AutoCallView } from "@/lib/console/queries";
 import { CALL_STATUS, CHECK_LABEL, uaeTime } from "@/lib/console/format";
@@ -35,21 +35,34 @@ function Lamp({ passed, label }: { passed: boolean; label: string }) {
  */
 export function CallBoard({
   applicationId,
+  name,
+  reference,
   phone,
   browser,
   calls,
   auto,
 }: {
   applicationId: number;
+  name: string;
+  reference: string;
   auto: AutoCallView;
   phone: Predial;
   browser: Predial;
   calls: { id: number; channel: string; status: string; blockReason: string | null; startedAt: string }[];
 }) {
   const [state, action, pending] = useActionState<CallState, FormData>(callAction, {});
-  // The browser call panel stays open until the officer closes it after the call.
-  const [closedSession, setClosedSession] = useState<number | null>(null);
-  const session = state.outcome === "browser" && state.session && state.session.attemptId !== closedSession ? state.session : null;
+  // A browser call is handed to the console's call keeper, so it carries on across console pages.
+  const keeper = useCallKeeper();
+  const session = state.outcome === "browser" ? state.session : undefined;
+  const { open } = keeper;
+  useEffect(() => {
+    if (session) open({ session, applicationId, name, reference });
+  }, [session]); // eslint-disable-line react-hooks/exhaustive-deps
+  // One call at a time: while a browser call is open (here, ready or live; or live on another case),
+  // this case can't start another. The key stays focusable so everyone meets the reason.
+  const ownOpen = keeper.active?.applicationId === applicationId;
+  const elsewhere = keeper.busy && !ownOpen ? keeper.active : null;
+  const browserLocked = ownOpen || !!elsewhere;
   const browserBy = new Map(browser.checks.map((c) => [c.name, c]));
 
   return (
@@ -87,15 +100,29 @@ export function CallBoard({
         <Button type="submit" name="channel" value="phone" disabled={pending} variant="board">
           <Phone aria-hidden /> Call phone
         </Button>
-        <Button type="submit" name="channel" value="browser" disabled={pending} variant="board">
+        <Button
+          type="submit"
+          name="channel"
+          value="browser"
+          disabled={pending}
+          aria-disabled={browserLocked || undefined}
+          aria-describedby={browserLocked ? `call-hint-${applicationId}` : undefined}
+          onClick={(e) => browserLocked && e.preventDefault()}
+          variant="board"
+          className={cn(browserLocked && "opacity-60 hover:border-board-rule hover:text-paper")}
+        >
           <Globe aria-hidden /> Call in browser
         </Button>
-        <p className="text-[12.5px] text-led-text/65">
-          {phone.allowed ? "Phone call allowed now." : browser.allowed ? "Browser call allowed; phone is held by a check above." : "No call allowed — pressing will log the refusal."}
+        <p id={`call-hint-${applicationId}`} className="text-[12.5px] text-led-text/65">
+          {ownOpen
+            ? "The browser call for this case is open below."
+            : elsewhere
+            ? `A call with ${elsewhere.name} is still on. End it before starting another.`
+            : phone.allowed ? "Phone call allowed now." : browser.allowed ? "Browser call allowed; phone is held by a check above." : "No call allowed — pressing will log the refusal."}
         </p>
       </form>
 
-      {state.outcome && (
+      {state.outcome && !(state.outcome === "browser" && !ownOpen) && (
         <div role="status" className="border-t border-board-rule px-4 py-3 text-[13.5px] leading-relaxed">
           {state.outcome === "blocked" && (
             <p className="text-led-red">
@@ -112,7 +139,7 @@ export function CallBoard({
           {state.outcome === "dialling" && (
             <p className="text-led-amber">Ringing the applicant&apos;s phone now. The call shows below; the transcript and analysis arrive when it ends.</p>
           )}
-          {state.outcome === "browser" && <p className="text-led-green">Checks passed. The live call panel is ready below — start it when you are.</p>}
+          {state.outcome === "browser" && ownOpen && <p className="text-led-green">Checks passed. The live call panel is ready below — start it when you are.</p>}
         </div>
       )}
 
@@ -131,7 +158,7 @@ export function CallBoard({
         </ol>
       )}
     </Panel>
-    {session && <BrowserCall key={session.attemptId} session={session} onClose={() => setClosedSession(session.attemptId)} />}
+    <DockedCallBoard applicationId={applicationId} />
     </>
   );
 }

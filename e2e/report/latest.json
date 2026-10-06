@@ -1,6 +1,6 @@
 {
-  "ran_at": "2026-10-06T21:23:49.905Z",
-  "base_url": "http://localhost:3000",
+  "ran_at": "2026-10-06T22:49:42.175Z",
+  "base_url": "http://localhost:3006",
   "status": "passed",
   "passed": 7,
   "total": 7,
@@ -9,7 +9,7 @@
       "flow": "A typo is fixed on the call, approved by an officer, and the applicant sees it",
       "file": "01-golden-path.spec.ts",
       "status": "passed",
-      "seconds": 30.6,
+      "seconds": 29.1,
       "steps": [
         {
           "title": "Applicant signs in, fills the form with a name typo, opts in to AI calls and submits",
@@ -57,7 +57,7 @@
       "flow": "An officer rejects a correction: nothing changes, a person takes over and the applicant is told",
       "file": "02-officer-rejects.spec.ts",
       "status": "passed",
-      "seconds": 31,
+      "seconds": 28.2,
       "steps": [
         {
           "title": "On a call, Ahmed verifies and confirms his date of birth from his passport",
@@ -85,7 +85,7 @@
       "flow": "A new photo by SMS link: a bad one is refused with the reason, a good one is approved by an officer",
       "file": "03-upload-link.spec.ts",
       "status": "passed",
-      "seconds": 38.2,
+      "seconds": 30,
       "steps": [
         {
           "title": "On a call, the assistant texts Fatima an upload link",
@@ -117,7 +117,7 @@
       "flow": "Calls that break the rules are refused before dialling and logged",
       "file": "04-predial-refusals.spec.ts",
       "status": "passed",
-      "seconds": 42,
+      "seconds": 28,
       "steps": [
         {
           "title": "Sarah never opted in to AI calls: the call is refused for consent",
@@ -137,7 +137,7 @@
       "flow": "Only the right people get in: officers, verified callers, and signed webhooks",
       "file": "05-access.spec.ts",
       "status": "passed",
-      "seconds": 13.1,
+      "seconds": 11.7,
       "steps": [
         {
           "title": "Console pages send a signed-out visitor to sign-in",
@@ -173,7 +173,7 @@
       "flow": "The applicant portal works in Arabic, right to left, and switches back",
       "file": "06-arabic.spec.ts",
       "status": "passed",
-      "seconds": 1.3,
+      "seconds": 0.7,
       "steps": [
         {
           "title": "In Arabic the page is right to left with Arabic text and the prototype banner",
@@ -189,7 +189,7 @@
       "flow": "With auto-call on, the assistant calls by itself after a fixable check, and the officer can stop it",
       "file": "07-auto-call.spec.ts",
       "status": "passed",
-      "seconds": 32.6,
+      "seconds": 29,
       "steps": [
         {
           "title": "Auto-call starts off; turning it on asks first",

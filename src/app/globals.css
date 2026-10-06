@@ -119,6 +119,8 @@
     @apply font-sans;
     scrollbar-color: #9ea29b transparent;
     -webkit-text-size-adjust: 100%;
+    /* The console's call bar pins to the top during a call; keep focused and anchored things clear of it. */
+    scroll-padding-top: var(--call-bar, 0px);
   }
   body {
     @apply bg-background text-foreground antialiased;

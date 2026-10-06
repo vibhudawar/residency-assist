@@ -1,14 +1,9 @@
 "use client";
 
-import { ConversationProvider, useConversationControls, useConversationMode, useConversationStatus } from "@elevenlabs/react";
 import { Mic, PhoneOff } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { browserCallEvent } from "@/app/console/actions";
 import { Panel } from "@/components/hall/led-board";
 import { Button } from "@/components/ui/button";
-import type { BrowserSession } from "@/lib/calls/start";
-import { refusedBy } from "@/lib/calls/tool-outcome";
 import { LANGUAGE } from "@/lib/console/format";
 import { cn } from "@/lib/utils";
 
@@ -19,7 +14,7 @@ export type CallLine =
 export type CallPhase = "ready" | "starting" | "live" | "ended" | "error";
 
 /** Plain words for each tool, so the officer reads what the agent is doing, not function names. */
-const TOOL_WORDS: Record<string, { row: string; short: string }> = {
+export const TOOL_WORDS: Record<string, { row: string; short: string }> = {
   verify_identity: { row: "Checking identity", short: "Identity" },
   get_case: { row: "Reading the case", short: "Case" },
   submit_correction: { row: "Sending correction for approval", short: "Correction" },
@@ -209,87 +204,5 @@ export function CallBoardView({
         {phase === "ended" && <p className="border-t border-board-rule px-4 py-3 text-[13px] text-led-text/70">{outro}</p>}
       </Panel>
     </div>
-  );
-}
-
-const OUTRO = "Call ended. The full record (transcript, summary, latency) appears in Call records as soon as ElevenLabs sends it.";
-
-function LiveCall({ session, onClose }: { session: BrowserSession; onClose: () => void }) {
-  const router = useRouter();
-  const { startSession, endSession } = useConversationControls();
-  const { status } = useConversationStatus();
-  const { isSpeaking } = useConversationMode();
-  const [lines, setLines] = useState<CallLine[]>([]);
-  const [phase, setPhase] = useState<CallPhase>("ready");
-  const [error, setError] = useState<string | null>(null);
-  const [startedAt, setStartedAt] = useState<number | null>(null);
-  const connected = useRef(false);
-
-  function start() {
-    setPhase("starting");
-    setError(null);
-    startSession({
-      conversationToken: session.conversationToken,
-      connectionType: "webrtc",
-      dynamicVariables: session.dynamicVariables,
-      overrides: { agent: { language: session.language } },
-      onConnect: () => {
-        connected.current = true;
-        setPhase("live");
-        setStartedAt(Date.now());
-        void browserCallEvent(session.attemptId, "live");
-      },
-      onMessage: ({ message, role, event_id }) => {
-        if (message.trim()) setLines((l) => [...l, { kind: "say", id: `m${event_id}-${role}`, who: role, text: message }]);
-      },
-      onAgentToolRequest: ({ tool_name, tool_call_id }) =>
-        setLines((l) => [...l, { kind: "tool", id: tool_call_id, name: tool_name, state: "running" }]),
-      // Two events can report a tool's outcome: the bare one (transport errors only) and the full one,
-      // which carries our backend's answer and so can say "refused". The full one always wins.
-      onAgentToolResponse: (e) => {
-        const full = "full_tool_result" in e;
-        const state = e.is_error || (full && (e.is_blocked || refusedBy(e.full_tool_result))) ? "error" : "ok";
-        setLines((l) => l.map((x) => (x.kind === "tool" && x.id === e.tool_call_id && (full || x.state === "running") ? { ...x, state } : x)));
-      },
-      onError: (message) => {
-        setError(message || "The call couldn't connect.");
-        if (!connected.current) {
-          setPhase("error");
-          void browserCallEvent(session.attemptId, "abandoned");
-        }
-      },
-      onDisconnect: () => {
-        if (!connected.current) return;
-        setPhase("ended");
-        // The record (transcript, analysis, latency) arrives by webhook shortly after the call ends.
-        setTimeout(() => router.refresh(), 4000);
-      },
-    });
-  }
-
-  return (
-    <CallBoardView
-      language={session.language}
-      phase={phase}
-      connecting={status === "connecting"}
-      speaking={isSpeaking}
-      lines={lines}
-      startedAt={startedAt}
-      error={error}
-      intro={`You'll speak as the applicant. Your browser will ask for the microphone. The assistant opens in ${LANGUAGE[session.language]}; speak another language and it switches.`}
-      outro={OUTRO}
-      onStart={start}
-      onEnd={() => endSession()}
-      onClose={onClose}
-    />
-  );
-}
-
-/** The browser call, in its own conversation context. */
-export function BrowserCall({ session, onClose }: { session: BrowserSession; onClose: () => void }) {
-  return (
-    <ConversationProvider>
-      <LiveCall session={session} onClose={onClose} />
-    </ConversationProvider>
   );
 }

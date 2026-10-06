@@ -26,7 +26,7 @@ export function ResetDemo() {
   }
   return (
     <form action={action} className="flex items-center gap-3">
-      <span className="text-[12.5px] text-led-text/80 max-md:hidden">Wipes every case and reseeds the 7 demo cases.</span>
+      <span className="text-[12.5px] text-led-text/80 max-md:hidden">Wipes every case and reseeds the 8 demo cases.</span>
       <Button type="button" variant="board" size="sm" onClick={() => setAsking(false)}>
         Cancel
       </Button>

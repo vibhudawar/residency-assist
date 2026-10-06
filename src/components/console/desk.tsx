@@ -10,7 +10,7 @@ export async function Desk({ children }: { children: React.ReactNode }) {
   return (
     <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
       <div className="lg:col-span-4">
-        <div className="lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto lg:rounded-[10px]">
+        <div className="lg:sticky lg:top-[calc(var(--call-bar,0px)+1.5rem)] lg:max-h-[calc(100vh-3rem-var(--call-bar,0px))] lg:overflow-y-auto lg:rounded-[10px]">
           <QueueBoard rows={queue.rows} awaitingDecision={queue.awaitingDecision} openHandoffs={queue.openHandoffs} blockedToday={queue.blockedToday} />
         </div>
       </div>
@@ -25,7 +25,7 @@ export function DeskClear() {
     <div className="max-w-[60ch] pt-4">
       <h1 className="text-[28px] font-semibold tracking-[-0.015em]">The desk is clear</h1>
       <p className="mt-3 text-[15px] leading-relaxed text-ink-2">
-        Cases appear in the queue as soon as an application is checked. Use Reset demo in the bar above to load the seven demo cases.
+        Cases appear in the queue as soon as an application is checked. Use Reset demo in the bar above to load the eight demo cases.
       </p>
     </div>
   );
