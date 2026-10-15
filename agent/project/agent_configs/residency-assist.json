@@ -171,7 +171,7 @@
     "turn": {
       "mode": "turn",
       "turn_timeout": 7,
-      "silence_end_call_timeout": 30
+      "silence_end_call_timeout": 60
     },
     "conversation": {
       "max_duration_seconds": 600,

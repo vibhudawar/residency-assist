@@ -285,7 +285,7 @@ async function main() {
       },
       asr: { keywords: S.ASR_KEYWORDS, provider: "scribe_realtime", quality: "high", user_input_audio_format: "pcm_16000" },
       tts: { model_id: S.TTS_MODEL, voice_id: S.VOICES.en, stability: 0.55, similarity_boost: 0.8, speed: 0.95, agent_output_audio_format: "pcm_16000" },
-      turn: { mode: "turn", turn_timeout: 7, silence_end_call_timeout: 30 },
+      turn: { mode: "turn", turn_timeout: 7, silence_end_call_timeout: 60 },
       conversation: { max_duration_seconds: S.MAX_CALL_SECONDS, client_events: ["audio", "interruption", "agent_response", "user_transcript", "agent_tool_request", "agent_tool_response", "agent_tool_response_full_payload"], text_only: false },
       language_presets: {
         ar: { overrides: { agent: { first_message: S.FIRST_MESSAGE.ar, language: "ar" }, tts: { voice_id: S.VOICES.ar } } },
