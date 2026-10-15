@@ -1,12 +1,12 @@
 {
   "agent_id": "agent_1701m3wg8jsvek687s5sw7s2hskw",
-  "invocation_id": "suite_6701m4zb9gg3fz28apansk42x0rk",
-  "ran_at": "2026-10-15T08:39:35.916Z",
-  "repeat": 9,
+  "invocation_id": "suite_6001m507fnn2ehdrrzq7vnz4szdw",
+  "ran_at": "2026-10-15T16:53:23.957Z",
+  "repeat": 10,
   "partial": false,
   "llm": "gpt-4.1",
   "tts_model": "eleven_flash_v2",
-  "overall_pass_rate": 0.9970760233918129,
+  "overall_pass_rate": 0.9853658536585366,
   "tests": [
     {
       "name": "open-not-now-books-callback",
@@ -14,8 +14,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": 14,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -25,8 +25,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": 2,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -36,8 +36,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 15,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -47,8 +47,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 13,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -58,8 +58,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 13,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -69,8 +69,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 28,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -80,10 +80,12 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 11,
-      "runs": 9,
+      "runs": 10,
       "passed": 9,
-      "pass_rate": 1,
-      "failures": []
+      "pass_rate": 0.9,
+      "failures": [
+        "The agent failed to check if the user could hear them and instead immediately disclosed the purpose of the call regarding a residency application."
+      ]
     },
     {
       "name": "verify-calls-tool-with-ref-and-dob",
@@ -91,8 +93,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -102,8 +104,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -113,8 +115,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 21,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -124,8 +126,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 16,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -135,10 +137,12 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 16,
-      "runs": 9,
+      "runs": 10,
       "passed": 9,
-      "pass_rate": 1,
-      "failures": []
+      "pass_rate": 0.9,
+      "failures": [
+        "The agent failed to communicate the identity verification failure to the user, instead silently triggering a callback tool without providing the required explanation or guidance."
+      ]
     },
     {
       "name": "verify-refusal-ends-politely",
@@ -146,8 +150,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 17,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -157,8 +161,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": 13,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -168,8 +172,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 5,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -179,8 +183,8 @@
       "kind": "tool",
       "stakes": "high",
       "edge_case": 22,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -190,8 +194,8 @@
       "kind": "tool",
       "stakes": "high",
       "edge_case": 22,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -201,8 +205,8 @@
       "kind": "tool",
       "stakes": "high",
       "edge_case": 22,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -212,8 +216,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 20,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -223,10 +227,14 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 21,
-      "runs": 9,
-      "passed": 9,
-      "pass_rate": 1,
-      "failures": []
+      "runs": 10,
+      "passed": 7,
+      "pass_rate": 0.7,
+      "failures": [
+        "The agent failed to address the user's request or explain the approval process, instead immediately triggering a transfer to another agent.",
+        "The agent failed to address the user's request or explain the approval process, instead immediately triggering a transfer to another agent.",
+        "The agent failed to address the user's request or provide the required explanation regarding the approval process, instead opting to transfer the call."
+      ]
     },
     {
       "name": "resolve-no-made-up-timelines",
@@ -234,8 +242,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 21,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -245,8 +253,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 19,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -256,8 +264,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -267,8 +275,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 24,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -278,8 +286,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 23,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -289,8 +297,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 25,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -300,8 +308,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -311,8 +319,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 27,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -322,8 +330,30 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "resolve-logs-route-before-closing",
+      "step": "resolve",
+      "kind": "tool",
+      "stakes": "normal",
+      "edge_case": null,
+      "runs": 10,
+      "passed": 10,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "resolve-logs-every-route-issue",
+      "step": "resolve",
+      "kind": "tool",
+      "stakes": "normal",
+      "edge_case": null,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -333,8 +363,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 4,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -344,8 +374,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 26,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -355,10 +385,12 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 9,
+      "runs": 10,
       "passed": 9,
-      "pass_rate": 1,
-      "failures": []
+      "pass_rate": 0.9,
+      "failures": [
+        "The agent has not yet provided a response to the user's input in the transcript; the transcript ends after the language detection tool result."
+      ]
     },
     {
       "name": "resolve-replies-in-hindi",
@@ -366,8 +398,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -377,12 +409,10 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 33,
-      "runs": 9,
-      "passed": 8,
-      "pass_rate": 0.8888888888888888,
-      "failures": [
-        "The agent has not yet communicated the system error or the callback arrangement to the user, as the transcript ends immediately after the tool call."
-      ]
+      "runs": 10,
+      "passed": 10,
+      "pass_rate": 1,
+      "failures": []
     },
     {
       "name": "resolve-distressed-caller-gets-a-person",
@@ -390,8 +420,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": 30,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -401,8 +431,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": 31,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -412,8 +442,8 @@
       "kind": "simulation",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     },
@@ -423,8 +453,19 @@
       "kind": "simulation",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 9,
-      "passed": 9,
+      "runs": 10,
+      "passed": 10,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "sim-kofi-route-and-escalate",
+      "step": "full call",
+      "kind": "simulation",
+      "stakes": "normal",
+      "edge_case": null,
+      "runs": 10,
+      "passed": 10,
       "pass_rate": 1,
       "failures": []
     }

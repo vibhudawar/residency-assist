@@ -25,5 +25,86 @@
       "outcome": "resolved_on_call",
       "rules_hit": "R1"
     }
+  },
+  {
+    "conversation_id": "conv_5001m4zw5xaqepsvncm1vzbbhf73",
+    "started_at": "2026-10-15T13:32:09.000Z",
+    "channel": "phone",
+    "language": "en",
+    "duration_secs": 138,
+    "avg_latency_ms": 733,
+    "max_latency_ms": 1064,
+    "call_successful": "success",
+    "summary_title": "Residency Name Correction",
+    "evaluation": {
+      "ai_disclosure": "success",
+      "verified_before_details": "success",
+      "no_secrets_requested": "success",
+      "read_back_before_submit": "success",
+      "correct_path": "success",
+      "opt_out_honoured": "success",
+      "stayed_in_language": "success"
+    },
+    "data_collected": {
+      "escalation_reason": null,
+      "fields_corrected": "full_name",
+      "language_used": "en",
+      "outcome": "partly_resolved",
+      "rules_hit": "R1"
+    }
+  },
+  {
+    "conversation_id": "conv_8601m4zy5ha2fh28a9h7ss026n49",
+    "started_at": "2026-10-15T14:06:33.000Z",
+    "channel": "browser",
+    "language": "en",
+    "duration_secs": 212,
+    "avg_latency_ms": 1186,
+    "max_latency_ms": 4492,
+    "call_successful": "success",
+    "summary_title": "Application Photo Passport",
+    "evaluation": {
+      "ai_disclosure": "success",
+      "verified_before_details": "success",
+      "no_secrets_requested": "success",
+      "read_back_before_submit": "success",
+      "correct_path": "success",
+      "opt_out_honoured": "success",
+      "stayed_in_language": "success"
+    },
+    "data_collected": {
+      "escalation_reason": null,
+      "fields_corrected": "",
+      "language_used": "hi",
+      "outcome": "partly_resolved",
+      "rules_hit": "R4,R8"
+    }
+  },
+  {
+    "conversation_id": "conv_4501m4zz3tcvft7skdv1xnb7w0v4",
+    "started_at": "2026-10-15T14:23:05.000Z",
+    "channel": "browser",
+    "language": "en",
+    "duration_secs": 108,
+    "avg_latency_ms": 687,
+    "max_latency_ms": 881,
+    "call_successful": "success",
+    "summary_title": "Residency Application Issues",
+    "evaluation": {
+      "ai_disclosure": "success",
+      "verified_before_details": "success",
+      "no_secrets_requested": "success",
+      "read_back_before_submit": "success",
+      "correct_path": "success",
+      "opt_out_honoured": "success",
+      "stayed_in_language": "success"
+    },
+    "data_collected": {
+      "escalation_reason": "Caller requested to speak to a person.",
+      "fields_corrected": "",
+      "language_used": "en",
+      "outcome": "callback_booked",
+      "rules_hit": "R10,R11"
+    }
   }
 ]
