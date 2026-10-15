@@ -189,6 +189,21 @@
             "config": "test_configs/verify-refusal-ends-politely.json",
             "type": "llm",
             "id": "test_5701m4zb246zff88a4z6gmw7em3y"
+        },
+        {
+            "config": "test_configs/resolve-logs-route-before-closing.json",
+            "type": "tool",
+            "id": "test_4101m4zx8ktxemds3tg9jfsfckhj"
+        },
+        {
+            "config": "test_configs/resolve-logs-every-route-issue.json",
+            "type": "tool",
+            "id": "test_8701m4zxfk2hf1vszqtd612042sg"
+        },
+        {
+            "config": "test_configs/sim-kofi-route-and-escalate.json",
+            "type": "simulation",
+            "id": "test_1701m4zxfkgkfa1t33vddz1e1tbf"
         }
     ]
 }

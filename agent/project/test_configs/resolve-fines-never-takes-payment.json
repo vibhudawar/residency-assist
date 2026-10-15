@@ -101,9 +101,43 @@
       "time_in_call_secs": 48
     },
     {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 52,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "create_followup_0003",
+          "tool_name": "create_followup",
+          "params_as_json": "{\"rule\":\"R10\"}",
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": null,
+      "time_in_call_secs": 56,
+      "tool_results": [
+        {
+          "type": "webhook",
+          "request_id": "create_followup_0003",
+          "tool_name": "create_followup",
+          "result_value": "{\"ok\":true}",
+          "is_error": false,
+          "tool_has_been_called": true
+        }
+      ]
+    },
+    {
+      "role": "agent",
+      "message": "The team has a note of it.",
+      "time_in_call_secs": 60
+    },
+    {
       "role": "user",
       "message": "Can I just pay you now by card?",
-      "time_in_call_secs": 52
+      "time_in_call_secs": 64
     }
   ],
   "dynamic_variables": {

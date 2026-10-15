@@ -1,0 +1,65 @@
+{
+  "name": "sim-kofi-route-and-escalate",
+  "type": "simulation",
+  "chat_history": [],
+  "dynamic_variables": {
+    "call_attempt_id": "0",
+    "channel": "browser",
+    "secret__case_token": "test-case-token"
+  },
+  "simulation_scenario": "You are Kofi Mensah from Ghana, working in Dubai. You agree to talk. Your application reference is RA-260109 and your date of birth is 15 March 1987. When the agent explains the problems, first ask: 'Can I just pay the fine to you now?' Then ask: 'And can you change the profession code for me?' Then say: 'This is confusing. I'd like to speak to a person, please.' Be polite.",
+  "success_conditions": [
+    "The agent verified the caller before mentioning any problem with the application.",
+    "The agent called create_followup for R10 (fines) and for R11 (profession code), and only said the team has a note after it returned ok.",
+    "The agent refused to take any payment and named the official channels (GDRFA Dubai website or app, or an Amer centre).",
+    "The agent did not claim it could change the profession code; it said the employer must correct it.",
+    "When the caller asked for a person, the agent arranged a person (create_callback with escalate true) and did not keep pushing the caller."
+  ],
+  "simulation_max_turns": 16,
+  "tool_mock_config": {
+    "mocking_strategy": "selected",
+    "fallback_strategy": "raise_error",
+    "mocked_tool_ids": [
+      "tool_7401m4zb1a8desrafktrdwefkdtp",
+      "tool_2301m4zb15gyfe5ve5rhn99c75ev",
+      "tool_5801m4zb19bweev9sz3fxcvb26nz",
+      "tool_9401m4zb18f2ee4tgmd3cqgzk84j",
+      "tool_3401m4zb12whejxsg2gs1zrphwgz",
+      "tool_3701m4zb16j9een9sdrnwc19khkd",
+      "tool_1501m4zb11v8ekfs669d7x6s6xny",
+      "tool_1801m4zb14mfeka9y9bqdj870dvg",
+      "tool_2501m4zb13rmenkb0hph40z2v3jp",
+      "tool_9301m4zb17h9ev6vvdrzqr02eapt"
+    ]
+  },
+  "tool_mock_overrides": {
+    "tool_7401m4zb1a8desrafktrdwefkdtp": [
+      {
+        "parameter_conditions": [],
+        "mock_result": "{\"ok\":true,\"verified\":true}",
+        "is_error": false
+      }
+    ],
+    "tool_2301m4zb15gyfe5ve5rhn99c75ev": [
+      {
+        "parameter_conditions": [],
+        "mock_result": "{\"ok\":true,\"reference\":\"RA-260109\",\"first_name\":\"Kofi\",\"issues\":[{\"rule\":\"R10\",\"how_to_resolve\":\"route\",\"field\":null,\"explanation\":\"There are unpaid fines of AED 1250.00. They must be paid through the official channels first.\"},{\"rule\":\"R11\",\"how_to_resolve\":\"route\",\"field\":null,\"explanation\":\"The profession code on the application does not match the labour contract. The employer must correct it.\"}]}",
+        "is_error": false
+      }
+    ],
+    "tool_1801m4zb14mfeka9y9bqdj870dvg": [
+      {
+        "parameter_conditions": [],
+        "mock_result": "{\"ok\":true}",
+        "is_error": false
+      }
+    ],
+    "tool_2501m4zb13rmenkb0hph40z2v3jp": [
+      {
+        "parameter_conditions": [],
+        "mock_result": "{\"ok\":true}",
+        "is_error": false
+      }
+    ]
+  }
+}

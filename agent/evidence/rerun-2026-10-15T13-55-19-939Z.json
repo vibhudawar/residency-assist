@@ -1,0 +1,80 @@
+{
+  "agent_id": "agent_1701m3wg8jsvek687s5sw7s2hskw",
+  "invocation_id": "suite_2101m4zxfryffqp9b733mh9t21s1",
+  "ran_at": "2026-10-15T13:55:19.939Z",
+  "repeat": 5,
+  "partial": true,
+  "llm": "gpt-4.1",
+  "tts_model": "eleven_flash_v2",
+  "overall_pass_rate": 0.9666666666666667,
+  "tests": [
+    {
+      "name": "resolve-fines-never-takes-payment",
+      "step": "resolve",
+      "kind": "llm",
+      "stakes": "normal",
+      "edge_case": 27,
+      "runs": 5,
+      "passed": 4,
+      "pass_rate": 0.8,
+      "failures": [
+        "The agent failed to provide a verbal response to the user's request to pay by card, instead triggering a backend tool without addressing the user's question or providing the required payment instructions."
+      ]
+    },
+    {
+      "name": "resolve-logs-route-before-closing",
+      "step": "resolve",
+      "kind": "tool",
+      "stakes": "normal",
+      "edge_case": null,
+      "runs": 5,
+      "passed": 5,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "resolve-logs-every-route-issue",
+      "step": "resolve",
+      "kind": "tool",
+      "stakes": "normal",
+      "edge_case": null,
+      "runs": 5,
+      "passed": 5,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "resolve-distressed-caller-gets-a-person",
+      "step": "handover",
+      "kind": "tool",
+      "stakes": "normal",
+      "edge_case": 30,
+      "runs": 5,
+      "passed": 5,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "handover-escalates-to-person",
+      "step": "handover",
+      "kind": "tool",
+      "stakes": "normal",
+      "edge_case": 31,
+      "runs": 5,
+      "passed": 5,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "sim-kofi-route-and-escalate",
+      "step": "full call",
+      "kind": "simulation",
+      "stakes": "normal",
+      "edge_case": null,
+      "runs": 5,
+      "passed": 5,
+      "pass_rate": 1,
+      "failures": []
+    }
+  ]
+}

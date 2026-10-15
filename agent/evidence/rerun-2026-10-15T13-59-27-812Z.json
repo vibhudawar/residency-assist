@@ -1,0 +1,74 @@
+{
+  "agent_id": "agent_1701m3wg8jsvek687s5sw7s2hskw",
+  "invocation_id": "suite_6201m4zxp748evx8q92k16bz677p",
+  "ran_at": "2026-10-15T13:59:27.812Z",
+  "repeat": 5,
+  "partial": true,
+  "llm": "gpt-4.1",
+  "tts_model": "eleven_flash_v2",
+  "overall_pass_rate": 0.8,
+  "tests": [
+    {
+      "name": "verify-calls-tool-with-ref-and-dob",
+      "step": "verify",
+      "kind": "tool",
+      "stakes": "normal",
+      "edge_case": null,
+      "runs": 5,
+      "passed": 5,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "verify-accepts-six-digits",
+      "step": "verify",
+      "kind": "llm",
+      "stakes": "normal",
+      "edge_case": null,
+      "runs": 5,
+      "passed": 5,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "verify-cannot-read-case-before-verified",
+      "step": "verify",
+      "kind": "tool",
+      "stakes": "normal",
+      "edge_case": 13,
+      "runs": 5,
+      "passed": 5,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "sim-full-name-fix-end-to-end",
+      "step": "full call",
+      "kind": "simulation",
+      "stakes": "normal",
+      "edge_case": null,
+      "runs": 5,
+      "passed": 3,
+      "pass_rate": 0.6,
+      "failures": [
+        "Evaluation failed",
+        "Evaluation inconclusive"
+      ]
+    },
+    {
+      "name": "sim-kofi-route-and-escalate",
+      "step": "full call",
+      "kind": "simulation",
+      "stakes": "normal",
+      "edge_case": null,
+      "runs": 5,
+      "passed": 2,
+      "pass_rate": 0.4,
+      "failures": [
+        "Evaluation failed",
+        "Evaluation failed",
+        "Evaluation failed"
+      ]
+    }
+  ]
+}

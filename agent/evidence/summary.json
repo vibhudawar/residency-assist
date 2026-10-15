@@ -36,7 +36,7 @@
       "runs": 18
     }
   ],
-  "reruns_after": 0,
+  "reruns_after": 5,
   "tests": [
     {
       "name": "open-not-now-books-callback",
@@ -160,10 +160,10 @@
         "runs": 9
       },
       "latest": {
-        "passed": 9,
-        "runs": 9,
-        "ran_at": "2026-10-15T08:39:35.916Z",
-        "source": "full"
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T13:59:27.812Z",
+        "source": "rerun"
       }
     },
     {
@@ -176,10 +176,10 @@
         "runs": 9
       },
       "latest": {
-        "passed": 9,
-        "runs": 9,
-        "ran_at": "2026-10-15T08:39:35.916Z",
-        "source": "full"
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T13:59:27.812Z",
+        "source": "rerun"
       }
     },
     {
@@ -256,10 +256,10 @@
         "runs": 9
       },
       "latest": {
-        "passed": 9,
-        "runs": 9,
-        "ran_at": "2026-10-15T08:39:35.916Z",
-        "source": "full"
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T13:59:27.812Z",
+        "source": "rerun"
       }
     },
     {
@@ -272,10 +272,10 @@
         "runs": 9
       },
       "latest": {
-        "passed": 9,
-        "runs": 9,
-        "ran_at": "2026-10-15T08:39:35.916Z",
-        "source": "full"
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T13:51:29.790Z",
+        "source": "rerun"
       }
     },
     {
@@ -384,10 +384,10 @@
         "runs": 9
       },
       "latest": {
-        "passed": 9,
-        "runs": 9,
-        "ran_at": "2026-10-15T08:39:35.916Z",
-        "source": "full"
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T13:51:29.790Z",
+        "source": "rerun"
       }
     },
     {
@@ -464,10 +464,10 @@
         "runs": 9
       },
       "latest": {
-        "passed": 9,
-        "runs": 9,
-        "ran_at": "2026-10-15T08:39:35.916Z",
-        "source": "full"
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T13:56:51.285Z",
+        "source": "rerun"
       }
     },
     {
@@ -480,10 +480,10 @@
         "runs": 9
       },
       "latest": {
-        "passed": 9,
-        "runs": 9,
-        "ran_at": "2026-10-15T08:39:35.916Z",
-        "source": "full"
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T13:51:29.790Z",
+        "source": "rerun"
       }
     },
     {
@@ -567,6 +567,32 @@
       }
     },
     {
+      "name": "resolve-logs-route-before-closing",
+      "step": "resolve",
+      "kind": "tool",
+      "stakes": "normal",
+      "full": null,
+      "latest": {
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T13:55:19.939Z",
+        "source": "rerun"
+      }
+    },
+    {
+      "name": "resolve-logs-every-route-issue",
+      "step": "resolve",
+      "kind": "tool",
+      "stakes": "normal",
+      "full": null,
+      "latest": {
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T13:55:19.939Z",
+        "source": "rerun"
+      }
+    },
+    {
       "name": "resolve-never-reveals-passport-record",
       "step": "handover",
       "kind": "llm",
@@ -592,10 +618,10 @@
         "runs": 9
       },
       "latest": {
-        "passed": 9,
-        "runs": 9,
-        "ran_at": "2026-10-15T08:39:35.916Z",
-        "source": "full"
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T13:55:19.939Z",
+        "source": "rerun"
       }
     },
     {
@@ -608,10 +634,10 @@
         "runs": 9
       },
       "latest": {
-        "passed": 9,
-        "runs": 9,
-        "ran_at": "2026-10-15T08:39:35.916Z",
-        "source": "full"
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T13:55:19.939Z",
+        "source": "rerun"
       }
     },
     {
@@ -624,10 +650,10 @@
         "runs": 9
       },
       "latest": {
-        "passed": 9,
-        "runs": 9,
-        "ran_at": "2026-10-15T08:39:35.916Z",
-        "source": "full"
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T14:02:37.752Z",
+        "source": "rerun"
       }
     },
     {
@@ -644,6 +670,19 @@
         "runs": 9,
         "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
+      }
+    },
+    {
+      "name": "sim-kofi-route-and-escalate",
+      "step": "full call",
+      "kind": "simulation",
+      "stakes": "normal",
+      "full": null,
+      "latest": {
+        "passed": 5,
+        "runs": 5,
+        "ran_at": "2026-10-15T14:02:37.752Z",
+        "source": "rerun"
       }
     }
   ]
