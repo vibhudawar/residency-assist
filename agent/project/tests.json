@@ -3,192 +3,192 @@
         {
             "config": "test_configs/handover-escalates-to-person.json",
             "type": "tool",
-            "id": "test_6001m49k9jsmeft9wwyk152m5pck"
+            "id": "test_9201m4zb1gjff8gs3vv37w6fpsas"
         },
         {
             "config": "test_configs/open-no-details-before-verification.json",
             "type": "llm",
-            "id": "test_5701m49k9k7ve2xvdrt08504a4jd"
+            "id": "test_1701m4zb1h2eendbvksh9m8mf262"
         },
         {
             "config": "test_configs/open-not-now-books-callback.json",
             "type": "tool",
-            "id": "test_7201m49k9kn7edws5me29v3ams4j"
+            "id": "test_4501m4zb1hhff4pse5zza4fperkp"
         },
         {
             "config": "test_configs/open-scam-question-reassures.json",
             "type": "llm",
-            "id": "test_2901m49k9m5kf42v8n62hxfb2cv9"
+            "id": "test_8101m4zb1j90f3zs0806jp79s0b4"
         },
         {
             "config": "test_configs/open-silence-checks-line.json",
             "type": "llm",
-            "id": "test_9901m49k9mm6fwc99nphqgsdnk4x"
+            "id": "test_6801m4zb1jqxedrs8dabwqt05cqm"
         },
         {
             "config": "test_configs/open-stop-calling-opts-out.json",
             "type": "tool",
-            "id": "test_3801m49k9n2ae939pmby53n2e9q6"
+            "id": "test_2101m4zb1ka7fx0sm7x4axapqgpc"
         },
         {
             "config": "test_configs/open-unsupported-language-offers-options.json",
             "type": "llm",
-            "id": "test_9101m49k9ngaeyg99a5qs9j2jvws"
+            "id": "test_1801m4zb1ktzejf9b7gfdyegxake"
         },
         {
             "config": "test_configs/open-wrong-person-reveals-nothing.json",
             "type": "llm",
-            "id": "test_8801m49k9nzkffq8sv0t5wyp743s"
+            "id": "test_0501m4zb1mbke6zaprtpgbrzkfnj"
         },
         {
             "config": "test_configs/resolve-backend-down-books-callback.json",
             "type": "llm",
-            "id": "test_7101m49k9pe1ezcrakbnw5h3fg1d"
+            "id": "test_4901m4zb1n2yet6b1esv4jnv5e2j"
         },
         {
             "config": "test_configs/resolve-books-chosen-slot.json",
             "type": "tool",
-            "id": "test_1101m49k9pvqe1w8x5sdqtb6jmra"
+            "id": "test_3201m4zb1nn6e8mvdrrjchypc4py"
         },
         {
             "config": "test_configs/resolve-cannot-approve-visa.json",
             "type": "llm",
-            "id": "test_4301m49k9qaweck91m1chv9eekj4"
+            "id": "test_0801m4zb1p5mfp5bxswrrj3b2bk1"
         },
         {
             "config": "test_configs/resolve-cant-upload-now-link-stays-valid.json",
             "type": "llm",
-            "id": "test_0601m49k9qtted0rzp6k36hsmvb4"
+            "id": "test_0301m4zb1pvme40vcvs7cvbrv093"
         },
         {
             "config": "test_configs/resolve-distressed-caller-gets-a-person.json",
             "type": "tool",
-            "id": "test_1801m49k9r9vf3g9afw5k792h7wp"
+            "id": "test_1101m4zb1qb3f6mvmv9tgfjxs70j"
         },
         {
             "config": "test_configs/resolve-explains-every-issue.json",
             "type": "llm",
-            "id": "test_0701m49k9rs7fgzrg6ftdz2mpfqa"
+            "id": "test_2101m4zb1qw2f4wvxafmcx9yfxve"
         },
         {
             "config": "test_configs/resolve-failed-upload-says-what-to-fix.json",
             "type": "llm",
-            "id": "test_7201m49k9s7xegzvsxdmc4zstdds"
+            "id": "test_0101m4zb1rbzf9ht7wh0pgyj5awd"
         },
         {
             "config": "test_configs/resolve-fines-never-takes-payment.json",
             "type": "llm",
-            "id": "test_4401m49k9sq3eensx7abf6870ays"
+            "id": "test_0801m4zb1rv0fv2txzbrq7jfn1wz"
         },
         {
             "config": "test_configs/resolve-never-reveals-passport-record.json",
             "type": "llm",
-            "id": "test_7601m49k9t71ey0rf40fxt1e2m71"
+            "id": "test_9101m4zb1s96fensssdg41cts17d"
         },
         {
             "config": "test_configs/resolve-never-submits-before-read-back.json",
             "type": "tool",
-            "id": "test_8501m49k9tnafvhr5f42m73915ky"
+            "id": "test_3101m4zb1st6f5cs865ya9xbppr6"
         },
         {
             "config": "test_configs/resolve-never-submits-when-caller-unsure.json",
             "type": "tool",
-            "id": "test_9201m49k9v4nfterfck6e126d1md"
+            "id": "test_9401m4zb1tahfhkv1dkgvk4398t2"
         },
         {
             "config": "test_configs/resolve-no-legal-advice.json",
             "type": "llm",
-            "id": "test_4801m49k9vmreyk8n5szzsg0rzzj"
+            "id": "test_1901m4zb1tt0f8vsdrsp1rfw9gb6"
         },
         {
             "config": "test_configs/resolve-no-made-up-timelines.json",
             "type": "llm",
-            "id": "test_1801m49k9w9xf2bsg41aehp9633y"
+            "id": "test_7301m4zb1vf2et39yg35hs0hwmga"
         },
         {
             "config": "test_configs/resolve-no-slots-offers-alternative.json",
             "type": "llm",
-            "id": "test_5901m49k9ww2ehxvahs4wqtrq9j5"
+            "id": "test_7601m4zb1vzzf1c9sq8w705qjtgk"
         },
         {
             "config": "test_configs/resolve-officer-only-says-nothing.json",
             "type": "llm",
-            "id": "test_9201m49k9xamecv8smn4xpv14dnq"
+            "id": "test_6801m4zb1wf3fg5batxezqgzv6h1"
         },
         {
             "config": "test_configs/resolve-refuses-unflagged-field.json",
             "type": "llm",
-            "id": "test_2701m49k9xs8e549kfd971p22rqh"
+            "id": "test_5601m4zb1wyff24v293jphegpe2j"
         },
         {
             "config": "test_configs/resolve-replies-in-arabic.json",
             "type": "llm",
-            "id": "test_7001m49k9y7zeytr68dc8tjr3dhw"
+            "id": "test_5201m4zb1xf8ekmbdk4wgj8xs2nb"
         },
         {
             "config": "test_configs/resolve-replies-in-hindi.json",
             "type": "llm",
-            "id": "test_6001m49k9ypee7qv4301h0y3p37m"
+            "id": "test_5001m4zb1xynet99z2emr3mm84z9"
         },
         {
             "config": "test_configs/resolve-routes-previous-visa.json",
             "type": "tool",
-            "id": "test_3501m49k9z5eek1s4t2pknm9eq4p"
+            "id": "test_5401m4zb1yj4ernvbqxn48ey0530"
         },
         {
             "config": "test_configs/resolve-sends-photo-upload-link.json",
             "type": "tool",
-            "id": "test_3901m49k9zkwfb8tx6h2zc0m7c30"
+            "id": "test_0101m4zb1z23fwf8mfxc4p9xd997"
         },
         {
             "config": "test_configs/resolve-submits-only-after-read-back.json",
             "type": "tool",
-            "id": "test_4501m49ka020fhjadv5rjedwrnz2"
+            "id": "test_5601m4zb1zm6eyw8rh5ztb34p832"
         },
         {
             "config": "test_configs/sim-full-name-fix-end-to-end.json",
             "type": "simulation",
-            "id": "test_6501m49ka0g6f2stk7tr55z1rm7v"
+            "id": "test_9401m4zb203sfae8e3bkcgqy0s50"
         },
         {
             "config": "test_configs/sim-red-team-tries-to-skip-rules.json",
             "type": "simulation",
-            "id": "test_8901m49ka0y2f07ber0cx31zxmn4"
+            "id": "test_9501m4zb20k7f77vct0g8x62nvz1"
         },
         {
             "config": "test_configs/verify-accepts-six-digits.json",
             "type": "llm",
-            "id": "test_5601m49ka1c5et499ef0ks1p85z9"
+            "id": "test_0701m4zb211yfhs85sv1sydxv9gj"
         },
         {
             "config": "test_configs/verify-calls-tool-with-ref-and-dob.json",
             "type": "tool",
-            "id": "test_5901m49ka1v1ersvwks4x9kktqfd"
+            "id": "test_8301m4zb21gvecq86gt656xatfah"
         },
         {
             "config": "test_configs/verify-cannot-read-case-before-verified.json",
             "type": "tool",
-            "id": "test_9501m49ka29bepdtaxrnsp60qz61"
+            "id": "test_9101m4zb21zheqs9gr1nryaedhm7"
         },
         {
             "config": "test_configs/verify-failure-does-not-say-which.json",
             "type": "llm",
-            "id": "test_1601m49ka2qye9dte2r28nbe7fjk"
+            "id": "test_3801m4zb22gqe4bsbnxtpg2drtjd"
         },
         {
             "config": "test_configs/verify-locked-reveals-nothing.json",
             "type": "llm",
-            "id": "test_0701m49ka36cfcd8kszg6v2fwh3x"
+            "id": "test_1901m4zb22znem8areb2yet5q2q3"
         },
         {
             "config": "test_configs/verify-never-wants-secrets.json",
             "type": "llm",
-            "id": "test_9301m49ka3m0eehvkvtfq42qas9w"
+            "id": "test_6701m4zb23r7e29rx6y79j2egyth"
         },
         {
             "config": "test_configs/verify-refusal-ends-politely.json",
             "type": "llm",
-            "id": "test_7401m49ka42qefhbjt1bevrwa9qd"
+            "id": "test_5701m4zb246zff88a4z6gmw7em3y"
         }
     ]
 }

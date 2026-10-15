@@ -312,7 +312,7 @@ async function main() {
         open_handover: { source: "open", target: "handover", forward_condition: { type: "llm", label: "Wants a person", condition: "The person asked to speak to a human, or is upset or distressed." } },
         verify_resolve: { source: "verify", target: "resolve", forward_condition: { type: "llm", label: "Verified", condition: "The verify_identity tool returned verified: true on this call." } },
         verify_handover: { source: "verify", target: "handover", forward_condition: { type: "llm", label: "Wants a person", condition: "The caller asked to speak to a human, or is upset or distressed." } },
-        resolve_handover: { source: "resolve", target: "handover", forward_condition: { type: "llm", label: "Needs a person", condition: "The caller asked to speak to a person, is upset or distressed, disputes the decision, keeps not being understood, or a tool said temporarily_unavailable or still_does_not_match. Questions the assistant can decline itself (legal advice, other services, approvals, timelines) are not a reason." } },
+        resolve_handover: { source: "resolve", target: "handover", forward_condition: { type: "llm", label: "Needs a person", condition: "The caller asked to speak to a person, is upset or distressed, disputes the decision, keeps not being understood, or a tool said temporarily_unavailable or still_does_not_match. Not a reason: being impatient or in a hurry; asking the assistant to approve the visa, speed it up or skip a step (that is not disputing the decision); questions it can decline itself (legal advice, other services, timelines). Those are answered in this step." } },
       },
     },
     platform_settings: {

@@ -1,12 +1,12 @@
 {
-  "agent_id": "agent_5801m44amaw8f4z89jd1snj1xkwh",
-  "invocation_id": "suite_2901m44anf37er2t4187fa1782zf",
-  "ran_at": "2026-10-04T20:47:05.929Z",
-  "repeat": 1,
+  "agent_id": "agent_1701m3wg8jsvek687s5sw7s2hskw",
+  "invocation_id": "suite_6701m4zb9gg3fz28apansk42x0rk",
+  "ran_at": "2026-10-15T08:39:35.916Z",
+  "repeat": 9,
   "partial": false,
   "llm": "gpt-4.1",
   "tts_model": "eleven_flash_v2",
-  "overall_pass_rate": 0.972972972972973,
+  "overall_pass_rate": 0.9970760233918129,
   "tests": [
     {
       "name": "open-not-now-books-callback",
@@ -14,8 +14,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": 14,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -25,8 +25,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": 2,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -36,8 +36,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 15,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -47,8 +47,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 13,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -58,8 +58,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 13,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -69,8 +69,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 28,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -80,8 +80,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 11,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -91,8 +91,19 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
+      "pass_rate": 1,
+      "failures": []
+    },
+    {
+      "name": "verify-accepts-six-digits",
+      "step": "verify",
+      "kind": "llm",
+      "stakes": "normal",
+      "edge_case": null,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -102,8 +113,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 21,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -113,8 +124,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 16,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -124,8 +135,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 16,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -135,8 +146,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 17,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -146,8 +157,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": 13,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -157,8 +168,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 5,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -168,8 +179,8 @@
       "kind": "tool",
       "stakes": "high",
       "edge_case": 22,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -179,8 +190,8 @@
       "kind": "tool",
       "stakes": "high",
       "edge_case": 22,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -190,8 +201,8 @@
       "kind": "tool",
       "stakes": "high",
       "edge_case": 22,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -201,8 +212,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 20,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -212,8 +223,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 21,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -223,8 +234,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 21,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -234,8 +245,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 19,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -245,8 +256,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -256,8 +267,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 24,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -267,8 +278,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 23,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -278,8 +289,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 25,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -289,8 +300,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -300,8 +311,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 27,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -311,8 +322,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -322,8 +333,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 4,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -333,8 +344,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 26,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -344,12 +355,10 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 1,
-      "passed": 0,
-      "pass_rate": 0,
-      "failures": [
-        "The agent has not yet provided a response to the user in Arabic to confirm the name correction as required by the acceptance criteria."
-      ]
+      "runs": 9,
+      "passed": 9,
+      "pass_rate": 1,
+      "failures": []
     },
     {
       "name": "resolve-replies-in-hindi",
@@ -357,8 +366,8 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -368,10 +377,12 @@
       "kind": "llm",
       "stakes": "normal",
       "edge_case": 33,
-      "runs": 1,
-      "passed": 1,
-      "pass_rate": 1,
-      "failures": []
+      "runs": 9,
+      "passed": 8,
+      "pass_rate": 0.8888888888888888,
+      "failures": [
+        "The agent has not yet communicated the system error or the callback arrangement to the user, as the transcript ends immediately after the tool call."
+      ]
     },
     {
       "name": "resolve-distressed-caller-gets-a-person",
@@ -379,8 +390,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": 30,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -390,8 +401,8 @@
       "kind": "tool",
       "stakes": "normal",
       "edge_case": 31,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -401,8 +412,8 @@
       "kind": "simulation",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     },
@@ -412,8 +423,8 @@
       "kind": "simulation",
       "stakes": "normal",
       "edge_case": null,
-      "runs": 1,
-      "passed": 1,
+      "runs": 9,
+      "passed": 9,
       "pass_rate": 1,
       "failures": []
     }

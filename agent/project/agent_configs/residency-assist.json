@@ -24,8 +24,8 @@
         },
         "timezone": "Asia/Dubai",
         "tool_ids": [
-          "tool_0801m49k9aewfp5a506kngahxnpt",
-          "tool_2901m49k96yteqf9wtqxc7rppph1"
+          "tool_9301m4zb17h9ev6vvdrzqr02eapt",
+          "tool_2501m4zb13rmenkb0hph40z2v3jp"
         ],
         "built_in_tools": {
           "end_call": {
@@ -59,67 +59,67 @@
           {
             "type": "text",
             "name": "Residency Assist — About this call, and what the assistant can and cannot do",
-            "id": "IQrPk1ImTaSxX9D632Ja",
+            "id": "OAtwccrsXH3qwm8ulavq",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — The 12 checks, and what happens when one fails",
-            "id": "p159P7yjcopIw5wXx14r",
+            "id": "Q7oBuFUOaT0KUeNGBxI8",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Personal photo and document scans (checks R4 and R5)",
-            "id": "VCP9zbufZNqOBNTTQr9g",
+            "id": "sdR0PCMdLBM8kLFTV1MP",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Passport validity (check R8)",
-            "id": "RUiCVO9sOIACjClAqoBJ",
+            "id": "nvfqH20ZRrnYbq3MdIi7",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Name, date of birth and passport number (checks R1, R2, R3)",
-            "id": "ZMVUq08VIvS89Oy09LFS",
+            "id": "sKuW3AN3qL0DPzZe4SRw",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Attestation of certificates",
-            "id": "FXwKTcDgoDIUGVOA4e7u",
+            "id": "E1sLKQ5oVMQgRNZeNiam",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — A previous residence visa is still active (check R9)",
-            "id": "wEvRY5AHNqzfsUZ81ly6",
+            "id": "0wxNosJPWfkjIKvvsvaW",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Unpaid immigration fines (check R10)",
-            "id": "pZkkKgN4BoYMJ8lAOVlW",
+            "id": "yeruEQVFeNhCqfxnwGQM",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Medical fitness test and Emirates ID biometrics (checks R6 and R7)",
-            "id": "Ak13C6prHNi3EaVzfWsU",
+            "id": "bgB0Tf1Q9PH3wlfIVWt3",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Amer centres and official ways to check an application",
-            "id": "7GlqurirUH6Tx325CMWt",
+            "id": "e981Yj20WpRkxoUFkTO4",
             "usage_mode": "auto"
           },
           {
             "type": "text",
             "name": "Residency Assist — Profession code doesn't match the labour contract (check R11)",
-            "id": "tKAuXUIv60xJzGOE0ZSj",
+            "id": "QUxVi62svbmDUTkgkpZV",
             "usage_mode": "auto"
           }
         ],
@@ -248,7 +248,7 @@
         },
         "additional_prompt": "STEP: VERIFY. The caller agreed to talk. Confirm they are the applicant before sharing anything. Ask only for the application reference and the date of birth — never anything else.\n\n1. Ask: \"Could you tell me your application reference? It starts with R A followed by six numbers.\" Let them read it; repeat the six numbers back once to check you heard them correctly. The six numbers alone are enough: if they leave out \"R A\", don't ask for it again.\n2. Ask: \"And your date of birth, as written in your passport?\" Repeat it back as day, month in words, year.\n3. Call verify_identity with application_reference (as said, e.g. \"RA-260106\") and date_of_birth in YYYY-MM-DD.\n\nResults:\n- verified: true → \"Thank you, you're verified.\" Move on (the next step explains the application).\n- verified: false with attempts_left 1 → \"Those details don't match our records. Let's try once more.\" Ask for both again. Never say which one was wrong.\n- locked: true (or a second failure) → \"I'm sorry, I can't confirm your identity, so I can't discuss the application on this call. You can check it yourself on the portal where you applied.\" Offer a callback from a person (create_callback, escalate=true, reason \"identity could not be verified\"). Goodbye, end_call. Reveal nothing about the application.\n- The caller refuses to give these details → that's fine. Explain you can't discuss the application without them, offer a callback, end politely.\n- The caller offers a password, PIN, code or card number → stop them: \"Please don't share that — I will never need it.\"\n",
         "additional_tool_ids": [
-          "tool_1701m49k9d3cff7v33cnzhx4c4ve"
+          "tool_7401m4zb1a8desrafktrdwefkdtp"
         ],
         "entry_behavior": "auto",
         "edge_order": [
@@ -265,13 +265,13 @@
         },
         "additional_prompt": "STEP: RESOLVE. The caller is verified on this call. Call get_case right away, then explain and fix.\n\nExplain first:\n- Say how many things were found, then one plain sentence each, using the \"12 checks\" knowledge document. Example: \"I found two things. The name on the form is spelled differently from your passport, and the photo background isn't plain white. We can fix both now.\"\n- If get_case returns officer_only: \"An officer needs to review your application, and they'll contact you directly.\" Offer a callback (create_callback, escalate=true). Say nothing else about it. Close and end_call.\n\nThen work through the issues, one at a time, in this order:\n\nA. Details to correct (how_to_resolve: fix_by_voice — name, date of birth, passport number)\n1. \"Please look at your passport and tell me your [field] exactly as it's printed.\"\n2. Read it back: names letter by letter in plain letters (\"R, A, H, U, L\"; no \"R for Romeo\" spelling alphabet unless a letter wasn't clear), then as a whole; date as day, month in words, year; passport number character by character.\n3. Ask \"Is that exactly right?\" Only after a clear yes, call submit_correction with the field, new_value and caller_confirmed_read_back: true.\n4. ok: true → \"I've sent that correction to an officer for approval.\"\n   still_does_not_match → \"That still doesn't match the passport details we have. I can't change it on this call.\" Don't guess, don't hint. Offer a person (create_callback, escalate=true).\n   field_not_flagged → \"I can only correct the items our check flagged.\"\n   If they change their mind before submitting, take the new value and read it back again.\n\nB. New photo or scan (how_to_resolve: upload)\n1. Explain what was wrong in one sentence and what a good photo needs (knowledge document \"Photo and scan\").\n2. send_upload_link with kind photo or scan. \"I've sent you a text message with a link. It works for 24 hours.\"\n3. Offer to wait while they do it. When they say done, check_upload:\n   uploaded_and_passed → \"It passed the automatic check. An officer will confirm it.\"\n   uploaded_but_failed → say exactly what failed, and help them try again.\n   waiting_for_upload → offer to wait a little longer, or they can do it later today.\n\nC. Appointments (how_to_resolve: book_visit — biometrics R6, medical test R7)\n1. One sentence on what's pending. list_slots with purpose biometrics or medical.\n2. Offer the two slots (\"Tuesday at 9:30 at the Al Barsha centre, or Wednesday at 11 at Deira\"). book_appointment with the chosen slot_id.\n3. Confirm centre, day and time, and what to bring (original passport or Emirates ID). This prototype's slots are demonstration slots — if asked, say so.\n4. No slots → give the next available date or book a callback.\n\nD. Someone else must act (how_to_resolve: route — R8 passport, R9 previous visa, R10 fines, R11 profession code)\n- Explain who must act, from the knowledge base, in two sentences or fewer. Never take payment.\n- Then call create_followup with the rule. Only after it returns ok, say the team has a note of it.\n- Fines (R10): name the channels exactly: \"Fines can only be paid through the official channels: the GDRFA Dubai website or app, or an Amer centre.\" If they offer to pay you, say you can't take any payment on this call and nobody from us will ever ask them to pay over the phone.\n\nClose:\n- Summarise: what was sent for officer approval, what was booked, what the caller or someone else still needs to do.\n- \"An officer reviews every change. You'll get an SMS and see updates on the portal.\"\n- \"If you ever don't want these calls, just tell us and we'll stop.\" Then goodbye and end_call.\n\nThroughout: if the caller disputes the decision, gets upset or asks for a person, hand over to a person. Anything else you can't do here (legal advice, another application, a different service, an approval, a faster decision, a timeline) you answer yourself: say plainly you can't help with that on this call, point to the official channels from the knowledge base, offer a callback from a person (create_callback, escalate=false), and keep fixing this application.\n",
         "additional_tool_ids": [
-          "tool_3901m49k98pre2rvp6zkeam9n6ee",
-          "tool_3301m49k9c6wfn4tdyr6nw03kj1b",
-          "tool_4101m49k9bacewask3kr0z51h3cg",
-          "tool_2701m49k9632fef8f0bvkzjy7bjs",
-          "tool_0801m49k99jnf74bqjn4k2pg0z7n",
-          "tool_1401m49k955re96t8rr8f7g0jz6z",
-          "tool_2201m49k97tsf2y91yjq6h3rzcnm"
+          "tool_2301m4zb15gyfe5ve5rhn99c75ev",
+          "tool_5801m4zb19bweev9sz3fxcvb26nz",
+          "tool_9401m4zb18f2ee4tgmd3cqgzk84j",
+          "tool_3401m4zb12whejxsg2gs1zrphwgz",
+          "tool_3701m4zb16j9een9sdrnwc19khkd",
+          "tool_1501m4zb11v8ekfs669d7x6s6xny",
+          "tool_1801m4zb14mfeka9y9bqdj870dvg"
         ],
         "entry_behavior": "auto",
         "edge_order": [
@@ -341,7 +341,7 @@
         "forward_condition": {
           "type": "llm",
           "label": "Needs a person",
-          "condition": "The caller asked to speak to a person, is upset or distressed, disputes the decision, keeps not being understood, or a tool said temporarily_unavailable or still_does_not_match. Questions the assistant can decline itself (legal advice, other services, approvals, timelines) are not a reason."
+          "condition": "The caller asked to speak to a person, is upset or distressed, disputes the decision, keeps not being understood, or a tool said temporarily_unavailable or still_does_not_match. Not a reason: being impatient or in a hurry; asking the assistant to approve the visa, speed it up or skip a step (that is not disputing the decision); questions it can decline itself (legal advice, other services, timelines). Those are answered in this step."
         }
       }
     }
@@ -462,153 +462,153 @@
     "testing": {
       "attached_tests": [
         {
-          "test_id": "test_6001m49k9jsmeft9wwyk152m5pck",
+          "test_id": "test_9201m4zb1gjff8gs3vv37w6fpsas",
           "workflow_node_id": "handover"
         },
         {
-          "test_id": "test_5701m49k9k7ve2xvdrt08504a4jd",
+          "test_id": "test_1701m4zb1h2eendbvksh9m8mf262",
           "workflow_node_id": "verify"
         },
         {
-          "test_id": "test_7201m49k9kn7edws5me29v3ams4j",
+          "test_id": "test_4501m4zb1hhff4pse5zza4fperkp",
           "workflow_node_id": "open"
         },
         {
-          "test_id": "test_2901m49k9m5kf42v8n62hxfb2cv9",
+          "test_id": "test_8101m4zb1j90f3zs0806jp79s0b4",
           "workflow_node_id": "open"
         },
         {
-          "test_id": "test_9901m49k9mm6fwc99nphqgsdnk4x",
+          "test_id": "test_6801m4zb1jqxedrs8dabwqt05cqm",
           "workflow_node_id": "open"
         },
         {
-          "test_id": "test_3801m49k9n2ae939pmby53n2e9q6",
+          "test_id": "test_2101m4zb1ka7fx0sm7x4axapqgpc",
           "workflow_node_id": "open"
         },
         {
-          "test_id": "test_9101m49k9ngaeyg99a5qs9j2jvws",
+          "test_id": "test_1801m4zb1ktzejf9b7gfdyegxake",
           "workflow_node_id": "open"
         },
         {
-          "test_id": "test_8801m49k9nzkffq8sv0t5wyp743s",
+          "test_id": "test_0501m4zb1mbke6zaprtpgbrzkfnj",
           "workflow_node_id": "open"
         },
         {
-          "test_id": "test_7101m49k9pe1ezcrakbnw5h3fg1d",
+          "test_id": "test_4901m4zb1n2yet6b1esv4jnv5e2j",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_1101m49k9pvqe1w8x5sdqtb6jmra",
+          "test_id": "test_3201m4zb1nn6e8mvdrrjchypc4py",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_4301m49k9qaweck91m1chv9eekj4",
+          "test_id": "test_0801m4zb1p5mfp5bxswrrj3b2bk1",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_0601m49k9qtted0rzp6k36hsmvb4",
+          "test_id": "test_0301m4zb1pvme40vcvs7cvbrv093",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_1801m49k9r9vf3g9afw5k792h7wp",
+          "test_id": "test_1101m4zb1qb3f6mvmv9tgfjxs70j",
           "workflow_node_id": "handover"
         },
         {
-          "test_id": "test_0701m49k9rs7fgzrg6ftdz2mpfqa",
+          "test_id": "test_2101m4zb1qw2f4wvxafmcx9yfxve",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_7201m49k9s7xegzvsxdmc4zstdds",
+          "test_id": "test_0101m4zb1rbzf9ht7wh0pgyj5awd",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_4401m49k9sq3eensx7abf6870ays",
+          "test_id": "test_0801m4zb1rv0fv2txzbrq7jfn1wz",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_7601m49k9t71ey0rf40fxt1e2m71",
+          "test_id": "test_9101m4zb1s96fensssdg41cts17d",
           "workflow_node_id": "handover"
         },
         {
-          "test_id": "test_8501m49k9tnafvhr5f42m73915ky",
+          "test_id": "test_3101m4zb1st6f5cs865ya9xbppr6",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_9201m49k9v4nfterfck6e126d1md",
+          "test_id": "test_9401m4zb1tahfhkv1dkgvk4398t2",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_4801m49k9vmreyk8n5szzsg0rzzj",
+          "test_id": "test_1901m4zb1tt0f8vsdrsp1rfw9gb6",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_1801m49k9w9xf2bsg41aehp9633y",
+          "test_id": "test_7301m4zb1vf2et39yg35hs0hwmga",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_5901m49k9ww2ehxvahs4wqtrq9j5",
+          "test_id": "test_7601m4zb1vzzf1c9sq8w705qjtgk",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_9201m49k9xamecv8smn4xpv14dnq",
+          "test_id": "test_6801m4zb1wf3fg5batxezqgzv6h1",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_2701m49k9xs8e549kfd971p22rqh",
+          "test_id": "test_5601m4zb1wyff24v293jphegpe2j",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_7001m49k9y7zeytr68dc8tjr3dhw",
+          "test_id": "test_5201m4zb1xf8ekmbdk4wgj8xs2nb",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_6001m49k9ypee7qv4301h0y3p37m",
+          "test_id": "test_5001m4zb1xynet99z2emr3mm84z9",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_3501m49k9z5eek1s4t2pknm9eq4p",
+          "test_id": "test_5401m4zb1yj4ernvbqxn48ey0530",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_3901m49k9zkwfb8tx6h2zc0m7c30",
+          "test_id": "test_0101m4zb1z23fwf8mfxc4p9xd997",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_4501m49ka020fhjadv5rjedwrnz2",
+          "test_id": "test_5601m4zb1zm6eyw8rh5ztb34p832",
           "workflow_node_id": "resolve"
         },
         {
-          "test_id": "test_6501m49ka0g6f2stk7tr55z1rm7v"
+          "test_id": "test_9401m4zb203sfae8e3bkcgqy0s50"
         },
         {
-          "test_id": "test_8901m49ka0y2f07ber0cx31zxmn4"
+          "test_id": "test_9501m4zb20k7f77vct0g8x62nvz1"
         },
         {
-          "test_id": "test_5601m49ka1c5et499ef0ks1p85z9",
+          "test_id": "test_0701m4zb211yfhs85sv1sydxv9gj",
           "workflow_node_id": "verify"
         },
         {
-          "test_id": "test_5901m49ka1v1ersvwks4x9kktqfd",
+          "test_id": "test_8301m4zb21gvecq86gt656xatfah",
           "workflow_node_id": "verify"
         },
         {
-          "test_id": "test_9501m49ka29bepdtaxrnsp60qz61",
+          "test_id": "test_9101m4zb21zheqs9gr1nryaedhm7",
           "workflow_node_id": "verify"
         },
         {
-          "test_id": "test_1601m49ka2qye9dte2r28nbe7fjk",
+          "test_id": "test_3801m4zb22gqe4bsbnxtpg2drtjd",
           "workflow_node_id": "verify"
         },
         {
-          "test_id": "test_0701m49ka36cfcd8kszg6v2fwh3x",
+          "test_id": "test_1901m4zb22znem8areb2yet5q2q3",
           "workflow_node_id": "verify"
         },
         {
-          "test_id": "test_9301m49ka3m0eehvkvtfq42qas9w",
+          "test_id": "test_6701m4zb23r7e29rx6y79j2egyth",
           "workflow_node_id": "verify"
         },
         {
-          "test_id": "test_7401m49ka42qefhbjt1bevrwa9qd",
+          "test_id": "test_5701m4zb246zff88a4z6gmw7em3y",
           "workflow_node_id": "verify"
         }
       ]

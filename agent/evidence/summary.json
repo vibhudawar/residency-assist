@@ -1,42 +1,42 @@
 {
-  "agent_id": "agent_5801m44amaw8f4z89jd1snj1xkwh",
+  "agent_id": "agent_1701m3wg8jsvek687s5sw7s2hskw",
   "full_run": {
-    "ran_at": "2026-10-04T20:47:05.929Z",
-    "repeat": 1,
+    "ran_at": "2026-10-15T08:39:35.916Z",
+    "repeat": 9,
     "llm": "gpt-4.1",
     "tts_model": "eleven_flash_v2",
-    "tests": 37,
-    "passed": 36,
-    "runs": 37
+    "tests": 38,
+    "passed": 341,
+    "runs": 342
   },
   "steps": [
     {
       "step": "open",
-      "passed": 6,
-      "runs": 6
+      "passed": 54,
+      "runs": 54
     },
     {
       "step": "verify",
-      "passed": 7,
-      "runs": 7
+      "passed": 72,
+      "runs": 72
     },
     {
       "step": "resolve",
-      "passed": 18,
-      "runs": 19
+      "passed": 170,
+      "runs": 171
     },
     {
       "step": "handover",
-      "passed": 3,
-      "runs": 3
+      "passed": 27,
+      "runs": 27
     },
     {
       "step": "full call",
-      "passed": 2,
-      "runs": 2
+      "passed": 18,
+      "runs": 18
     }
   ],
-  "reruns_after": 2,
+  "reruns_after": 0,
   "tests": [
     {
       "name": "open-not-now-books-callback",
@@ -44,13 +44,13 @@
       "kind": "tool",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -60,13 +60,13 @@
       "kind": "tool",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -76,13 +76,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -92,13 +92,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -108,13 +108,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -124,13 +124,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -140,13 +140,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -156,13 +156,29 @@
       "kind": "tool",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
+        "source": "full"
+      }
+    },
+    {
+      "name": "verify-accepts-six-digits",
+      "step": "verify",
+      "kind": "llm",
+      "stakes": "normal",
+      "full": {
+        "passed": 9,
+        "runs": 9
+      },
+      "latest": {
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -172,13 +188,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -188,13 +204,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -204,13 +220,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -220,13 +236,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -236,27 +252,14 @@
       "kind": "tool",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
-      }
-    },
-    {
-      "name": "verify-accepts-six-digits",
-      "step": "verify",
-      "kind": "llm",
-      "stakes": "normal",
-      "full": null,
-      "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T21:29:54.753Z",
-        "source": "rerun"
       }
     },
     {
@@ -265,13 +268,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -281,13 +284,13 @@
       "kind": "tool",
       "stakes": "high",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -297,13 +300,13 @@
       "kind": "tool",
       "stakes": "high",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -313,13 +316,13 @@
       "kind": "tool",
       "stakes": "high",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -329,13 +332,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -345,13 +348,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -361,13 +364,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -377,13 +380,13 @@
       "kind": "tool",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -393,13 +396,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -409,13 +412,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -425,13 +428,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -441,13 +444,13 @@
       "kind": "tool",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -457,13 +460,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -473,13 +476,13 @@
       "kind": "tool",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -489,13 +492,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -505,13 +508,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -521,14 +524,14 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 0,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:56:42.395Z",
-        "source": "rerun"
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
+        "source": "full"
       }
     },
     {
@@ -537,13 +540,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -553,13 +556,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 8,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 8,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -569,13 +572,13 @@
       "kind": "llm",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -585,13 +588,13 @@
       "kind": "tool",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -601,13 +604,13 @@
       "kind": "tool",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -617,13 +620,13 @@
       "kind": "simulation",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     },
@@ -633,13 +636,13 @@
       "kind": "simulation",
       "stakes": "normal",
       "full": {
-        "passed": 1,
-        "runs": 1
+        "passed": 9,
+        "runs": 9
       },
       "latest": {
-        "passed": 1,
-        "runs": 1,
-        "ran_at": "2026-10-04T20:47:05.929Z",
+        "passed": 9,
+        "runs": 9,
+        "ran_at": "2026-10-15T08:39:35.916Z",
         "source": "full"
       }
     }
