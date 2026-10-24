@@ -46,7 +46,7 @@ export default async function EvidencePage() {
                 <p className={cn("font-led text-[34px] leading-none font-black led-glow", allPassed ? "text-led-green" : "text-led-amber")}>
                   {run.passed}/{run.runs}
                 </p>
-                <p className="mt-2 text-[12.5px] text-led-text/75">tests passed, every test run once</p>
+                <p className="mt-2 text-[12.5px] text-led-text/75">{run.repeat > 1 ? `test runs passed: ${run.tests} tests, each run ${run.repeat} times` : "tests passed, every test run once"}</p>
               </div>
               <p className="text-end font-mono text-[11.5px] leading-relaxed text-led-text/55">
                 {run.llm}
@@ -130,11 +130,13 @@ export default async function EvidencePage() {
               </>
             )}
 
-            <div className="mt-6">
-              <EmptyLog>
-                Pass rates over 10 runs of every test: not run yet. A full run uses about 6,000 ElevenLabs credits, so the ten-run rates come when the challenge credits arrive.
-              </EmptyLog>
-            </div>
+            {run.repeat < 10 && (
+              <div className="mt-6">
+                <EmptyLog>
+                  Pass rates over 10 runs of every test: not run yet. A full run uses about 6,000 ElevenLabs credits, so the ten-run rates come when the challenge credits arrive.
+                </EmptyLog>
+              </div>
+            )}
 
             <details className="group mt-4">
               <summary className="cursor-pointer text-[13.5px] font-medium text-ink-2 hover:text-ink">Every test and its latest result · {agent.tests.length} tests</summary>
