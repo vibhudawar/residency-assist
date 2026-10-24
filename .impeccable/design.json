@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-05T18:00:00+00:00",
+  "generatedAt": "2026-10-24T12:00:00+00:00",
   "title": "Design System: Residency Assist",
   "extensions": {
     "colorMeta": {
@@ -449,6 +449,11 @@
         "name": "cell-well",
         "value": "inset 0 -1px 0 var(--board-rule)",
         "purpose": "Board character cells."
+      },
+      {
+        "name": "object-lift-presentation",
+        "value": "filter: drop-shadow(0 30px 28px rgb(22 24 26 / 0.32)) drop-shadow(0 3px 5px rgb(22 24 26 / 0.16))",
+        "purpose": "A real product element placed on a pitch slide as a cut-out image (ticket, board); the shadow follows its alpha shape."
       }
     ],
     "motion": [
@@ -699,11 +704,19 @@
       "description": "A failed screen on paper under the shared bar: headline, one plain line, large primary Try again (pending label), ghost exit, mono error reference. Never server error text.",
       "html": "<section class=\"ds-err\" role=\"alert\"><h1>This page didn't load</h1><p>Something went wrong on our side, not with your application. Try again in a moment.</p><div class=\"ds-keys\"><button class=\"ds-retry\">Try again</button><a class=\"ds-exit\" href=\"#\">Back to the start</a></div><p class=\"ds-ref\">Error reference <code dir=\"ltr\">2840193377</code></p></section>",
       "css": ".ds-err{max-width:60ch;color:var(--ink,#16181a);font-family:'Readex Pro',system-ui,sans-serif}.ds-err h1{margin:0;font-size:36px;line-height:1.12;font-weight:600;letter-spacing:-.015em}.ds-err p{margin:12px 0 0;font-size:15px;line-height:1.625;color:var(--ink-2,#4b5057)}.ds-keys{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.ds-retry,.ds-exit{height:48px;padding:0 24px;border-radius:8px;font:500 15px 'Readex Pro',system-ui,sans-serif;display:inline-flex;align-items:center;text-decoration:none;cursor:pointer;transition:background-color .15s,color .15s}.ds-retry{border:0;background:var(--ink,#16181a);color:var(--paper,#f6f8f9)}.ds-retry:hover{background:var(--board,#0c0e10)}.ds-exit{background:transparent;color:var(--ink-2,#4b5057)}.ds-exit:hover{background:var(--paper-quiet,#eaeef0);color:var(--ink,#16181a)}.ds-retry:focus-visible,.ds-exit:focus-visible{outline:2px solid var(--ring,#c98400);outline-offset:2px}.ds-err .ds-ref{margin-top:32px;font-size:12.5px}.ds-ref code{font-family:'Geist Mono',monospace;color:var(--ink,#16181a)}"
+    },
+    {
+      "name": "Pitch Slip and Leader",
+      "kind": "custom",
+      "refersTo": "correction-slip",
+      "description": "Pitch deck only: one flat paper slip per slide, joined to the element it names by a 2px ink leader with a 12px ink dot.",
+      "html": "<div class=\"ds-pitch\"><div class=\"ds-pitch-line\"></div><div class=\"ds-pitch-slip\"><span class=\"ds-pitch-chip\">R1</span>One wrong letter.</div></div>",
+      "css": ".ds-pitch{display:flex;align-items:center;padding:24px;background:var(--hall,#e4e8ea);font-family:'Readex Pro',system-ui,sans-serif}.ds-pitch-line{position:relative;width:96px;border-top:2px solid var(--ink,#16181a)}.ds-pitch-line::after{content:'';position:absolute;right:-6px;top:-7px;width:12px;height:12px;border-radius:50%;background:var(--ink,#16181a)}.ds-pitch-slip{margin-left:6px;background:var(--paper,#f6f8f9);border:1px solid var(--rule,#d0d6da);border-radius:6px;padding:11px 14px;font-size:14px;line-height:1.32;color:var(--ink,#16181a);white-space:nowrap}.ds-pitch-chip{display:inline-block;font-family:'Geist Mono',ui-monospace,monospace;font-size:10px;line-height:1;padding:3px 5px;border-radius:4px;margin-right:6px;vertical-align:1px;background:var(--fix-bg,#fff0d3);color:var(--fix,#8a5200)}"
     }
   ],
   "narrative": {
     "northStar": "The Service Hall",
-    "overview": "**Creative North Star: \"The Service Hall\"**\n\nThe application is a numbered ticket from a residency service hall, and the hall's black LED board always says where it is and what happens next. Two materials carry everything. The working surface is cool thermal paper printed in near-black ink: the form, the ticket, the issue list. The status surface is a near-black LED board whose dot-matrix lamps light amber while checking, green when done, red when attention is needed, blue when someone else must act. The hall itself is a pale cool grey floor that both materials sit on.\n\nThe world is calm and dense. The hall feels like a public counter where things are being dealt with, not like a dashboard. One bilingual sans (Readex Pro, Latin and Arabic) carries everything a person reads. The ticket prints in thermal mono. Dot-matrix appears only where a real board would light it: reference numerals, the \"now serving\" stage, short state words. Arabic is true RTL. Columns, lamps and ticket rows mirror; reference numbers and passport data stay LTR inside fixed character cells.\n\nThe world rejects the generic government blue-header stepper form and its startup-gradient opposite.\n\nThe operator console (`/console`) is built in the same world, unchanged: an officer's counter desk. The queue, the pre-dial calling board, the live call board, the latency board and every lit count are LED board; the open case file, correction slips, call records, logs and the case-history roll are thermal paper. Same tokens, same issue ramp, same lamp states, same motion grammar (\"paper feeds down, LED cells light; nothing else moves\"). The console is English-only and always LTR.\n\nWaiting, failure and absence are the same world too. While a page loads, the form is already pre-printed and the board is already hung: every fixed label prints, only the data is unprinted paper or an unlit board, at its real size. When a page fails, it says so in plain words on paper under the same bar, with one way forward.",
+    "overview": "**Creative North Star: \"The Service Hall\"**\n\nThe application is a numbered ticket from a residency service hall, and the hall's black LED board always says where it is and what happens next. Two materials carry everything. The working surface is cool thermal paper printed in near-black ink: the form, the ticket, the issue list. The status surface is a near-black LED board whose dot-matrix lamps light amber while checking, green when done, red when attention is needed, blue when someone else must act. The hall itself is a pale cool grey floor that both materials sit on.\n\nThe world is calm and dense. The hall feels like a public counter where things are being dealt with, not like a dashboard. One bilingual sans (Readex Pro, Latin and Arabic) carries everything a person reads. The ticket prints in thermal mono. Dot-matrix appears only where a real board would light it: reference numerals, the \"now serving\" stage, short state words. Arabic is true RTL. Columns, lamps and ticket rows mirror; reference numbers and passport data stay LTR inside fixed character cells.\n\nThe world rejects the generic government blue-header stepper form and its startup-gradient opposite.\n\nThe operator console (`/console`) is built in the same world, unchanged: an officer's counter desk. The queue, the pre-dial calling board, the live call board, the latency board and every lit count are LED board; the open case file, correction slips, call records, logs and the case-history roll are thermal paper. Same tokens, same issue ramp, same lamp states, same motion grammar (\"paper feeds down, LED cells light; nothing else moves\"). The console is English-only and always LTR.\n\nWaiting, failure and absence are the same world too. While a page loads, the form is already pre-printed and the board is already hung: every fixed label prints, only the data is unprinted paper or an unlit board, at its real size. When a page fails, it says so in plain words on paper under the same bar, with one way forward.\n\nThe pitch deck (`brag-output/pitch/deck.html`) is the same world presented, unchanged: 1920 x 1080 slides on the hall floor, type at about twice the app's scale, and the product's real elements (the ticket, its boards, issue rows, status headlines) placed on the floor as themselves, with at most one paper slip per slide pointing at the thing that matters.",
     "keyCharacteristics": [
       "Two materials only: thermal paper (working) and LED board (status), on a cool hall-grey floor.",
       "The reference number always sits in fixed character cells: reverse-printed ink on paper, glowing amber on the board.",
@@ -773,6 +786,11 @@
         "name": "The Page Never Promises A Call Rule",
         "body": "The status page promises a call only when one is queued, and says when in words the queue can keep. Otherwise an officer arranges the call or will contact the applicant. The applicant is never told to wait for a call nothing will place.",
         "section": "components"
+      },
+      {
+        "name": "The Lift The Shape Rule",
+        "body": "A lifted cut-out casts its shadow from its own alpha shape (filter: drop-shadow), so the ticket's teeth and a board's rounded corners throw their real outline. Never a box-shadow on the image's rectangle. Flat cut-outs (issue rows, a status headline) stay flat, like the cards they are.",
+        "section": "elevation"
       }
     ],
     "dos": [
@@ -792,7 +810,8 @@
       "Do keep whatever still works on screen when part of a page fails or loads: the bar, the tabs, the queue board.",
       "Do give every error screen one primary \"Try again\", an exit where there is one, and the mono error reference.",
       "Do ask first, inline on the board, before switching on anything that acts by itself on real phones; switching it off is immediate.",
-      "Do promise the applicant a call only when one is queued; otherwise say an officer will arrange it or contact them."
+      "Do promise the applicant a call only when one is queued; otherwise say an officer will arrange it or contact them.",
+      "Do keep the pitch deck's bottom-right 400 x 400 empty and its prototype line on every slide, and lift cut-out product elements by their own shape (drop-shadow), never by their rectangle."
     ],
     "donts": [
       "Don't use the generic government blue-header stepper form, or its startup-gradient opposite.",

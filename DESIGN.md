@@ -376,6 +376,8 @@ The operator console (`/console`) is built in the same world, unchanged: an offi
 
 Waiting, failure and absence are the same world too. While a page loads, the form is already pre-printed and the board is already hung: every fixed label prints, only the data is unprinted paper or an unlit board, at its real size. When a page fails, it says so in plain words on paper under the same bar, with one way forward.
 
+The pitch deck (`brag-output/pitch/deck.html`) is the same world presented, unchanged: 1920 x 1080 slides on the hall floor, type at about twice the app's scale, and the product's real elements (the ticket, its boards, issue rows, status headlines) placed on the floor as themselves, with at most one paper slip per slide pointing at the thing that matters.
+
 **Key Characteristics:**
 - Two materials only: thermal paper (working) and LED board (status), on a cool hall-grey floor.
 - The reference number always sits in fixed character cells: reverse-printed ink on paper, glowing amber on the board.
@@ -444,6 +446,7 @@ A cool, near-neutral paper-and-ink palette, lit by a small set of saturated LED 
 - **Ticket** (Geist Mono 400, 12.5px; labels uppercase in Faded Ink, values uppercase in ink unless typed case matters; uppercase is dropped in RTL).
 - **LED numeral** (Doto 900, 34px in 52px-tall cells on paper, 22px in 34px cells on the board, 15px in 24px cells on queue rows). Lit counts on the queue board are 26px Doto; the latency board's averages are 17px.
 - **LED word / stage** (Doto 900, uppercase; 15px at 0.06em for rule-row state words, 14px for queue-row state words, 13px for pre-dial PASS/STOP and for the auto-call words (the bar switch's ON/OFF, the case line's QUEUED / CALLING / PLACED / STOPPED / CANCELLED / OFF), 14px for live-call action words, 26px at 0.04em for the current stage and the live call's state word; tracking resets to normal in RTL). In RTL the rule-row state word leaves Doto altogether: Readex semibold 14px, normal tracking, in the lamp colour with the same glow (led-word-rtl).
+- **Pitch deck** (about 2x the app): 92px hook headline, 76px slide headlines, 84px closing line (all 600, 1.04, -0.025em, balanced); 44px sub-heads; 34px lead at 1.42, max 30ch to 52ch; 26px to 28px slips and notes; Doto board figures 84px to 104px over 22px labels; board asides 18px mono at 60%.
 
 ### Named Rules
 **The Three Voices Rule.** Readex reads, Geist Mono prints, Doto lights. Dot-matrix is limited to reference numerals, lit counts and figures on a board, the current stage, row state words and the hall monogram. Never use it for sentences, labels or headings.
@@ -466,6 +469,8 @@ The upload link is one 560px column with 20px side gutters, 24px from the bar to
 
 The operator console runs wider: a 1440px container with 16px gutters (24px from `sm`). Under the console bar a hall-grey tab row (44px tabs, 2px ink underline on the active one) names the sections. The desk splits 4/12 and 8/12 at `lg` with a 40px gap: the queue board on the left, sticky 24px from the top and scrolling inside its own frame, the case file on the right. The queue board belongs to the desk, not to a case: it stays in place (and keeps its scroll) while another case file loads, fails or is not found, and only the right-hand column changes. The case file keeps the same section order for every case: header, facts strip, why it was returned, your decision, call, case history. Sections open with a top rule and 20px of padding. The decision section sits above the calling board, so Approve is in the first viewport at 1440 x 900. Cross-case logs are full-width paper tables (min 860px) that scroll horizontally inside their frame on small screens. Below `lg` the desk is one column, queue first.
 
+The pitch deck is a fixed 1920 x 1080 stage on the hall floor, 96px from the top and 120px from the sides, with elements placed absolutely. The bottom-right 400 x 400 is the presenter's camera corner and stays empty on every slide. Every slide carries the prototype line on the left, 44px from the bottom: 17px Faded Ink, the product name in ink at 600, items split by 4px Paper Rule dots.
+
 ## Elevation & Depth
 
 Depth is physical, not interface. Exactly three objects lift off the hall floor: the paper ticket, the black board, and the dispenser machine (plus the paper sheets: the mock UAE PASS sheet and the officer sign-in sheet; and the console's case-history roll, a printout from the same thermal printer as the ticket). Each casts one soft, downward, negatively spread shadow, like an object lying on a counter. Everything else is flat and separated by hairline rules. The LED glow is light, not elevation: a soft halo around lit glyphs and lamps.
@@ -477,11 +482,14 @@ Depth is physical, not interface. Exactly three objects lift off the hall floor:
 - **Sheet drop** (`box-shadow: 0 24px 40px -28px rgb(22 24 26 / 0.5)`): a standalone paper sheet (mock UAE PASS, officer sign-in).
 - **LED glow** (`text-shadow: 0 0 6px color-mix(in oklab, currentColor 55%, transparent)`; lamps `0 0 6px` to `8px currentColor`): lit glyphs and lamps on the board only.
 - **Cell well** (`box-shadow: inset 0 -1px 0 board-rule`): board character cells.
+- **Object lift, presentation** (`filter: drop-shadow(0 30px 28px rgb(22 24 26 / 0.32)) drop-shadow(0 3px 5px rgb(22 24 26 / 0.16))`): a real product element placed on a pitch slide as a cut-out image (the ticket, a board). Boards drawn on a slide keep the board drop at twice its size (`0 48px 80px -48px rgb(0 0 0 / 0.65)`).
 
 ### Named Rules
 **The Objects Lift Rule.** Only physical hall objects (ticket and case-history roll, board, machine, sheet) cast shadows. Cards, slips, log tables, inputs and buttons are flat.
 
 **The Paper Can't Glow Rule.** Glow belongs to lamps. Reference cells on paper are reverse-printed ink with no glow. The same cells on the board glow amber.
+
+**The Lift The Shape Rule.** A lifted cut-out casts its shadow from its own alpha shape (filter: drop-shadow), so the ticket's teeth and a board's rounded corners throw their real outline. Never a box-shadow on the image's rectangle. Flat cut-outs (issue rows, a status headline) stay flat, like the cards they are.
 
 ## Shapes
 
@@ -629,6 +637,12 @@ A failed screen on paper, under the shared bar frame: say what happened, offer o
 ### Not-Found Notice
 The Error Notice's paper shape without a reference or retry: the page headline, one 15px Faded Ink line, and a large primary key that is the way back in ("Go to the applicant portal"). The portal version is in the applicant's language. On the case desk it reads "No case with that number" at case-headline size, with the queue board still beside it and the key "Open the first case".
 
+### Pitch Deck (presentation)
+The product presents itself; the deck adds only a slip and its leader.
+- **Slip:** at most one per slide. Paper, 1px Paper Rule border, 6px, 22px by 28px padding, 28px Readex at 1.32 (a second line at 22px Faded Ink), max 560px, flat. It may lead with an issue chip (20px mono on its ramp wash). Where the board itself makes the point, a plain 26px Faded Ink note sits beside it instead.
+- **Leader:** a 2px Thermal Ink line, horizontal or vertical, starting on the named element itself (the NAME row, not the ticket's edge) and running to the slip, with a 12px round ink dot.
+- **Settled figures:** numbers on a slide's board are glowing Doto 900 in LED Text; they are settled, not checking. Lamp Red marks only the returned count. No other lamp colour lights a figure.
+
 ### Motion grammar
 Paper feeds down, LED cells light; nothing else moves.
 - **Paper feed** (900ms, ease-out-expo `cubic-bezier(0.16, 1, 0.3, 1)`): the ticket unclips top-down from a 12px lift.
@@ -662,6 +676,7 @@ Paper feeds down, LED cells light; nothing else moves.
 - **Do** give every error screen one primary "Try again", an exit where there is one, and the mono error reference.
 - **Do** ask first, inline on the board, before switching on anything that acts by itself on real phones; switching it off is immediate.
 - **Do** promise the applicant a call only when one is queued; otherwise say an officer will arrange it or contact them.
+- **Do** keep the pitch deck's bottom-right 400 x 400 empty and its prototype line on every slide, and lift cut-out product elements by their own shape (drop-shadow), never by their rectangle.
 
 ### Don't:
 - **Don't** use the generic government blue-header stepper form, or its startup-gradient opposite.

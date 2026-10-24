@@ -22,12 +22,12 @@
 
 ## Scale, in numbers
 
-These are estimates. GDRFA publishes no return rate, so we apply a conservative 5–10% to its published volumes.
+These are estimates. GDRFA publishes no return rate, so we use a deliberately conservative figure.
 
 | | |
 |---|---|
 | Dubai residency permits | 1.051M new + 910k renewals in H1 2026 (GDRFA, reported) |
-| Returned for something fixable (est. 5–10%) | **~100k–200k a year** |
+| Returned for something fixable | **~100k–200k a year**, a conservative estimate (5–10% of the volumes above would be higher) |
 | Calls needed | **~275–550 a day** |
 | Call length, from our real calls | 1:48–3:32, about **2.5 minutes** on average |
 | Voice minutes | ~700–1,400 a day |
