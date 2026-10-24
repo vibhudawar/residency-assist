@@ -50,8 +50,10 @@ export async function predialChecks(applicationId: number, { channel, now = new 
   const hour = uaeHour(now);
   const inWindow = hour >= CALL_WINDOW.startHour && hour < CALL_WINDOW.endHour;
   void inWindow; // TEMPORARY (for recording): calling-hours window disabled below. Remove this line when restoring.
-  // Attempt limits are about ringing someone's phone; browser demo calls don't count.
-  const real = (attempts ?? []).filter((a) => a.status !== "queued" && a.channel === "phone");
+  // Attempt limits are about ringing someone's phone; browser demo calls don't count, and neither do
+  // calls that never started ("failed": our outbound dial errored before it reached them) — only a call
+  // that actually rang the applicant uses up their daily/total allowance.
+  const real = (attempts ?? []).filter((a) => !["queued", "failed"].includes(a.status) && a.channel === "phone");
   const today = uaeToday(now);
   const todayCount = real.filter((a) => uaeToday(new Date(a.started_at)) === today).length;
   const declines = real.filter((a) => a.status === "declined").length;
