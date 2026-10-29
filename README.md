@@ -11,7 +11,7 @@ Prototype. Not affiliated with GDRFA or ICP. All applicants and case data are fi
 
 **Live:** [https://residency-assist.vercel.app](https://residency-assist.vercel.app) (applicant portal) · [https://residency-assist.vercel.app/console](https://residency-assist.vercel.app/console) (officer console)
 
-**Officer console passcode for judges:** 
+**Officer console:** the judging period is over, so the console passcode is no longer public. Ask for access at 9vibhu@gmail.com.
 
 ```
 test@pass
@@ -38,7 +38,7 @@ test@pass
 
 ## Try it in 3 minutes
 
-1. Open **/console**, sign in with the passcode above, and click **Reset demo** (top bar). Every judge starts from the same clean state.
+1. Open **/console**, sign in (ask for the passcode), and click **Reset demo** (top bar). Every judge starts from the same clean state.
 2. Open the portal in a second tab → **Sign in with UAE PASS** (mock) → **Fill demo applicant details**. The name is typed as "Rahul **Sarma**"; the passport says Sharma.
 3. Tick **"An AI assistant may call me…"** → **Submit**. The 12-rule check returns the application for one fixable thing.
 4. Console → **Rahul Sarma** → **Call in browser** → **Start the call**. Allow the microphone. You are the applicant:

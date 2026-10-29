@@ -11,13 +11,11 @@ describe("nextCallTime", () => {
     expect(nextCallTime(uae("2026-10-05T09:00:00"))).toEqual(uae("2026-10-05T09:00:00"));
   });
 
-  // TEMPORARY (for recording): calling-hours window disabled in nextCallTime — these two assert the
-  // out-of-hours behaviour. Un-skip (it.skip → it) when restoring the window.
-  it.skip("waits for 09:00 the same morning before hours", () => {
+  it("waits for 09:00 the same morning before hours", () => {
     expect(nextCallTime(uae("2026-10-05T01:40:00"))).toEqual(uae("2026-10-05T09:00:00"));
   });
 
-  it.skip("waits for 09:00 tomorrow from 18:00 on", () => {
+  it("waits for 09:00 tomorrow from 18:00 on", () => {
     expect(nextCallTime(uae("2026-10-05T18:00:00"))).toEqual(uae("2026-10-06T09:00:00"));
     expect(nextCallTime(uae("2026-10-05T23:59:00"))).toEqual(uae("2026-10-06T09:00:00"));
   });
@@ -47,10 +45,8 @@ describe("afterRefusal", () => {
     expect(afterRefusal([{ name: "attempt_limits", detail: "Already called today — next attempt tomorrow." }], now)).toEqual({ action: "reschedule", dueAt: uae("2026-10-06T09:00:00") });
   });
 
-  // TEMPORARY (for recording): the calling_hours reschedule now returns `now` (window disabled in
-  // nextCallTime), so this asserts only the no_active_call branch. Restore the calling_hours line when
-  // the window comes back.
-  it("waits briefly for a call already in progress", () => {
+  it("waits for calling hours, and briefly for a call already in progress", () => {
+    expect(afterRefusal([{ name: "calling_hours", detail: "" }], now)).toEqual({ action: "reschedule", dueAt: uae("2026-10-06T09:00:00") });
     expect(afterRefusal([{ name: "no_active_call", detail: "" }], now)).toEqual({ action: "reschedule", dueAt: new Date(now.getTime() + 5 * 60 * 1000) });
   });
 

@@ -49,7 +49,6 @@ export async function predialChecks(applicationId: number, { channel, now = new 
 
   const hour = uaeHour(now);
   const inWindow = hour >= CALL_WINDOW.startHour && hour < CALL_WINDOW.endHour;
-  void inWindow; // TEMPORARY (for recording): calling-hours window disabled below. Remove this line when restoring.
   // Attempt limits are about ringing someone's phone; browser demo calls don't count, and neither do
   // calls that never started ("failed": our outbound dial errored before it reached them) — only a call
   // that actually rang the applicant uses up their daily/total allowance.
@@ -73,16 +72,12 @@ export async function predialChecks(applicationId: number, { channel, now = new 
     },
     {
       name: "calling_hours",
-      // TEMPORARY (for recording): calling-hours window disabled so phone calls go out any time.
-      // Restore by reverting `passed` to `channel === "browser" || inWindow`.
-      passed: true,
-      detail: "Calling-hours window temporarily disabled (recording).",
-      // passed: channel === "browser" || inWindow,
-      // detail: channel === "browser"
-      //   ? "Browser demo call — calling-hours window not applied."
-      //   : inWindow
-      //     ? `Within calling hours (09:00–18:00 UAE, now ${String(hour).padStart(2, "0")}:00).`
-      //     : "Outside calling hours (09:00–18:00 UAE).",
+      passed: channel === "browser" || inWindow,
+      detail: channel === "browser"
+        ? "Browser demo call — calling-hours window not applied."
+        : inWindow
+          ? `Within calling hours (09:00–18:00 UAE, now ${String(hour).padStart(2, "0")}:00).`
+          : "Outside calling hours (09:00–18:00 UAE).",
     },
     {
       name: "officer_only",

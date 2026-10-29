@@ -5,17 +5,13 @@
 import { addDays, uaeDateTime, uaeHour, uaeToday } from "@/lib/time";
 
 export const WINDOW = { start: "09:00", startHour: 9, endHour: 18 } as const;
-void addDays; // TEMPORARY (for recording): used only by the disabled calling-hours body in nextCallTime. Remove when restoring.
 
 /** Now, if it's calling hours; otherwise the next 09:00 UAE. */
 export function nextCallTime(now: Date): Date {
-  // TEMPORARY (for recording): calling-hours window disabled, so an auto-call is due now at any time.
-  // Restore by removing this line and uncommenting the body below.
-  return now;
-  // const hour = uaeHour(now);
-  // if (hour >= WINDOW.startHour && hour < WINDOW.endHour) return now;
-  // const day = hour < WINDOW.startHour ? uaeToday(now) : addDays(uaeToday(now), 1);
-  // return uaeDateTime(day, WINDOW.start);
+  const hour = uaeHour(now);
+  if (hour >= WINDOW.startHour && hour < WINDOW.endHour) return now;
+  const day = hour < WINDOW.startHour ? uaeToday(now) : addDays(uaeToday(now), 1);
+  return uaeDateTime(day, WINDOW.start);
 }
 
 /** A retry: the next day, at the same time if that's within calling hours, otherwise 09:00 that day. At most one try a day. */
