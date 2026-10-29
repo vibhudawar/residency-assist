@@ -13,12 +13,6 @@ Prototype. Not affiliated with GDRFA or ICP. All applicants and case data are fi
 
 **Officer console:** the judging period is over, so the console passcode is no longer public. Ask for access at 9vibhu@gmail.com.
 
-```
-test@pass
-```
-
-
-
 ## Stage 2 deliverables
 
 
